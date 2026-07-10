@@ -14,8 +14,8 @@ export default function Logo({ className = '', isDarkBg = false }: LogoProps) {
     <div id="zikr-brand-logo" className={`flex items-center select-none ${className}`}>
       <img
         src={logoSrc}
-        alt="Zikr Academy Logo"
-        className="h-9 sm:h-11 md:h-12 w-auto object-contain transition-transform duration-300 hover:scale-[1.02]"
+        alt="Quran Academee Logo"
+        className="h-6 sm:h-7.5 md:h-8 w-auto object-contain transition-transform duration-300 hover:scale-[1.02]"
         referrerPolicy="no-referrer"
       />
     </div>

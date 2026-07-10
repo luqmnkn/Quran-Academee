@@ -59,42 +59,64 @@ export default function Footer({ currentPage = 'home', onNavigate }: FooterProps
               An international online Quran academy providing personalized 1-on-1 certified live instruction for children and adults. Helping families master Tajweed and Quran memorization at home.
             </p>
 
-            <div className="flex items-center space-x-3.5 pt-4">
+            <div className="flex flex-wrap items-center gap-2 pt-4">
               <a
-                href="https://www.facebook.com/share/1AjoSTvuiw/?mibextid=wwXIfr"
+                href="https://www.facebook.com/quranacademee1"
                 target="_blank"
                 rel="noreferrer"
-                className="w-10 h-10 rounded-xl bg-white/[0.03] hover:bg-gradient-to-br hover:from-[#1C8DC8] hover:to-[#3D8DC3] text-slate-300 hover:text-white flex items-center justify-center transition-all duration-300 border border-white/5 hover:border-[#1C8DC8]/40 shadow-md hover:shadow-[0_0_15px_rgba(28,141,200,0.35)] hover:-translate-y-1 transform group"
+                className="w-9 h-9 rounded-xl bg-white/[0.03] hover:bg-gradient-to-br hover:from-[#1C8DC8] hover:to-[#3D8DC3] text-slate-300 hover:text-white flex items-center justify-center transition-all duration-300 border border-white/5 hover:border-[#1C8DC8]/40 shadow-md hover:shadow-[0_0_15px_rgba(28,141,200,0.35)] hover:-translate-y-1 transform group"
                 aria-label="Facebook"
               >
-                <Facebook size={18} className="transition-transform duration-300 group-hover:scale-110" />
+                <Facebook size={16} className="transition-transform duration-300 group-hover:scale-110" />
               </a>
               <a
-                href="https://www.instagram.com/zikr_academy"
+                href="https://www.instagram.com/quranacademee/"
                 target="_blank"
                 rel="noreferrer"
-                className="w-10 h-10 rounded-xl bg-white/[0.03] hover:bg-gradient-to-br hover:from-[#1C8DC8] hover:to-[#3D8DC3] text-slate-300 hover:text-white flex items-center justify-center transition-all duration-300 border border-white/5 hover:border-[#1C8DC8]/40 shadow-md hover:shadow-[0_0_15px_rgba(28,141,200,0.35)] hover:-translate-y-1 transform group"
+                className="w-9 h-9 rounded-xl bg-white/[0.03] hover:bg-gradient-to-br hover:from-[#1C8DC8] hover:to-[#3D8DC3] text-slate-300 hover:text-white flex items-center justify-center transition-all duration-300 border border-white/5 hover:border-[#1C8DC8]/40 shadow-md hover:shadow-[0_0_15px_rgba(28,141,200,0.35)] hover:-translate-y-1 transform group"
                 aria-label="Instagram"
               >
-                <Instagram size={18} className="transition-transform duration-300 group-hover:scale-110" />
+                <Instagram size={16} className="transition-transform duration-300 group-hover:scale-110" />
               </a>
               <a
-                href="https://youtube.com/@zikr_academy"
+                href="https://www.youtube.com/@quranacademee"
                 target="_blank"
                 rel="noreferrer"
-                className="w-10 h-10 rounded-xl bg-white/[0.03] hover:bg-gradient-to-br hover:from-[#1C8DC8] hover:to-[#3D8DC3] text-slate-300 hover:text-white flex items-center justify-center transition-all duration-300 border border-white/5 hover:border-[#1C8DC8]/40 shadow-md hover:shadow-[0_0_15px_rgba(28,141,200,0.35)] hover:-translate-y-1 transform group"
+                className="w-9 h-9 rounded-xl bg-white/[0.03] hover:bg-gradient-to-br hover:from-[#1C8DC8] hover:to-[#3D8DC3] text-slate-300 hover:text-white flex items-center justify-center transition-all duration-300 border border-white/5 hover:border-[#1C8DC8]/40 shadow-md hover:shadow-[0_0_15px_rgba(28,141,200,0.35)] hover:-translate-y-1 transform group"
                 aria-label="YouTube"
               >
-                <Youtube size={18} className="transition-transform duration-300 group-hover:scale-110" />
+                <Youtube size={16} className="transition-transform duration-300 group-hover:scale-110" />
               </a>
               <a
-                href="https://www.linkedin.com/company/zikr-academy/"
+                href="https://www.linkedin.com/company/quran-academee"
                 target="_blank"
                 rel="noreferrer"
-                className="w-10 h-10 rounded-xl bg-white/[0.03] hover:bg-gradient-to-br hover:from-[#1C8DC8] hover:to-[#3D8DC3] text-slate-300 hover:text-white flex items-center justify-center transition-all duration-300 border border-white/5 hover:border-[#1C8DC8]/40 shadow-md hover:shadow-[0_0_15px_rgba(28,141,200,0.35)] hover:-translate-y-1 transform group"
+                className="w-9 h-9 rounded-xl bg-white/[0.03] hover:bg-gradient-to-br hover:from-[#1C8DC8] hover:to-[#3D8DC3] text-slate-300 hover:text-white flex items-center justify-center transition-all duration-300 border border-white/5 hover:border-[#1C8DC8]/40 shadow-md hover:shadow-[0_0_15px_rgba(28,141,200,0.35)] hover:-translate-y-1 transform group"
                 aria-label="LinkedIn"
               >
-                <Linkedin size={18} className="transition-transform duration-300 group-hover:scale-110" />
+                <Linkedin size={16} className="transition-transform duration-300 group-hover:scale-110" />
+              </a>
+              <a
+                href="https://www.tiktok.com/@quranacademee"
+                target="_blank"
+                rel="noreferrer"
+                className="w-9 h-9 rounded-xl bg-white/[0.03] hover:bg-gradient-to-br hover:from-[#1C8DC8] hover:to-[#3D8DC3] text-slate-300 hover:text-white flex items-center justify-center transition-all duration-300 border border-white/5 hover:border-[#1C8DC8]/40 shadow-md hover:shadow-[0_0_15px_rgba(28,141,200,0.35)] hover:-translate-y-1 transform group"
+                aria-label="TikTok"
+              >
+                <svg className="w-[16px] h-[16px] fill-current transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24">
+                  <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.02 1.62 4.19 1.13 1.25 2.75 1.93 4.39 2.01v3.82c-1.39-.02-2.78-.39-3.97-1.12-.52-.31-.99-.71-1.39-1.17-.03 2.82-.02 5.64-.03 8.46-.05 1.63-.53 3.29-1.47 4.62-1.4 1.95-3.8 3.16-6.21 3.19-2.91.08-5.83-1.49-7.14-4.1-1.41-2.73-.81-6.24 1.43-8.32 1.4-1.3 3.36-1.9 5.25-1.57.01 1.34 0 2.69.01 4.03-.89-.24-1.89-.04-2.58.6-.74.65-1.04 1.74-.75 2.69.3 1.05 1.33 1.79 2.43 1.75 1.21-.01 2.22-1.03 2.22-2.24.01-4.99.01-9.98.01-14.97z"/>
+                </svg>
+              </a>
+              <a
+                href="https://www.reddit.com/user/quranacademee"
+                target="_blank"
+                rel="noreferrer"
+                className="w-9 h-9 rounded-xl bg-white/[0.03] hover:bg-gradient-to-br hover:from-[#1C8DC8] hover:to-[#3D8DC3] text-slate-300 hover:text-white flex items-center justify-center transition-all duration-300 border border-white/5 hover:border-[#1C8DC8]/40 shadow-md hover:shadow-[0_0_15px_rgba(28,141,200,0.35)] hover:-translate-y-1 transform group"
+                aria-label="Reddit"
+              >
+                <svg className="w-[16px] h-[16px] fill-current transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24">
+                  <path d="M24 11.5c0-1.65-1.35-3-3-3-.96 0-1.86.48-2.42 1.24-1.64-1-3.85-1.64-6.29-1.72l1.35-4.24 3.71.79c.08.97.89 1.73 1.88 1.73 1.03 0 1.88-.85 1.88-1.88s-.85-1.88-1.88-1.88c-.88 0-1.62.61-1.81 1.44l-4.11-.88c-.14-.03-.29.04-.35.17l-1.5 4.71C7.79 8.1 5.51 8.75 3.84 9.75c-.56-.76-1.45-1.25-2.42-1.25-1.65 0-3 1.35-3 3 0 1.12.61 2.1 1.53 2.62-.06.44-.09.88-.09 1.33 0 3.86 4.49 7 10 7s10-3.14 10-7c0-.45-.03-.89-.09-1.33.92-.52 1.53-1.5 1.53-2.62zm-18 1c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5zm11 4.5c-1.77 1.77-5.15 1.77-6.92 0-.2-.2-.2-.51 0-.71.2-.2.51-.2.71 0 1.38 1.38 4.12 1.38 5.5 0 .2-.2.51-.2.71 0 .2.2.2.51 0 .71zm-1.5-3c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+                </svg>
               </a>
             </div>
           </div>
@@ -161,8 +183,8 @@ export default function Footer({ currentPage = 'home', onNavigate }: FooterProps
                 <Phone size={14} className="text-[#1C8DC8] shrink-0 mt-0.5" />
                 <div>
                   <span className="text-[10px] block uppercase text-slate-400">WhatsApp Number</span>
-                  <a href="https://wa.me/18186509752" target="_blank" rel="noreferrer" className="text-white hover:text-[#1C8DC8] font-semibold block mt-0.5">
-                    +1 (818) 650-9752
+                  <a href="https://wa.me/923702680670" target="_blank" rel="noreferrer" className="text-white hover:text-[#1C8DC8] font-semibold block mt-0.5">
+                    +92 370 2680670
                   </a>
                 </div>
               </li>
@@ -171,8 +193,8 @@ export default function Footer({ currentPage = 'home', onNavigate }: FooterProps
                 <Mail size={14} className="text-[#1C8DC8] shrink-0 mt-0.5" />
                 <div>
                   <span className="text-[10px] block uppercase text-slate-400">Email Help desk</span>
-                  <a href="mailto:support@zikr.academy" className="text-white hover:text-[#1C8DC8] font-semibold block mt-0.5">
-                    support@zikr.academy
+                  <a href="mailto:contact@quranacademee.com" className="text-white hover:text-[#1C8DC8] font-semibold block mt-0.5">
+                    contact@quranacademee.com
                   </a>
                 </div>
               </li>
@@ -191,7 +213,7 @@ export default function Footer({ currentPage = 'home', onNavigate }: FooterProps
 
         {/* Brand Bottom line */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
-          <p>© {currentYear} Zikr Online Quran Academy. All Rights Reserved. Recite with Beauty.</p>
+          <p>© {currentYear} Quran Academee. All Rights Reserved. Recite with Beauty.</p>
           <div className="flex items-center space-x-4">
             <span>Designed with complete respect for Quranic learning</span>
           </div>

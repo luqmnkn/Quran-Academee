@@ -88,7 +88,7 @@ export default function InquiryForm({ prefilledCourse, onClearPrefill, onSubmitS
 
     try {
       
-      const apiUrl = "https://script.google.com/macros/s/AKfycbzt-QNo_-atksqCsKmmLovipxHV2RZlVL7PVnJ4TxLDO96Or4nywtbh2OxL5R35QKDH5A/exec";
+      const apiUrl = "https://script.google.com/macros/s/AKfycbzN5egOyuCiBQl_HPwxpW9D6_M5TMG9Bx3hwEnpTVGR2oy0Un7-QE81KxClxdqLeH9glg/exec";
       
       if (apiUrl) {
         const urlLower = apiUrl.toLowerCase();

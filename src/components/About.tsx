@@ -41,23 +41,26 @@ export default function About({ onOpenTrialModal }: AboutProps) {
   };
 
   const renderCardContent = (step: typeof steps[0]) => (
-    <div className="bg-white rounded-2xl border border-[#E0F2FE] p-6 sm:p-7 md:p-8 shadow-[0_12px_30px_rgba(28,141,200,0.03)] flex flex-col justify-between items-center text-center space-y-4 hover:shadow-[0_15px_30px_rgba(28,141,200,0.08)] transition-all duration-300 relative group overflow-hidden h-full min-h-[285px]">
+    <div className="bg-gradient-to-br from-white via-white to-[#F0F9FF]/40 rounded-2xl border border-[#E0F2FE] p-6 sm:p-7 md:p-8 shadow-[0_12px_30px_rgba(28,141,200,0.03)] flex flex-col justify-between items-center text-center space-y-4 hover:shadow-[0_20px_40px_rgba(28,141,200,0.09)] hover:-translate-y-1 transition-all duration-300 relative group overflow-hidden h-full min-h-[285px]">
       {/* Top indicator ribbon */}
-      <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#1C8DC8] to-[#3D8DC3] scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+      <div className="absolute top-0 left-0 right-0 h-[3.5px] bg-gradient-to-r from-[#1C8DC8] to-[#146299] scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
 
-      <span className="absolute top-4 right-5 font-mono font-black text-[10px] text-[#1C8DC8]/40 uppercase tracking-widest">
+      {/* Blue light glow from the top-right */}
+      <div className="absolute -top-10 -right-10 w-28 h-28 bg-[#1C8DC8]/12 rounded-full blur-xl group-hover:bg-[#1C8DC8]/22 group-hover:scale-115 transition-all duration-500 pointer-events-none"></div>
+
+      <span className="absolute top-4 right-5 font-mono font-black text-[10px] text-[#1C8DC8]/40 uppercase tracking-widest relative z-10">
         {step.num}
       </span>
 
       {/* Round icon badge layout */}
-      <div className="w-12 h-12 rounded-xl bg-[#F0F9FF] text-[#1C8DC8] border border-[#E0F2FE] flex items-center justify-center shadow-inner group-hover:bg-[#0B3951] group-hover:text-white transition-all duration-300 shrink-0">
+      <div className="w-12 h-12 rounded-xl bg-[#F0F9FF] text-[#1C8DC8] border border-[#E0F2FE] flex items-center justify-center shadow-inner group-hover:bg-[#0B3951] group-hover:text-white transition-all duration-300 shrink-0 relative z-10">
         {step.icon === 'CalendarRange' && <CalendarRange size={18} className="stroke-[2.2]" />}
         {step.icon === 'UserCheck' && <UserCheck size={18} className="stroke-[2.2]" />}
         {step.icon === 'GraduationCap' && <GraduationCap size={18} className="stroke-[2.2]" />}
       </div>
 
-      <div className="space-y-2">
-        <h4 className="font-display font-[800] text-base text-[#0B3951]">
+      <div className="space-y-2 relative z-10">
+        <h4 className="font-display font-[800] text-base text-[#0B3951] group-hover:text-[#1C8DC8] transition-colors duration-200">
           {step.title}
         </h4>
         <p className="text-xs text-slate-600 leading-relaxed font-sans font-medium">

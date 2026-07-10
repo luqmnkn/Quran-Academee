@@ -59,7 +59,7 @@ interface HeroProps {
 
 export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
   const [wordIdx, setWordIdx] = useState(0);
-  const words = ["Noorani Qaida", "Tajweed Rules", "Fluent Recitation", "Quran Reading"];
+  const words = ["Basic Qaida", "Tajweed Rules", "Fluent Recitation", "Quran Memorization"];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -112,13 +112,13 @@ export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -12 }}
                       transition={{ duration: 0.3, ease: "easeOut" }}
-                      className="absolute left-0 top-0 whitespace-nowrap text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] via-[#146299] to-[#0B3951]"
+                      className="absolute left-0 top-0 whitespace-nowrap font-serif font-[900] italic text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] via-[#146299] to-[#0B3951] tracking-wide"
                     >
                       {words[wordIdx]}
                     </motion.span>
                   </AnimatePresence>
                   {/* Invisible text reserves exact space needed dynamically */}
-                  <span className="opacity-0 select-none pointer-events-none whitespace-nowrap">{words[wordIdx]}</span>
+                  <span className="opacity-0 select-none pointer-events-none whitespace-nowrap font-serif font-[900] italic tracking-wide">{words[wordIdx]}</span>
                 </span>{' '}
                 to Hifz, We're With You Every Step.
               </motion.h1>
@@ -130,7 +130,7 @@ export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="hidden md:block text-[#146299] text-base sm:text-lg lg:text-xl max-w-xl font-medium leading-relaxed"
               >
-                Begin your journey of Quran learning with Zikr, a trusted online platform designed to make recitation, Tajweed, and understanding the Quran easier for everyone.
+                Begin your journey of Quran learning with Quran Academee, a trusted online platform designed to make recitation, Tajweed, and understanding the Quran easier for everyone.
               </motion.p>
             </div>
 
@@ -191,14 +191,14 @@ export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
             
             {/* Main Portrait Frame with significantly larger max width & negative margins on desktop */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
+              initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 0.15, ease: "easeOut" }}
               className="relative w-full max-w-[550px] lg:max-w-none lg:scale-110 xl:scale-115 transition-transform duration-500 self-end flex items-end"
             >
               <img
                 src={imghero}
-                alt="Zikr Online Quran Academy Student"
+                alt="Quran Academee Student"
                 className="w-full h-auto object-contain rounded-t-[32px] rounded-b-none drop-shadow-[0_15px_35px_rgba(28,141,200,0.14)] filter contrast-[1.01] block align-bottom"
                 style={{ marginBottom: '-2px' }}
                 referrerPolicy="no-referrer"

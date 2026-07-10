@@ -25,7 +25,7 @@ export default function Header({ onOpenTrialModal, currentPage, activeSection, o
   const navLinks = [
     { name: 'Home', page: 'home' as const, activeKey: 'home' as const, href: '#home' },
     { name: 'Course', page: 'home' as const, activeKey: 'courses' as const, href: '#courses' },
-    { name: 'Class', page: 'pricing' as const, activeKey: 'pricing' as const, href: '#pricing' },
+    { name: 'Pricing', page: 'pricing' as const, activeKey: 'pricing' as const, href: '#pricing' },
     { name: 'About Us', page: 'home' as const, activeKey: 'about' as const, href: '#about' },
   ];
 
@@ -42,10 +42,10 @@ export default function Header({ onOpenTrialModal, currentPage, activeSection, o
   return (
     <header 
       id="main-navigation-header"
-      className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-[750ms] ease-[cubic-bezier(0.25,1,0.5,1)] delay-[50ms] ${
+      className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-[2000ms] ease-[cubic-bezier(0.2,0.8,0.2,1)] ${
         isScrolled 
-          ? 'top-3 w-[92%] max-w-6xl rounded-2xl md:rounded-full bg-white/95 border border-[#E0F2FE] shadow-[0_15px_45px_rgba(28,141,200,0.12)] backdrop-blur-lg px-4 sm:px-8 py-2.5 sm:py-3' 
-          : 'top-0 w-full rounded-none bg-white/90 border-b border-[#E0F2FE]/60 backdrop-blur-md px-4 sm:px-8 py-4 sm:py-5.5'
+          ? 'top-2 w-[92%] max-w-6xl rounded-2xl md:rounded-full bg-white/95 border border-[#E0F2FE] shadow-[0_15px_45px_rgba(28,141,200,0.12)] backdrop-blur-lg px-4 sm:px-8 py-1 sm:py-1.5' 
+          : 'top-0 w-full rounded-none bg-white/90 border-b border-[#E0F2FE]/60 backdrop-blur-md px-4 sm:px-8 py-1.5 sm:py-2.5'
       }`}
     >
       <div className="w-full flex items-center justify-between">

@@ -47,7 +47,7 @@ export default function Services({ onSelectCourse, onOpenTrialModal }: ServicesP
           <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#F0F9FF] to-[#E0F2FE] text-[#0B3951] flex items-center justify-center group-hover:from-[#1C8DC8] group-hover:to-[#146299] group-hover:text-white transition-all duration-300 shadow-inner">
             <IconRenderer name={course.icon} className="w-5.5 h-5.5 stroke-[2]" />
           </div>
-          <span className="font-arabic text-2xl font-extrabold text-[#146299]/10 select-none transition-colors group-hover:text-[#1C8DC8]/20">
+          <span className="font-arabic text-xl sm:text-2xl font-black text-[#1C8DC8]/85 group-hover:text-[#146299] select-none transition-colors duration-300">
             {course.arabicTitle}
           </span>
         </div>

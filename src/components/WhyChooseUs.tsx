@@ -27,18 +27,18 @@ export default function WhyChooseUs() {
   };
 
   const renderCardContent = (feature: typeof WHY_CHOOSE_US[0]) => (
-    <div className="bg-gradient-to-br from-white via-white to-[#F0F9FF]/60 rounded-2xl border border-[#E0F2FE] hover:border-[#1C8DC8]/30 p-6 sm:p-7 md:p-8 space-y-4 transition-all duration-300 shadow-[0_12px_30px_rgba(28,141,200,0.03)] hover:shadow-[0_20px_40px_rgba(28,141,200,0.1)] flex flex-col justify-between items-start h-full relative overflow-hidden group text-left min-h-[290px]">
-      {/* Glow highlight effect */}
-      <div className="absolute -top-12 -right-12 w-32 h-32 bg-[#1C8DC8]/5 rounded-full blur-2xl group-hover:bg-[#1C8DC8]/10 transition-all duration-500"></div>
+    <div className="bg-gradient-to-br from-white via-white to-[#F0F9FF] rounded-[24px] border border-[#E0F2FE] hover:border-[#1C8DC8]/50 p-6 sm:p-7 md:p-8 space-y-4 transition-all duration-300 shadow-[0_12px_32px_rgba(28,141,200,0.02)] hover:shadow-[0_24px_50px_rgba(28,141,200,0.12)] hover:-translate-y-1.5 flex flex-col justify-between items-start h-full relative overflow-hidden group text-left min-h-[290px]">
+      {/* Rich Glow highlight effect */}
+      <div className="absolute -top-16 -right-16 w-36 h-36 bg-gradient-to-bl from-[#1C8DC8]/12 to-[#146299]/5 rounded-full blur-2xl group-hover:scale-125 transition-all duration-500 pointer-events-none"></div>
 
-      <div className="space-y-4">
+      <div className="space-y-4 w-full">
         {/* Premium Icon Badge */}
-        <div className="w-12 h-12 rounded-xl bg-[#F0F9FF] text-[#1C8DC8] border border-[#E0F2FE] flex items-center justify-center transition-all duration-300 group-hover:bg-gradient-to-r group-hover:from-[#1C8DC8] group-hover:to-[#3D8DC3] group-hover:text-white shadow-md">
+        <div className="w-12 h-12 rounded-xl bg-[#F0F9FF] text-[#1C8DC8] border border-[#E0F2FE] flex items-center justify-center transition-all duration-300 group-hover:bg-gradient-to-r group-hover:from-[#1C8DC8] group-hover:to-[#146299] group-hover:text-white shadow-md group-hover:scale-105">
           <IconRenderer name={feature.icon} className="w-6 h-6" />
         </div>
 
         {/* Feature info */}
-        <div className="space-y-2 relative z-10">
+        <div className="space-y-2 relative z-10 w-full">
           <h3 className="font-display font-[800] text-lg text-[#0B3951] group-hover:text-[#1C8DC8] transition-colors leading-snug">
             {feature.title}
           </h3>
@@ -49,8 +49,8 @@ export default function WhyChooseUs() {
       </div>
 
       {/* Sparkle detailing in corner */}
-      <div className="self-end pt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <Sparkles size={12} className="text-[#1C8DC8]" />
+      <div className="self-end pt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 relative z-10">
+        <Sparkles size={13} className="text-[#1C8DC8]" />
       </div>
     </div>
   );
@@ -76,7 +76,7 @@ export default function WhyChooseUs() {
           
           <h2 className="font-display font-[900] text-3xl sm:text-[45px] lg:text-[64px] text-[#0B3951] tracking-[-0.04em] leading-[1.05] filter drop-shadow-sm">
             Why Hundreds of Worldwide Families <br className="hidden sm:inline" />
-            Empower Their Kids via <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] via-[#146299] to-[#0B3951]">Zikr</span>
+            Empower Their Kids via <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] via-[#146299] to-[#0B3951]">Quran Academee</span>
           </h2>
           
           <p className="font-sans font-medium text-[18px] text-slate-600 max-w-2xl mx-auto leading-relaxed">
