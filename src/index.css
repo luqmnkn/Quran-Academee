@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@700;800;900&family=Plus+Jakarta+Sans:wght@700;800;900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Fira+Code:wght@300..700&family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@700;800;900&family=Plus+Jakarta+Sans:wght@700;800;900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Fira+Code:wght@300..700&family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Allura&family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
 @import "tailwindcss";
 
 @custom-variant dark (&:is(.dark *));
@@ -6,6 +6,7 @@
 @theme {
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-display: 'Plus Jakarta Sans', 'Manrope', system-ui, -apple-system, sans-serif;
+  --font-allora: 'Allora', 'Allura', 'Lora', 'Playfair Display', serif;
   --color-primary: #146299;
   --color-primary-dark: #06486D;
   --color-secondary: #3D8DC3;

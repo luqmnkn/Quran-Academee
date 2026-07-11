@@ -100,6 +100,56 @@ export const COURSES: Course[] = [
       'Monthly revision exams and live recitation evaluation',
       'Spiritual mentorship lessons on patience, sincerity, and applying Quranic life lessons'
     ]
+  },
+  {
+    id: 'islamic-essentials',
+    title: 'Islamic Essentials & Duas',
+    arabicTitle: 'الواجبات الإسلامية',
+    shortDescription: 'Learn essential Islamic knowledge, including Salah steps, daily Duas, Islamic history, and moral character development.',
+    fullDescription: 'Perfect for children and new Muslims, this course covers the absolute essentials of daily Islamic practice. Students learn the proper way to perform Wudu (ablution) and Salah (prayer), memorize everyday prophetic prayers (Duas), study the inspiring stories of the Prophets, and learn about the beautiful manners (Akhlaq) and character of a Muslim.',
+    icon: 'Sparkles',
+    ageGroup: 'Kids (5+) & New Muslims',
+    duration: '3-4 Months',
+    level: 'Beginner',
+    learningOutcomes: [
+      'Master the practical steps of Wudu (ablution) and daily Salah (prayer).',
+      'Memorize and understand essential daily Duas for sleeping, eating, and entering the home.',
+      'Learn the 5 pillars of Islam and the 6 articles of faith (Iman).',
+      'Study key historical events from the life of Prophet Muhammad (PBUH).',
+      'Develop beautiful Islamic manners (Akhlaq) like honesty, kindness, and respect.'
+    ],
+    curriculum: [
+      'Module 1: Pillars of Islam & Articles of Faith',
+      'Module 2: Practical guide to Wudu and 5 Daily Prayers',
+      'Module 3: Memorization of daily prayers (Duas) and short Hadiths',
+      'Module 4: Seerah (Prophet’s biography) and Stories of the Prophets',
+      'Module 5: Character building (Adab and Akhlaq in daily life)'
+    ]
+  },
+  {
+    id: 'hifz-revision',
+    title: 'Hifz Revision Partner',
+    arabicTitle: 'مراجعة وتثبيت الحفظ',
+    shortDescription: 'Dedicated revision program for Huffaz to cement their memorization, correct loose verses, and maintain a lifelong retaining cycle.',
+    fullDescription: 'Are you a Hafiz who wants to strengthen your memorization? Or did you memorize parts of the Quran but find it hard to retain? This program pairs you with a certified, top-tier Huffaz scholar who will serve as your dedicated revision partner. We listen to your daily recitation, target your weak verses (Mutashabihat), and construct a rigorous, sustainable Manzil routine to ensure your memorization remains rock-solid for life.',
+    icon: 'GraduationCap',
+    ageGroup: 'Huffaz & Advanced Students',
+    duration: 'Ongoing (Flexible)',
+    level: 'Advanced',
+    learningOutcomes: [
+      'Recite long portions of the Quran by heart with supreme fluency.',
+      'Eliminate hesitation and pronunciation errors in memorized chapters.',
+      'Master the identical verses (Mutashabihat) and recognize contextual overlaps.',
+      'Establish a lifelong daily or weekly revision routine (Manzil).',
+      'Prepare for official Hifz certification exams and public prayers (Tarawih).'
+    ],
+    curriculum: [
+      'Diagnostic Assessment: Identifying weak and strong chapters of your Hifz',
+      'Syllabus Mapping: Creating a custom weekly revision schedule (e.g., 1 Juz/day)',
+      'Interactive Revision: Tutors listen to your recitation and correct memory slips',
+      'Mutashabihat Analysis: Training to differentiate look-alike verses across chapters',
+      'Simulation Drills: Simulating lead-prayer scenarios and continuous testing'
+    ]
   }
 ];
 
@@ -108,7 +158,7 @@ export const TESTIMONIALS: Testimonial[] = [
     id: 't1',
     name: 'Sarah Rahman',
     role: 'Parent',
-    feedback: 'Both my 7-year-old and 9-year-old started Quranic learning from scratch with Zikr. The teachers are incredibly patient, warm, and encourage children. Their Noorani Qaida sessions are interactive, and the flexible schedule matches my active calendar seamlessly.',
+    feedback: 'Both my 7-year-old and 9-year-old started Quranic learning from scratch with Quran Academee. The teachers are incredibly patient, warm, and encourage children. Their Noorani Qaida sessions are interactive, and the flexible schedule matches my active calendar seamlessly.',
     rating: 5,
     location: 'Houston, USA',
     avatarInitials: 'SR'
@@ -117,7 +167,7 @@ export const TESTIMONIALS: Testimonial[] = [
     id: 't2',
     name: 'Dr. Tariq Mahmood',
     role: 'Adult Student',
-    feedback: 'As a busy medical professional, finding time for continuous Tajweed improvement was difficult. Zikr matched me with a certified, highly learned tutor. The live one-on-one session feels focused and high-yield, correcting pronunciation rules that I had struggled with for years.',
+    feedback: 'As a busy medical professional, finding time for continuous Tajweed improvement was difficult. Quran Academee matched me with a certified, highly learned tutor. The live one-on-one session feels focused and high-yield, correcting pronunciation rules that I had struggled with for years.',
     rating: 5,
     location: 'Birmingham, UK',
     avatarInitials: 'TM'
@@ -126,7 +176,7 @@ export const TESTIMONIALS: Testimonial[] = [
     id: 't3',
     name: 'Amina Al-Farsi',
     role: 'Parent',
-    feedback: 'Zikr has transformed our homeschooling routine. My daughter is doing Quran Memorization (Hifz) with a qualified female tutor. The teacher utilizes highly engaging techniques, breaking verses down into memorable rhythmic blocks.',
+    feedback: 'Quran Academee has transformed our homeschooling routine. My daughter is doing Quran Memorization (Hifz) with a qualified female tutor. The teacher utilizes highly engaging techniques, breaking verses down into memorable rhythmic blocks.',
     rating: 5,
     location: 'Toronto, Canada',
     avatarInitials: 'AF'

@@ -59,7 +59,7 @@ interface HeroProps {
 
 export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
   const [wordIdx, setWordIdx] = useState(0);
-  const words = ["Basic Qaida", "Tajweed Rules", "Fluent Recitation", "Quran Memorization"];
+  const words = ["Basic Qaida", "Tajweed Rules", "Fluent Recitation", "Quran Hifiz"];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -92,18 +92,18 @@ export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
       <div className="absolute top-1/4 left-10 w-72 h-72 bg-[#3D8DC3]/5 rounded-full blur-3xl" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full mt-auto">
-        <div className="grid grid-cols-12 gap-4 sm:gap-6 lg:gap-8 items-end">
+        <div className="grid grid-cols-12 gap-1 sm:gap-6 lg:gap-8 items-end">
           
           {/* Left Side: Premium Copy & CTAs */}
-          <div className="col-span-7 lg:col-span-6 flex flex-col space-y-4 sm:space-y-6 lg:space-y-8 text-left pb-6 sm:pb-12 lg:pb-16 relative z-10">
-            <div className="space-y-3 sm:space-y-4">
+          <div className="col-span-7 lg:col-span-6 flex flex-col space-y-3 sm:space-y-6 lg:space-y-8 text-left pb-6 sm:pb-12 lg:pb-16 relative z-10">
+            <div className="space-y-2 sm:space-y-4">
               <motion.h1
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.1 }}
-                className="font-sans font-black text-xl xs:text-2xl sm:text-4xl lg:text-5xl xl:text-6xl text-[#0B3951] tracking-tight leading-[1.15]"
+                className="font-sans font-black text-lg xs:text-xl sm:text-4xl lg:text-5xl xl:text-6xl text-[#0B3951] tracking-tight leading-[1.15]"
               >
-                From{' '}
+                Where{' '}
                 <span className="relative inline-block text-[#1C8DC8] text-left">
                   <AnimatePresence mode="wait">
                     <motion.span
@@ -112,15 +112,15 @@ export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -12 }}
                       transition={{ duration: 0.3, ease: "easeOut" }}
-                      className="absolute left-0 top-0 whitespace-nowrap font-serif font-[900] italic text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] via-[#146299] to-[#0B3951] tracking-wide"
+                      className="absolute left-0 top-0 whitespace-nowrap font-allora text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] via-[#146299] to-[#0B3951] tracking-wide"
                     >
                       {words[wordIdx]}
                     </motion.span>
                   </AnimatePresence>
                   {/* Invisible text reserves exact space needed dynamically */}
-                  <span className="opacity-0 select-none pointer-events-none whitespace-nowrap font-serif font-[900] italic tracking-wide">{words[wordIdx]}</span>
+                  <span className="opacity-0 select-none pointer-events-none whitespace-nowrap font-allora tracking-wide">{words[wordIdx]}</span>
                 </span>{' '}
-                to Hifz, We're With You Every Step.
+                Becomes a Lifelong Connection with the Quran.
               </motion.h1>
 
               {/* Subheading hidden on mobile as requested */}
@@ -143,7 +143,7 @@ export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
             >
               <div className="flex items-center space-x-2">
                 <CheckCircle2 className="w-5 h-5 text-[#1C8DC8] shrink-0" />
-                <span>1-on-1 Certified Native Arab Tutors</span>
+                <span>1-on-1 Certified Expert Tutors</span>
               </div>
               <div className="flex items-center space-x-2">
                 <CheckCircle2 className="w-5 h-5 text-[#1C8DC8] shrink-0" />
@@ -168,7 +168,7 @@ export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
             >
               <button
                 onClick={onOpenTrialModal}
-                className="bg-gradient-to-r from-[#1C8DC8] via-[#3D8DC3] to-[#146299] hover:from-[#146299] hover:to-[#1C8DC8] text-white font-extrabold text-[10px] xs:text-xs sm:text-base px-3 xs:px-5 sm:px-8 py-3 sm:py-4 rounded-full transition-all duration-300 shadow-[0_12px_24px_rgba(28,141,200,0.18)] hover:shadow-[0_16px_32px_rgba(28,141,200,0.3)] hover:scale-103 active:scale-98 flex items-center justify-center space-x-1 sm:space-x-2 cursor-pointer whitespace-nowrap"
+                className="bg-gradient-to-r from-[#1C8DC8] via-[#3D8DC3] to-[#146299] hover:from-[#146299] hover:to-[#1C8DC8] text-white font-extrabold text-[10px] xs:text-xs sm:text-base px-3 xs:px-5 sm:px-8 py-2.5 sm:py-4 rounded-full transition-all duration-300 shadow-[0_12px_24px_rgba(28,141,200,0.18)] hover:shadow-[0_16px_32px_rgba(28,141,200,0.3)] hover:scale-103 active:scale-98 flex items-center justify-center space-x-1 sm:space-x-2 cursor-pointer whitespace-nowrap"
               >
                 <span>Start Free Trial</span>
                 <ChevronRight className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
@@ -184,7 +184,7 @@ export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
           </div>
 
           {/* Right Side: Portrait Image & Glass Badges (Overlap left side & touch baseline) */}
-          <div className="col-span-5 lg:col-span-6 relative flex justify-center items-end self-end h-full z-20 -ml-8 sm:-ml-12 md:-ml-16 lg:-ml-24 xl:-ml-32">
+          <div className="col-span-5 lg:col-span-6 relative flex justify-end items-end self-end h-full z-20 -mr-4 sm:-mr-8 md:-mr-12 lg:-mr-16 -ml-1 sm:ml-0">
             
             {/* Visual Backdrops */}
             <div className="absolute w-[95%] aspect-square bg-gradient-to-tr from-[#3D8DC3]/15 to-[#1C8DC8]/5 rounded-full blur-3xl -z-10 animate-pulse duration-[8000ms] bottom-0" />
@@ -194,7 +194,7 @@ export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.15, ease: "easeOut" }}
-              className="relative w-full max-w-[550px] lg:max-w-none lg:scale-110 xl:scale-115 transition-transform duration-500 self-end flex items-end"
+              className="relative w-full max-w-[550px] lg:max-w-none scale-105 xs:scale-110 sm:scale-115 md:scale-120 lg:scale-110 xl:scale-115 transition-transform duration-500 self-end flex items-end"
             >
               <img
                 src={imghero}
@@ -251,7 +251,7 @@ export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
                     Pure, guided Qur'an education.
                   </h4>
                   <p className="text-[10px] sm:text-xs text-[#146299] mt-1 leading-normal font-medium">
-                    Learn recitation, Tajweed & Hifz with native Arabic speaking tutors.
+                    Learn recitation, Tajweed & Hifz with certified expert scholars.
                   </p>
                 </div>
                 <div className="bg-[#1C8DC8]/10 p-2 rounded-xl shrink-0">

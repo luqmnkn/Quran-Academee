@@ -10,7 +10,7 @@ const VIDEO_TESTIMONIALS = [
     studentName: 'Zayd Al-Mansoori',
     age: '9 Years',
     courseName: 'Noorani Qaida Basics',
-    duration: '3 Months with Zikr',
+    duration: '3 Months with Quran Academee',
     snippet: 'Watch Zayd pronouncing complex Arabic letters perfectly with proper Tajweed articulation points (Makharij)!',
     thumbnailGradient: 'from-emerald-500/20 via-[#1C8DC8]/25 to-[#0B3951]/20'
   },
@@ -19,7 +19,7 @@ const VIDEO_TESTIMONIALS = [
     studentName: 'Amira Yusuf',
     age: '11 Years',
     courseName: 'Quran Memorization (Hifz)',
-    duration: '6 Months with Zikr',
+    duration: '6 Months with Quran Academee',
     snippet: 'Watch Amira reciting her daily Sabaq (new memorization) with beautiful melodious tone and rhythmic rules.',
     thumbnailGradient: 'from-[#1C8DC8]/20 via-[#3D8DC3]/25 to-[#0B3951]/20'
   },
@@ -28,7 +28,7 @@ const VIDEO_TESTIMONIALS = [
     studentName: 'Yusuf & Omar',
     age: 'Brothers',
     courseName: 'Tajweed al Quran',
-    duration: '1 Year with Zikr',
+    duration: '1 Year with Quran Academee',
     snippet: 'How two brothers interact playfully and constructively with their Arab tutor during live 1-on-1 Quran sessions.',
     thumbnailGradient: 'from-amber-500/10 via-[#1C8DC8]/25 to-[#146299]/20'
   },
@@ -37,7 +37,7 @@ const VIDEO_TESTIMONIALS = [
     studentName: 'Dr. Farhan',
     age: 'Adult Student',
     courseName: 'Fluent Recitation',
-    duration: '5 Months with Zikr',
+    duration: '5 Months with Quran Academee',
     snippet: 'Reviewing adult Tajweed classes and explaining how flexible schedules accommodated his hospital shift changes.',
     thumbnailGradient: 'from-indigo-500/15 via-[#1C8DC8]/25 to-[#0B3951]/20'
   }
@@ -87,7 +87,7 @@ export default function Testimonials() {
   );
 
   return (
-    <section className="py-[100px] md:py-[140px] lg:py-[180px] bg-gradient-to-b from-white via-[#F0F9FF] to-white relative overflow-hidden">
+    <section className="py-16 sm:py-20 md:py-24 bg-gradient-to-b from-white via-[#F0F9FF] to-white relative overflow-hidden">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#1C8DC8]/3 rounded-full blur-[140px] pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
@@ -102,7 +102,7 @@ export default function Testimonials() {
           </div>
           
           <h2 className="font-display font-[900] text-3xl sm:text-[45px] lg:text-[64px] text-[#0B3951] tracking-[-0.04em] leading-[1.05]">
-            Hear From Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] via-[#146299] to-[#0B3951] underline underline-offset-8 decoration-4">Quran Learners</span>
+            Hear From Our <span className="font-allora text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] via-[#146299] to-[#0B3951]">Quran Learners</span>
           </h2>
           
           <p className="font-sans font-medium text-[18px] text-slate-600 max-w-lg mx-auto leading-relaxed">
@@ -166,7 +166,7 @@ export default function Testimonials() {
               </span>
             </div>
             <h3 className="font-display font-[900] text-2xl sm:text-[34px] text-[#0B3951] tracking-tight leading-none">
-              Watch Our Students <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] to-[#146299]">Recite In Real-Time</span>
+              Watch Our Students <span className="font-allora text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] to-[#146299]">Recite In Real-Time</span>
             </h3>
             <p className="font-sans font-medium text-sm sm:text-base text-slate-600 max-w-lg mx-auto">
               Real recordings from 1-on-1 virtual sessions showing progress in Quranic recitation, fluency, and proper Tajweed.

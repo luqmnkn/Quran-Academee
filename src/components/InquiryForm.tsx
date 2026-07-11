@@ -421,7 +421,7 @@ export default function InquiryForm({ prefilledCourse, onClearPrefill, onSubmitS
   return (
     <section 
       id="contact" 
-      className="py-24 md:py-36 lg:py-48 bg-gradient-to-tr from-[#F0F9FF] via-white to-white border-t border-[#E0F2FE] relative overflow-hidden"
+      className="py-16 sm:py-20 md:py-24 bg-gradient-to-tr from-[#F0F9FF] via-white to-white border-t border-[#E0F2FE] relative overflow-hidden"
     >
       {/* Visual background ambient lighting */}
       <div className="absolute top-1/4 right-0 w-[450px] h-[450px] bg-[#1C8DC8]/5 rounded-full blur-[110px] pointer-events-none"></div>
@@ -438,7 +438,7 @@ export default function InquiryForm({ prefilledCourse, onClearPrefill, onSubmitS
             </span>
           </div>
           <h2 className="font-display font-[900] text-3xl sm:text-[45px] text-[#0B3951] tracking-[-0.035em] leading-[1.05]">
-            Schedule Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] via-[#146299] to-[#0B3951] underline underline-offset-8 decoration-4">Free Trial Lesson</span>
+            Schedule Your <span className="font-allora text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] via-[#146299] to-[#0B3951]">Free Trial Lesson</span>
           </h2>
           <p className="text-sm sm:text-base text-slate-600 max-w-lg mx-auto leading-relaxed">
              Join risk-free. No credit card required. Our coordinator coordinates direct class setups on WhatsApp within 12 hours.
@@ -505,22 +505,22 @@ export default function InquiryForm({ prefilledCourse, onClearPrefill, onSubmitS
               
               <div className="space-y-3">
                 <a 
-                  href="https://wa.me/18186509752" 
+                  href="https://wa.me/923702680670" 
                   target="_blank" 
                   rel="noreferrer" 
                   className="flex items-center space-x-4 p-4 bg-[#F0F9FF] rounded-2xl hover:bg-white border border-[#E0F2FE] transition-all group"
                 >
                   <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-                    <Phone size={18} strokeWidth={2.5} />
+                    <i className="fa-brands fa-whatsapp text-lg"></i>
                   </div>
                   <div>
                     <span className="text-[10px] font-mono font-bold uppercase text-slate-400 tracking-wider">Fast Coordinator WhatsApp</span>
-                    <p className="text-[#0B3951] font-extrabold mt-0.5 text-sm">+1 (818) 650-9752</p>
+                    <p className="text-[#0B3951] font-extrabold mt-0.5 text-sm">+92 370 2680670</p>
                   </div>
                 </a>
 
                 <a 
-                  href="mailto:support@zikr.academy" 
+                  href="mailto:contact@quranacademee.com" 
                   className="flex items-center space-x-4 p-4 bg-[#F0F9FF] rounded-2xl hover:bg-white border border-[#E0F2FE] transition-all group"
                 >
                   <div className="w-10 h-10 rounded-xl bg-[#1C8DC8]/10 text-[#1C8DC8] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
@@ -528,7 +528,7 @@ export default function InquiryForm({ prefilledCourse, onClearPrefill, onSubmitS
                   </div>
                   <div>
                     <span className="text-[10px] font-mono font-bold uppercase text-slate-400 tracking-wider">Direct Helpdesk Email</span>
-                    <p className="text-[#0B3951] font-extrabold mt-0.5 text-sm">support@zikr.academy</p>
+                    <p className="text-[#0B3951] font-extrabold mt-0.5 text-sm">contact@quranacademee.com</p>
                   </div>
                 </a>
               </div>

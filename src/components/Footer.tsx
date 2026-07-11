@@ -64,16 +64,16 @@ export default function Footer({ currentPage = 'home', onNavigate }: FooterProps
                 href="https://www.facebook.com/quranacademee1"
                 target="_blank"
                 rel="noreferrer"
-                className="w-9 h-9 rounded-xl bg-white/[0.03] hover:bg-gradient-to-br hover:from-[#1C8DC8] hover:to-[#3D8DC3] text-slate-300 hover:text-white flex items-center justify-center transition-all duration-300 border border-white/5 hover:border-[#1C8DC8]/40 shadow-md hover:shadow-[0_0_15px_rgba(28,141,200,0.35)] hover:-translate-y-1 transform group"
+                className="w-9 h-9 rounded-xl bg-[#1877F2] text-white flex items-center justify-center transition-all duration-300 border border-transparent shadow-md hover:shadow-[0_0_15px_rgba(24,119,242,0.4)] hover:-translate-y-1 transform group"
                 aria-label="Facebook"
               >
-                <Facebook size={16} className="transition-transform duration-300 group-hover:scale-110" />
+                <Facebook size={16} className="fill-current transition-transform duration-300 group-hover:scale-110" />
               </a>
               <a
                 href="https://www.instagram.com/quranacademee/"
                 target="_blank"
                 rel="noreferrer"
-                className="w-9 h-9 rounded-xl bg-white/[0.03] hover:bg-gradient-to-br hover:from-[#1C8DC8] hover:to-[#3D8DC3] text-slate-300 hover:text-white flex items-center justify-center transition-all duration-300 border border-white/5 hover:border-[#1C8DC8]/40 shadow-md hover:shadow-[0_0_15px_rgba(28,141,200,0.35)] hover:-translate-y-1 transform group"
+                className="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#FFDC80] via-[#E1306C] to-[#C13584] text-white flex items-center justify-center transition-all duration-300 border border-transparent shadow-md hover:shadow-[0_0_15px_rgba(225,48,108,0.4)] hover:-translate-y-1 transform group"
                 aria-label="Instagram"
               >
                 <Instagram size={16} className="transition-transform duration-300 group-hover:scale-110" />
@@ -82,25 +82,25 @@ export default function Footer({ currentPage = 'home', onNavigate }: FooterProps
                 href="https://www.youtube.com/@quranacademee"
                 target="_blank"
                 rel="noreferrer"
-                className="w-9 h-9 rounded-xl bg-white/[0.03] hover:bg-gradient-to-br hover:from-[#1C8DC8] hover:to-[#3D8DC3] text-slate-300 hover:text-white flex items-center justify-center transition-all duration-300 border border-white/5 hover:border-[#1C8DC8]/40 shadow-md hover:shadow-[0_0_15px_rgba(28,141,200,0.35)] hover:-translate-y-1 transform group"
+                className="w-9 h-9 rounded-xl bg-[#FF0000] text-white flex items-center justify-center transition-all duration-300 border border-transparent shadow-md hover:shadow-[0_0_15px_rgba(255,0,0,0.4)] hover:-translate-y-1 transform group"
                 aria-label="YouTube"
               >
-                <Youtube size={16} className="transition-transform duration-300 group-hover:scale-110" />
+                <Youtube size={16} className="fill-current transition-transform duration-300 group-hover:scale-110" />
               </a>
               <a
                 href="https://www.linkedin.com/company/quran-academee"
                 target="_blank"
                 rel="noreferrer"
-                className="w-9 h-9 rounded-xl bg-white/[0.03] hover:bg-gradient-to-br hover:from-[#1C8DC8] hover:to-[#3D8DC3] text-slate-300 hover:text-white flex items-center justify-center transition-all duration-300 border border-white/5 hover:border-[#1C8DC8]/40 shadow-md hover:shadow-[0_0_15px_rgba(28,141,200,0.35)] hover:-translate-y-1 transform group"
+                className="w-9 h-9 rounded-xl bg-[#0A66C2] text-white flex items-center justify-center transition-all duration-300 border border-transparent shadow-md hover:shadow-[0_0_15px_rgba(10,102,194,0.4)] hover:-translate-y-1 transform group"
                 aria-label="LinkedIn"
               >
-                <Linkedin size={16} className="transition-transform duration-300 group-hover:scale-110" />
+                <Linkedin size={16} className="fill-current transition-transform duration-300 group-hover:scale-110" />
               </a>
               <a
                 href="https://www.tiktok.com/@quranacademee"
                 target="_blank"
                 rel="noreferrer"
-                className="w-9 h-9 rounded-xl bg-white/[0.03] hover:bg-gradient-to-br hover:from-[#1C8DC8] hover:to-[#3D8DC3] text-slate-300 hover:text-white flex items-center justify-center transition-all duration-300 border border-white/5 hover:border-[#1C8DC8]/40 shadow-md hover:shadow-[0_0_15px_rgba(28,141,200,0.35)] hover:-translate-y-1 transform group"
+                className="w-9 h-9 rounded-xl bg-[#000000] text-white flex items-center justify-center transition-all duration-300 border border-transparent shadow-md hover:shadow-[0_0_15px_rgba(0,0,0,0.4)] hover:-translate-y-1 transform group"
                 aria-label="TikTok"
               >
                 <svg className="w-[16px] h-[16px] fill-current transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24">
@@ -111,7 +111,7 @@ export default function Footer({ currentPage = 'home', onNavigate }: FooterProps
                 href="https://www.reddit.com/user/quranacademee"
                 target="_blank"
                 rel="noreferrer"
-                className="w-9 h-9 rounded-xl bg-white/[0.03] hover:bg-gradient-to-br hover:from-[#1C8DC8] hover:to-[#3D8DC3] text-slate-300 hover:text-white flex items-center justify-center transition-all duration-300 border border-white/5 hover:border-[#1C8DC8]/40 shadow-md hover:shadow-[0_0_15px_rgba(28,141,200,0.35)] hover:-translate-y-1 transform group"
+                className="w-9 h-9 rounded-xl bg-[#FF4500] text-white flex items-center justify-center transition-all duration-300 border border-transparent shadow-md hover:shadow-[0_0_15px_rgba(255,69,0,0.4)] hover:-translate-y-1 transform group"
                 aria-label="Reddit"
               >
                 <svg className="w-[16px] h-[16px] fill-current transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24">

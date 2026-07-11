@@ -64,7 +64,7 @@ function AnimatedCounter({ value }: AnimatedCounterProps) {
 
 export default function TrustCredibility() {
   return (
-    <section id="statistics" className="py-[100px] md:py-[140px] lg:py-[180px] bg-gradient-to-b from-white via-[#F0F9FF] to-white relative overflow-hidden">
+    <section id="statistics" className="py-16 sm:py-20 md:py-24 bg-gradient-to-b from-white via-[#F0F9FF] to-white relative overflow-hidden">
       
       {/* Luxurious Glowing Backdrops */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-[#1C8DC8]/5 rounded-full blur-[140px] pointer-events-none"></div>
@@ -81,7 +81,7 @@ export default function TrustCredibility() {
             </span>
           </div>
           <h2 className="font-display font-[900] text-3xl sm:text-[40px] text-[#0B3951] tracking-[-0.03em] leading-[1.1]">
-            An International Academy Built on Trust & Devotion
+            An International Academy Built on <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] to-[#146299] font-serif italic font-normal px-1">Trust & Devotion</span>
           </h2>
           <p className="text-sm sm:text-base text-slate-600 max-w-lg mx-auto leading-relaxed">
             We hold ourselves to the highest benchmarks of traditional Arabic pedagogy and verified academic certifications.

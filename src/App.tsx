@@ -13,6 +13,7 @@ import FAQSection from './components/FAQSection';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
 import FloatingControls from './components/FloatingControls';
+import AdminDashboard from './components/AdminDashboard';
 import { X, Calendar, User, ShieldCheck } from 'lucide-react';
 
 export default function App() {
@@ -22,8 +23,8 @@ export default function App() {
   const [isTrialModalOpen, setIsTrialModalOpen] = useState(false);
   const [selectedCourseSelection, setSelectedCourseSelection] = useState('');
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [currentPage, setCurrentPage] = useState<'home' | 'pricing'>('home');
-  const [activeSection, setActiveSection] = useState<'home' | 'pricing' | 'courses'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'pricing' | 'admin'>('home');
+  const [activeSection, setActiveSection] = useState<'home' | 'pricing' | 'courses' | 'about'>('home');
 
   // Synchronize routing state with URL path
   useEffect(() => {
@@ -31,6 +32,9 @@ export default function App() {
     if (path === '/pricing') {
       setCurrentPage('pricing');
       setActiveSection('pricing');
+    } else if (path === '/admin') {
+      setCurrentPage('admin');
+      setActiveSection('home');
     } else {
       setCurrentPage('home');
       if (activeSection === 'pricing') {
@@ -55,15 +59,25 @@ export default function App() {
       }
 
       if (currentPage === 'home') {
+        const aboutElement = document.getElementById('about');
         const coursesElement = document.getElementById('courses');
+
+        if (aboutElement) {
+          const rect = aboutElement.getBoundingClientRect();
+          if (rect.top <= window.innerHeight * 0.4 && rect.bottom >= window.innerHeight * 0.15) {
+            setActiveSection('about');
+            return;
+          }
+        }
+
         if (coursesElement) {
           const rect = coursesElement.getBoundingClientRect();
-          // If courses section is in view
-          if (rect.top <= window.innerHeight * 0.35 && rect.bottom >= window.innerHeight * 0.15) {
+          if (rect.top <= window.innerHeight * 0.4 && rect.bottom >= window.innerHeight * 0.15) {
             setActiveSection('courses');
             return;
           }
         }
+
         setActiveSection('home');
       }
     };
@@ -176,12 +190,14 @@ export default function App() {
       
 
       {/* Header Sticky Component */}
-      <Header 
-        onOpenTrialModal={() => setIsTrialModalOpen(true)} 
-        currentPage={currentPage}
-        activeSection={activeSection}
-        onNavigate={handleNavigation}
-      />
+      {currentPage !== 'admin' && (
+        <Header 
+          onOpenTrialModal={() => setIsTrialModalOpen(true)} 
+          currentPage={currentPage}
+          activeSection={activeSection}
+          onNavigate={handleNavigation}
+        />
+      )}
 
       {/* Main Content Sections with elegant conditional router */}
       <main>
@@ -225,13 +241,19 @@ export default function App() {
         {currentPage === 'pricing' && (
           <Pricing onBookTrial={handlePricingSelection} />
         )}
+
+        {currentPage === 'admin' && (
+          <AdminDashboard />
+        )}
       </main>
 
       {/* Layout Footer contacts */}
-      <Footer currentPage={currentPage} onNavigate={handleNavigation} />
+      {currentPage !== 'admin' && (
+        <Footer currentPage={currentPage} onNavigate={handleNavigation} />
+      )}
 
       {/* Floating vibration WhatsApp trigger */}
-      <WhatsAppButton />
+      {currentPage !== 'admin' && <WhatsAppButton />}
 
       {/* Core Trial Request Popup Modal Wrapper */}
       {isTrialModalOpen && (
@@ -285,7 +307,7 @@ export default function App() {
       )}
 
       {/* Floating Controls system */}
-      <FloatingControls onOpenTrialModal={() => setIsTrialModalOpen(true)} />
+      {currentPage !== 'admin' && <FloatingControls onOpenTrialModal={() => setIsTrialModalOpen(true)} />}
 
     </div>
   );

@@ -58,7 +58,7 @@ export default function WhyChooseUs() {
   return (
     <section 
       id="why-us" 
-      className="py-[100px] md:py-[140px] lg:py-[180px] bg-gradient-to-tr from-[#F0F9FF] via-white to-[#E0F2FE] text-[#0B3951] relative overflow-hidden"
+      className="py-16 sm:py-20 md:py-24 bg-gradient-to-tr from-[#F0F9FF] via-white to-[#E0F2FE] text-[#0B3951] relative overflow-hidden"
     >
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#1C8DC8]/3 rounded-full blur-[120px] pointer-events-none"></div>
       <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-[#3D8DC3]/3 rounded-full blur-[100px] pointer-events-none"></div>
@@ -76,7 +76,7 @@ export default function WhyChooseUs() {
           
           <h2 className="font-display font-[900] text-3xl sm:text-[45px] lg:text-[64px] text-[#0B3951] tracking-[-0.04em] leading-[1.05] filter drop-shadow-sm">
             Why Hundreds of Worldwide Families <br className="hidden sm:inline" />
-            Empower Their Kids via <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] via-[#146299] to-[#0B3951]">Quran Academee</span>
+            Empower Their Kids via <span className="font-allora text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] via-[#146299] to-[#0B3951]">Quran Academee</span>
           </h2>
           
           <p className="font-sans font-medium text-[18px] text-slate-600 max-w-2xl mx-auto leading-relaxed">

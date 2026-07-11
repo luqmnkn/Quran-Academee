@@ -11,7 +11,7 @@ export default function FAQSection() {
   };
 
   return (
-    <section id="faqs" className="py-24 md:py-36 lg:py-48 bg-gradient-to-b from-white via-[#F0F9FF] to-white border-t border-[#E0F2FE] relative overflow-hidden">
+    <section id="faqs" className="py-16 sm:py-20 md:py-24 bg-gradient-to-b from-white via-[#F0F9FF] to-white border-t border-[#E0F2FE] relative overflow-hidden">
       
       {/* Background radial highlight */}
       <div className="absolute top-1/4 right-0 w-80 h-80 bg-[#1C8DC8]/3 rounded-full blur-[120px] pointer-events-none"></div>
@@ -28,7 +28,7 @@ export default function FAQSection() {
           </div>
           
           <h2 className="font-display font-[900] text-3xl sm:text-[45px] text-[#0B3951] tracking-[-0.03em] leading-[1.05]">
-            Frequently Asked <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] via-[#146299] to-[#0B3951] underline underline-offset-8 decoration-4">Questions</span>
+            Frequently Asked <span className="font-allora text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] via-[#146299] to-[#0B3951]">Questions</span>
           </h2>
           
           <p className="text-sm sm:text-base text-slate-600 max-w-lg mx-auto leading-relaxed">

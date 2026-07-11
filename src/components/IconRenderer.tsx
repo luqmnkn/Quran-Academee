@@ -1,5 +1,4 @@
 import React from 'react';
-import * as LucideIcons from 'lucide-react';
 
 interface IconRendererProps {
   name: string;
@@ -8,13 +7,27 @@ interface IconRendererProps {
 }
 
 export default function IconRenderer({ name, className = '', size = 24 }: IconRendererProps) {
-  // Safe lookup of icons
-  const IconComponent = (LucideIcons as any)[name];
+  // Map Lucide names to Font Awesome classes
+  const fontAwesomeMap: Record<string, string> = {
+    BookOpen: 'fa-solid fa-book-open',
+    Book: 'fa-solid fa-book',
+    Award: 'fa-solid fa-award',
+    Brain: 'fa-solid fa-brain',
+    Sparkles: 'fa-solid fa-wand-magic-sparkles',
+    GraduationCap: 'fa-solid fa-graduation-cap',
+    ShieldCheck: 'fa-solid fa-shield-halved',
+    UserCheck: 'fa-solid fa-user-check',
+    CalendarDays: 'fa-solid fa-calendar-days',
+    Users: 'fa-solid fa-users',
+    CheckCircle: 'fa-solid fa-circle-check',
+  };
 
-  if (!IconComponent) {
-    // Return standard fallback icon
-    return <LucideIcons.Book className={className} size={size} />;
-  }
+  const faClass = fontAwesomeMap[name] || 'fa-solid fa-book';
 
-  return <IconComponent className={className} size={size} />;
+  return (
+    <i 
+      className={`${faClass} ${className}`} 
+      style={{ fontSize: `${size}px`, display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }} 
+    />
+  );
 }

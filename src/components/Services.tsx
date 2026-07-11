@@ -4,7 +4,8 @@ import { COURSES } from '../data';
 import { Course } from '../types';
 import IconRenderer from './IconRenderer';
 import PremiumCarousel from './PremiumCarousel';
-import { ArrowRight, BookOpen, Clock, Users, GraduationCap, X, CheckCircle2, Sparkles, Star } from 'lucide-react';
+import RecitationRecorder from './RecitationRecorder';
+import { ArrowRight, BookOpen, Clock, Users, GraduationCap, X, CheckCircle2, Sparkles, Star, Mic, Headphones } from 'lucide-react';
 
 interface ServicesProps {
   onSelectCourse: (courseName: string) => void;
@@ -13,6 +14,7 @@ interface ServicesProps {
 
 export default function Services({ onSelectCourse, onOpenTrialModal }: ServicesProps) {
   const [activeCourse, setActiveCourse] = useState<Course | null>(null);
+  const [isRecorderOpen, setIsRecorderOpen] = useState(false);
 
   const handleBookNow = (courseTitle: string) => {
     setActiveCourse(null);
@@ -35,6 +37,63 @@ export default function Services({ onSelectCourse, onOpenTrialModal }: ServicesP
       transition: { type: 'spring', stiffness: 100, damping: 16 }
     }
   };
+
+  const renderAssessmentCard = () => (
+    <div className="bg-gradient-to-br from-[#0B3951] via-[#0E4967] to-[#146299] text-white rounded-2xl border border-[#1C8DC8]/50 p-5 sm:p-6 flex flex-col justify-between h-full transition-all duration-300 hover:shadow-[0_15px_35px_rgba(28,141,200,0.18)] hover:border-[#1C8DC8]/80 hover:-translate-y-1.5 group relative overflow-hidden text-left min-h-[330px]">
+      {/* Top light-blue indicator */}
+      <div className="absolute top-0 left-0 right-0 h-[4px] bg-gradient-to-r from-[#1C8DC8] to-[#3D8DC3] scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+
+      {/* Blue glow ball */}
+      <div className="absolute -top-12 -right-12 w-28 h-28 bg-[#1C8DC8]/10 rounded-full blur-2xl group-hover:bg-[#1C8DC8]/20 transition-all duration-500 pointer-events-none"></div>
+
+      <div className="space-y-4">
+        {/* Card Header */}
+        <div className="flex items-center justify-between">
+          <div className="w-11 h-11 rounded-xl bg-white/10 text-white flex items-center justify-center border border-white/10 shadow-inner group-hover:bg-[#1C8DC8] group-hover:text-white transition-all duration-300">
+            <Mic className="w-5.5 h-5.5 stroke-[2]" />
+          </div>
+          <span className="font-display font-black text-[10px] tracking-widest uppercase bg-[#1C8DC8]/20 text-white border border-[#1C8DC8]/30 px-3 py-1 rounded-full">
+            Expert Review
+          </span>
+        </div>
+
+        {/* Title & Age information */}
+        <div className="space-y-1.5">
+          <div className="flex items-center space-x-1.5">
+            <h3 className="font-display font-[900] text-lg text-white tracking-tight group-hover:text-white transition-colors leading-snug">
+              Recitation Level Assessment
+            </h3>
+            <span className="bg-[#1C8DC8] text-white text-[8px] font-mono font-black uppercase tracking-wider px-1.5 py-0.5 rounded">FREE</span>
+          </div>
+          <div className="flex flex-wrap items-center gap-1.5 text-[9px] font-bold font-mono">
+            <span className="text-[#CBE8F4] bg-white/10 px-2 py-0.5 rounded-md font-sans">All Ages Welcome</span>
+            <span className="w-1 h-1 rounded-full bg-white/20"></span>
+            <span className="text-white uppercase tracking-widest">Free Scholar Review</span>
+          </div>
+        </div>
+
+        {/* Description line */}
+        <p className="text-[11px] font-sans font-medium text-[#E0F2FE] leading-relaxed line-clamp-4">
+          Not sure which program to pick? Record a short audio of your recitation (e.g. Surah Al-Fatihah). Our expert scholars will listen, evaluate your pronunciation (Makharij), and recommend the perfect course for you within 24 hours.
+        </p>
+      </div>
+
+      {/* Footer operations */}
+      <div className="mt-5 pt-3.5 border-t border-white/10 flex items-center justify-between gap-1">
+        <div className="text-[9px] font-black text-white flex items-center space-x-1 uppercase tracking-wider font-mono">
+          <CheckCircle2 size={10} className="stroke-[2.5]" />
+          <span>Results in 24 Hrs</span>
+        </div>
+        
+        <button
+          onClick={() => setIsRecorderOpen(true)}
+          className="bg-[#1C8DC8] hover:bg-[#146299] text-white rounded-md px-3.5 py-1.5 text-[9px] font-bold tracking-wider uppercase transition-all duration-300 cursor-pointer border border-transparent shadow-md hover:shadow-lg font-mono font-black"
+        >
+          Record Voice
+        </button>
+      </div>
+    </div>
+  );
 
   const renderCardContent = (course: Course) => (
     <div className="bg-gradient-to-br from-white via-white to-[#F0F9FF]/60 rounded-2xl border border-[#E0F2FE] p-5 sm:p-6 flex flex-col justify-between h-full transition-all duration-300 hover:shadow-[0_15px_35px_rgba(28,141,200,0.08),_0_2px_8px_rgba(0,0,0,0.01)] hover:border-[#1C8DC8]/40 hover:-translate-y-1.5 group relative overflow-hidden text-left min-h-[330px]">
@@ -93,7 +152,7 @@ export default function Services({ onSelectCourse, onOpenTrialModal }: ServicesP
   return (
     <section 
       id="courses" 
-      className="py-[100px] md:py-[140px] lg:py-[180px] bg-gradient-to-b from-white via-[#F0F9FF] to-white relative overflow-hidden"
+      className="py-16 sm:py-20 md:py-24 bg-gradient-to-b from-white via-[#F0F9FF] to-white relative overflow-hidden"
     >
       <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#F0F9FF] via-[#1C8DC8] to-[#F0F9FF]"></div>
       <div className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-[#1C8DC8]/5 rounded-full blur-[110px] pointer-events-none"></div>
@@ -103,7 +162,7 @@ export default function Services({ onSelectCourse, onOpenTrialModal }: ServicesP
         {/* Section Header with Elite Spacing & Typography */}
         <div className="text-center max-w-3xl mx-auto mb-20 space-y-6">
           <h2 className="font-display font-[900] text-3xl sm:text-[45px] lg:text-[64px] text-[#0B3951] tracking-[-0.04em] leading-[1.05] filter drop-shadow-sm">
-            Our Elite Online <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] via-[#146299] to-[#0B3951]">Quran Academy</span> Programs
+            Our Elite Online <span className="font-allora text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] via-[#146299] to-[#0B3951]">Quran Academee</span> Programs
           </h2>
           
           <p className="font-sans font-medium text-[18px] text-slate-600 leading-relaxed max-w-2xl mx-auto">
@@ -111,23 +170,19 @@ export default function Services({ onSelectCourse, onOpenTrialModal }: ServicesP
           </p>
         </div>
 
-        {/* 1. DESKTOP VIEW: Adaptive Grid Layout */}
-        <div className="hidden lg:grid grid-cols-4 gap-6 xl:gap-8">
-          {COURSES.map((course) => (
-            <div key={course.id}>
-              {renderCardContent(course)}
-            </div>
-          ))}
-        </div>
-
-        {/* 2. MOBILE VIEW: Horizontal Snap-Center Carousel */}
-        <div className="block lg:hidden">
+        {/* Course Cards Infinite Carousel */}
+        <div className="w-full">
           <PremiumCarousel>
-            {COURSES.map((course) => (
-              <div key={course.id} className="h-full">
-                {renderCardContent(course)}
+            {[
+              ...COURSES.map((course) => (
+                <div key={course.id} className="h-full">
+                  {renderCardContent(course)}
+                </div>
+              )),
+              <div key="assessment-card" className="h-full">
+                {renderAssessmentCard()}
               </div>
-            ))}
+            ]}
           </PremiumCarousel>
         </div>
 
@@ -264,6 +319,43 @@ export default function Services({ onSelectCourse, onOpenTrialModal }: ServicesP
                   </button>
                 </div>
               </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Recitation Level Assessment Modal */}
+      <AnimatePresence>
+        {isRecorderOpen && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md"
+          >
+            <motion.div 
+              initial={{ scale: 0.95, y: 15 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.95, y: 15 }}
+              transition={{ type: 'spring', duration: 0.4 }}
+              className="bg-white rounded-[32px] max-w-xl w-full shadow-[0_24px_60px_rgba(11,57,81,0.2)] overflow-hidden relative border border-[#E0F2FE] flex flex-col p-6 sm:p-8"
+            >
+              <div className="flex items-center justify-between border-b border-[#E0F2FE] pb-4 mb-4 text-left">
+                <div className="flex items-center space-x-2.5">
+                  <Mic className="text-[#1C8DC8] w-5 h-5" />
+                  <h3 className="font-display font-[900] text-lg text-[#0B3951] tracking-tight">
+                    Recitation Level Assessment
+                  </h3>
+                </div>
+                <button
+                  onClick={() => setIsRecorderOpen(false)}
+                  className="text-slate-400 hover:text-slate-600 p-1 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+
+              <RecitationRecorder onClose={() => setIsRecorderOpen(false)} />
             </motion.div>
           </motion.div>
         )}

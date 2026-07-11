@@ -6,7 +6,7 @@ import Logo from './Logo';
 interface HeaderProps {
   onOpenTrialModal: () => void;
   currentPage: 'home' | 'pricing';
-  activeSection: 'home' | 'pricing' | 'courses';
+  activeSection: 'home' | 'pricing' | 'courses' | 'about';
   onNavigate: (page: 'home' | 'pricing', sectionId?: string) => void;
 }
 
@@ -39,17 +39,28 @@ export default function Header({ onOpenTrialModal, currentPage, activeSection, o
     }
   };
 
+  const getHeaderClass = () => {
+    if (isScrolled) {
+      if (isMobileMenuOpen) {
+        // Scrolled and mobile menu is open: full-width, no rounding, solid white background
+        return 'top-0 w-full rounded-none bg-white border-b border-[#E0F2FE]/60 shadow-[0_4px_20px_rgba(0,0,0,0.05)] px-4 sm:px-8 py-2.5';
+      } else {
+        // Scrolled and menu is closed: rounded and elegant, backdrop-blur only on desktop (not mobile)
+        return 'top-2 w-[92%] max-w-6xl rounded-[24px] bg-white md:bg-white/85 border border-[#E0F2FE] shadow-[0_4px_20px_rgba(0,0,0,0.05)] md:shadow-[0_15px_45px_rgba(28,141,200,0.12)] md:backdrop-blur-lg px-4 sm:px-8 py-2 md:py-1.5';
+      }
+    } else {
+      // Not scrolled: transparent background, full-width
+      return 'top-0 w-full max-w-[1920px] rounded-none bg-transparent border-transparent shadow-none backdrop-blur-none px-4 sm:px-8 py-2 sm:py-3';
+    }
+  };
+
   return (
     <header 
       id="main-navigation-header"
-      className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-[2000ms] ease-[cubic-bezier(0.2,0.8,0.2,1)] ${
-        isScrolled 
-          ? 'top-2 w-[92%] max-w-6xl rounded-2xl md:rounded-full bg-white/95 border border-[#E0F2FE] shadow-[0_15px_45px_rgba(28,141,200,0.12)] backdrop-blur-lg px-4 sm:px-8 py-1 sm:py-1.5' 
-          : 'top-0 w-full rounded-none bg-white/90 border-b border-[#E0F2FE]/60 backdrop-blur-md px-4 sm:px-8 py-1.5 sm:py-2.5'
-      }`}
+      className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ease-in-out ${getHeaderClass()}`}
     >
       <div className="w-full flex items-center justify-between">
-        {/* Left Side: ZIKR Brand Logo */}
+        {/* Left Side: Quran Academee Brand Logo */}
         <a
           href="#home"
           onClick={(e) => handleLinkClick(e, 'home', '#home')}
@@ -86,26 +97,16 @@ export default function Header({ onOpenTrialModal, currentPage, activeSection, o
           })}
         </nav>
 
-        {/* Right Side: Log In, Register, and Mobile Toggle */}
+        {/* Right Side: Book Free Trial and Mobile Toggle */}
         <div className="flex items-center space-x-3 sm:space-x-6">
           <button
             onClick={() => {
               setIsMobileMenuOpen(false);
               onOpenTrialModal();
             }}
-            className="hidden xs:block text-sm font-semibold text-[#0B3951] hover:text-[#1C8DC8] transition-colors duration-200 uppercase tracking-wide cursor-pointer"
+            className="bg-[#1C8DC8] hover:bg-[#3D8DC3] text-white font-bold text-xs sm:text-sm px-4 sm:px-6 py-2 sm:py-2.5 rounded-full transition-all duration-200 shadow-md hover:shadow-lg hover:scale-102 active:scale-98 cursor-pointer uppercase tracking-wide"
           >
-            Log In
-          </button>
-          
-          <button
-            onClick={() => {
-              setIsMobileMenuOpen(false);
-              onOpenTrialModal();
-            }}
-            className="bg-[#1C8DC8] hover:bg-[#3D8DC3] text-white font-bold text-xs sm:text-sm px-4 sm:px-6 py-2 sm:py-2.5 rounded-full transition-all duration-200 shadow-md hover:shadow-lg hover:scale-102 active:scale-98 cursor-pointer"
-          >
-            Register
+            Enroll
           </button>
 
           {/* Mobile Hamburger Toggle Button */}
@@ -127,7 +128,7 @@ export default function Header({ onOpenTrialModal, currentPage, activeSection, o
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -10 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="md:hidden bg-gradient-to-br from-white via-white to-[#F0F9FF]/95 border border-[#E0F2FE] mt-4 mx-2 rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(28,141,200,0.18)] backdrop-blur-xl relative"
+            className="md:hidden bg-white border border-[#E0F2FE] mt-4 mx-2 rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(28,141,200,0.18)] relative"
           >
             {/* Subtle background glow */}
             <div className="absolute top-0 right-0 w-32 h-32 bg-[#1C8DC8]/5 rounded-full blur-2xl pointer-events-none" />
@@ -149,7 +150,7 @@ export default function Header({ onOpenTrialModal, currentPage, activeSection, o
                     onClick={(e) => handleLinkClick(e, link.page, link.href)}
                     className={`text-base font-bold py-3 px-4 rounded-xl transition-all uppercase tracking-wider flex items-center justify-between ${
                       isActive
-                        ? 'bg-gradient-to-r from-[#F0F9FF] to-[#E0F2FE] text-[#1C8DC8] border border-[#E0F2FE] shadow-sm'
+                        ? 'bg-[#F0F9FF] text-[#1C8DC8] border border-[#E0F2FE] shadow-sm'
                         : 'text-slate-600 hover:bg-[#F0F9FF]/60 hover:text-[#1C8DC8]'
                     }`}
                   >
@@ -158,17 +159,6 @@ export default function Header({ onOpenTrialModal, currentPage, activeSection, o
                   </motion.a>
                 );
               })}
-              <div className="pt-4 mt-2 border-t border-[#E0F2FE] flex flex-col space-y-3 px-3">
-                <button
-                  onClick={() => {
-                    setIsMobileMenuOpen(false);
-                    onOpenTrialModal();
-                  }}
-                  className="w-full text-center py-3.5 rounded-xl bg-gradient-to-r from-[#0B3951] to-[#146299] hover:from-[#1C8DC8] hover:to-[#146299] text-white text-sm font-extrabold uppercase tracking-wider cursor-pointer shadow-md transition-all active:scale-98"
-                >
-                  Log In / Sign Up
-                </button>
-              </div>
             </div>
           </motion.div>
         )}

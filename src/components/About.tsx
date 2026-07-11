@@ -41,29 +41,29 @@ export default function About({ onOpenTrialModal }: AboutProps) {
   };
 
   const renderCardContent = (step: typeof steps[0]) => (
-    <div className="bg-gradient-to-br from-white via-white to-[#F0F9FF]/40 rounded-2xl border border-[#E0F2FE] p-6 sm:p-7 md:p-8 shadow-[0_12px_30px_rgba(28,141,200,0.03)] flex flex-col justify-between items-center text-center space-y-4 hover:shadow-[0_20px_40px_rgba(28,141,200,0.09)] hover:-translate-y-1 transition-all duration-300 relative group overflow-hidden h-full min-h-[285px]">
+    <div className="bg-gradient-to-br from-white via-white to-[#F0F9FF]/40 rounded-2xl border border-[#E0F2FE] p-3.5 sm:p-5 lg:p-6 shadow-[0_10px_25px_rgba(28,141,200,0.03)] flex flex-col items-center text-center space-y-2 sm:space-y-4 hover:shadow-[0_15px_30px_rgba(28,141,200,0.08)] hover:-translate-y-1 transition-all duration-300 relative group overflow-hidden h-full min-h-[120px] md:min-h-[200px]">
       {/* Top indicator ribbon */}
       <div className="absolute top-0 left-0 right-0 h-[3.5px] bg-gradient-to-r from-[#1C8DC8] to-[#146299] scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
 
       {/* Blue light glow from the top-right */}
-      <div className="absolute -top-10 -right-10 w-28 h-28 bg-[#1C8DC8]/12 rounded-full blur-xl group-hover:bg-[#1C8DC8]/22 group-hover:scale-115 transition-all duration-500 pointer-events-none"></div>
+      <div className="absolute -top-10 -right-10 w-24 h-24 bg-[#1C8DC8]/12 rounded-full blur-xl group-hover:bg-[#1C8DC8]/22 transition-all duration-500 pointer-events-none"></div>
 
-      <span className="absolute top-4 right-5 font-mono font-black text-[10px] text-[#1C8DC8]/40 uppercase tracking-widest relative z-10">
+      <span className="absolute top-3 right-4 font-mono font-black text-[10px] sm:text-xs text-[#1C8DC8]/40 uppercase tracking-widest relative z-10">
         {step.num}
       </span>
 
       {/* Round icon badge layout */}
-      <div className="w-12 h-12 rounded-xl bg-[#F0F9FF] text-[#1C8DC8] border border-[#E0F2FE] flex items-center justify-center shadow-inner group-hover:bg-[#0B3951] group-hover:text-white transition-all duration-300 shrink-0 relative z-10">
-        {step.icon === 'CalendarRange' && <CalendarRange size={18} className="stroke-[2.2]" />}
-        {step.icon === 'UserCheck' && <UserCheck size={18} className="stroke-[2.2]" />}
-        {step.icon === 'GraduationCap' && <GraduationCap size={18} className="stroke-[2.2]" />}
+      <div className="w-8 h-8 sm:w-11 sm:h-11 rounded-xl bg-[#F0F9FF] text-[#1C8DC8] border border-[#E0F2FE] flex items-center justify-center shadow-inner group-hover:bg-[#0B3951] group-hover:text-white transition-all duration-300 shrink-0 relative z-10 mt-1 sm:mt-2">
+        {step.icon === 'CalendarRange' && <i className="fa-solid fa-calendar-days text-xs sm:text-base"></i>}
+        {step.icon === 'UserCheck' && <i className="fa-solid fa-user-check text-xs sm:text-base"></i>}
+        {step.icon === 'GraduationCap' && <i className="fa-solid fa-graduation-cap text-xs sm:text-base"></i>}
       </div>
 
-      <div className="space-y-2 relative z-10">
-        <h4 className="font-display font-[800] text-base text-[#0B3951] group-hover:text-[#1C8DC8] transition-colors duration-200">
+      <div className="relative z-10">
+        <h4 className="font-display font-[800] text-xs sm:text-sm lg:text-base text-[#0B3951] group-hover:text-[#1C8DC8] transition-colors duration-200">
           {step.title}
         </h4>
-        <p className="text-xs text-slate-600 leading-relaxed font-sans font-medium">
+        <p className="hidden md:block text-xs text-slate-500 mt-2 leading-relaxed font-sans font-medium">
           {step.desc}
         </p>
       </div>
@@ -73,7 +73,7 @@ export default function About({ onOpenTrialModal }: AboutProps) {
   return (
     <section 
       id="about" 
-      className="py-[100px] md:py-[140px] lg:py-[180px] bg-white relative overflow-hidden"
+      className="py-16 sm:py-20 md:py-24 bg-white relative overflow-hidden"
     >
       <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-[#1C8DC8]/3 rounded-full blur-[130px] -translate-y-1/2 pointer-events-none"></div>
 
@@ -96,7 +96,7 @@ export default function About({ onOpenTrialModal }: AboutProps) {
             <div className="relative rounded-[32px] overflow-hidden border border-[#E0F2FE] bg-white p-3 shadow-[0_22px_50px_rgba(28,141,200,0.06)]">
               <img
                 src={learningSessionImg}
-                alt="Student learning session with certified female tutor represented by Quran Academy classes"
+                alt="Student learning session with certified female tutor represented by Quran Academee classes"
                 className="w-full h-auto rounded-[24px] object-cover"
                 referrerPolicy="no-referrer"
               />
@@ -126,11 +126,11 @@ export default function About({ onOpenTrialModal }: AboutProps) {
             className="lg:col-span-7 space-y-8"
           >
             <h2 className="font-display font-[900] text-2xl sm:text-3xl lg:text-[38px] xl:text-[42px] text-[#0B3951] tracking-[-0.040em] leading-[1.1] filter drop-shadow-sm">
-              A Kind, Compassionate Pathway toward <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] via-[#146299] to-[#0B3951]">Noble Quran Tajweed</span>
+              A Kind, Compassionate Pathway toward <span className="font-allora text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] via-[#146299] to-[#0B3951]">Noble Quran Tajweed</span>
             </h2>
 
             <p className="font-sans font-medium text-[18px] text-slate-700 leading-relaxed">
-              At <strong>Quran Academy</strong>, we establish a warm, encouraging environment connecting families globally with highly certified, authorized expert educators from the comfort of home.
+              At <strong>Quran Academee</strong>, we establish a warm, encouraging environment connecting families globally with highly certified, authorized expert educators from the comfort of home.
             </p>
 
             <p className="font-sans font-medium text-[16px] text-slate-600 leading-relaxed">
@@ -163,61 +163,50 @@ export default function About({ onOpenTrialModal }: AboutProps) {
         </div>
 
         {/* 3 STEPS ONBOARDING */}
-        <div className="pt-20 border-t border-[#E0F2FE] text-center">
-          <div className="max-w-2xl mx-auto mb-16 space-y-4">
+        <div className="pt-10 sm:pt-20 border-t border-[#E0F2FE] text-center">
+          <div className="max-w-2xl mx-auto mb-8 sm:mb-16 space-y-2 sm:space-y-4">
             <span className="text-xs font-mono font-black uppercase tracking-widest text-[#146299]">
               The Simplest Process
             </span>
-            <h3 className="font-display font-[900] text-3xl sm:text-[45px] text-[#0B3951] tracking-[-0.04em] leading-tight">
-              Begin Your Path in <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] via-[#146299] to-[#0B3951] underline underline-offset-8 decoration-4">3 Elegant Steps</span>
+            <h3 className="font-display font-[900] text-2xl sm:text-[45px] text-[#0B3951] tracking-[-0.04em] leading-tight">
+              Begin Your Path in <span className="font-allora text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] via-[#146299] to-[#0B3951]">3 Elegant Steps</span>
             </h3>
           </div>
 
-          {/* 1. DESKTOP VIEW: Adaptive grid */}
+          {/* Symmetrical Grid/Flex for all screens (one line row on mobile, grid on desktop) */}
           <motion.div 
-            className="hidden md:grid grid-cols-3 gap-8 relative z-10"
+            className="flex flex-row overflow-x-auto sm:grid sm:grid-cols-3 gap-3 sm:gap-6 lg:gap-8 relative z-10 scrollbar-none snap-x snap-mandatory px-4 sm:px-0 -mx-4 sm:mx-0 pb-2 sm:pb-0"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
           >
-            <div className="hidden md:block absolute top-[60px] left-[15%] right-[15%] h-[2px] bg-gradient-to-r from-[#F0F9FF] via-[#1C8DC8]/20 to-[#F0F9FF] -z-10"></div>
+            <div className="hidden sm:block absolute top-[55px] left-[15%] right-[15%] h-[2px] bg-gradient-to-r from-[#F0F9FF] via-[#1C8DC8]/20 to-[#F0F9FF] -z-10"></div>
 
             {steps.map((step, idx) => (
               <motion.div
                 key={idx}
                 variants={childVariants}
-                className="h-full"
+                className="h-full min-w-[210px] sm:min-w-0 flex-1 snap-center"
               >
                 {renderCardContent(step)}
               </motion.div>
             ))}
           </motion.div>
 
-          {/* 2. MOBILE VIEW: Horizontal scroll */}
-          <div className="block md:hidden">
-            <PremiumCarousel>
-              {steps.map((step, idx) => (
-                <div key={idx} className="h-full">
-                  {renderCardContent(step)}
-                </div>
-              ))}
-            </PremiumCarousel>
-          </div>
-
           <motion.div 
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="mt-14"
+            className="mt-8 sm:mt-14"
           >
             <button
               onClick={onOpenTrialModal}
-              className="px-10 py-5 font-display font-black text-xs uppercase tracking-widest text-white bg-gradient-to-r from-[#1C8DC8] to-[#3D8DC3] hover:from-[#146299] hover:to-[#1C8DC8] hover:scale-[1.02] border-0 transition-all rounded-xl shadow-[0_12px_36px_rgba(28,141,200,0.2)] cursor-pointer inline-flex items-center space-x-2.5"
+              className="px-8 sm:px-10 py-4 sm:py-5 font-display font-black text-xs uppercase tracking-widest text-white bg-gradient-to-r from-[#1C8DC8] to-[#3D8DC3] hover:from-[#146299] hover:to-[#1C8DC8] hover:scale-[1.02] border-0 transition-all rounded-xl shadow-[0_12px_36px_rgba(28,141,200,0.2)] cursor-pointer inline-flex items-center space-x-2.5"
             >
               <span>Schedule 3-Day Free Trial Now</span>
-              <Sparkles size={14} className="animate-pulse" />
+              <i className="fa-solid fa-wand-magic-sparkles text-xs animate-pulse"></i>
             </button>
           </motion.div>
         </div>

@@ -40,9 +40,9 @@ export default function PremiumCarousel({ children }: PremiumCarouselProps) {
     },
     [
       Autoplay({
-        delay: 3500,
+        delay: 2500,
         stopOnInteraction: false,
-        stopOnMouseEnter: true,
+        stopOnMouseEnter: false,
       }),
     ]
   );
@@ -100,7 +100,7 @@ export default function PremiumCarousel({ children }: PremiumCarouselProps) {
             return (
               <div
                 key={idx}
-                className="w-[82%] sm:w-[75%] md:w-[65%] shrink-0 px-3"
+                className="w-[85%] sm:w-[50%] lg:w-[33.333%] shrink-0 px-3"
               >
                 <div
                   className="w-full h-full transition-all duration-500 ease-out"
