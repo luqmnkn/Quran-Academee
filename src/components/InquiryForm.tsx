@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { InquirySubmission } from '../types';
 import { Mail, Phone, Globe, MessageSquare, Check, AlertCircle, Trash2, Send, Clock, BookOpen, Sparkles, ShieldCheck } from 'lucide-react';
@@ -25,6 +25,17 @@ export default function InquiryForm({ prefilledCourse, onClearPrefill, onSubmitS
   
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+
+  const abortControllerRef = useRef<AbortController | null>(null);
+
+  // Cleanup pending requests on unmount
+  useEffect(() => {
+    return () => {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
+    };
+  }, []);
 
   const cleanAndFormatPhone = (code: string, num: string) => {
     let cleanedNum = num.replace(/[\s\-()]/g, '');
@@ -79,6 +90,9 @@ export default function InquiryForm({ prefilledCourse, onClearPrefill, onSubmitS
     e.preventDefault();
     if (!validate()) return;
 
+    // Prevent double submission if already sending
+    if (status === 'submitting') return;
+
     setStatus('submitting');
     if (errors.submit) {
       const updatedErrors = { ...errors };
@@ -86,59 +100,54 @@ export default function InquiryForm({ prefilledCourse, onClearPrefill, onSubmitS
       setErrors(updatedErrors);
     }
 
+    // Cancel any previous pending submission
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+    const controller = new AbortController();
+    abortControllerRef.current = controller;
+
     try {
-      
-      const apiUrl = "https://script.google.com/macros/s/AKfycbzN5egOyuCiBQl_HPwxpW9D6_M5TMG9Bx3hwEnpTVGR2oy0Un7-QE81KxClxdqLeH9glg/exec";
-      
-      if (apiUrl) {
-        const urlLower = apiUrl.toLowerCase();
-        const isGoogleScript = urlLower.includes('script.google.com') || urlLower.includes('/exec') || urlLower.includes('macros/s/');
-        const endpoint = isGoogleScript ? apiUrl : `${apiUrl}`;
-        
-        const formattedPhone = cleanAndFormatPhone(countryCode, phone);
-        
-        // Prepare data package using URL-encoded search formats instead of stringified JSON objects
-        const formPayload = new URLSearchParams();
-        formPayload.append('fullName', fullName);
-        formPayload.append('email', email);
-        formPayload.append('phone', formattedPhone);
-        formPayload.append('country', country);
-        formPayload.append('courseInterest', courseInterest);
-        formPayload.append('message', message);
-        formPayload.append('website', website);
-        formPayload.append('botField', botField);
+      const formattedPhone = cleanAndFormatPhone(countryCode, phone);
 
-        const response = await fetch(endpoint, {
-          method: 'POST',
-          mode: isGoogleScript ? 'no-cors' : 'cors',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          body: formPayload.toString(),
-        });
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        signal: controller.signal,
+        body: JSON.stringify({
+          fullName,
+          email,
+          phone: formattedPhone,
+          country,
+          courseInterest,
+          message,
+          website,
+          botField,
+        }),
+      });
 
-        if (isGoogleScript) {
-          console.log('Successfully completed fetch to Google Apps Script. Response status:', response.status);
+      const resData = await response.json();
+
+      if (!response.ok) {
+        if (resData && resData.errors) {
+          // Sync server validation errors with the UI
+          setErrors(prev => ({
+            ...prev,
+            ...resData.errors,
+          }));
+          throw new Error(resData.message || 'Validation failed. Please correct the fields above.');
         } else {
-          if (!response.ok) {
-            throw new Error('Inquiry transmission failed. Please check connection parameters.');
-          }
-
-          const resData = await response.json();
-          if (resData && resData.status === 'error') {
-            throw new Error(resData.message || 'Error occurred during form processing');
-          }
+          throw new Error(resData.message || 'Inquiry transmission failed. Please try again.');
         }
-      } else {
-        // Simulate network latency for a polished spinner effect
-        await new Promise((resolve) => setTimeout(resolve, 800));
       }
 
       // Track successful lead submission in Google Tag Manager
       trackLeadSubmission({
         fullName,
         email,
-        phone: cleanAndFormatPhone(countryCode, phone),
+        phone: formattedPhone,
         country,
         courseInterest,
         message,
@@ -164,6 +173,10 @@ export default function InquiryForm({ prefilledCourse, onClearPrefill, onSubmitS
       }, 12000);
 
     } catch (err: any) {
+      // If the request was aborted intentionally, ignore the error and do not update component state
+      if (err.name === 'AbortError') {
+        return;
+      }
       console.error("Submission failed:", err);
       setStatus('error');
       setErrors(prev => ({
