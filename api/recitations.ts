@@ -1,6 +1,7 @@
 import { isRateLimited } from '../lib/rateLimiter.js';
 import { sendEmail } from '../lib/resend.js';
 import { appendLeadToSheet, getSheetsClient } from '../lib/googleSheets.js';
+import { generateAdminRecitationEmailHtml } from '../utils/emailTemplates.js';
 
 // The secure admin access token
 const ADMIN_TOKEN = 'QA-Admin-Secure-9988';
@@ -245,6 +246,31 @@ export default async function handler(req: any, res: any) {
           notes,
           timestamp: new Date(timestamp).toLocaleString('en-US', { timeZone: 'UTC' }) + ' UTC',
         }).catch(err => console.error('Background sheets log failed:', err));
+
+        // Send non-blocking admin notification email
+        (async () => {
+          try {
+            const adminEmail = process.env.ADMIN_EMAIL || 'contact@quranacademee.com';
+            const formattedTimestamp = new Date(timestamp).toLocaleString('en-US', { timeZone: 'UTC' }) + ' UTC';
+            const adminHtml = generateAdminRecitationEmailHtml({
+              id,
+              fullName,
+              email,
+              phone,
+              country: country || 'Unspecified',
+              notes,
+              timestamp: formattedTimestamp,
+            });
+
+            await sendEmail({
+              to: adminEmail,
+              subject: `New Recitation Evaluation Submission: ${fullName}`,
+              html: adminHtml,
+            });
+          } catch (emailErr) {
+            console.error('[Email Dispatch Error] Non-blocking admin notification email failed:', emailErr);
+          }
+        })();
 
         return res.status(200).json({
           success: true,

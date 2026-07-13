@@ -177,6 +177,201 @@ export function generateAdminEmailHtml(data: {
 }
 
 /**
+ * Generates the HTML content for the recitation notification email sent to the admin.
+ */
+export function generateAdminRecitationEmailHtml(data: {
+  id: string;
+  fullName: string;
+  email: string;
+  phone: string;
+  country: string;
+  notes?: string;
+  timestamp: string;
+}): string {
+  const safeId = escapeHtml(data.id);
+  const safeFullName = escapeHtml(data.fullName);
+  const safeEmail = escapeHtml(data.email);
+  const safePhone = escapeHtml(data.phone);
+  const safeCountry = escapeHtml(data.country);
+  const safeTimestamp = escapeHtml(data.timestamp);
+  
+  const notesText = data.notes 
+    ? escapeHtml(data.notes).replace(/\n/g, '<br />') 
+    : '<em>None provided</em>';
+
+  return `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>New Recitation Evaluation Submission</title>
+      <style>
+        body {
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+          background-color: #f8fafc;
+          color: #1e293b;
+          margin: 0;
+          padding: 0;
+          -webkit-font-smoothing: antialiased;
+        }
+        .container {
+          max-width: 600px;
+          margin: 40px auto;
+          background-color: #ffffff;
+          border-radius: 16px;
+          overflow: hidden;
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+          border: 1px solid #e2e8f0;
+        }
+        .header {
+          background-color: #0B3951;
+          padding: 32px 24px;
+          text-align: center;
+        }
+        .header h1 {
+          color: #ffffff;
+          margin: 0;
+          font-size: 22px;
+          font-weight: 800;
+          letter-spacing: -0.025em;
+        }
+        .header p {
+          color: #E0F2FE;
+          margin: 8px 0 0 0;
+          font-size: 13px;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+        }
+        .content {
+          padding: 32px 24px;
+        }
+        .lead-info-title {
+          font-size: 14px;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          color: #64748b;
+          font-weight: 700;
+          margin-bottom: 16px;
+          border-bottom: 2px solid #f1f5f9;
+          padding-bottom: 8px;
+        }
+        .info-grid {
+          width: 100%;
+          border-collapse: collapse;
+          margin-bottom: 24px;
+        }
+        .info-grid td {
+          padding: 12px 0;
+          border-bottom: 1px solid #f1f5f9;
+          vertical-align: top;
+        }
+        .info-grid td.label {
+          width: 35%;
+          font-weight: 600;
+          color: #475569;
+          font-size: 14px;
+        }
+        .info-grid td.value {
+          color: #0f172a;
+          font-size: 14px;
+        }
+        .message-box {
+          background-color: #f8fafc;
+          border-left: 4px solid #1C8DC8;
+          padding: 16px;
+          border-radius: 0 8px 8px 0;
+          font-size: 14px;
+          line-height: 1.6;
+          color: #334155;
+          margin-top: 8px;
+          margin-bottom: 24px;
+        }
+        .cta-container {
+          text-align: center;
+          margin: 32px 0;
+        }
+        .cta-button {
+          display: inline-block;
+          background-color: #1C8DC8;
+          color: #ffffff !important;
+          font-weight: 700;
+          font-size: 14px;
+          text-decoration: none;
+          padding: 14px 28px;
+          border-radius: 8px;
+          text-align: center;
+        }
+        .footer {
+          background-color: #f8fafc;
+          padding: 24px;
+          text-align: center;
+          font-size: 12px;
+          color: #94a3b8;
+          border-top: 1px solid #e2e8f0;
+        }
+        .footer a {
+          color: #1C8DC8;
+          text-decoration: none;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">
+          <h1>New Recitation Submission</h1>
+          <p>Evaluation Request Pending</p>
+        </div>
+        <div class="content">
+          <div class="lead-info-title">Student Details</div>
+          <table class="info-grid">
+            <tr>
+              <td class="label">Recitation ID</td>
+              <td class="value"><code>${safeId}</code></td>
+            </tr>
+            <tr>
+              <td class="label">Full Name</td>
+              <td class="value"><strong>${safeFullName}</strong></td>
+            </tr>
+            <tr>
+              <td class="label">Email Address</td>
+              <td class="value"><a href="mailto:${safeEmail}" style="color: #1C8DC8; text-decoration: none;">${safeEmail}</a></td>
+            </tr>
+            <tr>
+              <td class="label">Phone Number</td>
+              <td class="value">${safePhone}</td>
+            </tr>
+            <tr>
+              <td class="label">Country</td>
+              <td class="value">${safeCountry}</td>
+            </tr>
+            <tr>
+              <td class="label">Submitted At</td>
+              <td class="value">${safeTimestamp}</td>
+            </tr>
+          </table>
+ 
+          <div class="lead-info-title">Student Notes</div>
+          <div class="message-box">
+            ${notesText}
+          </div>
+
+          <div class="cta-container">
+            <p style="font-size: 14px; color: #475569; margin-bottom: 16px;">Please log in to the Quran Academee Admin Dashboard to listen to the audio and provide scholar feedback.</p>
+            <a href="https://quranacademee.com/admin" class="cta-button" target="_blank">Open Admin Dashboard</a>
+          </div>
+        </div>
+        <div class="footer">
+          <p>Sent securely via Quran Academee Recitations Service • <a href="https://quranacademee.com">quranacademee.com</a></p>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+}
+
+/**
  * Generates the HTML content for the confirmation email sent to the student.
  */
 export function generateStudentEmailHtml(data: {
