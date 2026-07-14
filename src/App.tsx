@@ -188,7 +188,7 @@ export default function App() {
                   setTimeout(() => {
                     setIsTrialModalOpen(false);
                     setSelectedCourseSelection('');
-                  }, 4000);
+                  }, 5000);
                 }}
               />
             </div>
@@ -199,7 +199,6 @@ export default function App() {
 
       {/* Floating Controls system */}
       {!isAdminPage && <FloatingControls onOpenTrialModal={() => setIsTrialModalOpen(true)} />}
-
     </div>
   );
 }
