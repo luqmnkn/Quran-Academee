@@ -1,41 +1,10 @@
 import React from 'react';
-import { Phone, Mail, Clock, MessageSquare, ArrowUpRight, Instagram, Linkedin, Facebook, Youtube } from 'lucide-react';
+import { Phone, Mail, Clock, Instagram, Linkedin, Facebook, Youtube } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import Logo from './Logo';
 
-interface FooterProps {
-  currentPage?: 'home' | 'pricing';
-  onNavigate?: (page: 'home' | 'pricing', sectionId?: string) => void;
-}
-
-export default function Footer({ currentPage = 'home', onNavigate }: FooterProps) {
+export default function Footer() {
   const currentYear = new Date().getFullYear();
-
-  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-    e.preventDefault();
-    
-    let page: 'home' | 'pricing' = 'home';
-    if (id === '#pricing') {
-      page = 'pricing';
-    }
-
-    if (onNavigate) {
-      onNavigate(page, id);
-    } else {
-      const target = document.querySelector(id);
-      if (target) {
-        const offset = 80;
-        const bodyRect = document.body.getBoundingClientRect().top;
-        const elementRect = target.getBoundingClientRect().top;
-        const elementPosition = elementRect - bodyRect;
-        const offsetPosition = elementPosition - offset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-      }
-    }
-  };
 
   return (
     <footer className="bg-[#0B3951] text-white pt-16 pb-8 border-t border-[#1C8DC8]/20 relative">
@@ -47,13 +16,12 @@ export default function Footer({ currentPage = 'home', onNavigate }: FooterProps
           
           {/* Column 1: Brand Info */}
           <div className="md:col-span-4 space-y-4">
-            <a
-              href="/"
-              onClick={(e) => handleLinkClick(e, '#home')}
+            <Link
+              to="/"
               className="flex items-center group"
             >
               <Logo isDarkBg={true} className="transition-transform duration-300 group-hover:scale-[1.02]" />
-            </a>
+            </Link>
             
             <p className="text-xs text-slate-300 leading-relaxed max-w-sm">
               An international online Quran academy providing personalized 1-on-1 certified live instruction for children and adults. Helping families master Tajweed and Quran memorization at home.
@@ -128,22 +96,22 @@ export default function Footer({ currentPage = 'home', onNavigate }: FooterProps
             </h4>
             <ul className="space-y-2.5 text-xs text-slate-300 font-medium">
               <li>
-                <a href="/" onClick={(e) => handleLinkClick(e, '#home')} className="hover:text-white hover:underline transition-colors">Home</a>
+                <Link to="/" className="hover:text-white hover:underline transition-colors">Home</Link>
               </li>
               <li>
-                <a href="#about" onClick={(e) => handleLinkClick(e, '#about')} className="hover:text-white hover:underline transition-colors">About Us</a>
+                <Link to="/#about" className="hover:text-white hover:underline transition-colors">About Us</Link>
               </li>
               <li>
-                <a href="#courses" onClick={(e) => handleLinkClick(e, '#courses')} className="hover:text-white hover:underline transition-colors">Programs</a>
+                <Link to="/#courses" className="hover:text-white hover:underline transition-colors">Programs</Link>
               </li>
               <li>
-                <a href="/pricing" onClick={(e) => handleLinkClick(e, '#pricing')} className="hover:text-white hover:underline transition-colors">Pricing Plans</a>
+                <Link to="/pricing" className="hover:text-white hover:underline transition-colors">Pricing Plans</Link>
               </li>
               <li>
-                <a href="#why-us" onClick={(e) => handleLinkClick(e, '#why-us')} className="hover:text-white hover:underline transition-colors">Why Learn Here</a>
+                <Link to="/#why-us" className="hover:text-white hover:underline transition-colors">Why Learn Here</Link>
               </li>
               <li>
-                <a href="#faqs" onClick={(e) => handleLinkClick(e, '#faqs')} className="hover:text-white hover:underline transition-colors">Questions</a>
+                <Link to="/#faqs" className="hover:text-white hover:underline transition-colors">Questions</Link>
               </li>
             </ul>
           </div>
@@ -156,27 +124,27 @@ export default function Footer({ currentPage = 'home', onNavigate }: FooterProps
             <ul className="space-y-2.5 text-xs text-slate-300 font-medium">
               <li className="flex items-center space-x-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#1C8DC8] shrink-0"></span>
-                <a href="#courses" onClick={(e) => handleLinkClick(e, '#courses')} className="hover:text-white hover:underline transition-colors">Noorani Qaida Basics</a>
+                <Link to="/#courses" className="hover:text-white hover:underline transition-colors">Noorani Qaida Basics</Link>
               </li>
               <li className="flex items-center space-x-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#1C8DC8] shrink-0"></span>
-                <a href="#courses" onClick={(e) => handleLinkClick(e, '#courses')} className="hover:text-white hover:underline transition-colors">Quran Recitation & Reading</a>
+                <Link to="/#courses" className="hover:text-white hover:underline transition-colors">Quran Recitation & Reading</Link>
               </li>
               <li className="flex items-center space-x-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#1C8DC8] shrink-0"></span>
-                <a href="#courses" onClick={(e) => handleLinkClick(e, '#courses')} className="hover:text-white hover:underline transition-colors">Tajweed al Quran</a>
+                <Link to="/#courses" className="hover:text-white hover:underline transition-colors">Tajweed al Quran</Link>
               </li>
               <li className="flex items-center space-x-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#1C8DC8] shrink-0"></span>
-                <a href="#courses" onClick={(e) => handleLinkClick(e, '#courses')} className="hover:text-white hover:underline transition-colors">Quran Memorization (Hifz)</a>
+                <Link to="/#courses" className="hover:text-white hover:underline transition-colors">Quran Memorization (Hifz)</Link>
               </li>
               <li className="flex items-center space-x-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#1C8DC8] shrink-0"></span>
-                <a href="#courses" onClick={(e) => handleLinkClick(e, '#courses')} className="hover:text-white hover:underline transition-colors">Islamic Essentials & Duas</a>
+                <Link to="/#courses" className="hover:text-white hover:underline transition-colors">Islamic Essentials & Duas</Link>
               </li>
               <li className="flex items-center space-x-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#1C8DC8] shrink-0"></span>
-                <a href="#courses" onClick={(e) => handleLinkClick(e, '#courses')} className="hover:text-white hover:underline transition-colors">Hifz Revision Partner</a>
+                <Link to="/#courses" className="hover:text-white hover:underline transition-colors">Hifz Revision Partner</Link>
               </li>
             </ul>
           </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Pricing from './components/Pricing';
@@ -14,7 +14,7 @@ import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
 import FloatingControls from './components/FloatingControls';
 import AdminDashboard from './components/AdminDashboard';
-import { X, Calendar, User, ShieldCheck } from 'lucide-react';
+import { X, Calendar } from 'lucide-react';
 
 export default function App() {
   const location = useLocation();
@@ -22,142 +22,35 @@ export default function App() {
 
   const [isTrialModalOpen, setIsTrialModalOpen] = useState(false);
   const [selectedCourseSelection, setSelectedCourseSelection] = useState('');
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [currentPage, setCurrentPage] = useState<'home' | 'pricing' | 'admin'>('home');
-  const [activeSection, setActiveSection] = useState<'home' | 'pricing' | 'courses' | 'about'>('home');
 
-  // Synchronize routing state with URL path
+  // Declarative React Router DOM scroll and hash link scroller
   useEffect(() => {
-    const path = location.pathname;
-    if (path === '/pricing') {
-      setCurrentPage('pricing');
-      setActiveSection('pricing');
-    } else if (path === '/admin') {
-      setCurrentPage('admin');
-      setActiveSection('home');
-    } else {
-      setCurrentPage('home');
-      if (activeSection === 'pricing') {
-        setActiveSection('home');
-      }
-    }
-  }, [location.pathname]);
-
-  // Sync activeSection on page changes
-  useEffect(() => {
-    if (currentPage !== 'home') {
-      setActiveSection(currentPage);
-    }
-  }, [currentPage]);
-
-  // Scroll Progress Bar Tracker & ScrollSpy
-  useEffect(() => {
-    const handleScroll = () => {
-      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
-      if (totalScroll > 0) {
-        setScrollProgress((window.scrollY / totalScroll) * 100);
-      }
-
-      if (currentPage === 'home') {
-        const aboutElement = document.getElementById('about');
-        const coursesElement = document.getElementById('courses');
-
-        if (aboutElement) {
-          const rect = aboutElement.getBoundingClientRect();
-          if (rect.top <= window.innerHeight * 0.4 && rect.bottom >= window.innerHeight * 0.15) {
-            setActiveSection('about');
-            return;
-          }
-        }
-
-        if (coursesElement) {
-          const rect = coursesElement.getBoundingClientRect();
-          if (rect.top <= window.innerHeight * 0.4 && rect.bottom >= window.innerHeight * 0.15) {
-            setActiveSection('courses');
-            return;
-          }
-        }
-
-        setActiveSection('home');
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [currentPage]);
-
-  // Handle Page Navigation elegantly with optional scroll target anchors
-  const handleNavigation = (page: 'home' | 'pricing', sectionId?: string) => {
-    if (page === 'pricing') {
-      setActiveSection('pricing');
-      navigate('/pricing');
-    } else {
-      if (sectionId === '#courses') {
-        setActiveSection('courses');
-      } else {
-        setActiveSection('home');
-      }
-      navigate('/');
-    }
-
-    if (page !== currentPage) {
-      // If switching page and a target anchor section is available
-      if (page === 'home' && sectionId && sectionId !== '#home') {
-        setTimeout(() => {
-          const target = document.querySelector(sectionId);
-          if (target) {
-            const headerOffset = 100;
-            const elementPosition = target.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-            window.scrollTo({
-              top: offsetPosition,
-              behavior: 'smooth'
-            });
-          }
-        }, 150);
-      } else {
-        window.scrollTo({ top: 0, behavior: 'instant' as any });
-      }
-    } else {
-      // Already on requested page, scroll to specific section or smoothly to top
-      if (sectionId && sectionId !== '/') {
-        const target = document.querySelector(sectionId);
-        if (target) {
+    const hash = location.hash;
+    if (hash) {
+      const timer = setTimeout(() => {
+        const element = document.querySelector(hash);
+        if (element) {
           const headerOffset = 100;
-          const elementPosition = target.getBoundingClientRect().top;
+          const elementPosition = element.getBoundingClientRect().top;
           const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
           window.scrollTo({
             top: offsetPosition,
             behavior: 'smooth'
           });
-        } else {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-      } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
+      }, 120);
+      return () => clearTimeout(timer);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'instant' as any });
     }
-  };
+  }, [location.pathname, location.hash]);
 
-  // Handle Course Selection scrolling directly to form
+  // Handle Course Selection scrolling directly to contact form
   const handleCourseSelection = (courseName: string) => {
     setSelectedCourseSelection(courseName);
     
-    // If on a different subpage, navigate back home first
-    if (currentPage !== 'home') {
-      navigate('/');
-      setTimeout(() => {
-        const targetElement = document.querySelector('#contact');
-        if (targetElement) {
-          const headerOffset = 80;
-          const elementPosition = targetElement.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
-        }
-      }, 150);
+    if (location.pathname !== '/') {
+      navigate('/#contact');
     } else {
       const targetElement = document.querySelector('#contact');
       if (targetElement) {
@@ -180,80 +73,78 @@ export default function App() {
 
   // Submit trigger from Quick Inquiry Hero
   const handleLeadSubmitInHero = (data: { fullName: string; email: string; phone: string; country: string; courseInterest: string; message: string }) => {
-    // Lead successfully logged in InquiryForm already
-    // This hook allows us to log any metrics or sync views
     console.log('Lead sync from hero:', data);
   };
+
+  const isAdminPage = location.pathname === '/admin';
 
   return (
     <div className="relative min-h-screen font-sans antialiased text-gray-950 bg-gray-50/50">
       
-
       {/* Header Sticky Component */}
-      {currentPage !== 'admin' && (
+      {!isAdminPage && (
         <Header 
           onOpenTrialModal={() => setIsTrialModalOpen(true)} 
-          currentPage={currentPage}
-          activeSection={activeSection}
-          onNavigate={handleNavigation}
         />
       )}
 
-      {/* Main Content Sections with elegant conditional router */}
+      {/* Main Content Sections managed securely by react-router-dom */}
       <main>
-        {currentPage === 'home' && (
-          <>
-            {/* Hero Section */}
-            <Hero
-              onOpenTrialModal={() => setIsTrialModalOpen(true)}
-              onSubmitInquiry={handleLeadSubmitInHero}
-            />
+        <Routes>
+          <Route path="/" element={
+            <>
+              {/* Hero Section */}
+              <Hero
+                onOpenTrialModal={() => setIsTrialModalOpen(true)}
+                onSubmitInquiry={handleLeadSubmitInHero}
+              />
 
-            {/* Services / Syllabus Showcase */}
-            <Services
-              onSelectCourse={handleCourseSelection}
-              onOpenTrialModal={() => setIsTrialModalOpen(true)}
-            />
+              {/* Services / Syllabus Showcase */}
+              <Services
+                onSelectCourse={handleCourseSelection}
+                onOpenTrialModal={() => setIsTrialModalOpen(true)}
+              />
 
-            {/* About Academy & 3-Step Start Component */}
-            <About onOpenTrialModal={() => setIsTrialModalOpen(true)} />
+              {/* About Academy & 3-Step Start Component */}
+              <About onOpenTrialModal={() => setIsTrialModalOpen(true)} />
 
-            {/* Why Choose Us features grid */}
-            <WhyChooseUs />
+              {/* Why Choose Us features grid */}
+              <WhyChooseUs />
 
-            {/* Trust Credibility Stat meters */}
-            <TrustCredibility />
+              {/* Trust Credibility Stat meters */}
+              <TrustCredibility />
 
-            {/* Real student reviews & testimonials filter */}
-            <Testimonials />
+              {/* Real student reviews & testimonials filter */}
+              <Testimonials />
 
-            {/* Primary Lead Generation Enrollment Form */}
-            <InquiryForm
-              prefilledCourse={selectedCourseSelection && selectedCourseSelection.toLowerCase().includes('plan') ? '' : selectedCourseSelection}
-              onClearPrefill={() => setSelectedCourseSelection('')}
-            />
+              {/* Primary Lead Generation Enrollment Form */}
+              <InquiryForm
+                prefilledCourse={selectedCourseSelection && selectedCourseSelection.toLowerCase().includes('plan') ? '' : selectedCourseSelection}
+                onClearPrefill={() => setSelectedCourseSelection('')}
+              />
 
-            {/* FAQ Accordion Section */}
-            <FAQSection />
-          </>
-        )}
+              {/* FAQ Accordion Section */}
+              <FAQSection />
+            </>
+          } />
 
-        {currentPage === 'pricing' && (
-          <Pricing onBookTrial={handlePricingSelection} />
-        )}
+          <Route path="/pricing" element={
+            <Pricing onBookTrial={handlePricingSelection} />
+          } />
 
-        {currentPage === 'admin' && (
-          <AdminDashboard />
-        )}
+          <Route path="/admin" element={
+            <AdminDashboard />
+          } />
+        </Routes>
       </main>
 
       {/* Layout Footer contacts */}
-      {currentPage !== 'admin' && (
-        <Footer currentPage={currentPage} onNavigate={handleNavigation} />
+      {!isAdminPage && (
+        <Footer />
       )}
 
       {/* Floating vibration WhatsApp trigger */}
-      {currentPage !== 'admin' && <WhatsAppButton />}
+      {!isAdminPage && <WhatsAppButton />}
 
       {/* Core Trial Request Popup Modal Wrapper */}
       {isTrialModalOpen && (
@@ -307,7 +198,7 @@ export default function App() {
       )}
 
       {/* Floating Controls system */}
-      {currentPage !== 'admin' && <FloatingControls onOpenTrialModal={() => setIsTrialModalOpen(true)} />}
+      {!isAdminPage && <FloatingControls onOpenTrialModal={() => setIsTrialModalOpen(true)} />}
 
     </div>
   );

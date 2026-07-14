@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, Globe, LogIn } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 import Logo from './Logo';
 
 interface HeaderProps {
   onOpenTrialModal: () => void;
-  currentPage: 'home' | 'pricing';
-  activeSection: 'home' | 'pricing' | 'courses' | 'about';
-  onNavigate: (page: 'home' | 'pricing', sectionId?: string) => void;
 }
 
-export default function Header({ onOpenTrialModal, currentPage, activeSection, onNavigate }: HeaderProps) {
+export default function Header({ onOpenTrialModal }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,20 +22,28 @@ export default function Header({ onOpenTrialModal, currentPage, activeSection, o
   }, []);
 
   const navLinks = [
-    { name: 'Home', page: 'home' as const, activeKey: 'home' as const, href: '#home' },
-    { name: 'Course', page: 'home' as const, activeKey: 'courses' as const, href: '#courses' },
-    { name: 'Pricing', page: 'pricing' as const, activeKey: 'pricing' as const, href: '#pricing' },
-    { name: 'About Us', page: 'home' as const, activeKey: 'about' as const, href: '#about' },
+    { name: 'Home', to: '/', hash: '' },
+    { name: 'Course', to: '/#courses', hash: '#courses' },
+    { name: 'Pricing', to: '/pricing', hash: '' },
+    { name: 'About Us', to: '/#about', hash: '#about' },
   ];
 
-  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, page: 'home' | 'pricing', href: string) => {
-    e.preventDefault();
-    setIsMobileMenuOpen(false);
-    if (href === '#home' || href === '#courses' || href === '#about') {
-      onNavigate('home', href);
-    } else if (href === '#pricing') {
-      onNavigate('pricing');
+  const isLinkActive = (link: typeof navLinks[0]) => {
+    if (link.to === '/pricing') {
+      return location.pathname === '/pricing';
     }
+    if (location.pathname === '/') {
+      if (link.hash) {
+        return location.hash === link.hash;
+      } else {
+        return location.hash === '' || location.hash === '#home';
+      }
+    }
+    return false;
+  };
+
+  const handleLinkClick = () => {
+    setIsMobileMenuOpen(false);
   };
 
   const getHeaderClass = () => {
@@ -61,23 +68,23 @@ export default function Header({ onOpenTrialModal, currentPage, activeSection, o
     >
       <div className="w-full flex items-center justify-between">
         {/* Left Side: Quran Academee Brand Logo */}
-        <a
-          href="#home"
-          onClick={(e) => handleLinkClick(e, 'home', '#home')}
+        <Link
+          to="/"
+          onClick={handleLinkClick}
           className="flex items-center shrink-0"
         >
           <Logo isDarkBg={false} />
-        </a>
+        </Link>
 
         {/* Center: Desktop Navigation Links */}
         <nav className="hidden md:flex items-center space-x-8 lg:space-x-12">
           {navLinks.map((link) => {
-            const isActive = activeSection === link.activeKey;
+            const isActive = isLinkActive(link);
             return (
-              <a
+              <Link
                 key={link.name}
-                href={link.href}
-                onClick={(e) => handleLinkClick(e, link.page, link.href)}
+                to={link.to + (link.hash || '')}
+                onClick={handleLinkClick}
                 className={`text-sm tracking-wide font-medium transition-all duration-200 uppercase relative py-1 ${
                   isActive
                     ? 'text-[#0B3951] font-semibold'
@@ -92,7 +99,7 @@ export default function Header({ onOpenTrialModal, currentPage, activeSection, o
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
-              </a>
+              </Link>
             );
           })}
         </nav>
@@ -139,24 +146,27 @@ export default function Header({ onOpenTrialModal, currentPage, activeSection, o
               </div>
               
               {navLinks.map((link, i) => {
-                const isActive = activeSection === link.activeKey;
+                const isActive = isLinkActive(link);
                 return (
-                  <motion.a
+                  <motion.div
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.05 }}
                     key={link.name}
-                    href={link.href}
-                    onClick={(e) => handleLinkClick(e, link.page, link.href)}
-                    className={`text-base font-bold py-3 px-4 rounded-xl transition-all uppercase tracking-wider flex items-center justify-between ${
-                      isActive
-                        ? 'bg-[#F0F9FF] text-[#1C8DC8] border border-[#E0F2FE] shadow-sm'
-                        : 'text-slate-600 hover:bg-[#F0F9FF]/60 hover:text-[#1C8DC8]'
-                    }`}
                   >
-                    <span>{link.name}</span>
-                    <span className={`w-1.5 h-1.5 rounded-full bg-[#1C8DC8] transition-transform duration-300 ${isActive ? 'scale-100' : 'scale-0'}`} />
-                  </motion.a>
+                    <Link
+                      to={link.to + (link.hash || '')}
+                      onClick={handleLinkClick}
+                      className={`text-base font-bold py-3 px-4 rounded-xl transition-all uppercase tracking-wider flex items-center justify-between ${
+                        isActive
+                          ? 'bg-[#F0F9FF] text-[#1C8DC8] border border-[#E0F2FE] shadow-sm'
+                          : 'text-slate-600 hover:bg-[#F0F9FF]/60 hover:text-[#1C8DC8]'
+                      }`}
+                    >
+                      <span>{link.name}</span>
+                      <span className={`w-1.5 h-1.5 rounded-full bg-[#1C8DC8] transition-transform duration-300 ${isActive ? 'scale-100' : 'scale-0'}`} />
+                    </Link>
+                  </motion.div>
                 );
               })}
             </div>
