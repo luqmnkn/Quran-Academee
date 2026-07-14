@@ -111,16 +111,11 @@ export default function Services({ onSelectCourse, onOpenTrialModal }: ServicesP
           </span>
         </div>
 
-        {/* Title & Age information */}
+        {/* Title */}
         <div className="space-y-1.5">
           <h3 className="font-display font-[800] text-base text-[#0B3951] tracking-tight group-hover:text-[#1C8DC8] transition-colors leading-snug">
             {course.title}
           </h3>
-          <div className="flex flex-wrap items-center gap-1.5 text-[9px] font-bold font-mono">
-            <span className="text-[#146299] bg-[#E0F2FE]/60 px-2 py-0.5 rounded-md">{course.ageGroup}</span>
-            <span className="w-1 h-1 rounded-full bg-slate-200"></span>
-            <span className="text-slate-500 uppercase tracking-widest">{course.level}</span>
-          </div>
         </div>
 
         {/* Description line */}

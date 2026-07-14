@@ -156,39 +156,39 @@ export const COURSES: Course[] = [
 export const TESTIMONIALS: Testimonial[] = [
   {
     id: 't1',
-    name: 'Sarah Rahman',
+    name: 'Amara Sheikh',
     role: 'Parent',
-    feedback: 'Both my 7-year-old and 9-year-old started Quranic learning from scratch with Quran Academee. The teachers are incredibly patient, warm, and encourage children. Their Noorani Qaida sessions are interactive, and the flexible schedule matches my active calendar seamlessly.',
+    feedback: 'Outstanding teachers! My kids started Qaida from scratch and can now read basic verses easily. The lessons are so interactive and fun.',
     rating: 5,
     location: 'Houston, USA',
-    avatarInitials: 'SR'
+    avatarInitials: 'AS'
   },
   {
     id: 't2',
-    name: 'Dr. Tariq Mahmood',
+    name: 'Rayyan Khan',
     role: 'Adult Student',
-    feedback: 'As a busy medical professional, finding time for continuous Tajweed improvement was difficult. Quran Academee matched me with a certified, highly learned tutor. The live one-on-one session feels focused and high-yield, correcting pronunciation rules that I had struggled with for years.',
+    feedback: 'Perfect for busy professionals. The 1-on-1 sessions are high-yield, and my Tajweed has improved significantly in just two months.',
     rating: 5,
     location: 'Birmingham, UK',
-    avatarInitials: 'TM'
+    avatarInitials: 'RK'
   },
   {
     id: 't3',
-    name: 'Amina Al-Farsi',
+    name: 'Nadia Ahmed',
     role: 'Parent',
-    feedback: 'Quran Academee has transformed our homeschooling routine. My daughter is doing Quran Memorization (Hifz) with a qualified female tutor. The teacher utilizes highly engaging techniques, breaking verses down into memorable rhythmic blocks.',
+    feedback: 'Highly recommend the Hifz program. My daughter\'s female tutor is incredibly encouraging, patient, and uses fantastic memorization techniques.',
     rating: 5,
     location: 'Toronto, Canada',
-    avatarInitials: 'AF'
+    avatarInitials: 'NA'
   },
   {
     id: 't4',
-    name: 'Omar Khayyam',
+    name: 'Zayd Malik',
     role: 'Adult Student',
-    feedback: 'I had been looking for online classes where I could study Quran recitation with correct Makharij. The teachers here are amazing. They listen attentively, correct my rhythm instantly, and provide very clear guidance. Highly recommend to anyone seeking deep Tajweed instruction.',
+    feedback: 'Exceptional academy. The tutors are highly qualified scholars who correct your Makharij patiently. Flexible timing makes it very convenient.',
     rating: 5,
     location: 'Sydney, Australia',
-    avatarInitials: 'OK'
+    avatarInitials: 'ZM'
   }
 ];
 

@@ -270,6 +270,7 @@ export default function Pricing({ onBookTrial }: PricingProps) {
   const [countrySearchQuery, setCountrySearchQuery] = useState('');
   const [activeTab, setActiveTab] = useState('nazra');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isCourseDropdownOpen, setIsCourseDropdownOpen] = useState(false);
   const [customDays, setCustomDays] = useState(3);
   const [customDuration, setCustomDuration] = useState('30 Minutes');
   const [selectedCourse, setSelectedCourse] = useState('nazra');
@@ -496,8 +497,8 @@ export default function Pricing({ onBookTrial }: PricingProps) {
           </div>
         </div>
 
-        {/* Categories Tab Selector */}
-        <div className="flex overflow-x-auto pb-3 mb-10 max-w-4xl mx-auto scrollbar-none gap-2 px-1 justify-start md:justify-center">
+        {/* Categories Tab Selector for Desktop */}
+        <div className="hidden md:flex overflow-x-auto pb-3 mb-10 max-w-4xl mx-auto scrollbar-none gap-2 px-1 justify-start md:justify-center">
           {PRICING_CATEGORIES.map((category) => {
             const Icon = category.icon;
             const isActive = activeTab === category.id;
@@ -516,6 +517,65 @@ export default function Pricing({ onBookTrial }: PricingProps) {
               </button>
             );
           })}
+        </div>
+
+        {/* Mobile Course Dropdown (hidden on md and larger) */}
+        <div className="block md:hidden mb-10 max-w-xs mx-auto text-left relative z-30">
+          <label className="block text-[10px] font-bold uppercase tracking-widest text-[#1C8DC8] font-mono mb-2">
+            Choose Course Program:
+          </label>
+          <div className="relative">
+            <button
+              onClick={() => setIsCourseDropdownOpen(!isCourseDropdownOpen)}
+              className="w-full bg-white text-[#0B3951] font-display font-black text-xs uppercase tracking-widest px-4.5 py-3.5 rounded-2xl border border-sky-100 hover:border-[#1C8DC8]/30 shadow-sm flex items-center justify-between transition-all duration-200 cursor-pointer"
+            >
+              <div className="flex items-center space-x-2">
+                {(() => {
+                  const Icon = activeCategory.icon;
+                  return <Icon size={14} className="text-[#1C8DC8]" />;
+                })()}
+                <span>{activeCategory.title}</span>
+              </div>
+              <ChevronDown size={14} className={`text-slate-400 transition-transform duration-300 ${isCourseDropdownOpen ? 'rotate-180' : ''}`} />
+            </button>
+
+            <AnimatePresence>
+              {isCourseDropdownOpen && (
+                <>
+                  <div className="fixed inset-0 z-40" onClick={() => setIsCourseDropdownOpen(false)} />
+                  <motion.div
+                    initial={{ opacity: 0, y: 8, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 8, scale: 0.95 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute left-0 right-0 mt-2 bg-white border border-sky-100 rounded-2xl shadow-xl py-2 z-50 overflow-hidden"
+                  >
+                    {PRICING_CATEGORIES.map((category) => {
+                      const Icon = category.icon;
+                      const isActive = activeTab === category.id;
+                      return (
+                        <button
+                          key={category.id}
+                          onClick={() => {
+                            setActiveTab(category.id);
+                            setIsCourseDropdownOpen(false);
+                          }}
+                          className={`w-full text-left px-4 py-3 text-xs font-bold flex items-center space-x-3 transition-colors ${
+                            isActive 
+                              ? 'bg-[#F0F9FF] text-[#1C8DC8]' 
+                              : 'text-slate-600 hover:bg-slate-50'
+                          }`}
+                        >
+                          <Icon size={14} className={isActive ? 'text-[#1C8DC8]' : 'text-slate-400'} />
+                          <span className="flex-1">{category.title}</span>
+                        </button>
+                      );
+                    })}
+                  </motion.div>
+                </>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
 
         {/* Selected Category Intro */}

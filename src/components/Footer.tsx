@@ -160,15 +160,23 @@ export default function Footer({ currentPage = 'home', onNavigate }: FooterProps
               </li>
               <li className="flex items-center space-x-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#1C8DC8] shrink-0"></span>
-                <a href="#courses" onClick={(e) => handleLinkClick(e, '#courses')} className="hover:text-white hover:underline transition-colors">Quran Recitation Reading</a>
+                <a href="#courses" onClick={(e) => handleLinkClick(e, '#courses')} className="hover:text-white hover:underline transition-colors">Quran Recitation & Reading</a>
               </li>
               <li className="flex items-center space-x-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#1C8DC8] shrink-0"></span>
-                <a href="#courses" onClick={(e) => handleLinkClick(e, '#courses')} className="hover:text-white hover:underline transition-colors">Master Tajweed Rules</a>
+                <a href="#courses" onClick={(e) => handleLinkClick(e, '#courses')} className="hover:text-white hover:underline transition-colors">Tajweed al Quran</a>
               </li>
               <li className="flex items-center space-x-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#1C8DC8] shrink-0"></span>
                 <a href="#courses" onClick={(e) => handleLinkClick(e, '#courses')} className="hover:text-white hover:underline transition-colors">Quran Memorization (Hifz)</a>
+              </li>
+              <li className="flex items-center space-x-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#1C8DC8] shrink-0"></span>
+                <a href="#courses" onClick={(e) => handleLinkClick(e, '#courses')} className="hover:text-white hover:underline transition-colors">Islamic Essentials & Duas</a>
+              </li>
+              <li className="flex items-center space-x-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#1C8DC8] shrink-0"></span>
+                <a href="#courses" onClick={(e) => handleLinkClick(e, '#courses')} className="hover:text-white hover:underline transition-colors">Hifz Revision Partner</a>
               </li>
             </ul>
           </div>

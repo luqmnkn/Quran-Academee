@@ -91,36 +91,42 @@ export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(61,141,195,0.06),transparent_45%)]" />
       <div className="absolute top-1/4 left-10 w-72 h-72 bg-[#3D8DC3]/5 rounded-full blur-3xl" />
       
+      {/* Brand color gradient to the right side of the section to highlight the heading */}
+      <div className="absolute right-0 top-0 bottom-0 w-1/2 md:w-1/3 bg-gradient-to-l from-[#1C8DC8]/12 via-[#3D8DC3]/4 to-transparent pointer-events-none z-0" />
+      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full mt-auto">
-        <div className="grid grid-cols-12 gap-1 sm:gap-6 lg:gap-8 items-end">
+        <div className="grid grid-cols-12 gap-1 sm:gap-6 lg:gap-8 items-end relative">
           
           {/* Left Side: Premium Copy & CTAs */}
-          <div className="col-span-7 lg:col-span-6 flex flex-col space-y-3 sm:space-y-6 lg:space-y-8 text-left pb-6 sm:pb-12 lg:pb-16 relative z-10">
+          <div className="absolute md:relative bottom-4 xs:bottom-8 sm:bottom-12 md:bottom-auto left-0 md:left-auto z-30 col-span-12 md:col-span-7 lg:col-span-6 flex flex-col space-y-3 sm:space-y-6 lg:space-y-8 text-left pb-6 sm:pb-12 lg:pb-16 w-[70%] md:w-auto">
             <div className="space-y-2 sm:space-y-4">
               <motion.h1
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.1 }}
-                className="font-sans font-black text-lg xs:text-xl sm:text-4xl lg:text-5xl xl:text-6xl text-[#0B3951] tracking-tight leading-[1.15]"
+                className="font-sans font-black text-[18px] xs:text-[22px] sm:text-4xl lg:text-5xl xl:text-6xl text-[#0B3951] tracking-tight leading-[1.3] md:leading-[1.15]"
               >
-                Where{' '}
-                <span className="relative inline-block text-[#1C8DC8] text-left">
-                  <AnimatePresence mode="wait">
-                    <motion.span
-                      key={words[wordIdx]}
-                      initial={{ opacity: 0, y: 12 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -12 }}
-                      transition={{ duration: 0.3, ease: "easeOut" }}
-                      className="absolute left-0 top-0 whitespace-nowrap font-allora text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] via-[#146299] to-[#0B3951] tracking-wide"
-                    >
-                      {words[wordIdx]}
-                    </motion.span>
-                  </AnimatePresence>
-                  {/* Invisible text reserves exact space needed dynamically */}
-                  <span className="opacity-0 select-none pointer-events-none whitespace-nowrap font-allora tracking-wide">{words[wordIdx]}</span>
-                </span>{' '}
-                Becomes a Lifelong Connection with the Quran.
+                <span className="block md:whitespace-nowrap">start your journey</span>
+                <span className="block md:whitespace-nowrap">with Quran Academee</span>
+                <span className="block md:whitespace-nowrap">
+                  and master{' '}
+                  <span className="relative inline-block text-[#1C8DC8] text-left">
+                    <AnimatePresence mode="wait">
+                      <motion.span
+                        key={words[wordIdx]}
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -12 }}
+                        transition={{ duration: 0.3, ease: "easeOut" }}
+                        className="absolute left-0 top-0 whitespace-nowrap font-allora text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] via-[#146299] to-[#0B3951] tracking-wide"
+                      >
+                        {words[wordIdx]}
+                      </motion.span>
+                    </AnimatePresence>
+                    {/* Invisible text reserves exact space needed dynamically */}
+                    <span className="opacity-0 select-none pointer-events-none whitespace-nowrap font-allora tracking-wide">{words[wordIdx]}</span>
+                  </span>
+                </span>
               </motion.h1>
 
               {/* Subheading hidden on mobile as requested */}
@@ -184,25 +190,31 @@ export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
           </div>
 
           {/* Right Side: Portrait Image & Glass Badges (Overlap left side & touch baseline) */}
-          <div className="col-span-5 lg:col-span-6 relative flex justify-end items-end self-end h-full z-20 -mr-4 sm:-mr-8 md:-mr-12 lg:-mr-16 -ml-1 sm:ml-0">
+          <div className="col-span-12 md:col-span-5 lg:col-span-6 relative flex justify-end items-end self-end h-full z-10 md:z-20 -mr-4 sm:-mr-8 md:-mr-12 lg:-mr-16 -ml-1 sm:ml-0">
             
             {/* Visual Backdrops */}
             <div className="absolute w-[95%] aspect-square bg-gradient-to-tr from-[#3D8DC3]/15 to-[#1C8DC8]/5 rounded-full blur-3xl -z-10 animate-pulse duration-[8000ms] bottom-0" />
             
-            {/* Main Portrait Frame with significantly larger max width & negative margins on desktop */}
+            {/* Main Portrait Frame with precise height and bottom alignment to start at the bottom and end at the top without clipping */}
             <motion.div
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.15, ease: "easeOut" }}
-              className="relative w-full max-w-[550px] lg:max-w-none scale-105 xs:scale-110 sm:scale-115 md:scale-120 lg:scale-110 xl:scale-115 transition-transform duration-500 self-end flex items-end"
+              className="relative w-[70%] md:w-full ml-auto md:ml-0 max-w-[550px] lg:max-w-none h-[45vh] xs:h-[50vh] sm:h-[55vh] md:h-[75vh] lg:h-[82vh] xl:h-[90vh] flex items-end justify-end select-none transition-all duration-500 self-end origin-bottom-right"
+              style={{
+                maskImage: 'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.15) 15%, black 30%)',
+                WebkitMaskImage: 'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.15) 15%, black 30%)'
+              }}
             >
               <img
                 src={imghero}
                 alt="Quran Academee Student"
-                className="w-full h-auto object-contain rounded-t-[32px] rounded-b-none drop-shadow-[0_15px_35px_rgba(28,141,200,0.14)] filter contrast-[1.01] block align-bottom"
-                style={{ marginBottom: '-2px' }}
+                className="h-full w-auto object-contain object-bottom rounded-t-[32px] rounded-b-none drop-shadow-[0_15px_35px_rgba(28,141,200,0.14)] filter contrast-[1.01] block"
                 referrerPolicy="no-referrer"
               />
+
+              {/* Fade out left side of image on mobile to make the overlaying text stand out with maximum clarity */}
+              <div className="absolute inset-y-0 left-0 bg-gradient-to-r from-[#F0F9FF] via-[#F0F9FF]/25 to-transparent w-[30%] pointer-events-none md:hidden z-10" />
 
               {/* FLOATING WIDGET 1: 5.0 Rating (Repositioned lower & hidden on mobile as requested) */}
               <motion.div

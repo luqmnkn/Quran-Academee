@@ -508,27 +508,27 @@ export default function InquiryForm({ prefilledCourse, onClearPrefill, onSubmitS
                   href="https://wa.me/923702680670" 
                   target="_blank" 
                   rel="noreferrer" 
-                  className="flex items-center space-x-4 p-4 bg-[#F0F9FF] rounded-2xl hover:bg-white border border-[#E0F2FE] transition-all group"
+                  className="flex items-center space-x-4 p-4 bg-[#F0F9FF] rounded-2xl hover:bg-white border border-[#E0F2FE] transition-all group min-w-0"
                 >
                   <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
                     <i className="fa-brands fa-whatsapp text-lg"></i>
                   </div>
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <span className="text-[10px] font-mono font-bold uppercase text-slate-400 tracking-wider">Fast Coordinator WhatsApp</span>
-                    <p className="text-[#0B3951] font-extrabold mt-0.5 text-sm">+92 370 2680670</p>
+                    <p className="text-[#0B3951] font-extrabold mt-0.5 text-xs sm:text-sm truncate">+92 370 2680670</p>
                   </div>
                 </a>
 
                 <a 
                   href="mailto:contact@quranacademee.com" 
-                  className="flex items-center space-x-4 p-4 bg-[#F0F9FF] rounded-2xl hover:bg-white border border-[#E0F2FE] transition-all group"
+                  className="flex items-center space-x-4 p-4 bg-[#F0F9FF] rounded-2xl hover:bg-white border border-[#E0F2FE] transition-all group min-w-0"
                 >
                   <div className="w-10 h-10 rounded-xl bg-[#1C8DC8]/10 text-[#1C8DC8] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
                     <Mail size={18} strokeWidth={2.5} />
                   </div>
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <span className="text-[10px] font-mono font-bold uppercase text-slate-400 tracking-wider">Direct Helpdesk Email</span>
-                    <p className="text-[#0B3951] font-extrabold mt-0.5 text-sm">contact@quranacademee.com</p>
+                    <p className="text-[#0B3951] font-extrabold mt-0.5 text-xs sm:text-sm break-all">contact@quranacademee.com</p>
                   </div>
                 </a>
               </div>
