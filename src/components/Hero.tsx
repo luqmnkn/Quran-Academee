@@ -190,7 +190,7 @@ export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
           </div>
 
           {/* Right Side: Portrait Image & Glass Badges (Overlap left side & touch baseline) */}
-          <div className="col-span-12 md:col-span-5 lg:col-span-6 relative flex justify-end items-end self-end h-full z-10 md:z-20 -mr-4 sm:-mr-8 md:-mr-12 lg:-mr-16 -ml-1 sm:ml-0">
+          <div className="col-span-12 md:col-span-5 lg:col-span-6 relative flex justify-end items-end self-end h-full z-10 md:z-20 -mr-12 xs:-mr-16 sm:-mr-8 md:-mr-12 lg:-mr-16 -ml-1 sm:ml-0">
             
             {/* Visual Backdrops */}
             <div className="absolute w-[95%] aspect-square bg-gradient-to-tr from-[#3D8DC3]/15 to-[#1C8DC8]/5 rounded-full blur-3xl -z-10 animate-pulse duration-[8000ms] bottom-0" />
@@ -200,7 +200,7 @@ export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.15, ease: "easeOut" }}
-              className="relative w-[70%] md:w-full ml-auto md:ml-0 max-w-[550px] lg:max-w-none h-[45vh] xs:h-[50vh] sm:h-[55vh] md:h-[75vh] lg:h-[82vh] xl:h-[90vh] flex items-end justify-end select-none transition-all duration-500 self-end origin-bottom-right"
+              className="relative w-[55%] xs:w-[60%] sm:w-[65%] md:w-full translate-x-6 xs:translate-x-10 sm:translate-x-0 ml-auto md:ml-0 max-w-[550px] lg:max-w-none h-[45vh] xs:h-[50vh] sm:h-[55vh] md:h-[75vh] lg:h-[82vh] xl:h-[90vh] flex items-end justify-end select-none transition-all duration-500 self-end origin-bottom-right"
               style={{
                 maskImage: 'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.15) 15%, black 30%)',
                 WebkitMaskImage: 'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.15) 15%, black 30%)'
