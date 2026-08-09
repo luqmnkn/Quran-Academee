@@ -1,185 +1,4 @@
-/**
- * Helper function to escape HTML special characters to prevent HTML/XSS injection
- */
-function escapeHtml(str: string | undefined): string {
-  if (!str) return '';
-  return str
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
-}
-
-/**
- * Generates the HTML content for the notification email sent to the admin.
- */
-export function generateAdminEmailHtml(data: {
-  fullName: string;
-  email: string;
-  phone: string;
-  country: string;
-  courseInterest: string;
-  message?: string;
-  timestamp: string;
-}): string {
-  const safeFullName = escapeHtml(data.fullName);
-  const safeEmail = escapeHtml(data.email);
-  const safePhone = escapeHtml(data.phone);
-  const safeCountry = escapeHtml(data.country);
-  const safeCourseInterest = escapeHtml(data.courseInterest);
-  const safeTimestamp = escapeHtml(data.timestamp);
-  
-  const messageText = data.message 
-    ? escapeHtml(data.message).replace(/\n/g, '<br />') 
-    : '<em>None provided</em>';
-
-  return `
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>New Lead Notification</title>
-      <style>
-        body {
-          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-          background-color: #f8fafc;
-          color: #1e293b;
-          margin: 0;
-          padding: 0;
-          -webkit-font-smoothing: antialiased;
-        }
-        .container {
-          max-width: 600px;
-          margin: 40px auto;
-          background-color: #ffffff;
-          border-radius: 16px;
-          overflow: hidden;
-          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-          border: 1px solid #e2e8f0;
-        }
-        .header {
-          background-color: #2563eb;
-          padding: 32px 24px;
-          text-align: center;
-        }
-        .header h1 {
-          color: #ffffff;
-          margin: 0;
-          font-size: 22px;
-          font-weight: 800;
-          letter-spacing: -0.025em;
-        }
-        .content {
-          padding: 32px 24px;
-        }
-        .lead-info-title {
-          font-size: 14px;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          color: #64748b;
-          font-weight: 700;
-          margin-bottom: 16px;
-          border-bottom: 2px solid #f1f5f9;
-          padding-bottom: 8px;
-        }
-        .info-grid {
-          width: 100%;
-          border-collapse: collapse;
-          margin-bottom: 24px;
-        }
-        .info-grid td {
-          padding: 12px 0;
-          border-bottom: 1px solid #f1f5f9;
-          vertical-align: top;
-        }
-        .info-grid td.label {
-          width: 35%;
-          font-weight: 600;
-          color: #475569;
-          font-size: 14px;
-        }
-        .info-grid td.value {
-          color: #0f172a;
-          font-size: 14px;
-        }
-        .message-box {
-          background-color: #f8fafc;
-          border-left: 4px solid #2563eb;
-          padding: 16px;
-          border-radius: 0 8px 8px 0;
-          font-size: 14px;
-          line-height: 1.6;
-          color: #334155;
-          margin-top: 8px;
-        }
-        .footer {
-          background-color: #f8fafc;
-          padding: 24px;
-          text-align: center;
-          font-size: 12px;
-          color: #94a3b8;
-          border-top: 1px solid #e2e8f0;
-        }
-        .footer a {
-          color: #2563eb;
-          text-decoration: none;
-        }
-      </style>
-    </head>
-    <body>
-      <div class="container">
-        <div class="header">
-          <h1>New Student Inquiry</h1>
-        </div>
-        <div class="content">
-          <div class="lead-info-title">Lead Details</div>
-          <table class="info-grid">
-            <tr>
-              <td class="label">Full Name</td>
-              <td class="value"><strong>${safeFullName}</strong></td>
-            </tr>
-            <tr>
-              <td class="label">Email Address</td>
-              <td class="value"><a href="mailto:${safeEmail}" style="color: #2563eb; text-decoration: none;">${safeEmail}</a></td>
-            </tr>
-            <tr>
-              <td class="label">Phone Number</td>
-              <td class="value">${safePhone}</td>
-            </tr>
-            <tr>
-              <td class="label">Country</td>
-              <td class="value">${safeCountry}</td>
-            </tr>
-            <tr>
-              <td class="label">Course Interest</td>
-              <td class="value">${safeCourseInterest}</td>
-            </tr>
-            <tr>
-              <td class="label">Submitted At</td>
-              <td class="value">${safeTimestamp}</td>
-            </tr>
-          </table>
-
-          <div class="lead-info-title">Message / Note</div>
-          <div class="message-box">
-            ${messageText}
-          </div>
-        </div>
-        <div class="footer">
-          <p>Sent securely via Quran Academee Leads Service • <a href="https://quranacademee.com">quranacademee.com</a></p>
-        </div>
-      </div>
-    </body>
-    </html>
-  `;
-}
-
-/**
- * Generates the HTML content for the recitation notification email sent to the admin.
- */
-export function generateAdminRecitationEmailHtml(data: {
+interface AdminEmailParams {
   id: string;
   fullName: string;
   email: string;
@@ -187,340 +6,164 @@ export function generateAdminRecitationEmailHtml(data: {
   country: string;
   notes?: string;
   timestamp: string;
-}): string {
-  const safeId = escapeHtml(data.id);
-  const safeFullName = escapeHtml(data.fullName);
-  const safeEmail = escapeHtml(data.email);
-  const safePhone = escapeHtml(data.phone);
-  const safeCountry = escapeHtml(data.country);
-  const safeTimestamp = escapeHtml(data.timestamp);
-  
-  const notesText = data.notes 
-    ? escapeHtml(data.notes).replace(/\n/g, '<br />') 
-    : '<em>None provided</em>';
+}
 
+/**
+ * Generates premium HTML notification email for administrative scholars
+ * containing the coordinates of the new student and evaluation details.
+ */
+export function generateAdminRecitationEmailHtml({
+  id,
+  fullName,
+  email,
+  phone,
+  country,
+  notes,
+  timestamp,
+}: AdminEmailParams): string {
   return `
     <!DOCTYPE html>
-    <html lang="en">
+    <html>
     <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>New Recitation Evaluation Submission</title>
+      <meta charset="utf-8">
+      <title>New Recitation Submission - Quran Academee</title>
       <style>
         body {
-          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
           background-color: #f8fafc;
           color: #1e293b;
           margin: 0;
-          padding: 0;
-          -webkit-font-smoothing: antialiased;
+          padding: 20px;
         }
-        .container {
+        .card {
           max-width: 600px;
           margin: 40px auto;
-          background-color: #ffffff;
+          background: #ffffff;
           border-radius: 16px;
-          overflow: hidden;
-          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
           border: 1px solid #e2e8f0;
+          overflow: hidden;
+          box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
         .header {
-          background-color: #0B3951;
-          padding: 32px 24px;
+          background: #0B3951;
+          color: #ffffff;
+          padding: 28px 24px;
           text-align: center;
         }
         .header h1 {
-          color: #ffffff;
           margin: 0;
           font-size: 22px;
           font-weight: 800;
-          letter-spacing: -0.025em;
-        }
-        .header p {
-          color: #E0F2FE;
-          margin: 8px 0 0 0;
-          font-size: 13px;
-          font-weight: 600;
-          text-transform: uppercase;
-          letter-spacing: 0.1em;
+          letter-spacing: -0.02em;
         }
         .content {
           padding: 32px 24px;
+          line-height: 1.6;
         }
-        .lead-info-title {
-          font-size: 14px;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          color: #64748b;
-          font-weight: 700;
-          margin-bottom: 16px;
-          border-bottom: 2px solid #f1f5f9;
-          padding-bottom: 8px;
-        }
-        .info-grid {
+        .details-table {
           width: 100%;
           border-collapse: collapse;
-          margin-bottom: 24px;
+          margin: 24px 0;
         }
-        .info-grid td {
-          padding: 12px 0;
-          border-bottom: 1px solid #f1f5f9;
-          vertical-align: top;
+        .details-table th, .details-table td {
+          padding: 14px;
+          border-bottom: 1px solid #e2e8f0;
+          text-align: left;
+          font-size: 13px;
         }
-        .info-grid td.label {
-          width: 35%;
-          font-weight: 600;
+        .details-table th {
+          font-weight: 700;
           color: #475569;
-          font-size: 14px;
-        }
-        .info-grid td.value {
-          color: #0f172a;
-          font-size: 14px;
-        }
-        .message-box {
+          width: 30%;
           background-color: #f8fafc;
-          border-left: 4px solid #1C8DC8;
+        }
+        .details-table td {
+          color: #0b3951;
+          font-weight: 600;
+        }
+        .notes-box {
+          background: #FFFBEB;
+          border-left: 4px solid #D97706;
           padding: 16px;
           border-radius: 0 8px 8px 0;
-          font-size: 14px;
-          line-height: 1.6;
-          color: #334155;
-          margin-top: 8px;
-          margin-bottom: 24px;
+          margin: 24px 0;
+          font-size: 13px;
+          color: #92400E;
         }
-        .cta-container {
+        .footer {
+          background: #f8fafc;
+          padding: 20px;
           text-align: center;
-          margin: 32px 0;
+          font-size: 11px;
+          color: #94a3b8;
+          border-top: 1px solid #e2e8f0;
         }
-        .cta-button {
+        .btn {
           display: inline-block;
           background-color: #1C8DC8;
           color: #ffffff !important;
           font-weight: 700;
-          font-size: 14px;
           text-decoration: none;
-          padding: 14px 28px;
+          padding: 12px 24px;
           border-radius: 8px;
           text-align: center;
-        }
-        .footer {
-          background-color: #f8fafc;
-          padding: 24px;
-          text-align: center;
-          font-size: 12px;
-          color: #94a3b8;
-          border-top: 1px solid #e2e8f0;
-        }
-        .footer a {
-          color: #1C8DC8;
-          text-decoration: none;
+          margin: 10px 0 20px 0;
+          font-size: 13px;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
         }
       </style>
     </head>
     <body>
-      <div class="container">
+      <div class="card">
         <div class="header">
-          <h1>New Recitation Submission</h1>
-          <p>Evaluation Request Pending</p>
+          <h1>New Recitation Submitted</h1>
+          <div style="font-size: 12px; color: #E0F2FE; margin-top: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;">Quran Academee Scholar Panel</div>
         </div>
         <div class="content">
-          <div class="lead-info-title">Student Details</div>
-          <table class="info-grid">
+          <p style="font-size: 14px; margin-top: 0;">Assalamu Alaikum,</p>
+          <p style="font-size: 14px; color: #475569;">A new student has submitted their audio recitation for evaluation. Please review their submission in the admin dashboard.</p>
+          
+          <table class="details-table">
             <tr>
-              <td class="label">Recitation ID</td>
-              <td class="value"><code>${safeId}</code></td>
+              <th>Recitation ID</th>
+              <td><code style="font-family: monospace; font-size: 12px; color: #e11d48;">${id}</code></td>
             </tr>
             <tr>
-              <td class="label">Full Name</td>
-              <td class="value"><strong>${safeFullName}</strong></td>
+              <th>Full Name</th>
+              <td>${fullName}</td>
             </tr>
             <tr>
-              <td class="label">Email Address</td>
-              <td class="value"><a href="mailto:${safeEmail}" style="color: #1C8DC8; text-decoration: none;">${safeEmail}</a></td>
+              <th>Email</th>
+              <td><a href="mailto:${email}" style="color: #1C8DC8; text-decoration: none;">${email}</a></td>
             </tr>
             <tr>
-              <td class="label">Phone Number</td>
-              <td class="value">${safePhone}</td>
+              <th>Phone</th>
+              <td><a href="tel:${phone}" style="color: #1C8DC8; text-decoration: none;">${phone}</a></td>
             </tr>
             <tr>
-              <td class="label">Country</td>
-              <td class="value">${safeCountry}</td>
+              <th>Country</th>
+              <td>${country}</td>
             </tr>
             <tr>
-              <td class="label">Submitted At</td>
-              <td class="value">${safeTimestamp}</td>
+              <th>Submitted At</th>
+              <td>${timestamp}</td>
             </tr>
           </table>
- 
-          <div class="lead-info-title">Student Notes</div>
-          <div class="message-box">
-            ${notesText}
-          </div>
-
-          <div class="cta-container">
-            <p style="font-size: 14px; color: #475569; margin-bottom: 16px;">Please log in to the Quran Academee Admin Dashboard to listen to the audio and provide scholar feedback.</p>
-            <a href="https://quranacademee.com/admin" class="cta-button" target="_blank">Open Admin Dashboard</a>
-          </div>
-        </div>
-        <div class="footer">
-          <p>Sent securely via Quran Academee Recitations Service • <a href="https://quranacademee.com">quranacademee.com</a></p>
-        </div>
-      </div>
-    </body>
-    </html>
-  `;
-}
-
-/**
- * Generates the HTML content for the confirmation email sent to the student.
- */
-export function generateStudentEmailHtml(data: {
-  fullName: string;
-  courseInterest: string;
-}): string {
-  const safeFullName = escapeHtml(data.fullName);
-  const safeCourseInterest = escapeHtml(data.courseInterest);
-
-  return `
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Welcome to Quran Academee</title>
-      <style>
-        body {
-          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-          background-color: #f8fafc;
-          color: #1e293b;
-          margin: 0;
-          padding: 0;
-          -webkit-font-smoothing: antialiased;
-        }
-        .container {
-          max-width: 600px;
-          margin: 40px auto;
-          background-color: #ffffff;
-          border-radius: 16px;
-          overflow: hidden;
-          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-          border: 1px solid #e2e8f0;
-        }
-        .header {
-          background-color: #2563eb;
-          padding: 40px 24px;
-          text-align: center;
-        }
-        .header h1 {
-          color: #ffffff;
-          margin: 0;
-          font-size: 24px;
-          font-weight: 800;
-          letter-spacing: -0.025em;
-        }
-        .header p {
-          color: #bfdbfe;
-          margin: 8px 0 0 0;
-          font-size: 14px;
-          font-weight: 500;
-        }
-        .content {
-          padding: 36px 32px;
-          line-height: 1.625;
-          font-size: 15px;
-          color: #334155;
-        }
-        .content h2 {
-          color: #0f172a;
-          font-size: 18px;
-          font-weight: 700;
-          margin-top: 0;
-          margin-bottom: 16px;
-        }
-        .bullet-list {
-          background-color: #f8fafc;
-          border-radius: 12px;
-          padding: 20px 20px 20px 40px;
-          margin: 24px 0;
-          border: 1px solid #e2e8f0;
-        }
-        .bullet-list li {
-          margin-bottom: 10px;
-        }
-        .bullet-list li:last-child {
-          margin-bottom: 0;
-        }
-        .cta-button {
-          display: inline-block;
-          background-color: #2563eb;
-          color: #ffffff !important;
-          font-weight: 700;
-          font-size: 14px;
-          text-decoration: none;
-          padding: 14px 28px;
-          border-radius: 8px;
-          text-align: center;
-          margin: 24px 0 8px 0;
-          transition: background-color 0.2s;
-        }
-        .signature {
-          margin-top: 32px;
-          border-top: 1px solid #f1f5f9;
-          padding-top: 24px;
-          color: #475569;
-        }
-        .signature-title {
-          font-weight: 700;
-          color: #0f172a;
-        }
-        .footer {
-          background-color: #f8fafc;
-          padding: 24px;
-          text-align: center;
-          font-size: 12px;
-          color: #94a3b8;
-          border-top: 1px solid #e2e8f0;
-        }
-        .footer a {
-          color: #2563eb;
-          text-decoration: none;
-        }
-      </style>
-    </head>
-    <body>
-      <div class="container">
-        <div class="header">
-          <h1>Quran Academee</h1>
-          <p>Assalamu Alaikum & Welcome</p>
-        </div>
-        <div class="content">
-          <h2>Dear ${safeFullName},</h2>
-          <p>Thank you for reaching out to Quran Academee! We have successfully received your inquiry about our <strong>${safeCourseInterest}</strong> course.</p>
           
-          <p>Learning the Quran is a highly rewarding journey, and we are absolutely honored to support you and your family every step of the way with our premium 1-on-1 certified Quran teachers.</p>
-
-          <p><strong>What happens next?</strong></p>
-          <ul class="bullet-list">
-            <li>An academic coordinator is already reviewing your details.</li>
-            <li>We will contact you via Email or WhatsApp (at the number you provided) <strong>within 24 hours</strong> to coordinate your <strong>Free 1-on-1 Trial Class</strong>.</li>
-            <li>We will customize the schedule to fit your lifestyle, time zone, and learning goals perfectly.</li>
-          </ul>
-
-          <p>If you'd like to speed up the booking process, feel free to message us directly on WhatsApp by clicking the button below:</p>
-
-          <div style="text-align: center;">
-            <a href="https://wa.me/923702680670" class="cta-button" target="_blank">Chat with us on WhatsApp</a>
-          </div>
-
-          <div class="signature">
-            <p>Warmest regards,<br />
-            <span class="signature-title">The Quran Academee Team</span><br />
-            <a href="https://quranacademee.com" style="color: #2563eb; text-decoration: none;">quranacademee.com</a></p>
+          ${notes ? `
+            <div class="notes-box">
+              <strong style="display: block; margin-bottom: 4px; text-transform: uppercase; font-size: 11px; letter-spacing: 0.05em;">Student's Notes / Experience:</strong>
+              "${notes}"
+            </div>
+          ` : ''}
+          
+          <div style="text-align: center; margin-top: 28px;">
+            <a href="https://quranacademee.com/admin" class="btn" target="_blank">Open Administrative Evaluation Board</a>
           </div>
         </div>
         <div class="footer">
-          <p>© ${new Date().getFullYear()} Quran Academee • Recite with Beauty.<br />
-          If you have any questions, reply to this email or reach us at <a href="mailto:contact@quranacademee.com">contact@quranacademee.com</a></p>
+          <p>© ${new Date().getFullYear()} Quran Academee • Scholar Notification System</p>
         </div>
       </div>
     </body>

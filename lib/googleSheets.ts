@@ -1,82 +1,88 @@
-import { google } from 'googleapis';
+import { google, sheets_v4 } from 'googleapis';
 
-let sheetsClient: any = null;
-
-export function getSheetsClient() {
-  if (!sheetsClient) {
-    const clientEmail = process.env.GOOGLE_CLIENT_EMAIL;
-    const privateKey = process.env.GOOGLE_PRIVATE_KEY;
-
-    if (!clientEmail || !privateKey) {
-      throw new Error(
-        'Missing Google Service Account authentication configuration. Please provide GOOGLE_CLIENT_EMAIL and GOOGLE_PRIVATE_KEY in your environment variables.'
-      );
-    }
-
-    console.log('[Google Auth] Initializing Google JWT Service Account authentication.');
-    // Replace literal escape sequences '\n' with actual newlines
-    const formattedPrivateKey = privateKey.replace(/\\n/g, '\n');
-    const auth = new google.auth.JWT({
-      email: clientEmail,
-      key: formattedPrivateKey,
-      scopes: ['https://www.googleapis.com/auth/spreadsheets']
-    });
-
-    sheetsClient = google.sheets({ version: 'v4', auth });
-  }
-  return sheetsClient;
-}
-
-export async function appendLeadToSheet(data: {
+export interface LeadData {
   fullName: string;
   email: string;
   phone: string;
   country: string;
   courseInterest: string;
   message?: string;
-}) {
+}
+
+let sheetsClient: sheets_v4.Sheets | null = null;
+
+/**
+ * Initializes and caches the Google Sheets v4 client using JWT Service Account credentials.
+ */
+export function getSheetsClient(): sheets_v4.Sheets {
+  if (!sheetsClient) {
+    const clientEmail = process.env.GOOGLE_CLIENT_EMAIL;
+    const rawPrivateKey = process.env.GOOGLE_PRIVATE_KEY;
+
+    if (!clientEmail || !rawPrivateKey) {
+      throw new Error(
+        '[Google Sheets Auth Error]: Missing required environment variables. Please ensure GOOGLE_CLIENT_EMAIL and GOOGLE_PRIVATE_KEY are defined.'
+      );
+    }
+
+    // Handles both multiline RSA keys and escaped '\n' sequences from environment strings
+    const formattedPrivateKey = rawPrivateKey.startsWith('"') && rawPrivateKey.endsWith('"')
+      ? rawPrivateKey.slice(1, -1).replace(/\\n/g, '\n')
+      : rawPrivateKey.replace(/\\n/g, '\n');
+
+    const auth = new google.auth.JWT({
+      email: clientEmail,
+      key: formattedPrivateKey,
+      scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+    });
+
+    sheetsClient = google.sheets({ version: 'v4', auth });
+  }
+
+  return sheetsClient;
+}
+
+/**
+ * Appends a lead submission row to the specified Google Sheet.
+ * Auto-creates the target tab with header styling if it doesn't already exist.
+ */
+export async function appendLeadToSheet(data: LeadData): Promise<sheets_v4.Schema$AppendValuesResponse> {
   const sheets = getSheetsClient();
   const spreadsheetId = process.env.GOOGLE_SHEET_ID;
 
   if (!spreadsheetId) {
-    throw new Error('GOOGLE_SHEET_ID environment variable is not defined');
+    throw new Error('[Google Sheets Error]: GOOGLE_SHEET_ID environment variable is not defined.');
   }
 
   const sheetTitle = 'Quran Academee Leads';
-  const timestamp = new Date().toLocaleString('en-US', { timeZone: 'UTC' }) + ' UTC';
+  const timestamp = `${new Date().toLocaleString('en-US', { timeZone: 'UTC' })} UTC`;
 
   try {
-    // 1. Check if the "Quran Academee Leads" tab exists
-    const spreadsheet = await sheets.spreadsheets.get({
-      spreadsheetId,
-    });
-
+    // 1. Fetch spreadsheet metadata to verify tab existence
+    const spreadsheet = await sheets.spreadsheets.get({ spreadsheetId });
     const sheetExists = spreadsheet.data.sheets?.some(
-      (s: any) => s.properties?.title === sheetTitle
+      (s) => s.properties?.title === sheetTitle
     );
 
-    // 2. If the sheet doesn't exist, create it and write the headers
+    // 2. Auto-create tab and inject header row if non-existent
     if (!sheetExists) {
-      console.log(`Sheet "${sheetTitle}" not found. Creating a new tab.`);
       await sheets.spreadsheets.batchUpdate({
         spreadsheetId,
         requestBody: {
           requests: [
             {
               addSheet: {
-                properties: {
-                  title: sheetTitle,
-                },
+                properties: { title: sheetTitle },
               },
             },
           ],
         },
       });
 
-      // Write headers: A1 to G1
+      // Write column headers (A1:G1)
       await sheets.spreadsheets.values.append({
         spreadsheetId,
-        range: `${sheetTitle}!A1:G1`,
+        range: `'${sheetTitle}'!A1:G1`,
         valueInputOption: 'USER_ENTERED',
         requestBody: {
           values: [
@@ -86,10 +92,10 @@ export async function appendLeadToSheet(data: {
       });
     }
 
-    // 3. Append the lead row to the sheet (Fixed the nested .sheets call)
+    // 3. Append the lead row to the bottom of the dataset
     const appendResponse = await sheets.spreadsheets.values.append({
       spreadsheetId,
-      range: `${sheetTitle}!A:G`,
+      range: `'${sheetTitle}'!A:G`,
       valueInputOption: 'USER_ENTERED',
       insertDataOption: 'INSERT_ROWS',
       requestBody: {
@@ -109,7 +115,7 @@ export async function appendLeadToSheet(data: {
 
     return appendResponse.data;
   } catch (error: any) {
-    console.error('Google Sheets append failed:', error);
+    console.error('[Google Sheets Append Error]:', error);
     throw new Error(`Google Sheets logging failed: ${error.message}`);
   }
 }
