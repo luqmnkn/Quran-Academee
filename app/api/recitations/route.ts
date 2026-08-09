@@ -6,6 +6,8 @@ import { generateAdminRecitationEmailHtml } from '@/utils/emailTemplates';
 
 const ADMIN_TOKEN = process.env.ADMIN_TOKEN || 'QA-Admin-Secure-9988';
 
+export const maxDuration = 15;
+
 interface RecitationData {
   id: string;
   fullName: string;

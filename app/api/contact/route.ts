@@ -4,6 +4,8 @@ import { sendEmail } from '@/lib/resend';
 import { appendLeadToSheet } from '@/lib/googleSheets';
 import { contactSchema } from '@/lib/validations/contact';
 
+export const maxDuration = 15;
+
 // CORS Support Header Generator
 function getCorsHeaders() {
   return {
