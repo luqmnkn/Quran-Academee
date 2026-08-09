@@ -20,7 +20,7 @@
     }
   ],
   "functions": {
-    "api/**/*": {
+    "app/api/**/route.{ts,js}": {
       "maxDuration": 15
     }
   }
