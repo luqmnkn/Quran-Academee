@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import WhatsAppButton from '../components/WhatsAppButton';
@@ -16,6 +16,7 @@ export default function LayoutContent({
 }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const router = useRouter();
   const [isTrialModalOpen, setIsTrialModalOpen] = useState(false);
   const [selectedCourseSelection, setSelectedCourseSelection] = useState('');
   const [selectedDetailsSelection, setSelectedDetailsSelection] = useState('');
@@ -42,6 +43,29 @@ export default function LayoutContent({
     }
   }, [pathname, searchParams]);
 
+  const handleOpenTrialModal = (planOrCourseName?: string) => {
+    const params = new URLSearchParams(window.location.search);
+    params.set('trial', 'true');
+    if (planOrCourseName) {
+      params.set('plan', planOrCourseName);
+    } else {
+      params.delete('plan');
+    }
+    router.push(`${pathname}?${params.toString()}`, { scroll: false });
+  };
+
+  const handleCloseTrialModal = () => {
+    setIsTrialModalOpen(false);
+    setSelectedCourseSelection('');
+    setSelectedDetailsSelection('');
+    const params = new URLSearchParams(window.location.search);
+    params.delete('trial');
+    params.delete('plan');
+    params.delete('details');
+    const newUrl = params.toString() ? `${pathname}?${params.toString()}` : pathname;
+    router.push(newUrl, { scroll: false });
+  };
+
   // Open trial modal if requested via URL query params
   useEffect(() => {
     const trial = searchParams.get('trial');
@@ -51,18 +75,26 @@ export default function LayoutContent({
       setIsTrialModalOpen(true);
       if (plan) {
         setSelectedCourseSelection(plan);
+      } else {
+        setSelectedCourseSelection('');
       }
       if (details) {
         setSelectedDetailsSelection(details);
+      } else {
+        setSelectedDetailsSelection('');
       }
+    } else {
+      setIsTrialModalOpen(false);
+      setSelectedCourseSelection('');
+      setSelectedDetailsSelection('');
     }
-  }, [searchParams]);
+  }, [searchParams, pathname]);
 
   return (
     <>
       {/* Sticky Header */}
       {!isAdminPage && (
-        <Header onOpenTrialModal={() => setIsTrialModalOpen(true)} />
+        <Header onOpenTrialModal={() => handleOpenTrialModal()} />
       )}
 
       {/* Dynamic Page Content */}
@@ -74,18 +106,14 @@ export default function LayoutContent({
       {/* Floating WhatsApp Button */}
       {!isAdminPage && <WhatsAppButton />}
 
-      {/* Free Trial Popup Modal (100vh Slide-Over) */}
+      {/* Free Trial Popup Modal (Centered Modal) */}
       {isTrialModalOpen && (
-        <div className="fixed inset-0 z-50 flex justify-end bg-gray-900/60 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-white w-full max-w-lg h-screen shadow-2xl overflow-y-auto relative flex flex-col justify-start animate-in slide-in-from-right duration-300 border-l border-gray-100 p-6 sm:p-8">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900/60 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="bg-white w-full max-w-lg max-h-[90vh] rounded-3xl shadow-2xl overflow-y-auto relative flex flex-col justify-start animate-in zoom-in-95 duration-200 p-6 sm:p-8">
             
             {/* Floating Close Button */}
             <button
-              onClick={() => {
-                setIsTrialModalOpen(false);
-                setSelectedCourseSelection('');
-                setSelectedDetailsSelection('');
-              }}
+              onClick={handleCloseTrialModal}
               className="absolute top-4 right-4 z-20 text-slate-400 hover:text-slate-600 p-1.5 rounded-lg hover:bg-slate-100 transition-colors cursor-pointer"
               aria-label="Close scheduling modal"
             >
@@ -93,7 +121,7 @@ export default function LayoutContent({
             </button>
 
             {/* Modal Body */}
-            <div className="mt-8 flex-1">
+            <div className="mt-4 flex-1">
               <InquiryForm
                 prefilledCourse={selectedCourseSelection}
                 prefilledDetails={selectedDetailsSelection}
@@ -104,9 +132,7 @@ export default function LayoutContent({
                 isModalMode={true}
                 onSubmitSuccess={() => {
                   setTimeout(() => {
-                    setIsTrialModalOpen(false);
-                    setSelectedCourseSelection('');
-                    setSelectedDetailsSelection('');
+                    handleCloseTrialModal();
                   }, 4000);
                 }}
               />
@@ -118,7 +144,7 @@ export default function LayoutContent({
 
       {/* Floating Bar Controls */}
       {!isAdminPage && (
-        <FloatingControls onOpenTrialModal={() => setIsTrialModalOpen(true)} />
+        <FloatingControls onOpenTrialModal={() => handleOpenTrialModal()} />
       )}
     </>
   );

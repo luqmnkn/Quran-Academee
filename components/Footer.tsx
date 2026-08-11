@@ -84,64 +84,67 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column 2: Quick Navigation */}
-          <div className="md:col-span-2 space-y-4">
-            <h4 className="font-display font-bold text-xs uppercase tracking-widest text-[#1C8DC8]">
-              Quick Links
-            </h4>
-            <ul className="space-y-2.5 text-xs text-slate-300 font-medium">
-              <li>
-                <Link href="/" className="hover:text-white hover:underline transition-colors">Home</Link>
-              </li>
-              <li>
-                <Link href="/#about" className="hover:text-white hover:underline transition-colors">About Us</Link>
-              </li>
-              <li>
-                <Link href="/#courses" className="hover:text-white hover:underline transition-colors">Programs</Link>
-              </li>
-              <li>
-                <Link href="/pricing" className="hover:text-white hover:underline transition-colors">Pricing Plans</Link>
-              </li>
-              <li>
-                <Link href="/#why-us" className="hover:text-white hover:underline transition-colors">Why Learn Here</Link>
-              </li>
-              <li>
-                <Link href="/#faqs" className="hover:text-white hover:underline transition-colors">Questions</Link>
-              </li>
-            </ul>
-          </div>
+          {/* Columns 2 & 3: Quick Links & Programs side-by-side on mobile, grouped on desktop */}
+          <div className="md:col-span-5 grid grid-cols-2 gap-6">
+            {/* Column 2: Quick Navigation */}
+            <div className="space-y-4">
+              <h4 className="font-display font-bold text-xs uppercase tracking-widest text-[#1C8DC8]">
+                Quick Links
+              </h4>
+              <ul className="space-y-2.5 text-xs text-slate-300 font-medium">
+                <li>
+                  <Link href="/" className="hover:text-white hover:underline transition-colors">Home</Link>
+                </li>
+                <li>
+                  <Link href="/#about" className="hover:text-white hover:underline transition-colors">About Us</Link>
+                </li>
+                <li>
+                  <Link href="/#courses" className="hover:text-white hover:underline transition-colors">Programs</Link>
+                </li>
+                <li>
+                  <Link href="/pricing" className="hover:text-white hover:underline transition-colors">Pricing Plans</Link>
+                </li>
+                <li>
+                  <Link href="/#why-us" className="hover:text-white hover:underline transition-colors">Why Learn Here</Link>
+                </li>
+                <li>
+                  <Link href="/#faqs" className="hover:text-white hover:underline transition-colors">Questions</Link>
+                </li>
+              </ul>
+            </div>
 
-          {/* Column 3: Programs */}
-          <div className="md:col-span-3 space-y-4">
-            <h4 className="font-display font-bold text-xs uppercase tracking-widest text-[#1C8DC8]">
-              Our Programs
-            </h4>
-            <ul className="space-y-2.5 text-xs text-slate-300 font-medium">
-              <li className="flex items-center space-x-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#1C8DC8] shrink-0"></span>
-                <Link href="/#courses" className="hover:text-white hover:underline transition-colors">Alqaida Almadania Basics</Link>
-              </li>
-              <li className="flex items-center space-x-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#1C8DC8] shrink-0"></span>
-                <Link href="/#courses" className="hover:text-white hover:underline transition-colors">Quran Recitation & Reading</Link>
-              </li>
-              <li className="flex items-center space-x-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#1C8DC8] shrink-0"></span>
-                <Link href="/#courses" className="hover:text-white hover:underline transition-colors">Tajweed al Quran</Link>
-              </li>
-              <li className="flex items-center space-x-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#1C8DC8] shrink-0"></span>
-                <Link href="/#courses" className="hover:text-white hover:underline transition-colors">Quran Memorization (Hifz)</Link>
-              </li>
-              <li className="flex items-center space-x-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#1C8DC8] shrink-0"></span>
-                <Link href="/#courses" className="hover:text-white hover:underline transition-colors">Islamic Essentials & Duas</Link>
-              </li>
-              <li className="flex items-center space-x-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#1C8DC8] shrink-0"></span>
-                <Link href="/#courses" className="hover:text-white hover:underline transition-colors">Hifz Revision Partner</Link>
-              </li>
-            </ul>
+            {/* Column 3: Programs */}
+            <div className="space-y-4">
+              <h4 className="font-display font-bold text-xs uppercase tracking-widest text-[#1C8DC8]">
+                Our Programs
+              </h4>
+              <ul className="space-y-2.5 text-xs text-slate-300 font-medium">
+                <li className="flex items-center space-x-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#1C8DC8] shrink-0"></span>
+                  <Link href="/#courses" className="hover:text-white hover:underline transition-colors">Alqaida Almadania Basics</Link>
+                </li>
+                <li className="flex items-center space-x-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#1C8DC8] shrink-0"></span>
+                  <Link href="/#courses" className="hover:text-white hover:underline transition-colors">Quran Recitation & Reading</Link>
+                </li>
+                <li className="flex items-center space-x-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#1C8DC8] shrink-0"></span>
+                  <Link href="/#courses" className="hover:text-white hover:underline transition-colors">Tajweed al Quran</Link>
+                </li>
+                <li className="flex items-center space-x-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#1C8DC8] shrink-0"></span>
+                  <Link href="/#courses" className="hover:text-white hover:underline transition-colors">Quran Memorization (Hifz)</Link>
+                </li>
+                <li className="flex items-center space-x-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#1C8DC8] shrink-0"></span>
+                  <Link href="/#courses" className="hover:text-white hover:underline transition-colors">Islamic Essentials & Duas</Link>
+                </li>
+                <li className="flex items-center space-x-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#1C8DC8] shrink-0"></span>
+                  <Link href="/#courses" className="hover:text-white hover:underline transition-colors">Hifz Revision Partner</Link>
+                </li>
+              </ul>
+            </div>
           </div>
 
           {/* Column 4: Contact Core */}

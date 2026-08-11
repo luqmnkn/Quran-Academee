@@ -24,7 +24,7 @@ const VIDEO_TESTIMONIALS: VideoTestimonial[] = [
     duration: '3 Months with Quran Academee',
     snippet: 'Zayd pronouncing complex Arabic letters perfectly with Tajweed.',
     thumbnailGradient: 'from-emerald-500/20 via-[#1C8DC8]/25 to-[#0B3951]/20',
-    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-child-reading-a-book-in-bed-41551-large.mp4'
+    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4'
   },
   {
     id: 'v2',
@@ -34,7 +34,7 @@ const VIDEO_TESTIMONIALS: VideoTestimonial[] = [
     duration: '6 Months with Quran Academee',
     snippet: 'Amira reciting her daily Sabaq with melodious tone & rhythm.',
     thumbnailGradient: 'from-[#1C8DC8]/20 via-[#3D8DC3]/25 to-[#0B3951]/20',
-    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-girl-studying-with-a-laptop-42938-large.mp4'
+    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4'
   },
   {
     id: 'v3',
@@ -44,7 +44,7 @@ const VIDEO_TESTIMONIALS: VideoTestimonial[] = [
     duration: '1 Year with Quran Academee',
     snippet: 'Brothers interacting playfully with their Arab tutor in live session.',
     thumbnailGradient: 'from-amber-500/10 via-[#1C8DC8]/25 to-[#146299]/20',
-    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-children-playing-together-in-a-park-41549-large.mp4'
+    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4'
   },
   {
     id: 'v4',
@@ -54,7 +54,7 @@ const VIDEO_TESTIMONIALS: VideoTestimonial[] = [
     duration: '5 Months with Quran Academee',
     snippet: 'Adult Tajweed review and flexible schedule feedback.',
     thumbnailGradient: 'from-indigo-500/15 via-[#1C8DC8]/25 to-[#0B3951]/20',
-    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-man-holding-a-book-and-reading-41546-large.mp4'
+    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4'
   }
 ];
 

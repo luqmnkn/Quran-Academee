@@ -12,18 +12,40 @@ export async function GET(req: NextRequest) {
     });
   }
 
-  // 2. Fallback to server-side IP lookup for local development (no CORS restriction on server-side fetches)
+  // 2. Fallback to server-side IP lookup for local development (with User-Agent)
   try {
-    const res = await fetch('https://ipapi.co/json/');
+    const res = await fetch('https://ipapi.co/json/', {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+      }
+    });
     if (res.ok) {
       const data = await res.json();
-      return NextResponse.json({
-        country_code: data.country_code,
-        country_name: data.country,
-      });
+      if (data && data.country_code) {
+        return NextResponse.json({
+          country_code: data.country_code.toUpperCase(),
+          country_name: data.country,
+        });
+      }
     }
   } catch (err) {
-    console.error('Server-side geolocation lookup failed:', err);
+    console.error('Server-side ipapi.co lookup failed:', err);
+  }
+
+  // 3. Secondary fallback to ipwho.is lookup
+  try {
+    const res = await fetch('https://ipwho.is/');
+    if (res.ok) {
+      const data = await res.json();
+      if (data && data.success && data.country_code) {
+        return NextResponse.json({
+          country_code: data.country_code.toUpperCase(),
+          country_name: data.country,
+        });
+      }
+    }
+  } catch (err) {
+    console.error('Server-side ipwho.is lookup failed:', err);
   }
 
   // Default fallback if everything fails

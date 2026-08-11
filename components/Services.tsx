@@ -189,7 +189,7 @@ export default function Services({ onSelectCourse }: ServicesProps) {
         </div>
 
         {/* Course Cards Carousel */}
-        <div className="w-full">
+        <div className="w-full py-6 px-2">
           <PremiumCarousel>
             {[
               ...COURSES.map((course) => (
@@ -210,24 +210,24 @@ export default function Services({ onSelectCourse }: ServicesProps) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
-          className="mt-16 bg-gradient-to-br from-[#F0F9FF]/80 via-white to-[#F0F9FF]/40 rounded-[32px] border border-[#3D8DC3]/25 p-10 flex flex-col md:flex-row items-center justify-between gap-8 text-left shadow-[0_15px_35px_rgba(28,141,200,0.05)]"
+          className="mt-6 bg-gradient-to-br from-[#F0F9FF]/80 via-white to-[#F0F9FF]/40 rounded-2xl sm:rounded-3xl border border-[#3D8DC3]/25 p-5 sm:p-7 flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 text-left shadow-[0_12px_28px_rgba(28,141,200,0.04)]"
         >
-          <div className="flex items-center space-x-6">
-            <div className="w-16 h-16 bg-gradient-to-br from-[#F0F9FF] to-[#E0F2FE] rounded-2xl flex items-center justify-center shrink-0 shadow-inner border border-[#E0F2FE]">
-              <span className="material-symbols-outlined text-[28px] leading-none select-none text-[#1C8DC8]">help_outline</span>
+          <div className="flex items-center space-x-4">
+            <div className="w-12 h-12 bg-gradient-to-br from-[#F0F9FF] to-[#E0F2FE] rounded-xl flex items-center justify-center shrink-0 shadow-inner border border-[#E0F2FE]">
+              <span className="material-symbols-outlined text-[22px] leading-none select-none text-[#1C8DC8]">help_outline</span>
             </div>
             <div>
-              <h4 className="font-display font-[900] text-xl text-[#0B3951] leading-tight">
+              <h4 className="font-display font-[800] text-sm sm:text-base text-[#0B3951] leading-tight">
                 Still confused about which course is right for you?
               </h4>
-              <p className="font-sans text-[15px] font-medium text-slate-600 mt-2 max-w-xl">
+              <p className="font-sans text-xs sm:text-sm font-medium text-slate-500 mt-1 max-w-xl">
                 Submit a short voice recording of your Quran recitation. Our expert scholars will listen, assess your pronunciation level, and suggest the perfect personalized program.
               </p>
             </div>
           </div>
           <button
             onClick={() => setIsRecorderOpen(true)}
-            className="w-full md:w-auto bg-gradient-to-r from-[#1C8DC8] via-[#3D8DC3] to-[#146299] hover:from-[#146299] hover:to-[#1C8DC8] text-white font-display font-black text-xs uppercase tracking-widest py-4.5 px-9 rounded-xl shrink-0 transition-all hover:scale-[1.02] shadow-lg shadow-sky-500/15 cursor-pointer border border-[#E0F2FE]/50"
+            className="w-full md:w-auto bg-gradient-to-r from-[#1C8DC8] via-[#3D8DC3] to-[#146299] hover:from-[#146299] hover:to-[#1C8DC8] text-white font-display font-bold text-[10px] uppercase tracking-wider py-3 px-6 rounded-lg shrink-0 transition-all hover:scale-[1.01] shadow-md shadow-sky-500/10 cursor-pointer border border-[#E0F2FE]/50"
           >
             Record Voice Assessment
           </button>

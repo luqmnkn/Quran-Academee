@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Star, BookOpen, ChevronRight, CheckCircle2 } from 'lucide-react';
+import { Star, BookOpen, ChevronRight, CheckCircle2, Play } from 'lucide-react';
 import imghero from '../public/images/imghero.png';
 
 interface VideoReview {
@@ -14,6 +14,7 @@ interface VideoReview {
   duration: string;
   snippet: string;
   thumbnailGradient: string;
+  videoUrl?: string;
 }
 
 const VIDEO_REVIEWS: VideoReview[] = [
@@ -24,7 +25,8 @@ const VIDEO_REVIEWS: VideoReview[] = [
     courseName: 'Noorani Qaida Basics',
     duration: '3 Mos',
     snippet: 'Zayd pronouncing complex Arabic letters perfectly with proper Tajweed articulation points (Makharij)!',
-    thumbnailGradient: 'from-emerald-500/25 via-[#1C8DC8]/20 to-[#0B3951]/20'
+    thumbnailGradient: 'from-emerald-500/25 via-[#1C8DC8]/20 to-[#0B3951]/20',
+    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4'
   },
   {
     id: 'v2',
@@ -33,7 +35,8 @@ const VIDEO_REVIEWS: VideoReview[] = [
     courseName: 'Quran Memorization (Hifz)',
     duration: '6 Mos',
     snippet: 'Amira reciting her daily Sabaq (new memorization) with beautiful melodious tone and rhythmic rules.',
-    thumbnailGradient: 'from-[#1C8DC8]/25 via-[#3D8DC3]/20 to-[#0B3951]/20'
+    thumbnailGradient: 'from-[#1C8DC8]/25 via-[#3D8DC3]/20 to-[#0B3951]/20',
+    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4'
   },
   {
     id: 'v3',
@@ -42,7 +45,8 @@ const VIDEO_REVIEWS: VideoReview[] = [
     courseName: 'Tajweed al Quran',
     duration: '1 Year',
     snippet: 'How two brothers interact playfully and constructively with their Arab tutor during live 1-on-1 Quran sessions.',
-    thumbnailGradient: 'from-amber-500/15 via-[#1C8DC8]/20 to-[#146299]/20'
+    thumbnailGradient: 'from-amber-500/15 via-[#1C8DC8]/20 to-[#146299]/20',
+    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4'
   },
   {
     id: 'v4',
@@ -51,13 +55,110 @@ const VIDEO_REVIEWS: VideoReview[] = [
     courseName: 'Fluent Recitation',
     duration: '5 Mos',
     snippet: 'Reviewing adult Tajweed classes and explaining how flexible schedules accommodated his hospital shift changes.',
-    thumbnailGradient: 'from-indigo-500/20 via-[#1C8DC8]/20 to-[#0B3951]/20'
+    thumbnailGradient: 'from-indigo-500/20 via-[#1C8DC8]/20 to-[#0B3951]/20',
+    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4'
   }
 ];
 
 interface HeroProps {
   onSubmitInquiry: (data: { fullName: string; email: string; phone: string; country: string; courseInterest: string; message: string }) => void;
   onOpenTrialModal: () => void;
+}
+
+function HeroVideoCardItem({ review }: { review: VideoReview }) {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting && isPlaying) {
+            if (videoRef.current) {
+              videoRef.current.pause();
+            }
+            setIsPlaying(false);
+          }
+        });
+      },
+      { threshold: 0.6 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+    return () => observer.disconnect();
+  }, [isPlaying]);
+
+  const handleTogglePlay = () => {
+    if (!videoRef.current) return;
+    if (isPlaying) {
+      videoRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      videoRef.current.play();
+      setIsPlaying(true);
+    }
+  };
+
+  return (
+    <motion.div
+      ref={containerRef}
+      whileTap={{ scale: 0.98 }}
+      onClick={handleTogglePlay}
+      className="shrink-0 snap-center w-[60vw] aspect-[9/12.5] bg-gradient-to-tr rounded-[24px] border-2 border-[#0B3951]/10 overflow-hidden relative group cursor-pointer shadow-lg p-2.5 flex flex-col justify-between select-none"
+    >
+      {review.videoUrl && (
+        <video
+          ref={videoRef}
+          src={review.videoUrl}
+          playsInline
+          loop
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
+            isPlaying ? 'opacity-100 z-0' : 'opacity-0 -z-10'
+          }`}
+        />
+      )}
+
+      <div className={`absolute inset-0 bg-gradient-to-tr ${review.thumbnailGradient} -z-10`} />
+      <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#1c8dc8_1.5px,transparent_1.5px)] [background-size:16px_16px] -z-10" />
+
+      <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center transition-opacity duration-300 ${
+        isPlaying ? 'opacity-0 group-hover:opacity-100' : 'opacity-100'
+      }`}>
+        <div className="w-11 h-11 rounded-full bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center group-hover:scale-110 group-hover:bg-white/45 transition-all duration-300 shadow-md">
+          <Play className="w-4 h-4 text-white fill-current ml-0.5" />
+        </div>
+      </div>
+
+      <div className="absolute top-3 left-3 bg-[#1C8DC8]/90 text-white text-[8px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full shadow-sm backdrop-blur-sm z-10">
+        Video Review
+      </div>
+
+      {/* Empty spacer to align content to bottom */}
+      <div />
+
+      <div className="bg-white/85 backdrop-blur-md rounded-xl border border-white/60 p-2.5 text-left shadow-sm relative z-10">
+        <div className="flex items-center justify-between mb-0.5">
+          <h4 className="font-display font-extrabold text-[10px] text-[#0B3951] truncate">
+            {review.studentName}
+          </h4>
+          {review.age && (
+            <span className="text-[7px] font-extrabold uppercase text-[#1C8DC8] bg-[#1C8DC8]/10 px-1.5 py-0.5 rounded border border-[#1C8DC8]/20 shrink-0 leading-none">
+              {review.age}
+            </span>
+          )}
+        </div>
+        <p className="text-[8px] text-slate-400 font-mono font-bold uppercase tracking-wider mb-1 truncate leading-none">
+          {review.courseName} • {review.duration}
+        </p>
+        <p className="text-[9px] text-slate-600 leading-tight font-medium line-clamp-2">
+          "{review.snippet}"
+        </p>
+      </div>
+    </motion.div>
+  );
 }
 
 export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
@@ -365,44 +466,7 @@ export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
         
         <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 scrollbar-none scroll-smooth">
           {VIDEO_REVIEWS.map((review) => (
-            <motion.div
-              key={review.id}
-              whileTap={{ scale: 0.98 }}
-              className="snap-center shrink-0 w-[265px] aspect-[4/3] rounded-2xl border border-[#E0F2FE] relative overflow-hidden bg-[#0B3951] shadow-[0_12px_28px_rgba(28,141,200,0.12)] group cursor-pointer"
-            >
-              <div className={`absolute inset-0 bg-gradient-to-tr ${review.thumbnailGradient} flex items-center justify-center`}>
-                <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#1c8dc8_1.5px,transparent_1.5px)] [background-size:16px_16px]" />
-                
-                <div className="w-11 h-11 rounded-full bg-white/25 backdrop-blur-md border border-white/30 flex items-center justify-center group-hover:scale-110 group-hover:bg-white/35 transition-transform duration-300 shadow-md">
-                  <svg className="w-4 h-4 text-white fill-current ml-0.5" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                </div>
-              </div>
-
-              <div className="absolute top-3 left-3 bg-[#1C8DC8]/90 text-white text-[8px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full shadow-sm backdrop-blur-sm">
-                Video Review
-              </div>
-
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/95 via-black/80 to-transparent p-3.5 pt-8 text-left text-white flex flex-col justify-end">
-                <div className="flex items-center justify-between mb-0.5">
-                  <h4 className="font-display font-[800] text-xs text-white tracking-wide">
-                    {review.studentName}
-                  </h4>
-                  {review.age && (
-                    <span className="text-[8px] font-extrabold uppercase text-[#1C8DC8] bg-[#1C8DC8]/10 px-1.5 py-0.5 rounded border border-[#1C8DC8]/20">
-                      {review.age}
-                    </span>
-                  )}
-                </div>
-                <p className="text-[8px] font-mono font-bold text-slate-300 uppercase tracking-wider mb-1">
-                  {review.courseName} • {review.duration}
-                </p>
-                <p className="text-[9.5px] text-slate-200 leading-tight line-clamp-2">
-                  "{review.snippet}"
-                </p>
-              </div>
-            </motion.div>
+            <HeroVideoCardItem key={review.id} review={review} />
           ))}
         </div>
       </div>

@@ -53,11 +53,13 @@ export default function InquiryForm({
   // Sync prefilled course when it changes
   useEffect(() => {
     if (prefilledCourse) {
-      const courseValues = ['noorani-qaida', 'quran-reading', 'tajweed', 'memorization'];
+      const courseValues = ['noorani-qaida', 'quran-reading', 'tajweed', 'memorization', 'islamic-essentials', 'hifz-revision'];
       const matched = courseValues.find(
         (val) =>
           val.toLowerCase() === prefilledCourse.toLowerCase() ||
-          prefilledCourse.toLowerCase().includes(val.toLowerCase())
+          prefilledCourse.toLowerCase().includes(val.toLowerCase()) ||
+          (val === 'noorani-qaida' && prefilledCourse.toLowerCase().includes('qaida')) ||
+          (val === 'noorani-qaida' && prefilledCourse.toLowerCase().includes('almadania'))
       );
       if (matched) {
         setCourseInterest(matched);
@@ -83,17 +85,11 @@ export default function InquiryForm({
         const res = await fetch('/api/geolocation');
         if (res.ok) {
           const data = await res.json();
-          if (data && data.country_name) {
+          if (data && (data.country_code || data.country_name)) {
             const matched = ALL_COUNTRIES.find(
-              c => c.name.toLowerCase() === data.country_name.toLowerCase()
-            );
-            if (matched) {
-              setCountry(matched.name);
-              setCountryCode(matched.dial);
-            }
-          } else if (data && data.country_code) {
-            const matched = ALL_COUNTRIES.find(
-              c => c.code.toUpperCase() === data.country_code.toUpperCase()
+              c =>
+                (data.country_code && c.code.toUpperCase() === data.country_code.toUpperCase()) ||
+                (data.country_name && c.name.toLowerCase() === data.country_name.toLowerCase())
             );
             if (matched) {
               setCountry(matched.name);
@@ -241,13 +237,29 @@ export default function InquiryForm({
           </button>
         </motion.div>
       ) : (
-        <form onSubmit={handleFormSubmit} className="space-y-3 sm:space-y-4">
-          {errors.submit && (
-            <div className="bg-red-50 border border-red-200 text-red-700 text-xs px-3 py-2 rounded-lg flex items-center space-x-2 font-semibold">
-              <AlertCircle size={14} className="shrink-0 animate-pulse" />
-              <span>{errors.submit}</span>
+        <div className="w-full flex flex-col justify-start text-left md:items-center">
+          {isModalMode && (
+            <div className="text-center mb-6 w-full">
+              <span className="inline-flex items-center space-x-1.5 bg-[#1C8DC8]/10 text-[#1C8DC8] px-3 py-1 rounded-full text-[9px] font-mono font-bold uppercase tracking-wider">
+                <Sparkles size={10} className="animate-pulse" />
+                <span>3-Day Free Trial</span>
+              </span>
+              <h3 className="font-display font-[900] text-xl sm:text-2xl text-[#0B3951] mt-2">
+                Schedule Free Trial Class
+              </h3>
+              <p className="text-xs text-slate-500 mt-1 max-w-sm mx-auto leading-relaxed">
+                Experience personalized 1-on-1 learning with zero obligation.
+              </p>
             </div>
           )}
+
+          <form onSubmit={handleFormSubmit} className="space-y-3 sm:space-y-4 w-full text-left">
+            {errors.submit && (
+              <div className="bg-red-50 border border-red-200 text-red-700 text-xs px-3 py-2 rounded-lg flex items-center space-x-2 font-semibold">
+                <AlertCircle size={14} className="shrink-0 animate-pulse" />
+                <span>{errors.submit}</span>
+              </div>
+            )}
 
           {/* Honeypot fields */}
           <div className="absolute opacity-0 -z-50 h-0 w-0 overflow-hidden pointer-events-none" aria-hidden="true">
@@ -475,10 +487,12 @@ export default function InquiryForm({
                     : 'bg-[#F0F9FF] text-[#0B3951] border-[#E0F2FE] focus:border-[#1C8DC8]'
                 }`}
               >
-                <option value="noorani-qaida">Noorani Qaida Basics</option>
+                <option value="noorani-qaida">Alqaida Almadania Basics</option>
                 <option value="quran-reading">Quran Recitation & Reading</option>
-                <option value="tajweed">Tajweed al Quran Rules</option>
+                <option value="tajweed">Tajweed al Quran</option>
                 <option value="memorization">Quran Memorization (Hifz)</option>
+                <option value="islamic-essentials">Islamic Essentials & Duas</option>
+                <option value="hifz-revision">Hifz Revision Partner</option>
               </select>
             </div>
           </div>
@@ -532,7 +546,8 @@ export default function InquiryForm({
             )}
           </button>
 
-        </form>
+          </form>
+        </div>
       )}
     </AnimatePresence>
   );

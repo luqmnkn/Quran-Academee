@@ -54,14 +54,14 @@ interface PricingCategory {
 
 const PRICING_CATEGORIES: PricingCategory[] = [
   {
-    id: 'nazra',
-    title: 'Quran Nazra & Qaida',
-    subtitle: 'Qaida, Nazra, Duas & Basic Tajweed',
+    id: 'noorani-qaida',
+    title: 'Alqaida Almadania Basics',
+    subtitle: 'Qaida, Makharij & Foundations',
     icon: 'menu_book',
     description: 'Perfect for beginners and children building a strong pronunciation foundation from absolute scratch.',
     plans: [
       {
-        id: 'nazra-plan-1',
+        id: 'noorani-plan-1',
         name: 'Plan 1',
         price: 35,
         originalPrice: 48,
@@ -77,7 +77,7 @@ const PRICING_CATEGORIES: PricingCategory[] = [
         ]
       },
       {
-        id: 'nazra-plan-2',
+        id: 'noorani-plan-2',
         name: 'Plan 2',
         price: 50,
         originalPrice: 63,
@@ -94,7 +94,7 @@ const PRICING_CATEGORIES: PricingCategory[] = [
         ]
       },
       {
-        id: 'nazra-plan-3',
+        id: 'noorani-plan-3',
         name: 'Plan 3',
         price: 70,
         originalPrice: 78,
@@ -112,10 +112,126 @@ const PRICING_CATEGORIES: PricingCategory[] = [
     ]
   },
   {
-    id: 'memorization',
-    title: 'Quran Memorization',
-    subtitle: 'Comprehensive Hifz with Senior Mentors',
+    id: 'quran-reading',
+    title: 'Quran Recitation & Reading',
+    subtitle: 'Fluency, Waqf rules & Reading practice',
+    icon: 'chrome_reader_mode',
+    description: 'Improve word recognition and develop smooth, fluent reading of the entire Mushaf with live tutor focus.',
+    plans: [
+      {
+        id: 'reading-plan-1',
+        name: 'Plan 1',
+        price: 35,
+        originalPrice: 48,
+        weeklyClasses: 2,
+        classDuration: '30 Minutes',
+        classesPerMonth: 8,
+        features: [
+          'Free Trial Class included',
+          '2 Days/Week (30 Mins/Class)',
+          '08 Classes per Month',
+          'Word-by-word reading & pronunciation checks',
+          'Certified Male/Female Quran tutor'
+        ]
+      },
+      {
+        id: 'reading-plan-2',
+        name: 'Plan 2',
+        price: 50,
+        originalPrice: 63,
+        weeklyClasses: 3,
+        classDuration: '30 Minutes',
+        classesPerMonth: 12,
+        isPopular: true,
+        features: [
+          'Free Trial Class included',
+          '3 Days/Week (30 Mins/Class)',
+          '12 Classes per Month',
+          'Fluency drills & breath coordination',
+          'Certified expert Quran teacher'
+        ]
+      },
+      {
+        id: 'reading-plan-3',
+        name: 'Plan 3',
+        price: 70,
+        originalPrice: 78,
+        weeklyClasses: 5,
+        classDuration: '30 Minutes',
+        classesPerMonth: 20,
+        features: [
+          'Free Trial Class included',
+          '5 Days/Week (30 Mins/Class)',
+          '20 Classes per Month',
+          'Complete Mushaf reading progression',
+          'Senior certified Quran teacher'
+        ]
+      }
+    ]
+  },
+  {
+    id: 'tajweed',
+    title: 'Tajweed al Quran',
+    subtitle: 'Mastery of Tarteel, Mudood & Articulation',
     icon: 'workspace_premium',
+    description: 'Advanced phonetic rules to recite the Quran with the beautiful classical melody and precision.',
+    plans: [
+      {
+        id: 'tajweed-plan-1',
+        name: 'Plan 1',
+        price: 35,
+        originalPrice: 48,
+        weeklyClasses: 2,
+        classDuration: '30 Minutes',
+        classesPerMonth: 8,
+        features: [
+          'Free Trial Class included',
+          '2 Days/Week (30 Mins/Class)',
+          '08 Classes per Month',
+          'Basic Tajweed rules & Makharij check',
+          'Certified Male/Female Quran tutor'
+        ]
+      },
+      {
+        id: 'tajweed-plan-2',
+        name: 'Plan 2',
+        price: 50,
+        originalPrice: 63,
+        weeklyClasses: 3,
+        classDuration: '30 Minutes',
+        classesPerMonth: 12,
+        isPopular: true,
+        features: [
+          'Free Trial Class included',
+          '3 Days/Week (30 Mins/Class)',
+          '12 Classes per Month',
+          'Noon Sakinah, Meem Sakinah & Madd rules',
+          'Certified expert Tajweed teacher'
+        ]
+      },
+      {
+        id: 'tajweed-plan-3',
+        name: 'Plan 3',
+        price: 70,
+        originalPrice: 78,
+        weeklyClasses: 5,
+        classDuration: '30 Minutes',
+        classesPerMonth: 20,
+        features: [
+          'Free Trial Class included',
+          '5 Days/Week (30 Mins/Class)',
+          '20 Classes per Month',
+          'Tear-perfect classical Arabic recitation style',
+          'Senior certified Quran scholar'
+        ]
+      }
+    ]
+  },
+  {
+    id: 'memorization',
+    title: 'Quran Memorization (Hifz)',
+    subtitle: 'Comprehensive Hifz with Senior Mentors',
+    icon: 'psychology',
     description: 'Structured, highly disciplined private program to memorize and retain the Quran with authentic Tajweed.',
     plans: [
       {
@@ -185,8 +301,8 @@ const PRICING_CATEGORIES: PricingCategory[] = [
   },
   {
     id: 'islamic-essentials',
-    title: 'Islamic Essentials',
-    subtitle: 'Fiqh, Aqeedah, Seerah, & Adhkar',
+    title: 'Islamic Essentials & Duas',
+    subtitle: 'Fiqh, Aqeedah, Seerah, & Akhlaq',
     icon: 'explore',
     description: 'An essential structured curriculum covering basic creed, prayers, manners, and prophetic biographies.',
     plans: [
@@ -232,49 +348,71 @@ const PRICING_CATEGORIES: PricingCategory[] = [
     ]
   },
   {
-    id: 'quranic-arabic',
-    title: 'Quranic Arabic',
-    subtitle: 'Direct Grammar, Roots & Vocabulary',
-    icon: 'language',
-    description: 'Deconstruct Arabic root words, high-frequency verbs, and syntax to comprehend the words of Allah directly.',
+    id: 'hifz-revision',
+    title: 'Hifz Revision Partner',
+    subtitle: 'Cementing Memorization & Retaining',
+    icon: 'school',
+    description: 'Dedicated revision program for Huffaz to cement their memorization, correct loose verses, and maintain a lifelong retaining cycle.',
     plans: [
       {
-        id: 'arabic-plan-1',
+        id: 'revision-plan-1',
         name: 'Plan 1',
-        price: 60,
+        price: 100,
+        originalPrice: 115,
         weeklyClasses: 2,
-        classDuration: '30 Minutes',
+        classDuration: '40-45 Minutes',
         classesPerMonth: 8,
         features: [
           'Free Trial Class included',
           '2 Days per Week',
-          '30 Minutes / Class',
+          '40-45 Minutes / Class',
           '08 Classes / Month',
-          'High-frequency Quranic vocabulary',
-          'Essential simplified grammar rules (Nahw & Sarf)',
-          'Direct word-for-word translation of common Surahs',
-          'Certified linguist & Arabic teacher',
-          'Flexible scheduling / makeup classes'
+          'Diagnosing weak verses (Mutashabihat)',
+          'Interactive custom revision routine',
+          'Certified Hifz Scholar revision partner',
+          'Flexible scheduling / makeup classes',
+          'Monthly revision evaluations'
         ]
       },
       {
-        id: 'arabic-plan-2',
+        id: 'revision-plan-2',
         name: 'Plan 2',
-        price: 100,
+        price: 110,
+        originalPrice: 130,
         weeklyClasses: 3,
-        classDuration: '30 Minutes',
+        classDuration: '40-45 Minutes',
         classesPerMonth: 12,
         isPopular: true,
         features: [
           'Free Trial Class included',
           '3 Days per Week',
-          '30 Minutes / Class',
+          '40-45 Minutes / Class',
           '12 Classes / Month',
-          'Complete direct translation of deep Quran chapters',
-          'Advanced sentence structure parsing',
-          'Comprehending daily Adhkar & Salah directly',
-          'Comprehensive vocabulary guidebooks',
-          'Priority makeup class support'
+          'Mutashabihat cross-reference exercises',
+          'Rigorous revision of past memorized Juzs',
+          'Certified senior Hifz teacher partner',
+          'Priority makeup class rescheduling',
+          'Sustainable lifelong Manzil building'
+        ]
+      },
+      {
+        id: 'revision-plan-3',
+        name: 'Plan 3',
+        price: 150,
+        originalPrice: 175,
+        weeklyClasses: 5,
+        classDuration: '1 Hour',
+        classesPerMonth: 20,
+        features: [
+          'Free Trial Class included',
+          '5 Days per Week',
+          '1hr / Class',
+          '20 Classes / Month',
+          'Elite Scholar revision checkpoints',
+          'Intensive memorization preservation program',
+          'Preparation for public prayers & Hifz exams',
+          'Counselor revision evaluations',
+          'Priority direct helpline support'
         ]
       }
     ]
@@ -282,11 +420,12 @@ const PRICING_CATEGORIES: PricingCategory[] = [
 ];
 
 const COURSE_INFO = {
-  nazra: { label: 'Quran Nazra & Qaida', multiplier: 1.0 },
-  memorization: { label: 'Quran Memorization (Hifz)', multiplier: 1.4 },
-  'islamic-essentials': { label: 'Islamic Essentials', multiplier: 1.2 },
-  'quranic-arabic': { label: 'Quranic Arabic', multiplier: 1.3 },
-  'revision-partner': { label: 'Revision Partner', multiplier: 1.2 },
+  'noorani-qaida': { label: 'Alqaida Almadania Basics', multiplier: 1.0 },
+  'quran-reading': { label: 'Quran Recitation & Reading', multiplier: 1.0 },
+  'tajweed': { label: 'Tajweed al Quran', multiplier: 1.0 },
+  'memorization': { label: 'Quran Memorization (Hifz)', multiplier: 1.4 },
+  'islamic-essentials': { label: 'Islamic Essentials & Duas', multiplier: 1.2 },
+  'hifz-revision': { label: 'Hifz Revision Partner', multiplier: 1.2 },
 };
 
 const WEEKDAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
@@ -307,11 +446,11 @@ export default function Pricing({
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   // Standard pricing tab state
-  const [activeTab, setActiveTab] = useState('nazra');
+  const [activeTab, setActiveTab] = useState('noorani-qaida');
   const [isCourseDropdownOpen, setIsCourseDropdownOpen] = useState(false);
 
   // Custom planner state
-  const [selectedCourse, setSelectedCourse] = useState('nazra');
+  const [selectedCourse, setSelectedCourse] = useState('noorani-qaida');
   const [customDays, setCustomDays] = useState(3);
   const [selectedDaysList, setSelectedDaysList] = useState<string[]>(['Monday', 'Wednesday', 'Friday']);
   const [customDuration, setCustomDuration] = useState('30 Minutes');
@@ -404,7 +543,7 @@ export default function Pricing({
   // Custom estimator dynamic pricing calculations
   const hasWeekend = selectedDaysList.includes('Saturday') || selectedDaysList.includes('Sunday');
   const weekendFee = hasWeekend ? 20 : 0;
-  const courseData = COURSE_INFO[selectedCourse as keyof typeof COURSE_INFO] || COURSE_INFO.nazra;
+  const courseData = COURSE_INFO[selectedCourse as keyof typeof COURSE_INFO] || COURSE_INFO['noorani-qaida'];
   const basePrice = (customDays === 1 ? 22 : customDays === 2 ? 35 : customDays === 3 ? 50 : customDays === 4 ? 62 : customDays === 5 ? 70 : customDays === 6 ? 82 : 92);
   const durationMultiplier = customDuration === '30 Minutes' ? 1.0 : customDuration === '45 Minutes' ? 1.35 : 1.6;
   const customPriceUsd = Math.round(basePrice * durationMultiplier * courseData.multiplier) + weekendFee;
@@ -441,10 +580,6 @@ export default function Pricing({
             transition={{ duration: 0.5 }}
             className="inline-flex items-center space-x-2 bg-sky-50 border border-sky-100 px-4 py-1.5 rounded-full"
           >
-            <Sparkles className="text-[#1C8DC8] w-4 h-4" />
-            <span className="text-[11px] font-bold text-[#146299] uppercase tracking-widest font-mono">
-              Premium 1-on-1 Classes
-            </span>
           </motion.div>
 
           <motion.h2 
@@ -468,8 +603,8 @@ export default function Pricing({
           </motion.p>
         </div>
 
-        {/* Currency & Region Selector */}
-        <div className="relative inline-block text-left mb-12 z-40">
+        {/* Currency & Region Selector for Desktop */}
+        <div className="hidden md:inline-block relative text-left mb-12 z-40">
           <div className="flex items-center space-x-2.5">
             <span className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center space-x-1.5">
               <Globe size={13} className="text-[#1C8DC8]" />
@@ -568,49 +703,109 @@ export default function Pricing({
           </div>
         </div>
 
-        {/* Categories Tab Selector for Desktop */}
-        <div className="hidden md:flex justify-center mb-12">
-          <div className="bg-[#F0F9FF]/90 backdrop-blur-md border border-[#3D8DC3]/20 p-1.5 rounded-full inline-flex space-x-1 shadow-md">
-            {PRICING_CATEGORIES.map((category) => {
-              const iconName = category.icon;
-              const isActive = activeTab === category.id;
-              return (
-                <button
-                  key={category.id}
-                  onClick={() => setActiveTab(category.id)}
-                  className={`flex items-center space-x-2 px-6 py-2.5 rounded-full font-display font-black text-[11px] uppercase tracking-wider transition-all duration-300 shrink-0 cursor-pointer ${
-                    isActive
-                      ? 'bg-gradient-to-r from-[#1C8DC8] via-[#3D8DC3] to-[#146299] text-white shadow-md scale-[1.01]'
-                      : 'text-[#0B3951] hover:text-[#1C8DC8] hover:bg-white/50'
-                  }`}
-                >
-                  <span className={`material-symbols-outlined text-[15px] leading-none select-none ${isActive ? 'text-white' : 'text-[#3D8DC3]'}`}>
-                    {iconName}
-                  </span>
-                  <span>{category.title}</span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Mobile Course Dropdown */}
-        <div className="block md:hidden mb-10 max-w-xs mx-auto text-left relative z-30">
-          <label className="block text-[10px] font-bold uppercase tracking-widest text-[#1C8DC8] font-mono mb-2">
-            Choose Course Program:
-          </label>
-          <div className="relative">
+        {/* Currency & Course Selector Row for Mobile */}
+        <div className="flex md:hidden items-center justify-center gap-2 max-w-sm mx-auto mb-8 px-4 z-40 relative">
+          {/* Dropdown 1: Region Selector */}
+          <div className="flex-1 relative">
             <button
-              onClick={() => setIsCourseDropdownOpen(!isCourseDropdownOpen)}
-              className="w-full bg-white text-[#0B3951] font-display font-black text-xs uppercase tracking-widest px-4.5 py-3.5 rounded-2xl border border-sky-100 hover:border-[#1C8DC8]/30 shadow-sm flex items-center justify-between transition-all duration-200 cursor-pointer"
+              onClick={() => {
+                setIsDropdownOpen(!isDropdownOpen);
+                setCountrySearchQuery('');
+                setIsCourseDropdownOpen(false);
+              }}
+              className="w-full h-11 bg-white hover:bg-slate-50 text-[#0B3951] font-display font-extrabold text-[10px] uppercase tracking-wider px-3.5 rounded-2xl border border-sky-100 flex items-center justify-between shadow-sm cursor-pointer"
             >
-              <div className="flex items-center space-x-2">
-                <span className="material-symbols-outlined text-[16px] leading-none select-none text-[#1C8DC8]">
-                  {activeCategory.icon}
-                </span>
-                <span>{activeCategory.title}</span>
-              </div>
-              <ChevronDown size={14} className={`text-slate-400 transition-transform duration-300 ${isCourseDropdownOpen ? 'rotate-180' : ''}`} />
+              <span className="flex items-center space-x-1.5 min-w-0">
+                <span className="text-sm shrink-0">{currentCountry.flag}</span>
+                <span className="truncate">{currentCountry.name}</span>
+              </span>
+              <ChevronDown size={12} className={`text-slate-400 shrink-0 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} />
+            </button>
+
+            <AnimatePresence>
+              {isDropdownOpen && (
+                <>
+                  <div className="fixed inset-0 z-40" onClick={() => {
+                    setIsDropdownOpen(false);
+                    setCountrySearchQuery('');
+                  }} />
+                  <motion.div
+                    initial={{ opacity: 0, y: 8, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 8, scale: 0.95 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute left-0 mt-2 w-60 bg-white border border-sky-100 rounded-2xl shadow-xl py-2 z-50 overflow-hidden text-left"
+                  >
+                    <div className="px-3 pb-2 pt-1 border-b border-sky-50 mb-1">
+                      <div className="relative">
+                        <input
+                          type="text"
+                          placeholder="Search country..."
+                          value={countrySearchQuery}
+                          onChange={(e) => setCountrySearchQuery(e.target.value)}
+                          className="w-full bg-[#F0F9FF] border border-[#E0F2FE] focus:border-[#1C8DC8] rounded-xl px-3 py-1.5 text-xs text-[#0B3951] outline-none transition-all placeholder:text-slate-400"
+                          onClick={(e) => e.stopPropagation()}
+                          autoFocus
+                        />
+                      </div>
+                    </div>
+
+                    <div className="max-h-52 overflow-y-auto">
+                      {(() => {
+                        const filtered = COUNTRIES.filter(c => 
+                          c.name.toLowerCase().includes(countrySearchQuery.toLowerCase()) || 
+                          c.code.toLowerCase().includes(countrySearchQuery.toLowerCase())
+                        );
+
+                        if (filtered.length === 0) {
+                          return (
+                            <div className="text-center py-4 text-xs text-slate-400 font-medium font-sans">
+                              No results found
+                            </div>
+                          );
+                        }
+
+                        return filtered.map((c) => (
+                          <button
+                            key={c.code}
+                            onClick={() => {
+                              setSelectedCountry(c.code);
+                              setIsDropdownOpen(false);
+                              setCountrySearchQuery('');
+                            }}
+                            className={`w-full text-left px-4 py-2.5 text-xs font-bold flex items-center space-x-3 transition-colors ${
+                              selectedCountry === c.code 
+                                ? 'bg-[#F0F9FF] text-[#1C8DC8]' 
+                                : 'text-slate-600 hover:bg-slate-50'
+                            }`}
+                          >
+                            <span className="text-sm">{c.flag}</span>
+                            <span className="flex-1 truncate">{c.name}</span>
+                            <span className="text-[10px] font-mono text-slate-400">{c.symbol}</span>
+                          </button>
+                        ));
+                      })()}
+                    </div>
+                  </motion.div>
+                </>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Dropdown 2: Course Selector */}
+          <div className="flex-1 relative">
+            <button
+              onClick={() => {
+                setIsCourseDropdownOpen(!isCourseDropdownOpen);
+                setIsDropdownOpen(false);
+              }}
+              className="w-full h-11 bg-white hover:bg-slate-50 text-[#0B3951] font-display font-extrabold text-[10px] uppercase tracking-wider px-3.5 rounded-2xl border border-sky-100 flex items-center justify-between shadow-sm cursor-pointer"
+            >
+              <span className="flex items-center space-x-1.5 min-w-0">
+                <span className="material-symbols-outlined text-[15px] text-[#1C8DC8] shrink-0">{activeCategory.icon}</span>
+                <span className="truncate">{activeCategory.title}</span>
+              </span>
+              <ChevronDown size={12} className={`text-slate-400 shrink-0 transition-transform duration-300 ${isCourseDropdownOpen ? 'rotate-180' : ''}`} />
             </button>
 
             <AnimatePresence>
@@ -622,7 +817,7 @@ export default function Pricing({
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 8, scale: 0.95 }}
                     transition={{ duration: 0.15 }}
-                    className="absolute left-0 right-0 mt-2 bg-white border border-sky-100 rounded-2xl shadow-xl py-2 z-50 overflow-hidden"
+                    className="absolute right-0 mt-2 w-52 bg-white border border-sky-100 rounded-2xl shadow-xl py-2 z-50 overflow-hidden text-left"
                   >
                     {PRICING_CATEGORIES.map((category) => {
                       const iconName = category.icon;
@@ -634,16 +829,16 @@ export default function Pricing({
                             setActiveTab(category.id);
                             setIsCourseDropdownOpen(false);
                           }}
-                          className={`w-full text-left px-4 py-3 text-xs font-bold flex items-center space-x-3 transition-colors ${
+                          className={`w-full text-left px-4 py-2.5 text-[11px] font-bold flex items-center space-x-2.5 transition-colors ${
                             isActive 
                               ? 'bg-[#F0F9FF] text-[#1C8DC8]' 
                               : 'text-slate-600 hover:bg-slate-50'
                           }`}
                         >
-                          <span className={`material-symbols-outlined text-[16px] leading-none select-none ${isActive ? 'text-[#1C8DC8]' : 'text-slate-400'}`}>
+                          <span className={`material-symbols-outlined text-[15px] leading-none select-none ${isActive ? 'text-[#1C8DC8]' : 'text-slate-400'}`}>
                             {iconName}
                           </span>
-                          <span className="flex-1">{category.title}</span>
+                          <span className="flex-1 truncate">{category.title}</span>
                         </button>
                       );
                     })}
@@ -652,6 +847,43 @@ export default function Pricing({
               )}
             </AnimatePresence>
           </div>
+        </div>
+
+        {/* Six Course Selector Cards (Desktop Only) */}
+        <div className="hidden md:grid grid-cols-3 gap-4 max-w-4xl mx-auto mb-14 px-4">
+          {PRICING_CATEGORIES.map((category) => {
+            const iconName = category.icon;
+            const isActive = activeTab === category.id;
+            return (
+              <button
+                key={category.id}
+                onClick={() => setActiveTab(category.id)}
+                className={`flex items-center space-x-2.5 sm:space-x-3.5 p-3 sm:p-4.5 rounded-2xl border text-left cursor-pointer transition-all duration-300 select-none ${
+                  isActive
+                    ? 'bg-gradient-to-br from-white to-[#F0F9FF] border-[#1C8DC8] shadow-[0_10px_20px_rgba(28,141,200,0.06)] scale-[1.01]'
+                    : 'bg-white/60 backdrop-blur-sm border-slate-200/60 text-slate-700 hover:bg-white hover:border-[#1C8DC8]/30 hover:shadow-[0_6px_15px_rgba(0,0,0,0.02)]'
+                }`}
+              >
+                <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
+                  isActive ? 'bg-[#1C8DC8]/10 text-[#1C8DC8]' : 'bg-slate-100 text-slate-500'
+                }`}>
+                  <span className="material-symbols-outlined text-[18px] sm:text-[22px] leading-none select-none">
+                    {iconName}
+                  </span>
+                </div>
+                <div className="min-w-0">
+                  <h4 className={`font-display font-[900] text-[9.5px] sm:text-xs uppercase tracking-wider truncate transition-colors ${
+                    isActive ? 'text-[#0B3951]' : 'text-slate-600'
+                  }`}>
+                    {category.title}
+                  </h4>
+                  <p className="text-[8px] sm:text-[9.5px] text-slate-400 font-medium truncate mt-0.5 sm:mt-1 leading-none">
+                    {category.subtitle}
+                  </p>
+                </div>
+              </button>
+            );
+          })}
         </div>
 
         {/* Category Intro Description */}
