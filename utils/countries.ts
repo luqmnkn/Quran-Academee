@@ -1,4 +1,4 @@
-// util/countries.ts
+import countries from 'world-countries';
 
 export interface Country {
   name: string;
@@ -7,13 +7,15 @@ export interface Country {
   flag: string;
 }
 
-export const ALL_COUNTRIES: Country[] = [
-  { name: 'United States', code: 'US', dial: '+1', flag: '🇺🇸' },
-  { name: 'United Kingdom', code: 'GB', dial: '+44', flag: '🇬🇧' },
-  { name: 'Canada', code: 'CA', dial: '+1', flag: '🇨🇦' },
-  { name: 'Australia', code: 'AU', dial: '+61', flag: '🇦🇺' },
-  { name: 'Pakistan', code: 'PK', dial: '+92', flag: '🇵🇰' },
-  { name: 'Saudi Arabia', code: 'SA', dial: '+966', flag: '🇸🇦' },
-  { name: 'United Arab Emirates', code: 'AE', dial: '+971', flag: '🇦🇪' },
-  { name: 'Qatar', code: 'QA', dial: '+974', flag: '🇶🇦' },
-];
+export const ALL_COUNTRIES: Country[] = countries.map((c: any) => {
+  const root = c.idd?.root || '';
+  const suffix = (c.idd?.suffixes && c.idd.suffixes.length > 0) ? c.idd.suffixes[0] : '';
+  const dial = root + suffix;
+  const cleanDial = dial.startsWith('+') ? dial : dial ? `+${dial}` : '';
+  return {
+    name: c.name.common,
+    code: c.cca2,
+    dial: cleanDial || '+1',
+    flag: c.flag
+  };
+}).sort((a, b) => a.name.localeCompare(b.name));

@@ -14,24 +14,21 @@ import FAQSection from '../components/FAQSection';
 export default function HomePage() {
   const router = useRouter();
   const [selectedCourseSelection, setSelectedCourseSelection] = useState('');
-  const [isTrialModalOpen, setIsTrialModalOpen] = useState(false);
 
-  // Handle Course Selection scrolling directly to contact section
-  const handleCourseSelection = (courseName: string) => {
-    setSelectedCourseSelection(courseName);
-    
-    const targetElement = document.querySelector('#contact');
-    if (targetElement) {
-      const headerOffset = 80;
-      const elementPosition = targetElement.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      });
+  // Handle Course Selection by opening the Free Trial Modal
+  const handleOpenTrialModal = (planOrCourseName?: string) => {
+    const params = new URLSearchParams(window.location.search);
+    params.set('trial', 'true');
+    if (planOrCourseName) {
+      params.set('plan', planOrCourseName);
     } else {
-      router.push('/#contact');
+      params.delete('plan');
     }
+    router.push(`${window.location.pathname}?${params.toString()}`, { scroll: false });
+  };
+
+  const handleCourseSelection = (courseName: string) => {
+    handleOpenTrialModal(courseName);
   };
 
   const handleLeadSubmitInHero = (data: any) => {
@@ -41,16 +38,16 @@ export default function HomePage() {
   return (
     <>
       <Hero
-        onOpenTrialModal={() => setIsTrialModalOpen(true)}
+        onOpenTrialModal={() => handleOpenTrialModal()}
         onSubmitInquiry={handleLeadSubmitInHero}
       />
 
       <Services
         onSelectCourse={handleCourseSelection}
-        onOpenTrialModal={() => setIsTrialModalOpen(true)}
+        onOpenTrialModal={() => handleOpenTrialModal()}
       />
 
-      <About onOpenTrialModal={() => setIsTrialModalOpen(true)} />
+      <About onOpenTrialModal={() => handleOpenTrialModal()} />
 
       <WhyChooseUs />
 

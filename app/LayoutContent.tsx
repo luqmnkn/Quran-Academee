@@ -18,6 +18,7 @@ export default function LayoutContent({
   const searchParams = useSearchParams();
   const [isTrialModalOpen, setIsTrialModalOpen] = useState(false);
   const [selectedCourseSelection, setSelectedCourseSelection] = useState('');
+  const [selectedDetailsSelection, setSelectedDetailsSelection] = useState('');
 
   const isAdminPage = pathname === '/admin';
 
@@ -45,10 +46,14 @@ export default function LayoutContent({
   useEffect(() => {
     const trial = searchParams.get('trial');
     const plan = searchParams.get('plan');
+    const details = searchParams.get('details');
     if (trial === 'true') {
       setIsTrialModalOpen(true);
       if (plan) {
         setSelectedCourseSelection(plan);
+      }
+      if (details) {
+        setSelectedDetailsSelection(details);
       }
     }
   }, [searchParams]);
@@ -69,47 +74,39 @@ export default function LayoutContent({
       {/* Floating WhatsApp Button */}
       {!isAdminPage && <WhatsAppButton />}
 
-      {/* Free Trial Popup Modal */}
+      {/* Free Trial Popup Modal (100vh Slide-Over) */}
       {isTrialModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900/60 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-white rounded-2xl max-w-lg w-full shadow-2xl overflow-hidden relative border border-gray-100 animate-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-50 flex justify-end bg-gray-900/60 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="bg-white w-full max-w-lg h-screen shadow-2xl overflow-y-auto relative flex flex-col justify-start animate-in slide-in-from-right duration-300 border-l border-gray-100 p-6 sm:p-8">
             
-            {/* Modal Banner Header */}
-            <div className="bg-[#0B3951] text-white p-5 pr-12 relative overflow-hidden text-left">
-              <div className="absolute top-0 right-0 w-24 h-24 bg-[#1C8DC8]/10 rounded-full blur-xl" />
-              
-              <div className="flex items-center space-x-2.5">
-                <Calendar className="text-[#1C8DC8] w-5 h-5 shrink-0" />
-                <h3 className="font-display font-extrabold text-lg text-white">
-                  Schedule Free 3-Day Trial
-                </h3>
-              </div>
-              <p className="text-xs text-slate-300 mt-1.5 leading-relaxed">
-                Send your class request securely. No charges are billed for evaluation sessions.
-              </p>
-
-              <button
-                onClick={() => {
-                  setIsTrialModalOpen(false);
-                  setSelectedCourseSelection('');
-                }}
-                className="absolute top-4 right-4 text-slate-300 hover:text-white p-1 rounded-lg hover:bg-white/10 transition-colors"
-                aria-label="Close scheduling modal"
-              >
-                <X size={20} />
-              </button>
-            </div>
+            {/* Floating Close Button */}
+            <button
+              onClick={() => {
+                setIsTrialModalOpen(false);
+                setSelectedCourseSelection('');
+                setSelectedDetailsSelection('');
+              }}
+              className="absolute top-4 right-4 z-20 text-slate-400 hover:text-slate-600 p-1.5 rounded-lg hover:bg-slate-100 transition-colors cursor-pointer"
+              aria-label="Close scheduling modal"
+            >
+              <X size={22} />
+            </button>
 
             {/* Modal Body */}
-            <div className="p-6 max-h-[75vh] overflow-y-auto">
+            <div className="mt-8 flex-1">
               <InquiryForm
                 prefilledCourse={selectedCourseSelection}
-                onClearPrefill={() => setSelectedCourseSelection('')}
+                prefilledDetails={selectedDetailsSelection}
+                onClearPrefill={() => {
+                  setSelectedCourseSelection('');
+                  setSelectedDetailsSelection('');
+                }}
                 isModalMode={true}
                 onSubmitSuccess={() => {
                   setTimeout(() => {
                     setIsTrialModalOpen(false);
                     setSelectedCourseSelection('');
+                    setSelectedDetailsSelection('');
                   }, 4000);
                 }}
               />

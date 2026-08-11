@@ -24,7 +24,7 @@ export default function FAQSection() {
         
         {/* Header content with luxury system alignment */}
         <div className="text-center max-w-2xl mx-auto mb-20 space-y-5">
-          <div className="inline-flex items-center space-x-2 bg-[#F0F9FF] border border-[#E0F2FE] px-4 py-2 rounded-full shadow-sm">
+          <div className="inline-flex items-center space-x-2 bg-[#F0F9FF] border border-[#E0F2FE] px-4 py-2 shadow-sm">
             <HelpCircle size={14} className="text-[#1C8DC8]" />
             <span className="text-xs font-bold text-[#146299] uppercase tracking-widest font-mono">
               Got Questions?

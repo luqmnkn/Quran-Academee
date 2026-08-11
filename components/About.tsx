@@ -84,42 +84,41 @@ export default function About({ onOpenTrialModal }: AboutProps) {
         {/* SPLIT SECTION LAYOUT: Mission & Visual Presentation */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-12 items-center mb-28 text-left">
           
-          {/* Left Column: Learning visual display */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.98, x: -20 }}
-            whileInView={{ opacity: 1, scale: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5, ease: 'easeOut' }}
-            className="lg:col-span-5 relative"
-          >
-            <div className="absolute -top-6 -left-6 w-80 h-80 bg-[#1C8DC8]/5 rounded-full blur-3xl pointer-events-none"></div>
-            
-            {/* Multi borders */}
-            <div className="relative rounded-[32px] overflow-hidden border border-[#E0F2FE] bg-white p-3 shadow-[0_22px_50px_rgba(28,141,200,0.06)]">
-              <Image
-                src="/images/learning_session_1780674957111.png"
-                alt="Student learning session with certified female tutor represented by Quran Academee classes"
-                width={600}
-                height={400}
-                priority
-                className="w-full h-auto rounded-[24px] object-cover"
-              />
-              
-              {/* Overlaid Badge */}
-              <div className="absolute bottom-8 left-8 right-8 bg-[#0B3951]/95 text-white p-5 rounded-2xl border border-white/10 backdrop-blur-md flex items-center justify-between shadow-2xl">
-                <div className="flex items-center space-x-3.5">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-[#1C8DC8] to-[#3D8DC3] text-white flex items-center justify-center font-display font-extrabold shadow shrink-0">
-                    1:1
-                  </div>
-                  <div>
-                    <h5 className="font-display font-extrabold text-sm text-white leading-tight">Live Personalized Space</h5>
-                    <p className="text-[11px] text-[#CBE8F4] mt-1 leading-none animate-pulse">Dedicated interactive atmosphere</p>
-                  </div>
-                </div>
-                <Users size={20} className="text-[#3D8DC3]" />
-              </div>
-            </div>
-          </motion.div>
+{/* Left Column: Learning visual display */}
+<motion.div 
+  initial={{ opacity: 0, scale: 0.98, x: -20 }}
+  whileInView={{ opacity: 1, scale: 1, x: 0 }}
+  viewport={{ once: true, margin: "-100px" }}
+  transition={{ duration: 0.5, ease: 'easeOut' }}
+  className="lg:col-span-5 relative"
+>
+  <div className="absolute -top-6 -left-6 w-80 h-80 bg-[#1C8DC8]/5  blur-3xl pointer-events-none"></div>
+  
+  {/* Multi borders */}
+  <div className="">
+    
+    {/* Mobile Image (Hidden on desktop md+) */}
+    <Image
+      src="/images/navbarlogo.png"
+      alt="Student learning session with certified female tutor represented by Quran Academee classes"
+      width={600}
+      height={400}
+      priority
+      className="block md:hidden w-full h-auto object-cover"
+    />
+
+    {/* Desktop Image (Hidden on mobile, visible on md+) */}
+    <Image
+      src="/images/footerlogo.png"
+      alt="Student learning session with certified female tutor represented by Quran Academee classes"
+      width={600}
+      height={400}
+      priority
+      className="hidden md:block w-full h-auto rounded-[24px] object-cover"
+    />
+    
+  </div>
+</motion.div>
 
           {/* Right Column: Mission */}
           <motion.div 
@@ -166,54 +165,73 @@ export default function About({ onOpenTrialModal }: AboutProps) {
 
         </div>
 
-        {/* 3 STEPS ONBOARDING */}
-        <div className="pt-10 sm:pt-20 border-t border-[#E0F2FE] text-center">
-          <div className="max-w-2xl mx-auto mb-8 sm:mb-16 space-y-2 sm:space-y-4">
-            <span className="text-xs font-mono font-black uppercase tracking-widest text-[#146299]">
-              The Simplest Process
-            </span>
-            <h3 className="font-display font-[900] text-2xl sm:text-[45px] text-[#0B3951] tracking-[-0.04em] leading-tight">
-              Begin Your Path in <span className="font-allura text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] via-[#146299] to-[#0B3951]">3 Elegant Steps</span>
-            </h3>
-          </div>
+{/* 3 STEPS ONBOARDING */}
+<div className="pt-8 sm:pt-20 border-t border-[#E0F2FE] text-center overflow-hidden">
+  <div className="max-w-2xl mx-auto mb-6 sm:mb-16 px-4 space-y-2 sm:space-y-4">
+    <span className="text-xs font-mono font-black uppercase tracking-widest text-[#146299]">
+      The Simplest Process
+    </span>
+    <h3 className="font-display font-[900] text-2xl sm:text-[45px] text-[#0B3951] tracking-[-0.04em] leading-tight">
+      Begin Your Path in <span className="font-allura text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] via-[#146299] to-[#0B3951]">3 Elegant Steps</span>
+    </h3>
+  </div>
 
-          {/* Symmetrical Grid/Flex */}
-          <motion.div 
-            className="flex flex-row overflow-x-auto sm:grid sm:grid-cols-3 gap-3 sm:gap-6 lg:gap-8 relative z-10 scrollbar-none snap-x snap-mandatory px-4 sm:px-0 -mx-4 sm:mx-0 pb-2 sm:pb-0"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-          >
-            <div className="hidden sm:block absolute top-[55px] left-[15%] right-[15%] h-[2px] bg-gradient-to-r from-[#F0F9FF] via-[#1C8DC8]/20 to-[#F0F9FF] -z-10"></div>
+  {/* MOBILE UI: 100vw Themed Connected Blocks */}
+  <div className="block sm:hidden relative w-screen left-1/2 -translate-x-1/2 px-3 py-4">
+    {/* Colored Gradient Connecting Line */}
+    <div className="absolute top-1/2 left-[12%] right-[12%] h-[3px] bg-gradient-to-r from-[#1C8DC8] via-[#146299] to-[#0B3951] -translate-y-1/2 -z-0 rounded-full opacity-60" />
 
-            {steps.map((step, idx) => (
-              <motion.div
-                key={idx}
-                variants={childVariants}
-                className="h-full min-w-[210px] sm:min-w-0 flex-1 snap-center"
-              >
-                {renderCardContent(step)}
-              </motion.div>
-            ))}
-          </motion.div>
-
-          <motion.div 
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-            className="mt-8 sm:mt-14"
-          >
-            <button
-              onClick={onOpenTrialModal}
-              className="px-8 sm:px-10 py-4 sm:py-5 font-display font-black text-xs uppercase tracking-widest text-white bg-gradient-to-r from-[#1C8DC8] to-[#3D8DC3] hover:from-[#146299] hover:to-[#1C8DC8] hover:scale-[1.02] border-0 transition-all rounded-xl shadow-[0_12px_36px_rgba(28,141,200,0.2)] cursor-pointer inline-flex items-center space-x-2.5"
-            >
-              <span>Schedule 3-Day Free Trial Now</span>
-            </button>
-          </motion.div>
+    {/* 3 Connected Pill Containers */}
+    <div className="relative z-10 flex items-center justify-between gap-2 w-full px-1">
+      {steps.map((step, idx) => (
+        <div 
+          key={idx}
+          className="flex-1 bg-gradient-to-b from-white to-[#F0F9FF] border border-[#E0F2FE] rounded-2xl p-2.5 min-h-[96px] flex flex-col items-center justify-center text-center shadow-[0_8px_20px_rgba(28,141,200,0.08)] ring-1 ring-[#1C8DC8]/10"
+        >
+          <h4 className="font-display font-bold text-xs text-[#0B3951] leading-tight mb-1">
+            {step.title}
+          </h4>
+          <p className="text-[10px] font-medium text-[#146299]/90 leading-tight line-clamp-2">
+            {step.desc}
+          </p>
         </div>
+      ))}
+    </div>
+  </div>
 
+  {/* DESKTOP UI: Unchanged Grid Structure */}
+  <motion.div 
+    className="hidden sm:grid max-w-5xl mx-auto px-6 sm:grid-cols-3 gap-6 lg:gap-8 relative z-10"
+    variants={containerVariants}
+    initial="hidden"
+    whileInView="visible"
+    viewport={{ once: true, margin: "-100px" }}
+  >
+    <div className="absolute top-[55px] left-[15%] right-[15%] h-[2px] bg-gradient-to-r from-[#F0F9FF] via-[#1C8DC8]/20 to-[#F0F9FF] -z-10" />
+
+    {steps.map((step, idx) => (
+      <motion.div key={idx} variants={childVariants} className="h-full flex-1">
+        {renderCardContent(step)}
+      </motion.div>
+    ))}
+  </motion.div>
+
+  {/* CTA Button */}
+  <motion.div 
+    initial={{ opacity: 0, y: 15 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ delay: 0.3 }}
+    className="mt-6 sm:mt-14 px-4"
+  >
+    <button
+      onClick={onOpenTrialModal}
+      className="w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 font-display text-xs uppercase tracking-widest text-white bg-gradient-to-r from-[#1C8DC8] to-[#3D8DC3] hover:from-[#146299] hover:to-[#1C8DC8] transition-all rounded-xl shadow-[0_12px_36px_rgba(28,141,200,0.2)] cursor-pointer inline-flex items-center justify-center space-x-2.5"
+    >
+      <span>Schedule 3-Day Free Trial Now</span>
+    </button>
+  </motion.div>
+</div>
       </div>
     </section>
   );

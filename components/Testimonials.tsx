@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { TESTIMONIALS } from '../data';
-import { Star, Quote, Play, Video, X } from 'lucide-react';
+import { Star, Quote, Play, Video } from 'lucide-react';
 import PremiumCarousel from './PremiumCarousel';
 
 interface VideoTestimonial {
@@ -12,6 +12,7 @@ interface VideoTestimonial {
   duration: string;
   snippet: string;
   thumbnailGradient: string;
+  videoUrl?: string; // Optional: Add video source URLs here
 }
 
 const VIDEO_TESTIMONIALS: VideoTestimonial[] = [
@@ -21,8 +22,9 @@ const VIDEO_TESTIMONIALS: VideoTestimonial[] = [
     age: '9 Years',
     courseName: 'Noorani Qaida Basics',
     duration: '3 Months with Quran Academee',
-    snippet: 'Watch Zayd pronouncing complex Arabic letters perfectly with proper Tajweed articulation points (Makharij)!',
-    thumbnailGradient: 'from-emerald-500/20 via-[#1C8DC8]/25 to-[#0B3951]/20'
+    snippet: 'Zayd pronouncing complex Arabic letters perfectly with Tajweed.',
+    thumbnailGradient: 'from-emerald-500/20 via-[#1C8DC8]/25 to-[#0B3951]/20',
+    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-child-reading-a-book-in-bed-41551-large.mp4'
   },
   {
     id: 'v2',
@@ -30,8 +32,9 @@ const VIDEO_TESTIMONIALS: VideoTestimonial[] = [
     age: '11 Years',
     courseName: 'Quran Memorization (Hifz)',
     duration: '6 Months with Quran Academee',
-    snippet: 'Watch Amira reciting her daily Sabaq (new memorization) with beautiful melodious tone and rhythmic rules.',
-    thumbnailGradient: 'from-[#1C8DC8]/20 via-[#3D8DC3]/25 to-[#0B3951]/20'
+    snippet: 'Amira reciting her daily Sabaq with melodious tone & rhythm.',
+    thumbnailGradient: 'from-[#1C8DC8]/20 via-[#3D8DC3]/25 to-[#0B3951]/20',
+    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-girl-studying-with-a-laptop-42938-large.mp4'
   },
   {
     id: 'v3',
@@ -39,8 +42,9 @@ const VIDEO_TESTIMONIALS: VideoTestimonial[] = [
     age: 'Brothers',
     courseName: 'Tajweed al Quran',
     duration: '1 Year with Quran Academee',
-    snippet: 'How two brothers interact playfully and constructively with their Arab tutor during live 1-on-1 Quran sessions.',
-    thumbnailGradient: 'from-amber-500/10 via-[#1C8DC8]/25 to-[#146299]/20'
+    snippet: 'Brothers interacting playfully with their Arab tutor in live session.',
+    thumbnailGradient: 'from-amber-500/10 via-[#1C8DC8]/25 to-[#146299]/20',
+    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-children-playing-together-in-a-park-41549-large.mp4'
   },
   {
     id: 'v4',
@@ -48,62 +52,127 @@ const VIDEO_TESTIMONIALS: VideoTestimonial[] = [
     age: 'Adult Student',
     courseName: 'Fluent Recitation',
     duration: '5 Months with Quran Academee',
-    snippet: 'Reviewing adult Tajweed classes and explaining how flexible schedules accommodated his hospital shift changes.',
-    thumbnailGradient: 'from-indigo-500/15 via-[#1C8DC8]/25 to-[#0B3951]/20'
+    snippet: 'Adult Tajweed review and flexible schedule feedback.',
+    thumbnailGradient: 'from-indigo-500/15 via-[#1C8DC8]/25 to-[#0B3951]/20',
+    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-man-holding-a-book-and-reading-41546-large.mp4'
   }
 ];
 
+// Component for individual inline-playing video card
+function VideoCardItem({ video }: { video: VideoTestimonial }) {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  // Stop video when scrolled out of view
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting && isPlaying) {
+            if (videoRef.current) {
+              videoRef.current.pause();
+            }
+            setIsPlaying(false);
+          }
+        });
+      },
+      { threshold: 0.6 } // Auto-stop when 60% of card is scrolled out
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [isPlaying]);
+
+  const handleTogglePlay = () => {
+    if (!videoRef.current) return;
+
+    if (isPlaying) {
+      videoRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      videoRef.current.play();
+      setIsPlaying(true);
+    }
+  };
+
+  return (
+    <motion.div
+      ref={containerRef}
+      whileHover={{ y: -6 }}
+      onClick={handleTogglePlay}
+      className="shrink-0 snap-center w-[72vw] sm:w-auto aspect-[9/14] sm:aspect-[3/4] bg-gradient-to-tr rounded-[28px] border-2 border-[#0B3951]/10 overflow-hidden relative group cursor-pointer shadow-lg p-3 flex flex-col justify-between select-none"
+      style={{
+        backgroundImage: `linear-gradient(to top right, var(--tw-gradient-stops))`
+      }}
+    >
+      {/* HTML5 Video Element inside Card Frame */}
+      {video.videoUrl && (
+        <video
+          ref={videoRef}
+          src={video.videoUrl}
+          playsInline
+          loop
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
+            isPlaying ? 'opacity-100 z-0' : 'opacity-0 -z-10'
+          }`}
+        />
+      )}
+
+      {/* Fallback Cover Thumbnail */}
+      <div className={`absolute inset-0 bg-gradient-to-tr ${video.thumbnailGradient} -z-10`} />
+      <div className="absolute inset-0 opacity-[0.06] bg-[radial-gradient(#1c8dc8_1.5px,transparent_1.5px)] [background-size:16px_16px] -z-10" />
+
+      {/* Center Play/Pause Overlay Icon */}
+      <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center transition-opacity duration-300 ${
+        isPlaying ? 'opacity-0 group-hover:opacity-100' : 'opacity-100'
+      }`}>
+        <div className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center group-hover:scale-110 group-hover:bg-white/40 transition-all duration-300 shadow-xl">
+          <Play className={`w-6 h-6 text-white fill-current ${isPlaying ? '' : 'ml-1'}`} />
+        </div>
+      </div>
+
+      <div />
+
+      {/* Bottom Information Bar */}
+      <div className="bg-white/80 backdrop-blur-md rounded-2xl border border-white/60 p-3 text-left shadow-sm relative z-10">
+        <h4 className="font-display font-extrabold text-xs text-[#0B3951] truncate mb-0.5">
+          {video.studentName}
+        </h4>
+        <p className="text-[10px] text-slate-700 leading-snug font-medium line-clamp-2">
+          {video.snippet}
+        </p>
+      </div>
+    </motion.div>
+  );
+}
+
 export default function Testimonials() {
   const [activeTab, setActiveTab] = useState<'all' | 'Parent' | 'Adult Student'>('all');
-  const [activeVideo, setActiveVideo] = useState<VideoTestimonial | null>(null);
 
   const filtered = activeTab === 'all'
     ? TESTIMONIALS
     : TESTIMONIALS.filter(t => t.role === activeTab);
 
-  const closeVideoModal = useCallback(() => {
-    setActiveVideo(null);
-  }, []);
-
-  // Lock background scroll when video modal is open
-  useEffect(() => {
-    if (activeVideo) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') closeVideoModal();
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => {
-      document.body.style.overflow = '';
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [activeVideo, closeVideoModal]);
-
   const renderCardContent = (testimonial: typeof TESTIMONIALS[0]) => (
     <div className="bg-white rounded-2xl border border-[#E0F2FE] p-6 sm:p-7 md:p-8 flex flex-col justify-between h-full relative overflow-hidden group hover:border-[#1C8DC8]/40 hover:shadow-[0_15px_35px_rgba(28,141,200,0.06)] transition-all duration-300 text-left min-h-[260px]">
-      {/* Decorative styling */}
       <Quote className="absolute -bottom-6 -right-6 w-24 h-24 text-[#1C8DC8]/5 select-none pointer-events-none" />
 
       <div className="space-y-3 relative z-10">
-        {/* Five Star rating */}
         <div className="flex items-center space-x-0.5">
           {[...Array(testimonial.rating)].map((_, i) => (
             <Star key={i} size={13} className="text-[#1C8DC8] fill-[#1C8DC8]" />
           ))}
         </div>
 
-        {/* Feedback block */}
         <p className="text-xs sm:text-sm text-slate-700 leading-relaxed italic font-medium">
           "{testimonial.feedback}"
         </p>
       </div>
 
-      {/* Profile info block */}
       <div className="flex items-center space-x-3 pt-4 border-t border-[#E0F2FE] relative z-10 mt-4">
         <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0B3951] to-[#1C8DC8] text-white flex items-center justify-center font-display font-black text-xs select-none shadow shrink-0">
           {testimonial.avatarInitials}
@@ -128,7 +197,7 @@ export default function Testimonials() {
         
         {/* Header display segment */}
         <div className="text-center max-w-2xl mx-auto mb-16 space-y-6">
-          <div className="inline-flex items-center space-x-2 bg-[#F0F9FF] border border-[#E0F2FE] px-4 py-2 rounded-full shadow-sm">
+          <div className="inline-flex items-center space-x-2 bg-[#F0F9FF] border border-[#E0F2FE] px-4 py-2 shadow-sm">
             <Quote size={14} className="text-[#1C8DC8]" />
             <span className="text-xs font-bold text-[#146299] uppercase tracking-widest font-mono">
               Success Stories
@@ -193,7 +262,7 @@ export default function Testimonials() {
         {/* Video Reviews Subsection */}
         <div className="mt-24 pt-16 border-t border-[#E0F2FE] relative z-10">
           <div className="text-center max-w-2xl mx-auto mb-14 space-y-4">
-            <div className="inline-flex items-center space-x-2 bg-[#F0F9FF] border border-[#E0F2FE] px-3.5 py-1.5 rounded-full shadow-sm">
+            <div className="inline-flex items-center space-x-2 bg-[#F0F9FF] border border-[#E0F2FE] px-3.5 py-1.5 shadow-sm">
               <Video size={13} className="text-[#1C8DC8]" />
               <span className="text-[10px] font-bold text-[#146299] uppercase tracking-widest font-mono">
                 Student Recitation Videos
@@ -207,109 +276,15 @@ export default function Testimonials() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+          {/* PORTRAIT VIDEO CARDS CONTAINER */}
+          <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-none max-w-6xl mx-auto px-4 sm:px-0 -mx-4 sm:mx-0 pb-4">
             {VIDEO_TESTIMONIALS.map((video) => (
-              <motion.div
-                key={video.id}
-                whileHover={{ y: -6 }}
-                onClick={() => setActiveVideo(video)}
-                className="bg-white rounded-3xl border border-[#E0F2FE] overflow-hidden flex flex-col justify-between h-[310px] transition-all duration-300 hover:shadow-[0_20px_40px_rgba(28,141,200,0.12)] hover:border-[#1C8DC8]/40 relative group text-left cursor-pointer"
-              >
-                {/* Upper thumbnail with play overlay */}
-                <div className={`h-40 relative bg-gradient-to-tr ${video.thumbnailGradient} flex items-center justify-center overflow-hidden`}>
-                  <div className="absolute inset-0 opacity-[0.04] bg-[radial-gradient(#1c8dc8_1.5px,transparent_1.5px)] [background-size:16px_16px]" />
-                  
-                  {/* Glowing dynamic background pulse */}
-                  <div className="absolute w-24 h-24 bg-[#1C8DC8]/10 rounded-full blur-xl group-hover:bg-[#1C8DC8]/20 transition-all duration-500" />
-
-                  {/* Play Button */}
-                  <div className="w-12 h-12 rounded-full bg-white/30 backdrop-blur-md border border-white/40 flex items-center justify-center group-hover:scale-110 group-hover:bg-white/50 transition-all duration-300 shadow-lg relative z-10">
-                    <Play className="w-5 h-5 text-white fill-current ml-0.5" />
-                  </div>
-
-                  {/* Course tag badge */}
-                  <span className="absolute top-3 left-3 bg-[#0B3951]/80 text-white text-[8px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full shadow-sm backdrop-blur-sm">
-                    {video.courseName}
-                  </span>
-                </div>
-
-                {/* Lower details segment */}
-                <div className="p-4 flex-1 flex flex-col justify-between bg-gradient-to-br from-white via-white to-[#F0F9FF]/30 relative">
-                  <div>
-                    <div className="flex items-center justify-between mb-1">
-                      <h4 className="font-display font-[800] text-xs text-[#0B3951] tracking-wide">
-                        {video.studentName}
-                      </h4>
-                      <span className="text-[8px] font-extrabold uppercase text-[#1C8DC8] bg-[#F0F9FF] px-1.5 py-0.5 rounded border border-[#E0F2FE]">
-                        {video.age}
-                      </span>
-                    </div>
-                    <p className="text-[9px] font-mono font-bold text-slate-500 uppercase tracking-wider mb-2">
-                      {video.duration}
-                    </p>
-                    <p className="text-[10.5px] text-slate-600 leading-relaxed font-medium line-clamp-3">
-                      "{video.snippet}"
-                    </p>
-                  </div>
-                  
-                  <div className="text-[9px] font-extrabold text-[#1C8DC8] uppercase tracking-wider flex items-center space-x-1 mt-2 group-hover:translate-x-1 transition-transform">
-                    <span>Play Recording</span>
-                    <span>➔</span>
-                  </div>
-                </div>
-              </motion.div>
+              <VideoCardItem key={video.id} video={video} />
             ))}
           </div>
         </div>
 
       </div>
-
-      {/* Video Player Modal */}
-      <AnimatePresence>
-        {activeVideo && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={closeVideoModal}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md"
-          >
-            <motion.div
-              initial={{ scale: 0.9, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.9, y: 20 }}
-              onClick={(e) => e.stopPropagation()}
-              className="bg-[#0B3951] text-white rounded-3xl max-w-xl w-full p-6 relative overflow-hidden border border-[#1C8DC8]/30 shadow-2xl"
-            >
-              <button
-                onClick={closeVideoModal}
-                className="absolute top-4 right-4 text-white/70 hover:text-white p-2 rounded-full hover:bg-white/10 transition-colors cursor-pointer z-20"
-              >
-                <X size={20} />
-              </button>
-
-              <div className="relative aspect-video rounded-2xl bg-black/40 border border-white/10 flex flex-col items-center justify-center mb-5 overflow-hidden">
-                <Play className="w-12 h-12 text-[#1C8DC8] fill-current animate-pulse mb-3" />
-                <p className="text-xs font-mono font-bold uppercase text-[#E0F2FE]/70 tracking-widest">
-                  Sample Recording Preview
-                </p>
-              </div>
-
-              <div>
-                <span className="text-[9px] font-mono font-bold uppercase text-[#1C8DC8] bg-[#1C8DC8]/20 px-2.5 py-1 rounded-full border border-[#1C8DC8]/30">
-                  {activeVideo.courseName}
-                </span>
-                <h3 className="font-display font-[900] text-xl text-white mt-3">
-                  {activeVideo.studentName} ({activeVideo.age})
-                </h3>
-                <p className="text-xs text-[#E0F2FE]/80 mt-1">
-                  {activeVideo.snippet}
-                </p>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </section>
   );
 }

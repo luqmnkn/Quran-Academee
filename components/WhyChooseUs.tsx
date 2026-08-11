@@ -8,21 +8,37 @@ import { Compass, Sparkles, ShieldCheck } from 'lucide-react';
 // Type safety for array item
 type FeatureItem = (typeof WHY_CHOOSE_US)[number];
 
+const GOOGLE_ICON_MAP: Record<string, string> = {
+  shieldcheck: 'verified',
+  usercheck: 'support_agent',
+  calendardays: 'calendar_month',
+  users: 'groups',
+  checkcircle: 'stars',
+  graduationcap: 'school'
+};
+
+const getGoogleIcon = (iconName: string) => {
+  const normalized = iconName.toLowerCase().replace(/[-_]/g, '');
+  return GOOGLE_ICON_MAP[normalized] || 'verified';
+};
+
 // Sub-component for individual cards
 const WhyChooseUsCard = ({ feature }: { feature: FeatureItem }) => {
   return (
-    <div className="bg-gradient-to-br from-white via-white to-[#F0F9FF] rounded-[24px] border border-[#E0F2FE] hover:border-[#1C8DC8]/50 p-6 sm:p-7 md:p-8 space-y-4 transition-all duration-300 shadow-[0_12px_32px_rgba(28,141,200,0.02)] hover:shadow-[0_24px_50px_rgba(28,141,200,0.12)] hover:-translate-y-1.5 flex flex-col justify-between items-start h-full relative overflow-hidden group text-left min-h-[280px]">
+    <div className="bg-gradient-to-br from-white via-white to-[#F0F9FF] rounded-[24px] border border-[#E0F2FE] hover:border-[#1C8DC8]/50 p-6 sm:p-7 md:p-8 space-y-4 transition-all duration-300 shadow-[0_12px_32px_rgba(28,141,200,0.02)] hover:shadow-[0_24px_50px_rgba(28,141,200,0.12)] hover:-translate-y-1.5 flex flex-col justify-between items-center h-full relative overflow-hidden group text-center min-h-[280px]">
       {/* Background Glow */}
       <div className="absolute -top-16 -right-16 w-36 h-36 bg-gradient-to-bl from-[#1C8DC8]/12 to-[#146299]/5 rounded-full blur-2xl group-hover:scale-125 transition-all duration-500 pointer-events-none" />
 
-      <div className="space-y-4 w-full relative z-10">
+      <div className="space-y-4 w-full relative z-10 flex flex-col items-center">
         {/* Icon Badge */}
-        <div className="w-12 h-12 rounded-xl bg-[#F0F9FF] text-[#1C8DC8] border border-[#E0F2FE] flex items-center justify-center transition-all duration-300 group-hover:bg-gradient-to-r group-hover:from-[#1C8DC8] group-hover:to-[#146299] group-hover:text-white shadow-md group-hover:scale-105">
-          <IconRenderer name={feature.icon} className="w-6 h-6" />
+        <div className="w-12 h-12 rounded-xl bg-[#F0F9FF] text-[#1C8DC8] border border-[#E0F2FE] flex items-center justify-center transition-all duration-300 group-hover:bg-gradient-to-r group-hover:from-[#1C8DC8] group-hover:to-[#146299] group-hover:text-white shadow-md group-hover:scale-105 shrink-0">
+          <span className="material-symbols-outlined text-[24px] leading-none select-none">
+            {getGoogleIcon(feature.icon)}
+          </span>
         </div>
 
         {/* Feature Text */}
-        <div className="space-y-2 w-full">
+        <div className="space-y-2 w-full text-center">
           <h3 className="font-display font-[800] text-lg text-[#0B3951] group-hover:text-[#1C8DC8] transition-colors leading-snug">
             {feature.title}
           </h3>
@@ -33,7 +49,7 @@ const WhyChooseUsCard = ({ feature }: { feature: FeatureItem }) => {
       </div>
 
       {/* Detail Sparkle */}
-      <div className="self-end pt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 relative z-10">
+      <div className="self-center pt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 relative z-10">
         <Sparkles size={14} className="text-[#1C8DC8]" />
       </div>
     </div>
@@ -74,7 +90,7 @@ export default function WhyChooseUs() {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 space-y-4 sm:space-y-6">
-          <div className="inline-flex items-center space-x-2 bg-[#F0F9FF] border border-[#1C8DC8]/20 px-4 py-1.5 rounded-full shadow-sm">
+          <div className="inline-flex items-center space-x-2 bg-[#F0F9FF] border border-[#1C8DC8]/20 px-6 py-2 shadow-sm">
             <Compass className="text-[#1C8DC8] w-4 h-4 animate-spin" style={{ animationDuration: '10s' }} />
             <span className="text-xs font-bold text-[#146299] uppercase tracking-widest font-mono">
               Academy Advancements
@@ -120,17 +136,7 @@ export default function WhyChooseUs() {
           </PremiumCarousel>
         </div>
 
-        {/* Trust Footer Notice */}
-        <motion.div 
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-          className="mt-12 sm:mt-16 text-center flex items-center justify-center space-x-2 text-xs text-slate-500 font-medium px-4"
-        >
-          <ShieldCheck size={16} className="text-[#1C8DC8] shrink-0" />
-          <span>Rest assured: Every teaching credential is audited, verified, and certified annually to guarantee perfect authenticity.</span>
-        </motion.div>
+
 
       </div>
     </section>

@@ -8,14 +8,28 @@ interface PricingProps {
   onBookTrial?: (planName: string, planDetails: string) => void;
 }
 
-const COUNTRIES = [
-  { code: 'US', name: 'United States', flag: '🇺🇸', symbol: '$', rate: 1.0 },
-  { code: 'GB', name: 'United Kingdom', flag: '🇬🇧', symbol: '£', rate: 0.8 },
-  { code: 'CA', name: 'Canada', flag: '🇨🇦', symbol: 'CA$', rate: 1.35 },
-  { code: 'AU', name: 'Australia', flag: '🇦🇺', symbol: 'A$', rate: 1.5 },
-  { code: 'SA', name: 'Saudi Arabia', flag: '🇸🇦', symbol: 'SR ', rate: 3.75 },
-  { code: 'AE', name: 'United Arab Emirates', flag: '🇦🇪', symbol: 'AED ', rate: 3.67 },
-];
+import worldCountries from 'world-countries';
+
+const PRESET_COUNTRIES: Record<string, { symbol: string; rate: number }> = {
+  US: { symbol: '$', rate: 1.0 },
+  GB: { symbol: '£', rate: 0.8 },
+  CA: { symbol: 'CA$', rate: 1.35 },
+  AU: { symbol: 'A$', rate: 1.5 },
+  SA: { symbol: 'SR ', rate: 3.75 },
+  AE: { symbol: 'AED ', rate: 3.67 },
+};
+
+const COUNTRIES = worldCountries.map((c: any) => {
+  const code = c.cca2.toUpperCase();
+  const preset = PRESET_COUNTRIES[code];
+  return {
+    code,
+    name: c.name.common,
+    flag: c.flag,
+    symbol: preset ? preset.symbol : '$',
+    rate: preset ? preset.rate : 1.0,
+  };
+}).sort((a, b) => a.name.localeCompare(b.name));
 
 interface Plan {
   id: string;
@@ -52,11 +66,11 @@ const PRICING_CATEGORIES: PricingCategory[] = [
         price: 35,
         originalPrice: 48,
         weeklyClasses: 2,
-        classDuration: '20-25 Minutes',
+        classDuration: '30 Minutes',
         classesPerMonth: 8,
         features: [
           'Free Trial Class included',
-          '2 Days/Week (20-25 Mins/Class)',
+          '2 Days/Week (30 Mins/Class)',
           '08 Classes per Month',
           'Alqaida Almadania & Basic Reading',
           'Certified Male/Female Quran teacher'
@@ -68,12 +82,12 @@ const PRICING_CATEGORIES: PricingCategory[] = [
         price: 50,
         originalPrice: 63,
         weeklyClasses: 3,
-        classDuration: '20-25 Minutes',
+        classDuration: '30 Minutes',
         classesPerMonth: 12,
         isPopular: true,
         features: [
           'Free Trial Class included',
-          '3 Days/Week (20-25 Mins/Class)',
+          '3 Days/Week (30 Mins/Class)',
           '12 Classes per Month',
           'Fluency in Quranic reading & basic Tajweed',
           'Certified expert Quran teacher'
@@ -85,11 +99,11 @@ const PRICING_CATEGORIES: PricingCategory[] = [
         price: 70,
         originalPrice: 78,
         weeklyClasses: 5,
-        classDuration: '20-25 Minutes',
+        classDuration: '30 Minutes',
         classesPerMonth: 20,
         features: [
           'Free Trial Class included',
-          '5 Days/Week (20-25 Mins/Class)',
+          '5 Days/Week (30 Mins/Class)',
           '20 Classes per Month',
           'Rapid recitation & intensive Tajweed rules',
           'Senior certified Quran teacher'
@@ -181,12 +195,12 @@ const PRICING_CATEGORIES: PricingCategory[] = [
         name: 'Plan 1',
         price: 55,
         weeklyClasses: 2,
-        classDuration: '20-25 Minutes',
+        classDuration: '30 Minutes',
         classesPerMonth: 8,
         features: [
           'Free Trial Class included',
           '2 Days per Week',
-          '20-25 Minutes / Class',
+          '30 Minutes / Class',
           '08 Classes / Month',
           'Essential Islamic beliefs (Aqeedah)',
           'Step-by-step practical training for Wudu & Salah',
@@ -200,13 +214,13 @@ const PRICING_CATEGORIES: PricingCategory[] = [
         name: 'Plan 2',
         price: 80,
         weeklyClasses: 3,
-        classDuration: '20-25 Minutes',
+        classDuration: '30 Minutes',
         classesPerMonth: 12,
         isPopular: true,
         features: [
           'Free Trial Class included',
           '3 Days per Week',
-          '20-25 Minutes / Class',
+          '30 Minutes / Class',
           '12 Classes / Month',
           'Fiqh, Seerah of Prophet Muhammad (PBUH)',
           'Moral etiquettes & stories of the Prophets',
@@ -229,12 +243,12 @@ const PRICING_CATEGORIES: PricingCategory[] = [
         name: 'Plan 1',
         price: 60,
         weeklyClasses: 2,
-        classDuration: '20-25 Minutes',
+        classDuration: '30 Minutes',
         classesPerMonth: 8,
         features: [
           'Free Trial Class included',
           '2 Days per Week',
-          '20-25 Minutes / Class',
+          '30 Minutes / Class',
           '08 Classes / Month',
           'High-frequency Quranic vocabulary',
           'Essential simplified grammar rules (Nahw & Sarf)',
@@ -248,13 +262,13 @@ const PRICING_CATEGORIES: PricingCategory[] = [
         name: 'Plan 2',
         price: 100,
         weeklyClasses: 3,
-        classDuration: '20-25 Minutes',
+        classDuration: '30 Minutes',
         classesPerMonth: 12,
         isPopular: true,
         features: [
           'Free Trial Class included',
           '3 Days per Week',
-          '20-25 Minutes / Class',
+          '30 Minutes / Class',
           '12 Classes / Month',
           'Complete direct translation of deep Quran chapters',
           'Advanced sentence structure parsing',
@@ -315,6 +329,28 @@ export default function Pricing({
   }, []);
 
   useEffect(() => {
+    const detectPricingCountry = async () => {
+      try {
+        const res = await fetch('/api/geolocation');
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.country_code) {
+            const matched = COUNTRIES.find(
+              c => c.code.toUpperCase() === data.country_code.toUpperCase()
+            );
+            if (matched) {
+              setSelectedCountry(matched.code);
+            }
+          }
+        }
+      } catch (err) {
+        console.error('Failed to auto-detect pricing country:', err);
+      }
+    };
+    detectPricingCountry();
+  }, []);
+
+  useEffect(() => {
     if (isMobile && scrollContainerRef.current) {
       setTimeout(() => {
         const container = scrollContainerRef.current;
@@ -370,7 +406,7 @@ export default function Pricing({
   const weekendFee = hasWeekend ? 20 : 0;
   const courseData = COURSE_INFO[selectedCourse as keyof typeof COURSE_INFO] || COURSE_INFO.nazra;
   const basePrice = (customDays === 1 ? 22 : customDays === 2 ? 35 : customDays === 3 ? 50 : customDays === 4 ? 62 : customDays === 5 ? 70 : customDays === 6 ? 82 : 92);
-  const durationMultiplier = customDuration === '20-25 Minutes' ? 1.0 : customDuration === '30 Minutes' ? 1.25 : 1.6;
+  const durationMultiplier = customDuration === '30 Minutes' ? 1.0 : customDuration === '45 Minutes' ? 1.35 : 1.6;
   const customPriceUsd = Math.round(basePrice * durationMultiplier * courseData.multiplier) + weekendFee;
   const customPriceConverted = formatPrice(customPriceUsd);
 
@@ -533,27 +569,29 @@ export default function Pricing({
         </div>
 
         {/* Categories Tab Selector for Desktop */}
-        <div className="hidden md:flex overflow-x-auto pb-3 mb-10 max-w-4xl mx-auto scrollbar-none gap-2 px-1 justify-start md:justify-center">
-          {PRICING_CATEGORIES.map((category) => {
-            const iconName = category.icon;
-            const isActive = activeTab === category.id;
-            return (
-              <button
-                key={category.id}
-                onClick={() => setActiveTab(category.id)}
-                className={`flex items-center space-x-2 px-5 py-3.5 rounded-2xl font-display font-black text-xs uppercase tracking-widest transition-all duration-300 border shrink-0 cursor-pointer ${
-                  isActive
-                    ? 'bg-gradient-to-r from-[#0B3951] to-[#146299] text-white border-[#1C8DC8] shadow-[0_10px_25px_rgba(28,141,200,0.15)] scale-[1.02]'
-                    : 'bg-white text-slate-600 border-sky-100 hover:border-[#1C8DC8]/40 hover:text-[#0B3951]'
-                }`}
-              >
-                <span className={`material-symbols-outlined text-[16px] leading-none select-none ${isActive ? 'text-[#1C8DC8]' : 'text-slate-400'}`}>
-                  {iconName}
-                </span>
-                <span>{category.title}</span>
-              </button>
-            );
-          })}
+        <div className="hidden md:flex justify-center mb-12">
+          <div className="bg-[#F0F9FF]/90 backdrop-blur-md border border-[#3D8DC3]/20 p-1.5 rounded-full inline-flex space-x-1 shadow-md">
+            {PRICING_CATEGORIES.map((category) => {
+              const iconName = category.icon;
+              const isActive = activeTab === category.id;
+              return (
+                <button
+                  key={category.id}
+                  onClick={() => setActiveTab(category.id)}
+                  className={`flex items-center space-x-2 px-6 py-2.5 rounded-full font-display font-black text-[11px] uppercase tracking-wider transition-all duration-300 shrink-0 cursor-pointer ${
+                    isActive
+                      ? 'bg-gradient-to-r from-[#1C8DC8] via-[#3D8DC3] to-[#146299] text-white shadow-md scale-[1.01]'
+                      : 'text-[#0B3951] hover:text-[#1C8DC8] hover:bg-white/50'
+                  }`}
+                >
+                  <span className={`material-symbols-outlined text-[15px] leading-none select-none ${isActive ? 'text-white' : 'text-[#3D8DC3]'}`}>
+                    {iconName}
+                  </span>
+                  <span>{category.title}</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* Mobile Course Dropdown */}
@@ -739,8 +777,20 @@ export default function Pricing({
         </AnimatePresence>
       </div>
 
-      {/* SECTION 2: Custom "Make Your Own Plan" Card (100vh on mobile) */}
-      <div className="mt-16 sm:mt-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col justify-center min-h-[100vh] md:min-h-0">
+      {/* SECTION 2: Custom "Make Your Own Plan" Card (100vh on all screens) */}
+      <div className="mt-16 sm:mt-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col justify-center min-h-[100vh] py-12">
+        
+        {/* Heading Above the Card */}
+        <div className="text-center mb-8 max-w-2xl mx-auto">
+          <span className="inline-flex items-center space-x-1.5 text-[9px] bg-[#1C8DC8]/10 text-[#1C8DC8] border border-[#1C8DC8]/20 px-3.5 py-1 rounded-full font-bold uppercase tracking-widest font-mono">
+            <Sparkles size={10} className="text-[#1C8DC8] animate-pulse" />
+            <span>Interactive Planner</span>
+          </span>
+          <h2 className="font-display font-[900] text-2xl sm:text-4xl text-[#0B3951] tracking-tight mt-3">
+            Design Your Custom Plan
+          </h2>
+        </div>
+
         <motion.div 
           initial={{ opacity: 0, y: 35 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -756,18 +806,6 @@ export default function Pricing({
             
             {/* Left Column: Form Selectors */}
             <div className="lg:col-span-7 space-y-4 sm:space-y-6">
-              <div>
-                <span className="inline-flex items-center space-x-1.5 text-[9px] bg-[#1C8DC8]/20 text-[#1C8DC8] px-3.5 py-1 rounded-full font-bold uppercase tracking-widest font-mono border border-[#1C8DC8]/20">
-                  <Sparkles size={10} className="text-[#1C8DC8] animate-pulse" />
-                  <span>Interactive Planner</span>
-                </span>
-                <h3 className="font-display font-[900] text-xl sm:text-3xl text-white tracking-tight mt-2 sm:mt-3">
-                  Design Your Custom Plan
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-300 mt-1 sm:mt-2 leading-relaxed font-sans font-medium">
-                  Can't find a preset schedule that fits your routine? Use our dynamic estimator to design a program tailored exactly to your weekly availability and course preferences.
-                </p>
-              </div>
 
               {/* Selector 1: Course Selection */}
               <div className="space-y-1.5 sm:space-y-2">
@@ -872,7 +910,7 @@ export default function Pricing({
                   Session Duration
                 </label>
                 <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                  {['20-25 Minutes', '30 Minutes', '45 Minutes'].map((dur) => (
+                  {['30 Minutes', '45 Minutes', '1 Hour'].map((dur) => (
                     <button
                       key={dur}
                       type="button"

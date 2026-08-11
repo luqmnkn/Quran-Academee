@@ -74,7 +74,7 @@ export default function TrustCredibility() {
         
         {/* Section Header */}
         <div className="max-w-2xl mx-auto mb-16 sm:mb-20 space-y-4">
-          <div className="inline-flex items-center space-x-2 bg-[#F0F9FF] border border-[#1C8DC8]/20 px-4 py-2 rounded-full shadow-sm">
+          <div className="inline-flex items-center space-x-2 bg-[#F0F9FF] border border-[#1C8DC8]/20 px-4 py-2 shadow-sm">
             <Award size={14} className="text-[#1C8DC8]" />
             <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#1C8DC8]">
               Credibility & Experience
@@ -113,23 +113,6 @@ export default function TrustCredibility() {
             </motion.div>
           ))}
         </div>
-
-        {/* Certifications Card */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-16 bg-white border border-[#E0F2FE] max-w-lg lg:max-w-3xl mx-auto p-6 sm:p-8 rounded-[28px] flex flex-col sm:flex-row items-center justify-center sm:space-x-5 space-y-4 sm:space-y-0 text-left shadow-[0_15px_30px_rgba(28,141,200,0.04)]"
-        >
-          <div className="w-12 h-12 rounded-xl bg-[#F0F9FF] border border-[#1C8DC8]/20 flex items-center justify-center text-[#1C8DC8] shrink-0">
-            <CheckCircle2 size={24} />
-          </div>
-          <div className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-            <strong className="text-[#0B3951] block font-extrabold mb-1 font-display">100% Certified Recitation Credentials</strong>
-            All our senior tutors hold certified credentials and authorizations from respected institutions. Your family receives authentic, beautifully articulated preservation classes.
-          </div>
-        </motion.div>
 
       </div>
     </section>

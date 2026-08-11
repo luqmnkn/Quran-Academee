@@ -37,6 +37,7 @@ export default function RootLayout({
     <html lang="en" className={`scroll-smooth ${inter.variable} ${rubik.variable} ${courgette.variable}`}>
       <head>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossOrigin="anonymous" referrerPolicy="no-referrer" />
       </head>
       <body className="relative min-h-screen font-sans antialiased text-gray-950 bg-gray-50/50">
         <Suspense fallback={<main>{children}</main>}>
