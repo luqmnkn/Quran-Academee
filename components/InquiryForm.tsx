@@ -240,10 +240,6 @@ export default function InquiryForm({
         <div className="w-full flex flex-col justify-start text-left md:items-center">
           {isModalMode && (
             <div className="text-center mb-6 w-full">
-              <span className="inline-flex items-center space-x-1.5 bg-[#1C8DC8]/10 text-[#1C8DC8] px-3 py-1 rounded-full text-[9px] font-mono font-bold uppercase tracking-wider">
-                <Sparkles size={10} className="animate-pulse" />
-                <span>3-Day Free Trial</span>
-              </span>
               <h3 className="font-display font-[900] text-xl sm:text-2xl text-[#0B3951] mt-2">
                 Schedule Free Trial Class
               </h3>
@@ -540,7 +536,6 @@ export default function InquiryForm({
               </>
             ) : (
               <>
-                <Send size={14} className="stroke-[2.5]" />
                 <span>Securely Book 3-Day Free Trial</span>
               </>
             )}

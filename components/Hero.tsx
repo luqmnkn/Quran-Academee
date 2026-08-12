@@ -132,9 +132,7 @@ function HeroVideoCardItem({ review }: { review: VideoReview }) {
         </div>
       </div>
 
-      <div className="absolute top-3 left-3 bg-[#1C8DC8]/90 text-white text-[8px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full shadow-sm backdrop-blur-sm z-10">
-        Video Review
-      </div>
+      
 
       {/* Empty spacer to align content to bottom */}
       <div />
@@ -446,9 +444,6 @@ export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
       <div className="block md:hidden w-full px-5 pt-3 pb-8 relative z-30">
         <div className="flex items-center justify-between mb-3 px-1">
           <div className="flex flex-col">
-            <span className="text-[9px] font-extrabold text-[#1C8DC8] uppercase tracking-widest font-mono">
-              Live Classes in Action
-            </span>
             <h3 className="font-display font-[800] text-sm text-[#0B3951]">
               Student Video Reviews
             </h3>

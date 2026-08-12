@@ -935,7 +935,6 @@ export default function Pricing({
                 >
                   {plan.isPopular && (
                     <div className="absolute top-[-14px] left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#1C8DC8] to-[#3D8DC3] text-white text-[9px] uppercase tracking-widest font-display font-black px-4 py-1 rounded-full shadow-md flex items-center space-x-1 whitespace-nowrap">
-                      <Star size={10} className="fill-current text-white" />
                       <span>RECOMMENDED</span>
                     </div>
                   )}
@@ -945,9 +944,7 @@ export default function Pricing({
                       <h4 className="font-display font-[900] text-lg sm:text-xl tracking-tight uppercase">
                         {plan.name}
                       </h4>
-                      <p className={`text-[10px] font-mono uppercase tracking-wider font-bold mt-1 transition-colors duration-500 ${isActiveCard ? 'text-sky-300' : 'text-[#1C8DC8]'}`}>
-                        {plan.weeklyClasses} Days per week
-                      </p>
+                      
                     </div>
 
                     <div className="flex items-baseline space-x-2">
@@ -1009,7 +1006,6 @@ export default function Pricing({
                       }`}
                     >
                       <span>Book Free Trial</span>
-                      <Sparkles size={12} className={isActiveCard ? 'text-white animate-pulse' : 'text-current'} />
                     </button>
                   </div>
                 </motion.div>
