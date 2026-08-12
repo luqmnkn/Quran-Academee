@@ -109,7 +109,7 @@ export default function About({ onOpenTrialModal }: AboutProps) {
 
     {/* Desktop Image (Hidden on mobile, visible on md+) */}
     <Image
-      src="/images/footerlogo.png"
+      src="/images/footerLogo.png"
       alt="Student learning session with certified female tutor represented by Quran Academee classes"
       width={600}
       height={400}
