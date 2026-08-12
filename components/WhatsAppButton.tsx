@@ -4,49 +4,12 @@ import { MessageCircle, X } from 'lucide-react';
 export default function WhatsAppButton() {
   const [showTooltip, setShowTooltip] = useState(false);
 
-  useEffect(() => {
-    // Show Tooltip bubble after 5 seconds
-    const timer = setTimeout(() => {
-      setShowTooltip(true);
-    }, 5000);
-
-    // Hide tooltip after 15 total seconds
-    const hideTimer = setTimeout(() => {
-      setShowTooltip(false);
-    }, 15000);
-
-    return () => {
-      clearTimeout(timer);
-      clearTimeout(hideTimer);
-    };
-  }, []);
-
   const whatsappMessage = encodeURIComponent(
     "Assalamu Alaikum, I would like to learn Quran online. Please share details about your courses and free trial classes."
   );
 
   return (
     <div className="fixed bottom-20 md:bottom-6 right-5 sm:right-6 z-40 flex items-center group">
-      
-      {/* Speech Bubble Tooltip */}
-      {showTooltip && (
-        <div 
-          role="tooltip"
-          className="absolute right-16 bottom-1 bg-white text-slate-800 text-xs font-semibold px-3.5 py-2 rounded-2xl shadow-xl border border-[#E0F2FE] whitespace-nowrap flex items-center gap-2 animate-in fade-in slide-in-from-right-3 duration-300 transition-all"
-        >
-          <span>Chat with us on WhatsApp 👋</span>
-          <button
-            onClick={() => setShowTooltip(false)}
-            className="text-slate-400 hover:text-slate-600 transition-colors p-0.5 rounded-full"
-            aria-label="Close tooltip"
-          >
-            <X size={12} />
-          </button>
-          
-          {/* Caret arrow */}
-          <div className="absolute -right-1.5 top-1/2 -translate-y-1/2 w-3 h-3 bg-white border-t border-r border-[#E0F2FE] rotate-45 pointer-events-none" />
-        </div>
-      )}
 
       {/* Main floating button */}
       <a

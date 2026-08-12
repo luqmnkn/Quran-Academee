@@ -26,6 +26,16 @@ const courgette = Courgette({
 export const metadata = {
   title: 'Quran Academee - Live 1-on-1 Quran Classes',
   description: 'Learn Quran online with qualified, certified male and female scholars. Tajweed rules, memorization, and Arabic lessons.',
+  icons: {
+    icon: [
+      { url: '/images/favicon.png', type: 'image/png' },
+      { url: '/favicon.ico' },
+    ],
+    shortcut: ['/images/favicon.png'],
+    apple: [
+      { url: '/images/favicon.png' },
+    ],
+  },
 };
 
 export default function RootLayout({
@@ -36,6 +46,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`scroll-smooth ${inter.variable} ${rubik.variable} ${courgette.variable}`}>
       <head>
+        <link rel="icon" href="/images/favicon.png" type="image/png" sizes="any" />
+        <link rel="shortcut icon" href="/images/favicon.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/images/favicon.png" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossOrigin="anonymous" referrerPolicy="no-referrer" />
       </head>

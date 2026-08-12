@@ -160,7 +160,7 @@ export default function Services({ onSelectCourse }: ServicesProps) {
 
         <button
           onClick={() => handleBookNow(course.title)}
-          className="bg-gradient-to-r from-[#0B3951] to-[#146299] hover:from-[#1C8DC8] hover:to-[#146299] text-white rounded-md px-3.5 py-1.5 text-[9px] font-bold tracking-wider uppercase transition-all duration-300 cursor-pointer border border-[#E0F2FE] shadow-md hover:shadow-lg whitespace-nowrap"
+          className="bg-gradient-to-r from-[#0B3951] to-[#146299] hover:from-[#1C8DC8] hover:to-[#146299] text-white rounded-xl px-4 py-2 text-[10px] font-extrabold tracking-wider uppercase transition-all duration-300 cursor-pointer border border-[#E0F2FE] shadow-[0_8px_20px_rgba(11,57,81,0.2)] hover:shadow-[0_12px_28px_rgba(28,141,200,0.32)] hover:-translate-y-0.5 whitespace-nowrap"
         >
           Book Class
         </button>
@@ -173,7 +173,6 @@ export default function Services({ onSelectCourse }: ServicesProps) {
       id="courses" 
       className="py-16 sm:py-20 md:py-24 bg-gradient-to-b from-white via-[#F0F9FF] to-white relative overflow-hidden"
     >
-      <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#F0F9FF] via-[#1C8DC8] to-[#F0F9FF]" />
       <div className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-[#1C8DC8]/5 rounded-full blur-[110px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">

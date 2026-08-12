@@ -157,7 +157,7 @@ export default function Header({ onOpenTrialModal }: HeaderProps) {
               setIsMobileMenuOpen(false);
               onOpenTrialModal();
             }}
-            className="bg-[#1C8DC8] hover:bg-[#3D8DC3] text-white font-bold text-xs sm:text-sm px-4 sm:px-6 py-2 sm:py-2.5 rounded-full transition-all duration-200 shadow-md hover:shadow-lg hover:scale-102 active:scale-98 cursor-pointer uppercase tracking-wide"
+            className="bg-gradient-to-r from-[#1C8DC8] via-[#3D8DC3] to-[#146299] hover:from-[#146299] hover:to-[#1C8DC8] text-white font-extrabold text-xs sm:text-sm px-5 sm:px-6 py-2.5 sm:py-2.5 rounded-full transition-all duration-300 shadow-[0_8px_20px_rgba(28,141,200,0.22)] hover:shadow-[0_12px_28px_rgba(28,141,200,0.35)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer uppercase tracking-wide"
           >
             Enroll
           </button>

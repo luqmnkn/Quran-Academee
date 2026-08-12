@@ -80,7 +80,7 @@ export default function WhyChooseUs() {
   return (
     <section 
       id="why-us" 
-      className="py-16 sm:py-20 md:py-24 bg-gradient-to-tr from-[#F0F9FF] via-white to-[#E0F2FE] text-[#0B3951] relative overflow-hidden"
+      className="py-16 sm:py-20 md:py-24 bg-gradient-to-b from-white via-[#F0F9FF] to-white text-[#0B3951] relative overflow-hidden"
     >
       {/* Visual Ambient Lights */}
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#1C8DC8]/5 rounded-full blur-[120px] pointer-events-none" />

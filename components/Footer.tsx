@@ -6,10 +6,12 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#0B3951] text-white pt-16 pb-8 border-t border-[#1C8DC8]/20 relative">
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#1C8DC8] via-[#3D8DC3] to-[#146299]"></div>
+    <footer className="bg-[#0B3951] text-white pt-20 pb-8 relative overflow-hidden">
+      {/* Soft Gradient Canvas Entry Blend */}
+      <div className="absolute -top-12 inset-x-0 h-12 bg-gradient-to-b from-white via-white/50 to-transparent pointer-events-none" />
+      <div className="absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-[#0B3951]/40 via-[#0B3951]/80 to-[#0B3951] pointer-events-none" />
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 border-b border-white/10 pb-12 mb-10 text-left">
           

@@ -17,14 +17,18 @@ export default function HomePage() {
 
   // Handle Course Selection by opening the Free Trial Modal
   const handleOpenTrialModal = (planOrCourseName?: string) => {
-    const params = new URLSearchParams(window.location.search);
-    params.set('trial', 'true');
-    if (planOrCourseName) {
-      params.set('plan', planOrCourseName);
-    } else {
-      params.delete('plan');
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      params.set('trial', 'true');
+      if (planOrCourseName) {
+        params.set('plan', planOrCourseName);
+      } else {
+        params.delete('plan');
+      }
+      const newUrl = `${window.location.pathname}?${params.toString()}`;
+      window.history.replaceState(null, '', newUrl);
+      window.dispatchEvent(new Event('open-trial-modal'));
     }
-    router.push(`${window.location.pathname}?${params.toString()}`, { scroll: false });
   };
 
   const handleCourseSelection = (courseName: string) => {

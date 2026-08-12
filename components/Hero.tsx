@@ -132,9 +132,7 @@ function HeroVideoCardItem({ review }: { review: VideoReview }) {
         </div>
       </div>
 
-      <div className="absolute top-3 left-3 bg-[#1C8DC8]/90 text-white text-[8px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full shadow-sm backdrop-blur-sm z-10">
-        Video Review
-      </div>
+      
 
       {/* Empty spacer to align content to bottom */}
       <div />
@@ -178,7 +176,7 @@ export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
   return (
     <section 
       id="home" 
-      className="relative min-h-[110vh] md:min-h-screen bg-gradient-to-br from-[#F0F9FF] via-white to-[#E0F2FE] text-[#0B3951] pt-24 sm:pt-32 pb-0 overflow-hidden flex flex-col justify-between"
+      className="relative min-h-[110vh] md:min-h-screen bg-gradient-to-b from-[#F0F9FF] via-white to-white text-[#0B3951] pt-24 sm:pt-32 pb-0 overflow-hidden flex flex-col justify-between"
     >
       {/* Background radial effects */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(61,141,195,0.06),transparent_45%)]" />
@@ -248,15 +246,15 @@ export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
             >
               <button
                 onClick={onOpenTrialModal}
-                className="bg-gradient-to-r from-[#1C8DC8] via-[#3D8DC3] to-[#146299] hover:from-[#146299] hover:to-[#1C8DC8] text-white font-extrabold text-xs sm:text-base px-5 sm:px-8 py-3.5 sm:py-4 rounded-full transition-all duration-300 shadow-[0_12px_24px_rgba(28,141,200,0.18)] hover:shadow-[0_16px_32px_rgba(28,141,200,0.3)] hover:scale-103 active:scale-98 flex items-center justify-center space-x-2 cursor-pointer whitespace-nowrap"
+                className="bg-gradient-to-r from-[#1C8DC8] via-[#3D8DC3] to-[#146299] hover:from-[#146299] hover:to-[#1C8DC8] text-white font-extrabold text-xs sm:text-base px-6 sm:px-9 py-4 sm:py-4.5 rounded-full transition-all duration-300 shadow-[0_12px_32px_rgba(28,141,200,0.25)] hover:shadow-[0_16px_40px_rgba(28,141,200,0.38)] hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center space-x-2 cursor-pointer whitespace-nowrap group"
               >
                 <span>Start Free Trial</span>
-                <ChevronRight className="w-5 h-5" />
+                <ChevronRight className="w-5 h-5 group-hover:translate-x-0.5 transition-transform" />
               </button>
 
               <button
                 onClick={() => window.location.href = '/pricing'}
-                className="border-2 border-[#1C8DC8]/20 hover:border-[#1C8DC8] text-[#146299] font-bold text-base px-8 py-4 rounded-full transition-all duration-300 hover:bg-[#1C8DC8]/5 hover:scale-103 active:scale-98 flex items-center justify-center cursor-pointer whitespace-nowrap"
+                className="bg-white/80 backdrop-blur-md border border-[#1C8DC8]/30 hover:border-[#1C8DC8] text-[#146299] font-extrabold text-xs sm:text-base px-6 sm:px-8 py-4 sm:py-4.5 rounded-full transition-all duration-300 shadow-[0_8px_24px_rgba(28,141,200,0.08)] hover:shadow-[0_12px_32px_rgba(28,141,200,0.18)] hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center cursor-pointer whitespace-nowrap"
               >
                 Choose Plan
               </button>
@@ -273,16 +271,19 @@ export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
               transition={{ duration: 0.15, ease: "easeOut" }}
               className="relative w-[55%] xs:w-[60%] sm:w-[65%] md:w-full translate-x-6 xs:translate-x-10 sm:translate-x-0 ml-auto md:ml-0 max-w-[550px] lg:max-w-none h-[45vh] xs:h-[50vh] sm:h-[55vh] md:h-[75vh] lg:h-[82vh] xl:h-[90vh] flex items-end justify-end select-none transition-all duration-500 self-end origin-bottom-right"
               style={{
-                maskImage: 'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.15) 15%, black 30%)',
-                WebkitMaskImage: 'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.15) 15%, black 30%)'
+                maskImage: 'linear-gradient(to bottom, black 65%, transparent 100%)',
+                WebkitMaskImage: 'linear-gradient(to bottom, black 65%, transparent 100%)'
               }}
             >
               <img
                 src={imghero.src}
                 alt="Quran Academee Student"
-                className="h-full w-auto object-contain object-bottom rounded-t-[32px] rounded-b-none drop-shadow-[0_15px_35px_rgba(28,141,200,0.14)] filter contrast-[1.01] block"
+                className="h-full w-auto object-contain object-bottom rounded-t-[32px] rounded-b-none drop-shadow-[0_6px_12px_rgba(28,141,200,0.08)] filter contrast-[1.01] block"
                 referrerPolicy="no-referrer"
               />
+
+              {/* Bottom Soft Mask Blend Overlay */}
+              <div className="absolute inset-x-0 bottom-0 h-24 lg:h-36 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none z-30" />
 
               {/* Rating Widget (Desktop layout - aligned with boy's shoulder) */}
               <motion.div
@@ -324,10 +325,10 @@ export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
                 initial={{ opacity: 0, x: 30, y: 30 }}
                 animate={{ opacity: 1, x: 0, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
-                className="absolute bottom-8 sm:bottom-12 -right-4 sm:-right-6 bg-gradient-to-br from-white/98 to-[#F0F9FF]/98 backdrop-blur-xl border border-[#3D8DC3]/20 p-4 rounded-2xl shadow-[0_20px_40px_rgba(11,57,81,0.08)] flex items-center space-x-3.5 max-w-[240px] sm:max-w-[280px] z-30"
+                className="absolute bottom-8 sm:bottom-12 -right-4 sm:-right-6 bg-gradient-to-br from-white/98 to-[#F0F9FF]/98 backdrop-blur-xl border border-[#3D8DC3]/20 p-4 rounded-2xl shadow-[0_6px_16px_rgba(11,57,81,0.06)] flex items-center space-x-3.5 max-w-[240px] sm:max-w-[280px] z-100"
               >
                 <div className="text-left flex-1">
-                  <h4 className="font-sans font-extrabold text-xs sm:text-sm text-[#0B3951] leading-tight">
+                  <h4 className="font-sans font-extrabold text-xs sm:text-sm text-[#0B3951] leading-tight ">
                     Pure, guided Qur'an education.
                   </h4>
                   <p className="text-[10px] sm:text-xs text-[#146299] mt-1 leading-normal font-medium">
@@ -364,63 +365,54 @@ export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
           </div>
 
           {/* Image Container (Mobile Full Width) */}
-          <div className="relative flex justify-center items-end w-full h-[40vh] xs:h-[45vh] sm:h-[50vh] z-10">
-            <div className="absolute w-[95%] aspect-square bg-gradient-to-tr from-[#3D8DC3]/15 to-[#1C8DC8]/5 rounded-full blur-3xl -z-10 bottom-0" />
-            
-            <motion.div
-              initial={{ opacity: 0, scale: 0.98 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.15, ease: "easeOut" }}
-              className="relative w-full h-full flex items-end justify-center select-none origin-bottom"
-            >
-              <Image
-                src={imghero}
-                alt="Quran Academee Student"
-                priority
-                className="h-full w-auto object-contain object-bottom rounded-t-[32px] rounded-b-none drop-shadow-[0_15px_35px_rgba(28,141,200,0.14)] block z-20"
-              />
+<div className="relative flex justify-center items-end w-full h-[40vh] xs:h-[45vh] sm:h-[50vh] z-10">
+  <div className="absolute w-[95%] aspect-square bg-gradient-to-tr from-[#3D8DC3]/15 to-[#1C8DC8]/5 rounded-full blur-3xl -z-10 bottom-0" />
+  
+  <motion.div
+    initial={{ opacity: 0, scale: 0.98 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{ duration: 0.15, ease: "easeOut" }}
+    className="relative w-full h-full flex items-end justify-center select-none origin-bottom"
+    style={{
+      maskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)',
+      WebkitMaskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)'
+    }}
+  >
+    <Image
+      src={imghero}
+      alt="Quran Academee Student"
+      priority
+      className="h-full w-auto object-contain object-bottom rounded-t-[32px] rounded-b-none drop-shadow-[0_6px_12px_rgba(28,141,200,0.08)] block z-20"
+    />
 
-              {/* Rating Widget (Mobile layout - no arrow) */}
-              <motion.div
-                initial={{ opacity: 0, x: 30, y: -20 }}
-                animate={{ opacity: 1, x: 0, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="absolute top-8 right-2 bg-gradient-to-br from-white/95 to-[#F0F9FF]/95 backdrop-blur-xl border border-[#3D8DC3]/25 p-2.5 rounded-xl shadow-[0_10px_20px_rgba(11,57,81,0.05)] max-w-[125px] xs:max-w-[145px] z-30 flex flex-col text-left"
-              >
-                <div className="flex items-center space-x-1 mb-0.5">
-                  <span className="font-sans font-black text-xs text-[#1C8DC8]">5.0</span>
-                  <div className="flex text-amber-400">
-                    <Star className="w-2.5 h-2.5 fill-current" />
-                    <Star className="w-2.5 h-2.5 fill-current" />
-                    <Star className="w-2.5 h-2.5 fill-current" />
-                  </div>
-                </div>
-                <p className="text-[8.5px] text-slate-700 leading-tight font-medium">
-                  Trusted by 12,000+ Muslim families.
-                </p>
-              </motion.div>
+    {/* Reduced Height Soft Bottom Fade Mask */}
+    <div className="absolute inset-x-0 bottom-0 h-8 sm:h-12 bg-gradient-to-t from-white via-white/70 to-transparent pointer-events-none z-30" />
 
-              {/* Info Widget (Mobile layout) */}
-              <motion.div
-                initial={{ opacity: 0, x: 30, y: 20 }}
-                animate={{ opacity: 1, x: 0, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.5 }}
-                className="absolute bottom-6 right-2 bg-gradient-to-br from-white/95 to-[#F0F9FF]/95 backdrop-blur-xl border border-[#3D8DC3]/25 p-2.5 rounded-xl shadow-[0_10px_20px_rgba(11,57,81,0.05)] flex items-center space-x-2 max-w-[160px] xs:max-w-[185px] z-30"
-              >
-                <div className="text-left flex-1">
-                  <h4 className="font-sans font-extrabold text-[9px] text-[#0B3951] leading-tight">
-                    Pure Quran education.
-                  </h4>
-                  <p className="text-[8px] text-[#146299] mt-0.5 leading-normal font-medium">
-                    Learn recitation & Tajweed.
-                  </p>
-                </div>
-                <div className="bg-[#1C8DC8]/10 p-1 rounded-md shrink-0">
-                  <BookOpen className="w-3.5 h-3.5 text-[#1C8DC8]" />
-                </div>
-              </motion.div>
-            </motion.div>
-          </div>
+    {/* Rating Widget (Mobile layout - no arrow) */}
+    <motion.div
+      initial={{ opacity: 0, x: 30, y: -20 }}
+      animate={{ opacity: 1, x: 0, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.4 }}
+      className="absolute top-4 right-2 bg-gradient-to-br from-white/95 to-[#F0F9FF]/95 backdrop-blur-xl border border-[#3D8DC3]/25 p-2.5 rounded-xl shadow-[0_10px_20px_rgba(11,57,81,0.05)] max-w-[150px] xs:max-w-[170px] z-30"
+    >
+      <div className="flex items-center space-x-1 mb-0.5">
+        <span className="font-sans font-black text-sm text-[#1C8DC8]">5.0</span>
+        <div className="flex text-amber-400">
+          <Star className="w-3 h-3 fill-current" />
+          <Star className="w-3 h-3 fill-current" />
+          <Star className="w-3 h-3 fill-current" />
+          <Star className="w-3 h-3 fill-current" />
+          <Star className="w-3 h-3 fill-current" />
+        </div>
+      </div>
+      <p className="text-[9px] text-slate-700 leading-tight font-medium text-left">
+        Trusted by 12,000+ families.
+      </p>
+    </motion.div>
+
+
+  </motion.div>
+</div>
 
           {/* Action Buttons (Mobile only bottom CTAs) */}
           <motion.div
@@ -431,7 +423,7 @@ export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
           >
             <button
               onClick={onOpenTrialModal}
-              className="w-1/2 bg-gradient-to-r from-[#1C8DC8] via-[#3D8DC3] to-[#146299] text-white font-extrabold text-xs py-3.5 rounded-full shadow-md flex items-center justify-center space-x-1 cursor-pointer whitespace-nowrap active:scale-98"
+              className="w-1/2 bg-gradient-to-r from-[#1C8DC8] via-[#3D8DC3] to-[#146299] text-white font-extrabold text-xs py-3.5 rounded-full shadow-[0_12px_28px_rgba(28,141,200,0.25)] hover:shadow-[0_16px_36px_rgba(28,141,200,0.35)] flex items-center justify-center space-x-1 cursor-pointer whitespace-nowrap active:scale-98"
             >
               <span>Free Trial</span>
               <ChevronRight className="w-4 h-4" />
@@ -439,7 +431,7 @@ export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
 
             <button
               onClick={() => window.location.href = '/pricing'}
-              className="w-1/2 border border-[#1C8DC8]/30 text-[#146299] bg-white/70 backdrop-blur font-bold text-xs py-3.5 rounded-full flex items-center justify-center cursor-pointer whitespace-nowrap active:scale-98"
+              className="w-1/2 border border-[#1C8DC8]/30 text-[#146299] bg-white/80 backdrop-blur font-bold text-xs py-3.5 rounded-full shadow-[0_8px_20px_rgba(28,141,200,0.08)] flex items-center justify-center cursor-pointer whitespace-nowrap active:scale-98"
             >
               Choose Plan
             </button>
@@ -452,9 +444,6 @@ export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
       <div className="block md:hidden w-full px-5 pt-3 pb-8 relative z-30">
         <div className="flex items-center justify-between mb-3 px-1">
           <div className="flex flex-col">
-            <span className="text-[9px] font-extrabold text-[#1C8DC8] uppercase tracking-widest font-mono">
-              Live Classes in Action
-            </span>
             <h3 className="font-display font-[800] text-sm text-[#0B3951]">
               Student Video Reviews
             </h3>
@@ -480,6 +469,9 @@ export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
           />
         </svg>
       </div>
+
+      {/* Soft Ambient Canvas Blend at Section Bottom */}
+      <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none z-20" />
     </section>
   );
 }
