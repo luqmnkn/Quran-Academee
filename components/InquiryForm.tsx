@@ -531,7 +531,7 @@ export default function InquiryForm({
           <button
             type="submit"
             disabled={status === 'submitting'}
-            className="w-full h-11 sm:h-12 bg-gradient-to-r from-[#1C8DC8] to-[#3D8DC3] hover:scale-[1.01] text-white font-display font-extrabold rounded-xl uppercase tracking-wider text-[10px] sm:text-xs px-4 transition-all duration-300 flex items-center justify-center space-x-2 cursor-pointer shadow-md shadow-sky-500/15"
+            className="w-full h-11 sm:h-12 bg-gradient-to-r from-[#1C8DC8] via-[#3D8DC3] to-[#146299] hover:from-[#146299] hover:to-[#1C8DC8] text-white font-display font-extrabold rounded-2xl uppercase tracking-wider text-[10px] sm:text-xs px-4 transition-all duration-300 flex items-center justify-center space-x-2 cursor-pointer shadow-[0_12px_32px_rgba(28,141,200,0.22)] hover:shadow-[0_16px_40px_rgba(28,141,200,0.35)] hover:-translate-y-0.5 active:translate-y-0"
           >
             {status === 'submitting' ? (
               <>
@@ -546,77 +546,80 @@ export default function InquiryForm({
             )}
           </button>
 
-          </form>
-        </div>
-      )}
-    </AnimatePresence>
-  );
+
+
+          
+        </form>
+      </div>
+    )}
+  </AnimatePresence>
+);
 
   if (isModalMode) {
     return renderFormContent();
   }
 
   return (
-    <section id="contact" className="w-full h-screen max-h-screen py-4 lg:py-6 bg-slate-50 flex items-center justify-center overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex items-center">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 items-center w-full max-h-full">
-          
-          {/* Left Column: Context / Value Proposition */}
-          <div className="lg:col-span-5 flex flex-col justify-between space-y-4 bg-[#0B3951] text-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-xl">
-            <div className="space-y-4">
-              <div className="inline-flex items-center space-x-2 bg-white/10 text-sky-200 border border-white/15 px-3 py-1 text-[11px] font-mono font-semibold uppercase tracking-wider">
-                <Sparkles size={12} className="text-sky-300" />
-                <span>3-Day Free Trial</span>
+<section id="contact" className="w-full lg:min-h-screen py-8 lg:py-12 bg-gradient-to-b from-white via-[#F0F9FF] to-white flex items-center justify-center overflow-hidden">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex items-center">
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 items-center w-full max-h-full">
+      
+      {/* Left Column: Context / Value Proposition */}
+      <div className="lg:col-span-5 flex flex-col justify-between space-y-4 bg-[#0B3951] text-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-xl">
+        <div className="space-y-4">
+          <div className="inline-flex items-center space-x-2 bg-white/10 text-sky-200 border border-white/15 px-3 py-1 rounded-full text-[11px] font-mono font-semibold uppercase tracking-wider">
+            <Sparkles size={12} className="text-sky-300" />
+            <span>3-Day Free Trial</span>
+          </div>
+
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-extrabold text-white leading-tight">
+            Start Your Quran Learning Journey Today
+          </h2>
+
+          {/* HIDDEN ON MOBILE */}
+          <p className="hidden lg:block text-xs sm:text-sm text-slate-300 leading-relaxed">
+            Experience personalized 1-on-1 Quran classes with qualified male and female tutors. Book your free 3-day trial session with zero obligation.
+          </p>
+
+          {/* HIDDEN ON MOBILE */}
+          <div className="hidden lg:block space-y-3 pt-2">
+            <div className="flex items-start space-x-3">
+              <div className="p-1.5 bg-sky-500/20 rounded-lg text-sky-300 shrink-0 mt-0.5">
+                <Calendar size={16} />
               </div>
-
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-extrabold text-white leading-tight">
-                Start Your Quran Learning Journey Today
-              </h2>
-
-              {/* HIDDEN ON MOBILE */}
-              <p className="hidden lg:block text-xs sm:text-sm text-slate-300 leading-relaxed">
-                Experience personalized 1-on-1 Quran classes with qualified male and female tutors. Book your free 3-day trial session with zero obligation.
-              </p>
-
-              {/* HIDDEN ON MOBILE */}
-              <div className="hidden lg:block space-y-3 pt-2">
-                <div className="flex items-start space-x-3">
-                  <div className="p-1.5 bg-sky-500/20 rounded-lg text-sky-300 shrink-0 mt-0.5">
-                    <Calendar size={16} />
-                  </div>
-                  <div>
-                    <h4 className="text-xs font-bold text-white">Flexible Scheduling</h4>
-                    <p className="text-[11px] text-slate-300">Choose times that perfectly fit your daily schedule.</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-3">
-                  <div className="p-1.5 bg-sky-500/20 rounded-lg text-sky-300 shrink-0 mt-0.5">
-                    <ShieldCheck size={16} />
-                  </div>
-                  <div>
-                    <h4 className="text-xs font-bold text-white">Certified Tutors</h4>
-                    <p className="text-[11px] text-slate-300">Learn from experienced, vetted Sanad-certified scholars.</p>
-                  </div>
-                </div>
+              <div>
+                <h4 className="text-xs font-bold text-white">Flexible Scheduling</h4>
+                <p className="text-[11px] text-slate-300">Choose times that perfectly fit your daily schedule.</p>
               </div>
             </div>
 
-            {/* HIDDEN ON MOBILE */}
-            <div className="hidden lg:block border-t border-white/10 pt-4 mt-2">
-              <p className="text-[11px] text-slate-400">
-                Have urgent queries? Contact scheduling directly on WhatsApp for immediate support.
-              </p>
+            <div className="flex items-start space-x-3">
+              <div className="p-1.5 bg-sky-500/20 rounded-lg text-sky-300 shrink-0 mt-0.5">
+                <ShieldCheck size={16} />
+              </div>
+              <div>
+                <h4 className="text-xs font-bold text-white">Certified Tutors</h4>
+                <p className="text-[11px] text-slate-300">Learn from experienced, vetted Sanad-certified scholars.</p>
+              </div>
             </div>
           </div>
+        </div>
 
-          {/* Right Column: Compact 100vh Form */}
-          <div className="lg:col-span-7 bg-white rounded-2xl sm:rounded-3xl border border-[#E0F2FE] p-4 sm:p-6 shadow-xl flex flex-col justify-center">
-            {renderFormContent()}
-          </div>
-
+        {/* HIDDEN ON MOBILE */}
+        <div className="hidden lg:block border-t border-white/10 pt-4 mt-2">
+          <p className="text-[11px] text-slate-400">
+            Have urgent queries? Contact scheduling directly on WhatsApp for immediate support.
+          </p>
         </div>
       </div>
-    </section>
+
+      {/* Right Column: Compact Form */}
+      <div className="lg:col-span-7 bg-white rounded-2xl sm:rounded-3xl border border-[#E0F2FE] p-4 sm:p-6 shadow-xl flex flex-col justify-center">
+        {renderFormContent()}
+      </div>
+
+    </div>
+  </div>
+</section>
   );
 }

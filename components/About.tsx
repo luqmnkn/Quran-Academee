@@ -166,7 +166,7 @@ export default function About({ onOpenTrialModal }: AboutProps) {
         </div>
 
 {/* 3 STEPS ONBOARDING */}
-<div className="pt-8 sm:pt-20 border-t border-[#E0F2FE] text-center overflow-hidden">
+<div className="pt-8 sm:pt-20 text-center overflow-hidden">
   <div className="max-w-2xl mx-auto mb-6 sm:mb-16 px-4 space-y-2 sm:space-y-4">
     <span className="text-xs font-mono font-black uppercase tracking-widest text-[#146299]">
       The Simplest Process
@@ -226,7 +226,7 @@ export default function About({ onOpenTrialModal }: AboutProps) {
   >
     <button
       onClick={onOpenTrialModal}
-      className="w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 font-display text-xs uppercase tracking-widest text-white bg-gradient-to-r from-[#1C8DC8] to-[#3D8DC3] hover:from-[#146299] hover:to-[#1C8DC8] transition-all rounded-xl shadow-[0_12px_36px_rgba(28,141,200,0.2)] cursor-pointer inline-flex items-center justify-center space-x-2.5"
+      className="w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 font-display text-xs font-extrabold uppercase tracking-widest text-white bg-gradient-to-r from-[#1C8DC8] via-[#3D8DC3] to-[#146299] hover:from-[#146299] hover:to-[#1C8DC8] transition-all duration-300 rounded-full shadow-[0_12px_32px_rgba(28,141,200,0.22)] hover:shadow-[0_16px_40px_rgba(28,141,200,0.35)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer inline-flex items-center justify-center space-x-2.5"
     >
       <span>Schedule 3-Day Free Trial Now</span>
     </button>

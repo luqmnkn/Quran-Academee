@@ -992,10 +992,10 @@ export default function Pricing({
                   <div className="pt-8 mt-auto">
                     <button
                       onClick={() => handleBookTrial(plan.name, planDetailsString)}
-                      className={`w-full py-3.5 px-4 font-display font-black text-xs uppercase tracking-widest rounded-xl transition-all duration-300 cursor-pointer flex items-center justify-center space-x-1.5 ${
+                      className={`w-full py-4 px-5 font-display font-black text-xs uppercase tracking-widest rounded-full transition-all duration-300 cursor-pointer flex items-center justify-center space-x-1.5 ${
                         isActiveCard
-                          ? 'bg-gradient-to-r from-[#1C8DC8] via-[#3D8DC3] to-[#146299] hover:from-[#146299] hover:to-[#1C8DC8] text-white hover:scale-[1.01] shadow-[0_12px_30px_rgba(28,141,200,0.35)] border-0'
-                          : 'bg-[#0B3951] hover:bg-[#1C8DC8] text-white hover:scale-[1.01] shadow-sm hover:shadow-md'
+                          ? 'bg-gradient-to-r from-[#1C8DC8] via-[#3D8DC3] to-[#146299] hover:from-[#146299] hover:to-[#1C8DC8] text-white shadow-[0_12px_32px_rgba(28,141,200,0.28)] hover:shadow-[0_16px_40px_rgba(28,141,200,0.42)] hover:-translate-y-0.5 active:translate-y-0 border-0'
+                          : 'bg-[#0B3951] hover:bg-[#1C8DC8] text-white shadow-[0_8px_24px_rgba(11,57,81,0.2)] hover:shadow-[0_12px_32px_rgba(28,141,200,0.32)] hover:-translate-y-0.5 active:translate-y-0'
                       }`}
                     >
                       <span>Book Free Trial</span>
@@ -1203,7 +1203,7 @@ export default function Pricing({
                   const details = `Custom: ${courseData.label} - ${customDays} Days/Week (${selectedDaysList.join(', ')}) - ${customDuration} (${customDays * 4} Classes/Month) - ${currentCountry.symbol}${customPriceConverted}/month`;
                   handleBookTrial('Custom Plan', details);
                 }}
-                className="w-full bg-gradient-to-r from-[#1C8DC8] to-[#3D8DC3] hover:from-[#3D8DC3] hover:to-[#1C8DC8] text-white font-display font-black text-xs uppercase tracking-widest py-3 sm:py-3.5 rounded-xl transition-all hover:scale-[1.01] shadow-lg shadow-[#1C8DC8]/10 cursor-pointer border-0 mt-2"
+                className="w-full bg-gradient-to-r from-[#1C8DC8] via-[#3D8DC3] to-[#146299] hover:from-[#146299] hover:to-[#1C8DC8] text-white font-display font-black text-xs uppercase tracking-widest py-4 rounded-full transition-all duration-300 shadow-[0_12px_32px_rgba(28,141,200,0.28)] hover:shadow-[0_16px_40px_rgba(28,141,200,0.42)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer border-0 mt-2"
               >
                 Book Custom Trial
               </button>

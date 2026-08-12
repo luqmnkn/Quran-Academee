@@ -15,7 +15,7 @@ export default function FAQSection() {
   return (
     <section 
       id="faqs" 
-      className="py-16 sm:py-20 md:py-24 bg-gradient-to-b from-white via-[#F0F9FF] to-white border-t border-[#E0F2FE] relative overflow-hidden"
+      className="py-16 sm:py-20 md:py-24 bg-gradient-to-b from-white via-[#F0F9FF]/40 to-white relative overflow-hidden"
     >
       {/* Background radial highlight */}
       <div className="absolute top-1/4 right-0 w-80 h-80 bg-[#1C8DC8]/3 rounded-full blur-[120px] pointer-events-none" />
