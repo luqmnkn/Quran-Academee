@@ -562,10 +562,7 @@ export default function InquiryForm({
       {/* Left Column: Context / Value Proposition */}
       <div className="lg:col-span-5 flex flex-col justify-between space-y-4 bg-[#0B3951] text-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-xl">
         <div className="space-y-4">
-          <div className="inline-flex items-center space-x-2 bg-white/10 text-sky-200 border border-white/15 px-3 py-1 rounded-full text-[11px] font-mono font-semibold uppercase tracking-wider">
-            <Sparkles size={12} className="text-sky-300" />
-            <span>3-Day Free Trial</span>
-          </div>
+          
 
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-extrabold text-white leading-tight">
             Start Your Quran Learning Journey Today
