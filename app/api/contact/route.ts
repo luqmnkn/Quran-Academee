@@ -3,6 +3,7 @@ import { isRateLimited } from '@/lib/rateLimiter';
 import { sendEmail } from '@/lib/resend';
 import { appendLeadToSheet } from '@/lib/googleSheets';
 import { contactSchema } from '@/lib/validations/contact';
+import { generateUserConfirmationEmailHtml } from '@/utils/emailTemplates';
 
 export const maxDuration = 15;
 
@@ -215,6 +216,26 @@ export async function POST(req: NextRequest) {
       subject: `New Lead Request: ${data.fullName} (${data.courseInterest})`,
       html: adminEmailHtml,
     });
+
+    // 3. Dispatch user confirmation email directly to the student/parent
+    try {
+      const userEmailHtml = generateUserConfirmationEmailHtml({
+        fullName: data.fullName,
+        email: data.email,
+        phone: data.phone,
+        country: data.country,
+        courseInterest: data.courseInterest,
+        message: data.message,
+      });
+
+      await sendEmail({
+        to: data.email,
+        subject: `Assalamu Alaikum! Your 3-Day Free Trial Request is Received — Quran Academee`,
+        html: userEmailHtml,
+      });
+    } catch (userEmailErr) {
+      console.error('[User Confirmation Email Error]: Non-blocking user confirmation email dispatch failed:', userEmailErr);
+    }
 
     return NextResponse.json(
       { success: true, message: 'Your lead request was securely processed.' },
