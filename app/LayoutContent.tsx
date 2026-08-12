@@ -44,51 +44,78 @@ export default function LayoutContent({
   }, [pathname, searchParams]);
 
   const handleOpenTrialModal = (planOrCourseName?: string) => {
-    const params = new URLSearchParams(window.location.search);
-    params.set('trial', 'true');
-    if (planOrCourseName) {
-      params.set('plan', planOrCourseName);
-    } else {
-      params.delete('plan');
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      params.set('trial', 'true');
+      if (planOrCourseName) {
+        params.set('plan', planOrCourseName);
+      } else {
+        params.delete('plan');
+      }
+      const newUrl = `${pathname}?${params.toString()}`;
+      window.history.replaceState(null, '', newUrl);
     }
-    router.push(`${pathname}?${params.toString()}`, { scroll: false });
+    setIsTrialModalOpen(true);
+    if (planOrCourseName) {
+      setSelectedCourseSelection(planOrCourseName);
+    }
   };
 
   const handleCloseTrialModal = () => {
     setIsTrialModalOpen(false);
     setSelectedCourseSelection('');
     setSelectedDetailsSelection('');
-    const params = new URLSearchParams(window.location.search);
-    params.delete('trial');
-    params.delete('plan');
-    params.delete('details');
-    const newUrl = params.toString() ? `${pathname}?${params.toString()}` : pathname;
-    router.push(newUrl, { scroll: false });
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      params.delete('trial');
+      params.delete('plan');
+      params.delete('details');
+      const cleanUrl = params.toString() ? `${pathname}?${params.toString()}` : pathname;
+      window.history.replaceState(null, '', cleanUrl);
+    }
   };
 
-  // Open trial modal if requested via URL query params
+  // Sync trial modal state from URL query params cleanly without history stack clutter
   useEffect(() => {
-    const trial = searchParams.get('trial');
-    const plan = searchParams.get('plan');
-    const details = searchParams.get('details');
-    if (trial === 'true') {
-      setIsTrialModalOpen(true);
-      if (plan) {
-        setSelectedCourseSelection(plan);
+    const syncModalStateFromUrl = () => {
+      if (typeof window === 'undefined') return;
+      const params = new URLSearchParams(window.location.search);
+      const trial = params.get('trial');
+      const plan = params.get('plan');
+      const details = params.get('details');
+
+      if (trial === 'true') {
+        setIsTrialModalOpen(true);
+        if (plan) setSelectedCourseSelection(plan);
+        if (details) setSelectedDetailsSelection(details);
       } else {
+        setIsTrialModalOpen(false);
         setSelectedCourseSelection('');
-      }
-      if (details) {
-        setSelectedDetailsSelection(details);
-      } else {
         setSelectedDetailsSelection('');
       }
-    } else {
-      setIsTrialModalOpen(false);
-      setSelectedCourseSelection('');
-      setSelectedDetailsSelection('');
-    }
-  }, [searchParams, pathname]);
+    };
+
+    syncModalStateFromUrl();
+
+    window.addEventListener('popstate', syncModalStateFromUrl);
+    window.addEventListener('open-trial-modal', syncModalStateFromUrl);
+
+    return () => {
+      window.removeEventListener('popstate', syncModalStateFromUrl);
+      window.removeEventListener('open-trial-modal', syncModalStateFromUrl);
+    };
+  }, [pathname, searchParams]);
+
+  // Bind Escape key to close modal
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isTrialModalOpen) {
+        handleCloseTrialModal();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isTrialModalOpen]);
 
   return (
     <>
@@ -108,8 +135,14 @@ export default function LayoutContent({
 
       {/* Free Trial Popup Modal (Centered Modal) */}
       {isTrialModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900/60 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-white w-full max-w-lg max-h-[90vh] rounded-3xl shadow-2xl overflow-y-auto relative flex flex-col justify-start animate-in zoom-in-95 duration-200 p-6 sm:p-8">
+        <div 
+          onClick={handleCloseTrialModal}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900/60 backdrop-blur-sm animate-in fade-in duration-200 cursor-pointer"
+        >
+          <div 
+            onClick={(e) => e.stopPropagation()}
+            className="bg-white w-full max-w-lg max-h-[90vh] rounded-3xl shadow-2xl overflow-y-auto relative flex flex-col justify-start animate-in zoom-in-95 duration-200 p-6 sm:p-8 cursor-default"
+          >
             
             {/* Floating Close Button */}
             <button

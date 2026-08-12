@@ -437,7 +437,17 @@ export default function Pricing({
     if (onBookTrial && onBookTrial.toString() !== '() => {}') {
       onBookTrial(planName, planDetails);
     }
-    window.location.href = `/?trial=true&plan=${encodeURIComponent(planName)}&details=${encodeURIComponent(planDetails)}`;
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      params.set('trial', 'true');
+      params.set('plan', planName);
+      if (planDetails) {
+        params.set('details', planDetails);
+      }
+      const newUrl = `${window.location.pathname}?${params.toString()}`;
+      window.history.replaceState(null, '', newUrl);
+      window.dispatchEvent(new Event('open-trial-modal'));
+    }
   };
 
   // Global country selection

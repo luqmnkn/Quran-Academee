@@ -140,14 +140,14 @@ export default function About({ onOpenTrialModal }: AboutProps) {
               We appreciate that every student is unique and advances at their own natural speed. Our live classes are conducted as supportive, friendly dialogs rather than stressful examinations. We seamlessly fuse classic Arabic spelling (Noorani Qaida) rules with interactive video platforms, ensuring your children read the verses with absolute beauty, correct pronunciation, and deep admiration.
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3">
+            <div className="hidden sm:grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3">
               <div className="space-y-2.5 p-6 rounded-[24px] bg-[#F0F9FF] border border-[#E0F2FE] hover:border-[#1C8DC8]/30 transition-all duration-350">
                 <h4 className="font-display font-[900] text-sm text-[#0B3951] flex items-center space-x-2">
                   <span className="w-2.5 h-2.5 rounded-full bg-[#1C8DC8]"></span>
-                  <span>Perfect Makharij Accuracy</span>
+                  <span>A Beautiful Islamic Environment</span>
                 </h4>
                 <p className="text-xs text-slate-600 leading-relaxed">
-                  Focusing closely on native tongue and throat positions so children learn correct letter origins.
+                  Focusing closely on creating a warm, respectful, and faith-centered atmosphere for all learners.
                 </p>
               </div>
               

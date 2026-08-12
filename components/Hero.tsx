@@ -280,7 +280,7 @@ export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
               <img
                 src={imghero.src}
                 alt="Quran Academee Student"
-                className="h-full w-auto object-contain object-bottom rounded-t-[32px] rounded-b-none drop-shadow-[0_15px_35px_rgba(28,141,200,0.14)] filter contrast-[1.01] block"
+                className="h-full w-auto object-contain object-bottom rounded-t-[32px] rounded-b-none drop-shadow-[0_6px_12px_rgba(28,141,200,0.08)] filter contrast-[1.01] block"
                 referrerPolicy="no-referrer"
               />
 
@@ -327,10 +327,10 @@ export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
                 initial={{ opacity: 0, x: 30, y: 30 }}
                 animate={{ opacity: 1, x: 0, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
-                className="absolute bottom-8 sm:bottom-12 -right-4 sm:-right-6 bg-gradient-to-br from-white/98 to-[#F0F9FF]/98 backdrop-blur-xl border border-[#3D8DC3]/20 p-4 rounded-2xl shadow-[0_20px_40px_rgba(11,57,81,0.08)] flex items-center space-x-3.5 max-w-[240px] sm:max-w-[280px] z-30"
+                className="absolute bottom-8 sm:bottom-12 -right-4 sm:-right-6 bg-gradient-to-br from-white/98 to-[#F0F9FF]/98 backdrop-blur-xl border border-[#3D8DC3]/20 p-4 rounded-2xl shadow-[0_6px_16px_rgba(11,57,81,0.06)] flex items-center space-x-3.5 max-w-[240px] sm:max-w-[280px] z-100"
               >
                 <div className="text-left flex-1">
-                  <h4 className="font-sans font-extrabold text-xs sm:text-sm text-[#0B3951] leading-tight">
+                  <h4 className="font-sans font-extrabold text-xs sm:text-sm text-[#0B3951] leading-tight ">
                     Pure, guided Qur'an education.
                   </h4>
                   <p className="text-[10px] sm:text-xs text-[#146299] mt-1 leading-normal font-medium">
@@ -367,72 +367,54 @@ export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
           </div>
 
           {/* Image Container (Mobile Full Width) */}
-          <div className="relative flex justify-center items-end w-full h-[40vh] xs:h-[45vh] sm:h-[50vh] z-10">
-            <div className="absolute w-[95%] aspect-square bg-gradient-to-tr from-[#3D8DC3]/15 to-[#1C8DC8]/5 rounded-full blur-3xl -z-10 bottom-0" />
-            
-            <motion.div
-              initial={{ opacity: 0, scale: 0.98 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.15, ease: "easeOut" }}
-              className="relative w-full h-full flex items-end justify-center select-none origin-bottom"
-              style={{
-                maskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
-                WebkitMaskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)'
-              }}
-            >
-              <Image
-                src={imghero}
-                alt="Quran Academee Student"
-                priority
-                className="h-full w-auto object-contain object-bottom rounded-t-[32px] rounded-b-none drop-shadow-[0_15px_35px_rgba(28,141,200,0.14)] block z-20"
-              />
+<div className="relative flex justify-center items-end w-full h-[40vh] xs:h-[45vh] sm:h-[50vh] z-10">
+  <div className="absolute w-[95%] aspect-square bg-gradient-to-tr from-[#3D8DC3]/15 to-[#1C8DC8]/5 rounded-full blur-3xl -z-10 bottom-0" />
+  
+  <motion.div
+    initial={{ opacity: 0, scale: 0.98 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{ duration: 0.15, ease: "easeOut" }}
+    className="relative w-full h-full flex items-end justify-center select-none origin-bottom"
+    style={{
+      maskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)',
+      WebkitMaskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)'
+    }}
+  >
+    <Image
+      src={imghero}
+      alt="Quran Academee Student"
+      priority
+      className="h-full w-auto object-contain object-bottom rounded-t-[32px] rounded-b-none drop-shadow-[0_6px_12px_rgba(28,141,200,0.08)] block z-20"
+    />
 
-              {/* Bottom Soft Mask Overlay */}
-              <div className="absolute inset-x-0 bottom-0 h-20 sm:h-28 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none z-30" />
+    {/* Reduced Height Soft Bottom Fade Mask */}
+    <div className="absolute inset-x-0 bottom-0 h-8 sm:h-12 bg-gradient-to-t from-white via-white/70 to-transparent pointer-events-none z-30" />
 
-              {/* Rating Widget (Mobile layout - no arrow) */}
-              <motion.div
-                initial={{ opacity: 0, x: 30, y: -20 }}
-                animate={{ opacity: 1, x: 0, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="absolute top-4 right-2 bg-gradient-to-br from-white/95 to-[#F0F9FF]/95 backdrop-blur-xl border border-[#3D8DC3]/25 p-2.5 rounded-xl shadow-[0_10px_20px_rgba(11,57,81,0.05)] max-w-[150px] xs:max-w-[170px] z-30"
-              >
-                <div className="flex items-center space-x-1 mb-0.5">
-                  <span className="font-sans font-black text-sm text-[#1C8DC8]">5.0</span>
-                  <div className="flex text-amber-400">
-                    <Star className="w-3 h-3 fill-current" />
-                    <Star className="w-3 h-3 fill-current" />
-                    <Star className="w-3 h-3 fill-current" />
-                    <Star className="w-3 h-3 fill-current" />
-                    <Star className="w-3 h-3 fill-current" />
-                  </div>
-                </div>
-                <p className="text-[9px] text-slate-700 leading-tight font-medium text-left">
-                  Trusted by 12,000+ families.
-                </p>
-              </motion.div>
+    {/* Rating Widget (Mobile layout - no arrow) */}
+    <motion.div
+      initial={{ opacity: 0, x: 30, y: -20 }}
+      animate={{ opacity: 1, x: 0, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.4 }}
+      className="absolute top-4 right-2 bg-gradient-to-br from-white/95 to-[#F0F9FF]/95 backdrop-blur-xl border border-[#3D8DC3]/25 p-2.5 rounded-xl shadow-[0_10px_20px_rgba(11,57,81,0.05)] max-w-[150px] xs:max-w-[170px] z-30"
+    >
+      <div className="flex items-center space-x-1 mb-0.5">
+        <span className="font-sans font-black text-sm text-[#1C8DC8]">5.0</span>
+        <div className="flex text-amber-400">
+          <Star className="w-3 h-3 fill-current" />
+          <Star className="w-3 h-3 fill-current" />
+          <Star className="w-3 h-3 fill-current" />
+          <Star className="w-3 h-3 fill-current" />
+          <Star className="w-3 h-3 fill-current" />
+        </div>
+      </div>
+      <p className="text-[9px] text-slate-700 leading-tight font-medium text-left">
+        Trusted by 12,000+ families.
+      </p>
+    </motion.div>
 
-              {/* Info Widget (Mobile layout) */}
-              <motion.div
-                initial={{ opacity: 0, x: 30, y: 20 }}
-                animate={{ opacity: 1, x: 0, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.5 }}
-                className="absolute bottom-6 right-2 bg-gradient-to-br from-white/95 to-[#F0F9FF]/95 backdrop-blur-xl border border-[#3D8DC3]/25 p-2.5 rounded-xl shadow-[0_10px_20px_rgba(11,57,81,0.05)] flex items-center space-x-2 max-w-[160px] xs:max-w-[185px] z-30"
-              >
-                <div className="text-left flex-1">
-                  <h4 className="font-sans font-extrabold text-[9px] text-[#0B3951] leading-tight">
-                    Pure Quran education.
-                  </h4>
-                  <p className="text-[8px] text-[#146299] mt-0.5 leading-normal font-medium">
-                    Learn recitation & Tajweed.
-                  </p>
-                </div>
-                <div className="bg-[#1C8DC8]/10 p-1 rounded-md shrink-0">
-                  <BookOpen className="w-3.5 h-3.5 text-[#1C8DC8]" />
-                </div>
-              </motion.div>
-            </motion.div>
-          </div>
+
+  </motion.div>
+</div>
 
           {/* Action Buttons (Mobile only bottom CTAs) */}
           <motion.div
