@@ -1,4 +1,5 @@
 import React, { Suspense } from 'react';
+import Script from 'next/script';
 import { Inter, Rubik, Courgette } from 'next/font/google';
 import LayoutContent from './LayoutContent';
 import './globals.css';
@@ -46,6 +47,21 @@ export default function RootLayout({
   return (
     <html lang="en" className={`scroll-smooth ${inter.variable} ${rubik.variable} ${courgette.variable}`}>
       <head>
+        {/* Google tag (gtag.js) */}
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-T1HV73Q5RN"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-T1HV73Q5RN');
+          `}
+        </Script>
         <link rel="icon" href="/images/favicon.png" type="image/png" sizes="any" />
         <link rel="shortcut icon" href="/images/favicon.png" type="image/png" />
         <link rel="apple-touch-icon" href="/images/favicon.png" />
