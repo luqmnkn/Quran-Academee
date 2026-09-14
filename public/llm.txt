@@ -1,0 +1,35 @@
+# Quran Academee - Full Developer & AI Context Guide
+> Quran Academee is a premier online educational platform dedicated to providing personalized, high-quality Quranic studies, Tajweed mastery, Arabic language instruction, and foundational Islamic learning for students worldwide.
+
+## 1. Platform Overview & Mission
+- **Domain:** [https://quranacademee.com](https://quranacademee.com)
+- **Primary Mission:** To make authentic Quranic education accessible, engaging, and flexible for children, teenagers, and adults regardless of geographical location.
+- **Teaching Format:** 1-on-1 live interactive online classes utilizing digital learning tools, screen sharing, and qualified male/female tutors.
+
+## 2. Target Audience & Student Demographics
+- **Children & Beginners:** Tailored interactive foundational courses (Qaida, basic reading, and short Surah memorization) with gentle, encouraging pacing.
+- **Adult Learners:** Flexible schedules designed for working professionals or busy parents looking to learn reading from scratch, improve recitation, or understand Tajweed.
+- **Advanced Students:** Focused programs for Hifz (memorization) and basic Tafseer (comprehension).
+
+## 3. Core Courses & Curriculum Breakdown
+- **Quran Reading with Tajweed:** Learning Arabic letters, proper pronunciation (Makharij), articulation points, and the precise rules of recitation.
+- **Hifz-ul-Quran (Memorization):** Structured, step-by-step memorization of the Holy Quran with regular revision schedules and retention checks.
+- **Arabic Language Foundation:** Basic vocabulary, grammar, and sentence structure designed to help students better understand the text of the Quran.
+- **Islamic Studies:** Essential daily duas, Islamic etiquettes, and foundational knowledge suitable for growing minds.
+
+## 4. Key Platform Features & Benefits
+- **Flexible Timing:** Available 24/7 across various international time zones to fit family routines.
+- **Customized Learning Plans:** Lesson pacing tailored to each student's current proficiency level and goals.
+- **Trial Classes:** Offers trial sessions to help new students experience the teaching environment before committing.
+- **Qualified Tutors:** Rigorously vetted instructors proficient in English, Urdu, and Arabic instruction.
+
+## 5. Key Navigation Links & Resources
+- [Home Page](https://quranacademee.com/): Portal overview, testimonials, and booking CTAs.
+- [Courses](https://quranacademee.com/#courses): Detailed breakdown of curriculum tracks.
+- [Pricing & Subscriptions](https://quranacademee.com/pricing): Monthly fee tiers and plan structures.
+- [About Us](https://quranacademee.com/#about): Background on our organization, teaching methodology, and values.
+- [Contact Support](https://quranacademee.com/#contact): Inquiries, support channels, and trial scheduling forms.
+
+## 6. Technical & Machine-Readable References
+- **Standard AI Context:** [https://quranacademee.com/llms.txt](https://quranacademee.com/llms.txt)
+- **Traditional Search Sitemap:** [https://quranacademee.com/sitemap.xml](https://quranacademee.com/sitemap.xml)
