@@ -16,18 +16,21 @@ export default function About({ onOpenTrialModal }: AboutProps) {
       num: '01',
       title: 'Book a Free Trial',
       desc: 'Fill out our simple inquiry form. Our scheduling coordinator will reach out directly on WhatsApp to coordinate a convenient time.',
+      mobileDesc: 'Book your free trial class in seconds.',
       icon: 'CalendarRange'
     },
     {
       num: '02',
-      title: 'Meet Your Tutor',
-      desc: 'Connect live with a certified expert tutor. We assess the learner\'s levels and suggest a customized curriculum path.',
+      title: 'Meet Your Scholar',
+      desc: 'Connect live with a certified expert scholar. We assess your level and outline a personalized course path tailored to your goals.',
+      mobileDesc: 'Connect live for a friendly level assessment.',
       icon: 'UserCheck'
     },
     {
       num: '03',
-      title: 'Begin Quran Classes',
-      desc: 'Lock in your weekly class slots and join highly interactive 1-on-1 virtual sessions. Watch your family\'s Tajweed skills rise.',
+      title: 'Begin Learning',
+      desc: 'Join interactive 1-on-1 virtual sessions to master Tajweed, understand verses, and apply Quranic principles in daily life.',
+      mobileDesc: 'Start 1-on-1 classes to recite and live by Quran.',
       icon: 'GraduationCap'
     }
   ];
@@ -94,8 +97,8 @@ export default function About({ onOpenTrialModal }: AboutProps) {
 >
   <div className="absolute -top-6 -left-6 w-80 h-80 bg-[#1C8DC8]/5  blur-3xl pointer-events-none"></div>
   
-  {/* Multi borders */}
-  <div className="">
+  {/* Logo Picture */}
+  <div className="w-full h-full">
     
     {/* Mobile Image (Hidden on desktop md+) */}
     <Image
@@ -104,17 +107,17 @@ export default function About({ onOpenTrialModal }: AboutProps) {
       width={600}
       height={400}
       priority
-      className="block md:hidden w-full h-auto object-cover"
+      className="block md:hidden w-full h-auto object-contain"
     />
 
     {/* Desktop Image (Hidden on mobile, visible on md+) */}
     <Image
       src="/images/footerLogo.png"
       alt="Student learning session with certified female tutor represented by Quran Academee classes"
-      width={600}
+      width={500}
       height={400}
       priority
-      className="hidden md:block w-full h-auto rounded-[24px] object-cover"
+      className="hidden md:block w-full h-auto object-contain"
     />
     
   </div>
@@ -129,35 +132,35 @@ export default function About({ onOpenTrialModal }: AboutProps) {
             className="lg:col-span-7 space-y-8"
           >
             <h2 className="font-display font-[900] text-2xl sm:text-3xl lg:text-[38px] xl:text-[42px] text-[#0B3951] tracking-[-0.040em] leading-[1.1] filter drop-shadow-sm">
-              A Kind, Compassionate Pathway toward <span className="font-allura text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] via-[#146299] to-[#0B3951]">Noble Quran Tajweed</span>
+              Learn to Recite, Understand, and <span className="font-allura text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] via-[#146299] to-[#0B3951]">Live by the Quran</span>
             </h2>
 
             <p className="font-sans font-medium text-[18px] text-slate-700 leading-relaxed">
-              At <strong>Quran Academee</strong>, we establish a warm, encouraging environment connecting families globally with highly certified, authorized expert educators from the comfort of home.
+              At <strong>Quran Academee</strong>, our main purpose is helping students learn how to live according to the Quran in their daily choices, character, and family life.
             </p>
 
             <p className="font-sans font-medium text-[16px] text-slate-600 leading-relaxed">
-              We appreciate that every student is unique and advances at their own natural speed. Our live classes are conducted as supportive, friendly dialogs rather than stressful examinations. We seamlessly fuse classic Arabic spelling (Noorani Qaida) rules with interactive video platforms, ensuring your children read the verses with absolute beauty, correct pronunciation, and deep admiration.
+              While we offer essential courses in reading, Tajweed, and memorization as foundational starting steps, our focus goes further—guiding learners to understand divine translation and apply Quranic values every day.
             </p>
 
             <div className="hidden sm:grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3">
               <div className="space-y-2.5 p-6 rounded-[24px] bg-[#F0F9FF] border border-[#E0F2FE] hover:border-[#1C8DC8]/30 transition-all duration-350">
                 <h4 className="font-display font-[900] text-sm text-[#0B3951] flex items-center space-x-2">
                   <span className="w-2.5 h-2.5 rounded-full bg-[#1C8DC8]"></span>
-                  <span>A Beautiful Islamic Environment</span>
+                  <span>Living by Quranic Guidance</span>
                 </h4>
                 <p className="text-xs text-slate-600 leading-relaxed">
-                  Focusing closely on creating a warm, respectful, and faith-centered atmosphere for all learners.
+                  Focusing on applying divine teachings to personal character, daily habits, and family decisions.
                 </p>
               </div>
               
               <div className="space-y-2.5 p-6 rounded-[24px] bg-[#F0F9FF] border border-[#E0F2FE] hover:border-[#1C8DC8]/30 transition-all duration-350">
                 <h4 className="font-display font-[900] text-sm text-[#0B3951] flex items-center space-x-2">
                   <span className="w-2.5 h-2.5 rounded-full bg-[#1C8DC8]"></span>
-                  <span>Patient Female Specialists</span>
+                  <span>Patient Female Scholars</span>
                 </h4>
                 <p className="text-xs text-slate-600 leading-relaxed">
-                   Gentle and loving certified female Sheikhahs highly protective of young kids and sisters.
+                   Gentle and highly protective certified female scholars for sisters and young children.
                 </p>
               </div>
             </div>
@@ -172,28 +175,29 @@ export default function About({ onOpenTrialModal }: AboutProps) {
       The Simplest Process
     </span>
     <h3 className="font-display font-[900] text-2xl sm:text-[45px] text-[#0B3951] tracking-[-0.04em] leading-tight">
-      Begin Your Path in <span className="font-allura text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] via-[#146299] to-[#0B3951]">3 Elegant Steps</span>
+      Begin Your Path in <span className="font-allura text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] via-[#146299] to-[#0B3951]">3 Easy Steps</span>
     </h3>
   </div>
 
-  {/* MOBILE UI: 100vw Themed Connected Blocks */}
-  <div className="block sm:hidden relative w-screen left-1/2 -translate-x-1/2 px-3 py-4">
-    {/* Colored Gradient Connecting Line */}
-    <div className="absolute top-1/2 left-[12%] right-[12%] h-[3px] bg-gradient-to-r from-[#1C8DC8] via-[#146299] to-[#0B3951] -translate-y-1/2 -z-0 rounded-full opacity-60" />
-
-    {/* 3 Connected Pill Containers */}
-    <div className="relative z-10 flex items-center justify-between gap-2 w-full px-1">
+  {/* MOBILE UI: 3 Clean Connected Step Cards with 1-Sentence Descriptions */}
+  <div className="block sm:hidden relative w-full px-2 py-2">
+    <div className="flex flex-col space-y-3 w-full">
       {steps.map((step, idx) => (
         <div 
           key={idx}
-          className="flex-1 bg-gradient-to-b from-white to-[#F0F9FF] border border-[#E0F2FE] rounded-2xl p-2.5 min-h-[96px] flex flex-col items-center justify-center text-center shadow-[0_8px_20px_rgba(28,141,200,0.08)] ring-1 ring-[#1C8DC8]/10"
+          className="bg-gradient-to-r from-white via-white to-[#F0F9FF] border border-[#E0F2FE] rounded-2xl p-3.5 flex items-center space-x-3.5 shadow-sm text-left"
         >
-          <h4 className="font-display font-bold text-xs text-[#0B3951] leading-tight mb-1">
-            {step.title}
-          </h4>
-          <p className="text-[10px] font-medium text-[#146299]/90 leading-tight line-clamp-2">
-            {step.desc}
-          </p>
+          <div className="w-10 h-10 rounded-xl bg-[#0B3951] text-[#1C8DC8] flex items-center justify-center font-display font-extrabold text-xs shrink-0 shadow-inner border border-[#E0F2FE]">
+            {step.num}
+          </div>
+          <div className="flex-1 min-w-0">
+            <h4 className="font-display font-extrabold text-xs text-[#0B3951] leading-tight">
+              {step.title}
+            </h4>
+            <p className="text-[11px] font-medium text-slate-600 leading-snug mt-0.5">
+              {step.mobileDesc}
+            </p>
+          </div>
         </div>
       ))}
     </div>

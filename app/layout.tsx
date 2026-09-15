@@ -25,19 +25,19 @@ const courgette = Courgette({
 });
 
 export const metadata = {
-  title: 'Quran Academee - Live 1-on-1 Quran Classes',
-  description: 'Learn Quran online with qualified, certified male and female scholars. Tajweed rules, memorization, and Arabic lessons.',
+  title: 'Quran Academee - Sacred Recitation to Living Wisdom',
+  description: 'Master Tajweed, reading & Hifz as vital foundations, then connect deeply through Quran understanding, translation & daily life application.',
   // 1. Set your domain base URL so Next.js can resolve relative paths
   metadataBase: new URL('https://quranacademee.com'),
   
   openGraph: {
-    title: 'Quran Academee - Live 1-on-1 Quran Classes',
-    description: 'Learn Quran online with qualified, certified male and female scholars. Tajweed rules, memorization, and Arabic lessons.',
+    title: 'Quran Academee - Sacred Recitation to Living Wisdom',
+    description: 'Master Tajweed, reading & Hifz as vital foundations, then connect deeply through Quran understanding, translation & daily life application.',
     url: 'https://quranacademee.com',
     siteName: 'Quran Academee',
     images: [
       {
-        url: '/images/favicon.png', // 2. Points directly to your static file in public/images/
+        url: '/images/link.png', // 2. Points directly to your static file in public/images/
         width: 1200,
         height: 630,
         alt: 'Quran Academee Preview',

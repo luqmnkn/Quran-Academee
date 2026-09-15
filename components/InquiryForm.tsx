@@ -560,17 +560,33 @@ export default function InquiryForm({
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 items-center w-full max-h-full">
       
       {/* Left Column: Context / Value Proposition */}
-      <div className="lg:col-span-5 flex flex-col justify-between space-y-4 bg-[#0B3951] text-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-xl">
-        <div className="space-y-4">
-          
+      <div className="lg:col-span-5 flex flex-col justify-between space-y-4 bg-[#0B3951] text-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-xl relative overflow-hidden">
+        {/* Background Decorative Lines & Pattern */}
+        <div className="absolute inset-0 pointer-events-none opacity-15 overflow-hidden">
+          <svg className="w-full h-full" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M-50 80 C120 20, 220 180, 450 60" stroke="#1C8DC8" strokeWidth="2" strokeDasharray="6 6" />
+            <path d="M-50 180 C100 120, 260 260, 450 140" stroke="white" strokeWidth="1.5" />
+            <path d="M-50 280 C140 200, 210 340, 450 240" stroke="#1C8DC8" strokeWidth="2" strokeDasharray="4 4" />
+            <circle cx="340" cy="70" r="110" stroke="white" strokeWidth="1.5" />
+            <circle cx="60" cy="330" r="85" stroke="#1C8DC8" strokeWidth="1.5" />
+          </svg>
+        </div>
+
+        <div className="space-y-4 relative z-10">
+          <div className="inline-flex items-center space-x-2 bg-white/10 border border-white/20 px-3 py-1 rounded-full w-fit">
+            <Sparkles className="w-3.5 h-3.5 text-sky-300" />
+            <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-sky-200">
+              Free 3-Day Trial
+            </span>
+          </div>
 
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-extrabold text-white leading-tight">
-            Start Your Quran Learning Journey Today
+            Book Your Free Trial
           </h2>
 
           {/* HIDDEN ON MOBILE */}
           <p className="hidden lg:block text-xs sm:text-sm text-slate-300 leading-relaxed">
-            Experience personalized 1-on-1 Quran classes with qualified male and female tutors. Book your free 3-day trial session with zero obligation.
+            Experience 1-on-1 live instruction combining sacred recitation, Tajweed, and Hifz with clear understanding and daily implementation.
           </p>
 
           {/* HIDDEN ON MOBILE */}
@@ -598,7 +614,7 @@ export default function InquiryForm({
         </div>
 
         {/* HIDDEN ON MOBILE */}
-        <div className="hidden lg:block border-t border-white/10 pt-4 mt-2">
+        <div className="hidden lg:block border-t border-white/10 pt-4 mt-2 relative z-10">
           <p className="text-[11px] text-slate-400">
             Have urgent queries? Contact scheduling directly on WhatsApp for immediate support.
           </p>

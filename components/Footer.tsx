@@ -25,7 +25,7 @@ export default function Footer() {
             </Link>
             
             <p className="text-xs text-slate-300 leading-relaxed max-w-sm">
-              An international online Quran academy providing personalized 1-on-1 certified live instruction for children and adults. Helping families master Tajweed and Quran memorization at home.
+              An international Quran academy guiding students from proper reading and Hifz to deep translation, character building, and daily life application.
             </p>
  
             <div className="flex flex-wrap items-center gap-2 pt-4">
@@ -189,7 +189,7 @@ export default function Footer() {
 
         {/* Brand Bottom line */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
-          <p>© {currentYear} Quran Academee. All Rights Reserved. Recite with Beauty.</p>
+          <p>© {currentYear} Quran Academee. All Rights Reserved. Bridging Divine Words with Living Action.</p>
           <div className="flex items-center space-x-4">
             <span>Designed with complete respect for Quranic learning</span>
           </div>

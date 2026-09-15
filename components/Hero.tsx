@@ -24,7 +24,7 @@ const VIDEO_REVIEWS: VideoReview[] = [
     age: '9 Years',
     courseName: 'Noorani Qaida Basics',
     duration: '3 Mos',
-    snippet: 'Zayd pronouncing complex Arabic letters perfectly with proper Tajweed articulation points (Makharij)!',
+    snippet: 'zayd pronouncing complex arabic letters perfectly with proper makharij',
     thumbnailGradient: 'from-emerald-500/25 via-[#1C8DC8]/20 to-[#0B3951]/20',
     videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4'
   },
@@ -34,7 +34,7 @@ const VIDEO_REVIEWS: VideoReview[] = [
     age: '11 Years',
     courseName: 'Quran Memorization (Hifz)',
     duration: '6 Mos',
-    snippet: 'Amira reciting her daily Sabaq (new memorization) with beautiful melodious tone and rhythmic rules.',
+    snippet: 'amira reciting her daily sabaq with beautiful tone and understanding',
     thumbnailGradient: 'from-[#1C8DC8]/25 via-[#3D8DC3]/20 to-[#0B3951]/20',
     videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4'
   },
@@ -44,7 +44,7 @@ const VIDEO_REVIEWS: VideoReview[] = [
     age: 'Brothers',
     courseName: 'Tajweed al Quran',
     duration: '1 Year',
-    snippet: 'How two brothers interact playfully and constructively with their Arab tutor during live 1-on-1 Quran sessions.',
+    snippet: 'how two brothers learn and interact playfully with their tutor in live session',
     thumbnailGradient: 'from-amber-500/15 via-[#1C8DC8]/20 to-[#146299]/20',
     videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4'
   },
@@ -54,7 +54,7 @@ const VIDEO_REVIEWS: VideoReview[] = [
     age: 'Adult',
     courseName: 'Fluent Recitation',
     duration: '5 Mos',
-    snippet: 'Reviewing adult Tajweed classes and explaining how flexible schedules accommodated his hospital shift changes.',
+    snippet: 'reviewing adult tajweed classes and how flexible timings fit my work shift',
     thumbnailGradient: 'from-indigo-500/20 via-[#1C8DC8]/20 to-[#0B3951]/20',
     videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4'
   }
@@ -208,7 +208,7 @@ export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="text-[#146299] text-base sm:text-lg lg:text-xl max-w-xl font-medium leading-relaxed"
               >
-                Begin your journey of Quran learning with Quran Academee, a trusted online platform designed to make recitation, Tajweed, and understanding the Quran easier for everyone.
+                Begin a complete Quranic journey starting with sacred recitation, Tajweed, and Hifz as vital foundations, moving directly into translation, deep understanding, and purposeful daily action.
               </motion.p>
             </div>
 
@@ -221,19 +221,19 @@ export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
             >
               <div className="flex items-center space-x-2">
                 <CheckCircle2 className="w-5 h-5 text-[#1C8DC8] shrink-0" />
-                <span>1-on-1 Certified Expert Tutors</span>
+                <span>1-on-1 Certified Expert Scholars</span>
               </div>
               <div className="flex items-center space-x-2">
                 <CheckCircle2 className="w-5 h-5 text-[#1C8DC8] shrink-0" />
-                <span>Customized Interactive Syllabuses</span>
+                <span>Sacred Recitation & Deep Meaning</span>
               </div>
               <div className="flex items-center space-x-2">
                 <CheckCircle2 className="w-5 h-5 text-[#1C8DC8] shrink-0" />
-                <span>Super Flexible 24/7 Scheduling</span>
+                <span>Flexible 24/7 Global Schedules</span>
               </div>
               <div className="flex items-center space-x-2">
                 <CheckCircle2 className="w-5 h-5 text-[#1C8DC8] shrink-0" />
-                <span>Female Tutors Available for Sisters</span>
+                <span>Dedicated Female & Male Tutors</span>
               </div>
             </motion.div>
 
@@ -329,10 +329,10 @@ export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
               >
                 <div className="text-left flex-1">
                   <h4 className="font-sans font-extrabold text-xs sm:text-sm text-[#0B3951] leading-tight ">
-                    Pure, guided Qur'an education.
+                    Sacred recitation to living wisdom.
                   </h4>
                   <p className="text-[10px] sm:text-xs text-[#146299] mt-1 leading-normal font-medium">
-                    Learn recitation, Tajweed & Hifz with certified expert scholars.
+                    Master Tajweed, Hifz & verse understanding with certified scholars.
                   </p>
                 </div>
                 <div className="bg-[#1C8DC8]/10 p-2 rounded-xl shrink-0">
