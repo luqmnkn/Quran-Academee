@@ -106,7 +106,7 @@ export default function WhyChooseUs() {
           </h2>
           
           <p className="font-sans font-medium text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
-            Our academy prioritizes professional teacher evaluations, scheduling convenience, verified certifications, and interactive spaces designed for success.
+            We combine traditional Tajweed excellence and Hifz guidance with interactive online learning to help students recite, understand, and live the Quran.
           </p>
         </div>
 

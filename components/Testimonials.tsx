@@ -22,7 +22,7 @@ const VIDEO_TESTIMONIALS: VideoTestimonial[] = [
     age: '9 Years',
     courseName: 'Noorani Qaida Basics',
     duration: '3 Months with Quran Academee',
-    snippet: 'Zayd pronouncing complex Arabic letters perfectly with Tajweed.',
+    snippet: 'zayd pronouncing complex arabic letters perfectly with proper makharij',
     thumbnailGradient: 'from-emerald-500/20 via-[#1C8DC8]/25 to-[#0B3951]/20',
     videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4'
   },
@@ -32,7 +32,7 @@ const VIDEO_TESTIMONIALS: VideoTestimonial[] = [
     age: '11 Years',
     courseName: 'Quran Memorization (Hifz)',
     duration: '6 Months with Quran Academee',
-    snippet: 'Amira reciting her daily Sabaq with melodious tone & rhythm.',
+    snippet: 'amira reciting her daily sabaq with beautiful tone and understanding',
     thumbnailGradient: 'from-[#1C8DC8]/20 via-[#3D8DC3]/25 to-[#0B3951]/20',
     videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4'
   },
@@ -42,7 +42,7 @@ const VIDEO_TESTIMONIALS: VideoTestimonial[] = [
     age: 'Brothers',
     courseName: 'Tajweed al Quran',
     duration: '1 Year with Quran Academee',
-    snippet: 'Brothers interacting playfully with their Arab tutor in live session.',
+    snippet: 'how two brothers learn and interact playfully with their tutor in live session',
     thumbnailGradient: 'from-amber-500/10 via-[#1C8DC8]/25 to-[#146299]/20',
     videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4'
   },
@@ -52,7 +52,7 @@ const VIDEO_TESTIMONIALS: VideoTestimonial[] = [
     age: 'Adult Student',
     courseName: 'Fluent Recitation',
     duration: '5 Months with Quran Academee',
-    snippet: 'Adult Tajweed review and flexible schedule feedback.',
+    snippet: 'reviewing adult tajweed classes and how flexible timings fit my work shift',
     thumbnailGradient: 'from-indigo-500/15 via-[#1C8DC8]/25 to-[#0B3951]/20',
     videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4'
   }
@@ -168,8 +168,8 @@ export default function Testimonials() {
           ))}
         </div>
 
-        <p className="text-xs sm:text-sm text-slate-700 leading-relaxed italic font-medium">
-          "{testimonial.feedback}"
+        <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal">
+          {testimonial.feedback}
         </p>
       </div>
 
@@ -209,7 +209,7 @@ export default function Testimonials() {
           </h2>
           
           <p className="font-sans font-medium text-[18px] text-slate-600 max-w-lg mx-auto leading-relaxed">
-            Discover how school children and adults are improving Arabic letter articulation and Tajweed rules at home.
+            Discover how kids and adults master Tajweed foundations while discovering deeper meaning and practical life guidance.
           </p>
 
           {/* Filtering tabs */}
@@ -272,7 +272,7 @@ export default function Testimonials() {
               Watch Our Students <span className="font-allura text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] to-[#146299]">Recite In Real-Time</span>
             </h3>
             <p className="font-sans font-medium text-sm sm:text-base text-slate-600 max-w-lg mx-auto">
-              Real recordings from 1-on-1 virtual sessions showing progress in Quranic recitation, fluency, and proper Tajweed.
+              Real recordings from 1-on-1 virtual sessions showing progress in Tajweed recitation, Hifz retention, and active reflection.
             </p>
           </div>
 

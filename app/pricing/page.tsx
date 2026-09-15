@@ -58,7 +58,7 @@ const PRICING_CATEGORIES: PricingCategory[] = [
     title: 'Alqaida Almadania Basics',
     subtitle: 'Qaida, Makharij & Foundations',
     icon: 'menu_book',
-    description: 'Perfect for beginners and children building a strong pronunciation foundation from absolute scratch.',
+    description: 'Foundational course for beginners building a strong pronunciation and Tajweed foundation leading to understanding.',
     plans: [
       {
         id: 'noorani-plan-1',
@@ -116,7 +116,7 @@ const PRICING_CATEGORIES: PricingCategory[] = [
     title: 'Quran Recitation & Reading',
     subtitle: 'Fluency, Waqf rules & Reading practice',
     icon: 'chrome_reader_mode',
-    description: 'Improve word recognition and develop smooth, fluent reading of the entire Mushaf with live tutor focus.',
+    description: 'Develop smooth Mushaf reading and Tajweed fluency, preparing for verse comprehension and daily action.',
     plans: [
       {
         id: 'reading-plan-1',
@@ -174,7 +174,7 @@ const PRICING_CATEGORIES: PricingCategory[] = [
     title: 'Tajweed al Quran',
     subtitle: 'Mastery of Tarteel, Mudood & Articulation',
     icon: 'workspace_premium',
-    description: 'Advanced phonetic rules to recite the Quran with the beautiful classical melody and precision.',
+    description: 'Master classical rules of Tarteel and Makharij to recite with precision, connecting words with character.',
     plans: [
       {
         id: 'tajweed-plan-1',
@@ -232,7 +232,7 @@ const PRICING_CATEGORIES: PricingCategory[] = [
     title: 'Quran Memorization (Hifz)',
     subtitle: 'Comprehensive Hifz with Senior Mentors',
     icon: 'psychology',
-    description: 'Structured, highly disciplined private program to memorize and retain the Quran with authentic Tajweed.',
+    description: 'Structured Hifz program to memorize and retain the Quran with authentic Tajweed while living its message.',
     plans: [
       {
         id: 'hifz-plan-1',
@@ -304,7 +304,7 @@ const PRICING_CATEGORIES: PricingCategory[] = [
     title: 'Islamic Essentials & Duas',
     subtitle: 'Fiqh, Aqeedah, Seerah, & Akhlaq',
     icon: 'explore',
-    description: 'An essential structured curriculum covering basic creed, prayers, manners, and prophetic biographies.',
+    description: 'Curriculum covering core creed, Salah, daily Duas, basic translation, and Islamic character development.',
     plans: [
       {
         id: 'islamic-plan-1',
@@ -352,7 +352,7 @@ const PRICING_CATEGORIES: PricingCategory[] = [
     title: 'Hifz Revision Partner',
     subtitle: 'Cementing Memorization & Retaining',
     icon: 'school',
-    description: 'Dedicated revision program for Huffaz to cement their memorization, correct loose verses, and maintain a lifelong retaining cycle.',
+    description: 'Dedicated revision partner for Huffaz to reinforce memorization, refine Tajweed, and maintain lifelong retention.',
     plans: [
       {
         id: 'revision-plan-1',
@@ -609,7 +609,7 @@ export default function Pricing({
             transition={{ duration: 0.5, delay: 0.2 }}
             className="font-sans font-medium text-sm sm:text-base text-slate-600 max-w-xl mx-auto leading-relaxed pt-1"
           >
-            Convert tuition instantly to your country's currency. No hidden fees or contracts.
+            Master Tajweed & Hifz foundations while progressing into Quranic translation and understanding. Convert tuition instantly.
           </motion.p>
         </div>
 

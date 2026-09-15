@@ -83,7 +83,7 @@ export default function Services({ onSelectCourse }: ServicesProps) {
 
         {/* Description */}
         <p className="text-[11px] font-sans font-medium text-[#E0F2FE] leading-relaxed line-clamp-4">
-          Not sure which program to pick? Record a short audio of your recitation (e.g. Surah Al-Fatihah). Our expert scholars will listen, evaluate your pronunciation (Makharij), and recommend the perfect course for you within 24 hours.
+          Not sure where to begin? Record a brief audio sample of your recitation. Our scholars will evaluate your Tajweed and Makharij to recommend your ideal starting path within 24 hours.
         </p>
       </div>
 
@@ -179,11 +179,11 @@ export default function Services({ onSelectCourse }: ServicesProps) {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-20 space-y-6">
           <h2 className="font-display font-[900] text-3xl sm:text-[45px] lg:text-[64px] text-[#0B3951] tracking-[-0.04em] leading-[1.05] filter drop-shadow-sm">
-            Our Elite Online <span className="font-allura text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] via-[#146299] to-[#0B3951]">Quran Academee</span> Programs
+            Targeted Courses for Your <span className="font-allura text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] via-[#146299] to-[#0B3951]">Quranic Journey</span>
           </h2>
 
           <p className="font-sans font-medium text-[18px] text-slate-600 leading-relaxed max-w-2xl mx-auto">
-            Each course syllabus is masterfully optimized for youngsters, school children, and remote beginners, ensuring beautiful Arabic recitation with expert live focus.
+            Explore our individual 1-on-1 courses designed for every step—from foundational reading and Tajweed to translation and living by the Quran.
           </p>
         </div>
 
@@ -217,10 +217,10 @@ export default function Services({ onSelectCourse }: ServicesProps) {
             </div>
             <div>
               <h4 className="font-display font-[800] text-sm sm:text-base text-[#0B3951] leading-tight">
-                Still confused about which course is right for you?
+                Unsure which stage of your Quranic journey to start with?
               </h4>
               <p className="font-sans text-xs sm:text-sm font-medium text-slate-500 mt-1 max-w-xl">
-                Submit a short voice recording of your Quran recitation. Our expert scholars will listen, assess your pronunciation level, and suggest the perfect personalized program.
+                Submit a short voice sample. Our scholars will review your recitation accuracy and suggest the right balance of Tajweed, Hifz, or translation.
               </p>
             </div>
           </div>

@@ -36,7 +36,7 @@ export default function FAQSection() {
           </h2>
           
           <p className="text-sm sm:text-base text-slate-600 max-w-lg mx-auto leading-relaxed">
-            Find immediate answers regarding lesson formats, teacher gender options, scheduling flexibility, and billing.
+            Find clear answers about our teaching philosophy, Tajweed focus, translation integration, scheduling, and tutors.
           </p>
         </div>
 

@@ -25,22 +25,30 @@ export default function Header({ onOpenTrialModal }: HeaderProps) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Track active section via IntersectionObserver
+  // Track active section via IntersectionObserver & scroll position
   useEffect(() => {
     if (pathname !== '/') {
       setActiveSection('');
       return;
     }
 
+    const handleScroll = () => {
+      if (window.scrollY < 120) {
+        setActiveSection('home');
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
     const observerOptions = {
       root: null,
-      rootMargin: '-30% 0px -60% 0px',
+      rootMargin: '-20% 0px -50% 0px',
       threshold: 0,
     };
 
     const handleIntersection = (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting && window.scrollY >= 120) {
           setActiveSection(entry.target.id);
         }
       });
@@ -55,6 +63,7 @@ export default function Header({ onOpenTrialModal }: HeaderProps) {
     });
 
     return () => {
+      window.removeEventListener('scroll', handleScroll);
       sections.forEach((id) => {
         const el = document.getElementById(id);
         if (el) observer.unobserve(el);
@@ -92,17 +101,26 @@ export default function Header({ onOpenTrialModal }: HeaderProps) {
     setIsMobileMenuOpen(false);
   };
 
+  const handleHomeClick = (e: React.MouseEvent) => {
+    setIsMobileMenuOpen(false);
+    if (pathname === '/') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (window.location.hash) {
+        window.history.pushState(null, '', window.location.pathname);
+      }
+      setActiveSection('home');
+    }
+  };
+
   const getHeaderClass = () => {
     if (isScrolled) {
       if (isMobileMenuOpen) {
-        // Scrolled and mobile menu is open: full-width, no rounding, solid white background
         return 'top-0 w-full rounded-none bg-white border-b border-[#E0F2FE]/60 shadow-[0_4px_20px_rgba(0,0,0,0.05)] px-4 sm:px-8 py-2.5';
       } else {
-        // Scrolled and menu is closed: rounded and elegant, backdrop-blur on desktop
-        return 'top-2 w-[92%] max-w-6xl rounded-[24px] bg-white md:bg-white/85 border border-[#E0F2FE] shadow-[0_4px_20px_rgba(0,0,0,0.05)] md:shadow-[0_15px_45px_rgba(28,141,200,0.12)] md:backdrop-blur-lg px-4 sm:px-8 py-2 md:py-1.5';
+        return 'top-3 w-[92%] max-w-6xl rounded-[28px] bg-white/90 border border-[#E0F2FE] shadow-[0_12px_40px_rgba(28,141,200,0.12)] backdrop-blur-xl px-5 sm:px-8 py-2 md:py-1.5';
       }
     } else {
-      // Not scrolled: transparent background, full-width
       return 'top-0 w-full max-w-[1920px] rounded-none bg-transparent border-transparent shadow-none backdrop-blur-none px-4 sm:px-8 py-2 sm:py-3';
     }
   };
@@ -110,39 +128,40 @@ export default function Header({ onOpenTrialModal }: HeaderProps) {
   return (
     <header 
       id="main-navigation-header"
-      className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ease-in-out ${getHeaderClass()}`}
+      className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-700 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] ${getHeaderClass()}`}
     >
       <div className="w-full flex items-center justify-between">
         {/* Left Side: Quran Academee Brand Logo */}
         <Link
           href="/"
-          onClick={handleLinkClick}
+          onClick={handleHomeClick}
           className="flex items-center shrink-0"
         >
           <Logo isDarkBg={false} />
         </Link>
 
-        {/* Center: Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center space-x-8 lg:space-x-12">
+        {/* Center: Desktop Navigation Links (Removed div background and border) */}
+        <nav className="hidden md:flex items-center space-x-1.5 p-1.5">
           {navLinks.map((link) => {
             const isActive = isLinkActive(link.href);
             return (
               <Link
                 key={link.name}
                 href={link.href}
-                onClick={handleLinkClick}
-                className={`text-sm tracking-wide font-medium transition-all duration-200 uppercase relative py-1 ${
+                onClick={link.href === '/' ? handleHomeClick : handleLinkClick}
+                className={`text-xs tracking-wider font-extrabold uppercase px-4.5 py-2 transition-all duration-300 relative flex items-center justify-center cursor-pointer select-none ${
                   isActive
-                    ? 'text-[#0B3951] font-semibold'
+                    ? 'text-[#1C8DC8]'
                     : 'text-slate-600 hover:text-[#1C8DC8]'
                 }`}
               >
-                <span>{link.name}</span>
+                <span className="relative z-10">{link.name}</span>
+                {/* Active indicator: Soft & Light Bottom Line */}
                 {isActive && (
                   <motion.span
                     layoutId="activeNavIndicator"
-                    className="absolute -bottom-1 left-0 right-0 h-[2.5px] bg-[#1C8DC8] rounded-full"
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    className="absolute bottom-0 left-2 right-2 h-[2px] bg-[#1C8DC8]/60 rounded-full z-0"
+                    transition={{ type: "spring", stiffness: 320, damping: 28, mass: 0.8 }}
                   />
                 )}
               </Link>
@@ -202,7 +221,7 @@ export default function Header({ onOpenTrialModal }: HeaderProps) {
                   >
                     <Link
                       href={link.href}
-                      onClick={handleLinkClick}
+                      onClick={link.href === '/' ? handleHomeClick : handleLinkClick}
                       className={`text-base font-bold py-3 px-4 rounded-xl transition-all uppercase tracking-wider flex items-center justify-between ${
                         isActive
                           ? 'bg-[#F0F9FF] text-[#1C8DC8] border border-[#E0F2FE] shadow-sm'
