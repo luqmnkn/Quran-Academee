@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { BookOpen, Layers, Sparkles, ArrowLeft, Download, ExternalLink, ShieldCheck, CheckCircle2 } from 'lucide-react';
 import { SURAHS, JUZ_LIST, DUAS, getJuzSlug, getJuzParaName, getSurahSlug } from '@/lib/quranData';
 import ResourceFooter from '@/components/ResourceFooter';
+import QuranPdfViewer from '@/components/QuranPdfViewer';
 
 export default function DownloadableResourcesPage() {
   const [resourceCategory, setResourceCategory] = useState<'surahs' | 'juz' | 'duas'>('surahs');
@@ -163,22 +164,21 @@ export default function DownloadableResourcesPage() {
             </div>
 
             {/* Dynamic PDF / Image Viewer Container */}
-            <div className="w-full h-[520px] rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-inner relative flex items-center justify-center">
+            <div className={`w-full rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-inner relative flex items-center justify-center ${resourceCategory === 'duas' ? 'aspect-[4/1] bg-slate-100' : 'h-[520px]'}`}>
               {resourceCategory === 'duas' ? (
-                <div className="relative w-full h-full p-4 flex items-center justify-center bg-slate-900/5">
+                <div className="relative w-full h-full p-2 flex items-center justify-center">
                   <Image
                     src={currentFilePath}
                     alt={currentTitle}
                     fill
-                    className="object-contain p-2"
+                    className="object-contain p-1"
                   />
                 </div>
               ) : (
-                <iframe
+                <QuranPdfViewer
                   key={`${resourceCategory}-${selectedId}`}
-                  src={`${currentFilePath}#page=1&toolbar=0&navpanes=0`}
+                  src={currentFilePath}
                   title={`${currentTitle} PDF Preview`}
-                  className="w-full h-full border-none bg-white"
                 />
               )}
             </div>

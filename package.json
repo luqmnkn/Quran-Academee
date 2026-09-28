@@ -15,9 +15,11 @@
     "lucide-react": "^1.26.0",
     "motion": "^12.42.2",
     "next": "16.2.11",
+    "pdfjs-dist": "^6.3.289",
     "quran-academee": "file:",
     "react": "19.2.4",
     "react-dom": "19.2.4",
+    "react-pdf": "^11.0.0",
     "resend": "^6.18.1",
     "world-countries": "^5.1.0",
     "zod": "^4.4.3"

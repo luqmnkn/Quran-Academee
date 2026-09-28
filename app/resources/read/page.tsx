@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { BookOpen, Layers, ArrowLeft, Download, X, ChevronLeft, ChevronRight, Search } from 'lucide-react';
 import { SURAHS, JUZ_LIST } from '@/lib/quranData';
 import ResourceFooter from '@/components/ResourceFooter';
+import QuranPdfViewer from '@/components/QuranPdfViewer';
 
 export default function OnlineReaderPage() {
   const [contentType, setContentType] = useState<'surah' | 'juz'>('surah');
@@ -73,7 +74,7 @@ export default function OnlineReaderPage() {
 
           {/* PDF Viewer Container - Strictly Bounds Width */}
           <div className="flex-1 bg-slate-100 relative overflow-hidden w-full max-w-full">
-            <iframe
+            <QuranPdfViewer
               src={currentFilePath}
               title={currentTitle}
               className="w-full h-full border-none bg-white max-w-full"
