@@ -4,7 +4,7 @@ import { Metadata } from 'next';
 import { Download, ArrowLeft, BookOpen, CheckCircle2, ShieldCheck, HelpCircle, ArrowRight } from 'lucide-react';
 import { SURAHS, getSurahSlug } from '@/lib/quranData';
 import ResourceFooter from '@/components/ResourceFooter';
-import QuranPdfViewer from '@/components/QuranPdfViewer';
+import QuranPdfViewer from '@/components/QuranPdfViewerWrapper';
 
 interface Props {
   params: Promise<{ id: string }>;

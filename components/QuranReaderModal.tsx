@@ -5,17 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Download, BookOpen, Layers, ChevronLeft, ChevronRight, Maximize2, Minimize2, Loader2 } from 'lucide-react';
 import { SURAHS, JUZ_LIST } from '@/lib/quranData';
 import Logo from './Logo';
-import dynamic from 'next/dynamic';
-
-const QuranPdfViewer = dynamic(() => import('@/components/QuranPdfViewer'), {
-  ssr: false,
-  loading: () => (
-    <div className="flex flex-col items-center justify-center w-full h-full bg-slate-100 text-[#1081b7] gap-3">
-      <div className="w-6 h-6 border-2 border-[#1081b7] border-t-transparent rounded-full animate-spin" />
-      <span className="text-xs font-semibold">Loading Quran...</span>
-    </div>
-  ),
-});
+import QuranPdfViewer from '@/components/QuranPdfViewerWrapper';
 
 interface QuranReaderModalProps {
   isOpen: boolean;

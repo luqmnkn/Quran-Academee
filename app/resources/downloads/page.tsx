@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { BookOpen, Layers, Sparkles, ArrowLeft, Download, ExternalLink, ShieldCheck, CheckCircle2 } from 'lucide-react';
 import { SURAHS, JUZ_LIST, DUAS, getJuzSlug, getJuzParaName, getSurahSlug } from '@/lib/quranData';
 import ResourceFooter from '@/components/ResourceFooter';
-import QuranPdfViewer from '@/components/QuranPdfViewer';
+import QuranPdfViewer from '@/components/QuranPdfViewerWrapper';
 
 export default function DownloadableResourcesPage() {
   const [resourceCategory, setResourceCategory] = useState<'surahs' | 'juz' | 'duas'>('surahs');

@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { BookOpen, Layers, ArrowLeft, Download, X, ChevronLeft, ChevronRight, Search } from 'lucide-react';
 import { SURAHS, JUZ_LIST } from '@/lib/quranData';
 import ResourceFooter from '@/components/ResourceFooter';
-import QuranPdfViewer from '@/components/QuranPdfViewer';
+import QuranPdfViewer from '@/components/QuranPdfViewerWrapper';
 
 export default function OnlineReaderPage() {
   const [contentType, setContentType] = useState<'surah' | 'juz'>('surah');
