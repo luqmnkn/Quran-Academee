@@ -223,7 +223,7 @@ export default function AdminDashboard() {
                 <ShieldCheck size={28} className="stroke-[2]" />
               </div>
               <div>
-                <h2 className="font-display font-[900] text-xl text-white">Quran Academee</h2>
+                <h2 className="font-display font-[900] text-xl text-white">Quran Academy</h2>
                 <p className="text-xs text-slate-400 font-mono font-bold uppercase tracking-wider mt-1">Admin Portal Access</p>
               </div>
 

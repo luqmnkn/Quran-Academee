@@ -74,16 +74,20 @@ export default function Header({ onOpenTrialModal }: HeaderProps) {
   const navLinks = [
     { name: 'Home', href: '/' },
     { name: 'Course', href: '/#courses' },
+    { name: 'Resources', href: '/resources' },
     { name: 'Pricing', href: '/pricing' },
     { name: 'About Us', href: '/#about' },
   ];
 
   const isLinkActive = (linkHref: string) => {
+    if (pathname.startsWith('/resources') && linkHref === '/resources') {
+      return true;
+    }
     if (pathname === '/pricing') {
       return linkHref === '/pricing';
     }
     if (pathname === '/') {
-      if (linkHref === '/pricing') return false;
+      if (linkHref === '/pricing' || linkHref === '/resources') return false;
       if (linkHref === '/') {
         return activeSection === 'home' || activeSection === '';
       }
@@ -126,7 +130,7 @@ export default function Header({ onOpenTrialModal }: HeaderProps) {
   };
 
   return (
-    <header 
+    <header
       id="main-navigation-header"
       className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-700 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] ${getHeaderClass()}`}
     >
@@ -140,23 +144,23 @@ export default function Header({ onOpenTrialModal }: HeaderProps) {
           <Logo isDarkBg={false} />
         </Link>
 
-        {/* Center: Desktop Navigation Links (Removed div background and border) */}
+        {/* Center: Desktop Navigation Links */}
         <nav className="hidden md:flex items-center space-x-1.5 p-1.5">
           {navLinks.map((link) => {
             const isActive = isLinkActive(link.href);
+
             return (
               <Link
                 key={link.name}
                 href={link.href}
                 onClick={link.href === '/' ? handleHomeClick : handleLinkClick}
-                className={`text-xs tracking-wider font-extrabold uppercase px-4.5 py-2 transition-all duration-300 relative flex items-center justify-center cursor-pointer select-none ${
+                className={`text-xs tracking-wider font-extrabold uppercase px-4 py-2 transition-all duration-300 relative flex items-center justify-center cursor-pointer select-none ${
                   isActive
                     ? 'text-[#1C8DC8]'
                     : 'text-slate-600 hover:text-[#1C8DC8]'
                 }`}
               >
                 <span className="relative z-10">{link.name}</span>
-                {/* Active indicator: Soft & Light Bottom Line */}
                 {isActive && (
                   <motion.span
                     layoutId="activeNavIndicator"
@@ -169,7 +173,7 @@ export default function Header({ onOpenTrialModal }: HeaderProps) {
           })}
         </nav>
 
-        {/* Right Side: Book Free Trial and Mobile Toggle */}
+        {/* Right Side: Enroll CTA and Mobile Toggle */}
         <div className="flex items-center space-x-3 sm:space-x-6">
           <button
             onClick={() => {
@@ -202,16 +206,16 @@ export default function Header({ onOpenTrialModal }: HeaderProps) {
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             className="md:hidden bg-white border border-[#E0F2FE] mt-4 mx-2 rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(28,141,200,0.18)] relative"
           >
-            {/* Subtle background glow */}
             <div className="absolute top-0 right-0 w-32 h-32 bg-[#1C8DC8]/5 rounded-full blur-2xl pointer-events-none" />
-            
+
             <div className="px-5 py-6 space-y-3.5 flex flex-col relative z-10">
               <div className="text-[10px] font-extrabold uppercase tracking-widest text-[#146299]/60 px-3 pb-1 border-b border-[#E0F2FE]/50">
                 Navigation
               </div>
-              
+
               {navLinks.map((link, i) => {
                 const isActive = isLinkActive(link.href);
+
                 return (
                   <motion.div
                     initial={{ opacity: 0, x: -10 }}

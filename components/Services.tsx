@@ -119,7 +119,7 @@ export default function Services({ onSelectCourse }: ServicesProps) {
   };
 
   const renderCardContent = (course: Course) => (
-    <div className="bg-[#F0F9FF]/75 hover:bg-[#F0F9FF] rounded-2xl border border-[#3D8DC3]/20 p-5 sm:p-6 flex flex-col justify-between h-full transition-all duration-300 hover:shadow-[0_15px_35px_rgba(28,141,200,0.08)] hover:border-[#1C8DC8]/40 hover:-translate-y-1.5 group relative overflow-hidden text-left min-h-[330px]">
+    <div className="bg-gradient-to-br from-[#f0f9ff] via-white to-[#e0f2fe]/40 border border-[#38aae3]/20 rounded-3xl p-5 sm:p-6 flex flex-col justify-between h-full transition-all duration-300 hover:shadow-[0_15px_35px_rgba(28,141,200,0.12)] hover:border-[#1081b7]/40 hover:-translate-y-1.5 group relative overflow-hidden text-left min-h-[330px]">
       <div className="absolute top-0 left-0 right-0 h-[4px] bg-gradient-to-r from-[#1C8DC8] to-[#146299] scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
 
       <div className="space-y-4">
