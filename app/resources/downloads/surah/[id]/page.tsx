@@ -4,6 +4,7 @@ import { Metadata } from 'next';
 import { Download, ArrowLeft, BookOpen, CheckCircle2, ShieldCheck, HelpCircle, ArrowRight } from 'lucide-react';
 import { SURAHS, getSurahSlug } from '@/lib/quranData';
 import ResourceFooter from '@/components/ResourceFooter';
+import QuranPdfViewer from '@/components/QuranPdfViewer';
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -204,11 +205,10 @@ export default async function SurahDownloadDetailPage({ params }: Props) {
                   </span>
                 </div>
 
-                <div className="flex-1 w-full min-h-[300px] rounded-xl overflow-hidden border border-slate-200 bg-slate-50">
-                  <iframe
-                    src={`${surah.filePath}#toolbar=0&navpanes=0`}
+                <div className="flex-1 w-full min-h-[300px] rounded-xl overflow-hidden border border-slate-200 bg-slate-50 relative">
+                  <QuranPdfViewer
+                    src={surah.filePath}
                     title={`Surah ${surah.name} PDF Preview`}
-                    className="w-full h-full border-none bg-white"
                   />
                 </div>
               </div>

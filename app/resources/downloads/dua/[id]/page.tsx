@@ -55,12 +55,12 @@ export default function DuaDetailPage({ params }: DuaDetailPageProps) {
 
         {/* 3. Dua Card */}
         <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-md space-y-4">
-          <div className="relative w-full h-[460px] bg-slate-100 rounded-xl overflow-hidden flex items-center justify-center">
+          <div className="relative w-full aspect-[4/1] bg-slate-100 rounded-xl overflow-hidden flex items-center justify-center border border-slate-200">
             <Image
               src={currentDua.imagePath}
               alt={currentDua.title}
               fill
-              className="object-contain p-2"
+              className="object-contain p-1"
               priority
             />
           </div>
