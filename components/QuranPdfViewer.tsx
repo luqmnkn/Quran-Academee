@@ -4,9 +4,9 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 import { Loader2, AlertCircle, RefreshCw } from 'lucide-react';
 
-// Configure pdfjs worker URL for browser runtime
-if (typeof window !== 'undefined' && !pdfjs.GlobalWorkerOptions.workerSrc) {
-  pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
+// Configure pdfjs worker URL from local public folder to guarantee CORS-free, instant worker loading
+if (typeof window !== 'undefined') {
+  pdfjs.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
 }
 
 interface QuranPdfViewerProps {
@@ -20,7 +20,12 @@ export default function QuranPdfViewer({ file, src, title, className = '' }: Qur
   const [mounted, setMounted] = useState<boolean>(false);
   const filePath = file || src || '';
   const [numPages, setNumPages] = useState<number | null>(null);
-  const [containerWidth, setContainerWidth] = useState<number>(0);
+  const [containerWidth, setContainerWidth] = useState<number>(() => {
+    if (typeof window !== 'undefined') {
+      return Math.min(window.innerWidth - 24, 850);
+    }
+    return 600;
+  });
   const [isError, setIsError] = useState<boolean>(false);
   const [reloadKey, setReloadKey] = useState<number>(0);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -37,6 +42,8 @@ export default function QuranPdfViewer({ file, src, title, className = '' }: Qur
       if (width > 0) {
         setContainerWidth(width);
       }
+    } else if (typeof window !== 'undefined') {
+      setContainerWidth(Math.min(window.innerWidth - 24, 850));
     }
   }, []);
 
@@ -49,8 +56,10 @@ export default function QuranPdfViewer({ file, src, title, className = '' }: Qur
     if (containerRef.current) {
       resizeObserver.observe(containerRef.current);
     }
+    window.addEventListener('resize', updateWidth);
     return () => {
       resizeObserver.disconnect();
+      window.removeEventListener('resize', updateWidth);
     };
   }, [mounted, updateWidth]);
 
@@ -85,7 +94,8 @@ export default function QuranPdfViewer({ file, src, title, className = '' }: Qur
   }
 
   // Calculate target page width (fit container width, max 850px for clean desktop reading)
-  const targetPageWidth = containerWidth > 0 ? Math.min(containerWidth - (containerWidth < 640 ? 12 : 24), 850) : undefined;
+  const paddingOffset = containerWidth < 640 ? 12 : 24;
+  const targetPageWidth = containerWidth > 0 ? Math.min(containerWidth - paddingOffset, 850) : 600;
 
   return (
     <div
@@ -133,7 +143,10 @@ export default function QuranPdfViewer({ file, src, title, className = '' }: Qur
                   renderTextLayer={false}
                   renderAnnotationLayer={false}
                   loading={
-                    <div className="h-64 sm:h-96 w-full flex items-center justify-center bg-slate-50 text-slate-400 text-xs">
+                    <div
+                      className="flex items-center justify-center bg-slate-50 text-slate-400 text-xs"
+                      style={{ width: targetPageWidth, height: targetPageWidth * 1.4 }}
+                    >
                       Loading page {index + 1}...
                     </div>
                   }
