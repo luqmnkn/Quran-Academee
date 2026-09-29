@@ -2,20 +2,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Download, BookOpen, Layers, ChevronLeft, ChevronRight, Maximize2, Minimize2, Loader2 } from 'lucide-react';
+import { X, Download, BookOpen, Layers, ChevronLeft, ChevronRight, Maximize2, Minimize2 } from 'lucide-react';
 import { SURAHS, JUZ_LIST } from '@/lib/quranData';
 import Logo from './Logo';
-import dynamic from 'next/dynamic';
-
-const QuranPdfViewer = dynamic(() => import('@/components/QuranPdfViewer'), {
-  ssr: false,
-  loading: () => (
-    <div className="flex flex-col items-center justify-center w-full h-full bg-slate-100 text-[#1081b7] gap-3">
-      <div className="w-6 h-6 border-2 border-[#1081b7] border-t-transparent rounded-full animate-spin" />
-      <span className="text-xs font-semibold">Loading Quran...</span>
-    </div>
-  ),
-});
+import QuranInteractiveReader from '@/components/QuranInteractiveReader';
 
 interface QuranReaderModalProps {
   isOpen: boolean;
@@ -33,9 +23,6 @@ export default function QuranReaderModal({
   const [contentType, setContentType] = useState<'surah' | 'juz'>(initialType);
   const [currentId, setCurrentId] = useState<number>(initialId);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [htmlContent, setHtmlContent] = useState<string>('');
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
   // Sync state if initial props change while open
   useEffect(() => {
     setContentType(initialType);
@@ -45,100 +32,6 @@ export default function QuranReaderModal({
   const currentSurah = SURAHS.find((s) => s.id === currentId) || SURAHS[0];
   const currentJuz = JUZ_LIST.find((j) => j.id === currentId) || JUZ_LIST[0];
   const currentFilePath = contentType === 'surah' ? currentSurah.filePath : currentJuz.filePath;
-
-  // Extract pure Quran images from Surah HTML files to load cleanly without script errors
-  useEffect(() => {
-    if (!isOpen || contentType !== 'surah') {
-      setHtmlContent('');
-      return;
-    }
-
-    let isMounted = true;
-    setIsLoading(true);
-
-    fetch(currentFilePath)
-      .then((res) => res.text())
-      .then((text) => {
-        if (!isMounted) return;
-
-        // Match surah_images container
-        const imagesMatch = text.match(/<div class="surah_images">([\s\S]*?)<\/div>/i);
-        let extractedImages = '';
-
-        if (imagesMatch && imagesMatch[1]) {
-          extractedImages = imagesMatch[1];
-        } else {
-          // Fallback: extract all img tags with surah-images
-          const imgRegex = /<img[^>]+src=["']([^"']*surah-images[^"']*)["'][^>]*>/gi;
-          const matches = [...text.matchAll(imgRegex)];
-          extractedImages = matches.map((m) => m[0]).join('\n');
-        }
-
-        if (extractedImages) {
-          const cleanDoc = `
-            <!DOCTYPE html>
-            <html lang="ar">
-              <head>
-                <meta charset="utf-8"/>
-                <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-                <style>
-                  * { box-sizing: border-box; }
-                  body {
-                    margin: 0;
-                    padding: 24px 16px;
-                    background-color: #f8fafc;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    gap: 24px;
-                    font-family: system-ui, -apple-system, sans-serif;
-                  }
-                  .surah-container {
-                    width: 100%;
-                    max-width: 850px;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    gap: 24px;
-                  }
-                  img {
-                    max-width: 100%;
-                    height: auto;
-                    border-radius: 16px;
-                    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-                    border: 1px solid #e2e8f0;
-                    background: #ffffff;
-                    display: block;
-                  }
-                </style>
-              </head>
-              <body>
-                <div class="surah-container">
-                  ${extractedImages}
-                </div>
-              </body>
-            </html>
-          `;
-          setHtmlContent(cleanDoc);
-        } else {
-          // Fallback if no surah_images matched
-          const sanitized = text
-            .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
-            .replace(/header/gi, 'div')
-            .replace(/footer/gi, 'div');
-          setHtmlContent(sanitized);
-        }
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.error('Error fetching Surah HTML:', err);
-        if (isMounted) setIsLoading(false);
-      });
-
-    return () => {
-      isMounted = false;
-    };
-  }, [isOpen, contentType, currentFilePath]);
 
   if (!isOpen) return null;
 
@@ -293,23 +186,17 @@ export default function QuranReaderModal({
 
           {/* Viewer Frame */}
           <div className="flex-1 bg-slate-100 relative overflow-hidden flex items-center justify-center">
-            {isLoading ? (
-              <div className="flex flex-col items-center gap-3 text-[#1081b7]">
-                <Loader2 className="w-8 h-8 animate-spin" />
-                <span className="text-xs font-semibold">Loading Quran Recitation Script...</span>
-              </div>
-            ) : contentType === 'surah' ? (
-              <iframe
-                srcDoc={htmlContent}
-                title={currentTitle}
-                className="w-full h-full border-none bg-[#f8fafc]"
-              />
-            ) : (
-              <QuranPdfViewer
-                src={currentFilePath}
-                title={currentTitle}
-              />
-            )}
+            <QuranInteractiveReader
+              contentType={contentType}
+              currentId={currentId}
+              currentTitle={currentTitle}
+              currentFilePath={currentFilePath}
+              onSelectSurahOrJuz={(type, id) => {
+                setContentType(type);
+                setCurrentId(id);
+              }}
+              className="w-full h-full"
+            />
           </div>
         </motion.div>
       </div>

@@ -74,8 +74,8 @@ export default function Header({ onOpenTrialModal }: HeaderProps) {
   const navLinks = [
     { name: 'Home', href: '/' },
     { name: 'Course', href: '/#courses' },
-    { name: 'Resources', href: '/resources' },
     { name: 'Pricing', href: '/pricing' },
+    { name: 'Resources', href: '/resources' },
     { name: 'About Us', href: '/#about' },
   ];
 
