@@ -2,36 +2,25 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import {
-  Search,
   Settings,
   X,
-  Volume2,
   Play,
   Pause,
   BookOpen,
-  Sparkles,
-  Languages,
-  Check,
   Sun,
   Moon,
   Info,
   ZoomIn,
   ZoomOut,
-  ChevronRight,
-  Layers,
-  ArrowRight
+  Layers
 } from 'lucide-react';
 import {
-  getSurahVersesTajweed,
   getSurahVersesMadani,
-  getSurahVersesIndopak,
-  getSurahTranslation,
   getSurahAudioUrl,
   getJuzVerses,
   VerseItem,
   POPULAR_RECITERS
 } from '@/lib/quranApi';
-import { SURAHS, JUZ_LIST } from '@/lib/quranData';
 
 interface QuranInteractiveReaderProps {
   contentType: 'surah' | 'juz';
@@ -55,15 +44,6 @@ export default function QuranInteractiveReader({
   // Theme state: 'light' | 'dark' | 'sepia'
   const [theme, setTheme] = useState<'light' | 'dark' | 'sepia'>('light');
 
-  // Script type: 'madani' | 'indopak'
-  const [scriptType, setScriptType] = useState<'madani' | 'indopak'>('madani');
-
-  // Tajweed toggle: boolean
-  const [isTajweedEnabled, setIsTajweedEnabled] = useState<boolean>(true);
-
-  // Translation language: 'none' | 'en' | 'ur'
-  const [translationLang, setTranslationLang] = useState<'none' | 'en' | 'ur'>('none');
-
   // Font Size in pixels
   const [fontSize, setFontSize] = useState<number>(32);
 
@@ -76,27 +56,11 @@ export default function QuranInteractiveReader({
   const [selectedReciter, setSelectedReciter] = useState<number>(7); // Mishary Rashid Alafasy
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const [audioProgress, setAudioProgress] = useState<number>(0);
-  const [audioDuration, setAudioDuration] = useState<number>(0);
 
   // Modals & Panels State
   const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
-  const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
-  const [showTajweedGuide, setShowTajweedGuide] = useState<boolean>(false);
-
-  // Search State
-  const [searchQuery, setSearchQuery] = useState<string>('');
-  const [targetAyah, setTargetAyah] = useState<string>('');
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
-
-  // Determine active view mode based on toggles
-  const activeMode =
-    translationLang !== 'none'
-      ? 'translation'
-      : isTajweedEnabled
-      ? 'tajweed'
-      : scriptType;
 
   // Load Quran.com API data
   useEffect(() => {
@@ -109,19 +73,9 @@ export default function QuranInteractiveReader({
         let fetchedVerses: VerseItem[] = [];
 
         if (contentType === 'surah') {
-          if (translationLang !== 'none') {
-            fetchedVerses = await getSurahTranslation(currentId, translationLang);
-          } else if (isTajweedEnabled) {
-            fetchedVerses = await getSurahVersesTajweed(currentId);
-          } else if (scriptType === 'indopak') {
-            fetchedVerses = await getSurahVersesIndopak(currentId);
-          } else {
-            fetchedVerses = await getSurahVersesMadani(currentId);
-          }
+          fetchedVerses = await getSurahVersesMadani(currentId);
         } else {
-          // Juz mode
-          const mode = isTajweedEnabled ? 'tajweed' : scriptType;
-          fetchedVerses = await getJuzVerses(currentId, mode as any);
+          fetchedVerses = await getJuzVerses(currentId, 'madani');
         }
 
         if (isMounted) {
@@ -142,7 +96,7 @@ export default function QuranInteractiveReader({
     return () => {
       isMounted = false;
     };
-  }, [contentType, currentId, activeMode, translationLang, isTajweedEnabled, scriptType]);
+  }, [contentType, currentId]);
 
   // Load Audio Recitation for Surah
   useEffect(() => {
@@ -157,7 +111,6 @@ export default function QuranInteractiveReader({
         if (isMounted && url) {
           setAudioUrl(url);
           setIsPlaying(false);
-          setAudioProgress(0);
         }
       })
       .catch((err) => console.error('Audio fetch error:', err));
@@ -179,46 +132,24 @@ export default function QuranInteractiveReader({
     }
   };
 
-  const handleTimeUpdate = () => {
-    if (audioRef.current) {
-      setAudioProgress(audioRef.current.currentTime);
-      setAudioDuration(audioRef.current.duration || 0);
-    }
-  };
-
   // Theme styling mapping
   const themeClasses = {
-    light: 'bg-white text-slate-900',
+    light: 'bg-[#f8fafc] text-slate-900',
     dark: 'bg-[#0f172a] text-slate-100',
-    sepia: 'bg-[#fbf0d9] text-[#3d2b1f]'
+    sepia: 'bg-[#f8f1e1] text-[#3d2b1f]'
   }[theme];
 
-  const cardBorderClasses = {
-    light: 'border-slate-100 hover:bg-slate-50/60',
-    dark: 'border-slate-800/80 hover:bg-slate-800/40',
-    sepia: 'border-[#eedfc3] hover:bg-[#f5e5c8]/50'
+  const cardThemeClasses = {
+    light: 'bg-white text-slate-900 border-slate-200/80 shadow-md',
+    dark: 'bg-[#1e293b] text-slate-100 border-slate-700/80 shadow-xl',
+    sepia: 'bg-[#fbf5e6] text-[#3d2b1f] border-[#e2d5b6] shadow-md'
   }[theme];
 
-  // Search Results
-  const filteredSurahs = SURAHS.filter(
-    (s) =>
-      s.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      s.transliteration.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      s.arabic.includes(searchQuery) ||
-      s.id.toString() === searchQuery.trim()
-  );
-
-  const handleJumpToAyah = () => {
-    const num = parseInt(targetAyah.trim());
-    if (!isNaN(num) && num > 0 && num <= verses.length) {
-      const el = document.getElementById(`ayah-${num}`);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        setIsSearchOpen(false);
-        setTargetAyah('');
-      }
-    }
-  };
+  const bismillahThemeClasses = {
+    light: 'bg-white/70 border-slate-200/60 text-[#116c9c]',
+    dark: 'bg-slate-800/70 border-slate-700/60 text-[#38aae3]',
+    sepia: 'bg-[#f5e7cb]/80 border-[#e2d5b6] text-amber-900'
+  }[theme];
 
   return (
     <div className={`w-full h-full flex flex-col relative overflow-hidden transition-colors duration-300 ${themeClasses} ${className}`}>
@@ -227,24 +158,15 @@ export default function QuranInteractiveReader({
         <audio
           ref={audioRef}
           src={audioUrl}
-          onTimeUpdate={handleTimeUpdate}
           onEnded={() => setIsPlaying(false)}
         />
       )}
 
       {/* Reader Container Main Area */}
       <div className="flex-1 flex flex-col relative overflow-hidden w-full max-w-full">
-        {/* Top Container Header with Search Icon on Left */}
+        {/* Top Header */}
         <div className="flex items-center justify-between px-3 py-2.5 sm:px-6 sm:py-3.5 bg-gradient-to-r from-[#116c9c] via-[#1081b7] to-[#0e94d3] text-white shadow-md select-none shrink-0 w-full max-w-full z-10">
-          {/* Top Left Search Icon Button */}
-          <button
-            onClick={() => setIsSearchOpen(true)}
-            className="p-2 bg-white/10 hover:bg-white/20 active:scale-95 rounded-xl transition-all flex items-center gap-1.5 text-white"
-            title="Advanced Search & Jump to Ayah"
-          >
-            <Search className="w-4 h-4 sm:w-5 sm:h-5" />
-            <span className="hidden sm:inline text-xs font-semibold">Search</span>
-          </button>
+          <div className="w-8" />
 
           {/* Centered Title */}
           <div className="flex items-center gap-2 max-w-full truncate px-2">
@@ -270,7 +192,7 @@ export default function QuranInteractiveReader({
           )}
         </div>
 
-        {/* Main Content Area (Continuous Recitation View vs Verse Translation View) */}
+        {/* Main Content Area: Centered Ayah lines */}
         <div className="flex-1 overflow-y-auto px-3 sm:px-6 py-4 sm:py-8 relative w-full scroll-smooth">
           {isLoading ? (
             <div className="w-full h-full flex flex-col items-center justify-center gap-3 text-[#1081b7] p-8">
@@ -282,84 +204,32 @@ export default function QuranInteractiveReader({
               <Info className="w-8 h-8 text-amber-500" />
               <p className="text-xs sm:text-sm font-semibold">{error}</p>
             </div>
-          ) : translationLang === 'none' ? (
-            /* RECITATION MODE: Continuous Flowing Quranic Text (Physical Mushaf Experience) */
+          ) : (
             <div className="max-w-4xl mx-auto space-y-6 sm:space-y-8">
               {/* Bismillah Header (Except Surah 9 Taubah) */}
-              {contentType === 'surah' && currentId !== 9 && currentId !== 1 && (
-                <div className="text-center py-4 sm:py-6 rounded-2xl bg-white/40 dark:bg-slate-800/40 border border-slate-200/50 dark:border-slate-700/50 shadow-sm">
-                  <span className="text-2xl sm:text-3xl font-arabic text-[#116c9c] dark:text-[#38aae3] leading-relaxed">
+              {contentType === 'surah' && currentId !== 9 && (
+                <div className={`text-center py-4 sm:py-6 rounded-2xl border shadow-sm ${bismillahThemeClasses}`}>
+                  <h2 className="text-2xl sm:text-3xl font-quran-madani leading-relaxed font-bold">
                     بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
-                  </span>
+                  </h2>
                 </div>
               )}
 
-              {/* Continuous Text Paragraph */}
-              <div
-                className="bg-white/80 dark:bg-slate-800/80 rounded-3xl p-5 sm:p-10 shadow-lg border border-slate-200/60 dark:border-slate-700/60 text-right leading-[2.4] sm:leading-[2.8] select-text dir-rtl"
-                style={{ fontSize: `${fontSize}px` }}
-              >
-                {verses.map((verse, idx) => (
-                  <React.Fragment key={verse.id || idx}>
-                    <span id={`ayah-${verse.verse_number || idx + 1}`} className="inline">
-                      {isTajweedEnabled && verse.text_uthmani_tajweed ? (
-                        <span
-                          dangerouslySetInnerHTML={{ __html: verse.text_uthmani_tajweed }}
-                          className="tajweed-text inline"
-                        />
-                      ) : scriptType === 'indopak' && verse.text_indopak ? (
-                        <span className="font-indopak">{verse.text_indopak}</span>
-                      ) : (
-                        <span className="font-arabic">{verse.text_uthmani || verse.text_indopak}</span>
-                      )}
-                    </span>
-                    {/* Standard Quranic Ayah Symbol with Number ONLY */}
-                    <span className="inline-block text-[#1081b7] dark:text-[#38aae3] mx-1.5 sm:mx-2 font-mono font-bold select-none">
-                      ۝{verse.verse_number || idx + 1}
-                    </span>
-                    {' '}
-                  </React.Fragment>
-                ))}
-              </div>
-            </div>
-          ) : (
-            /* TRANSLATION MODE: Line-by-Line / Verse-by-Verse with English or Urdu Translation */
-            <div className="max-w-4xl mx-auto space-y-4 sm:space-y-6">
-              {/* Bismillah Header */}
-              {contentType === 'surah' && currentId !== 9 && currentId !== 1 && (
-                <div className="text-center py-4 rounded-2xl bg-white/40 dark:bg-slate-800/40 border border-slate-200/50 shadow-sm">
-                  <span className="text-2xl sm:text-3xl font-arabic text-[#116c9c] dark:text-[#38aae3]">
-                    بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
-                  </span>
-                </div>
-              )}
-
-              <div className="space-y-4">
+              {/* Quran Text Container: One Ayah per Line & Centered */}
+              <div className={`${cardThemeClasses} rounded-3xl p-5 sm:p-10 transition-colors duration-300`}>
                 {verses.map((verse, idx) => (
                   <div
-                    id={`ayah-${verse.verse_number || idx + 1}`}
                     key={verse.id || idx}
-                    className={`p-4 sm:p-6 rounded-2xl border transition-all ${cardBorderClasses}`}
+                    id={`ayah-${verse.verse_number || idx + 1}`}
+                    className="w-full text-center py-3 sm:py-5 border-b border-slate-100/30 dark:border-slate-800/40 last:border-none leading-[2.4] sm:leading-[2.8] select-text"
+                    style={{ fontSize: `${fontSize}px` }}
                   >
-                    {/* Arabic Text with Ayah End Symbol */}
-                    <div
-                      className="text-right font-arabic leading-[2.3] text-slate-900 dark:text-slate-100 select-text"
-                      style={{ fontSize: `${fontSize}px` }}
-                    >
-                      <span>{verse.text_uthmani || verse.text_indopak}</span>
-                      <span className="inline-block text-[#1081b7] dark:text-[#38aae3] mx-2 font-mono font-bold select-none">
-                        ۝{verse.verse_number || idx + 1}
-                      </span>
-                    </div>
-
-                    {/* Translation Text Below */}
-                    {verse.translation && (
-                      <div className="mt-3 pt-3 border-t border-slate-100 dark:border-slate-800 text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed">
-                        <p className={translationLang === 'ur' ? 'font-serif text-right text-sm sm:text-base' : 'italic'}>
-                          {verse.translation}
-                        </p>
-                      </div>
-                    )}
+                    <span className="font-quran-madani text-center inline">
+                      {verse.text_uthmani || verse.text_indopak}
+                    </span>
+                    <span className="inline-block text-[#1081b7] dark:text-[#38aae3] mx-2.5 text-xl font-bold select-none">
+                      ۝
+                    </span>
                   </div>
                 ))}
               </div>
@@ -367,7 +237,7 @@ export default function QuranInteractiveReader({
           )}
         </div>
 
-        {/* Floating Bottom Navigation Bar: EXACTLY 3 BUTTONS (Settings | Surah List | Juz List) */}
+        {/* Floating Bottom Navigation Bar (Settings | Surah List | Juz List) */}
         <div className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 bg-slate-900/90 backdrop-blur-md p-1.5 sm:p-2 rounded-full border border-white/20 shadow-2xl max-w-[calc(100vw-32px)]">
           {/* Button 1: Settings (Left Side) */}
           <button
@@ -407,87 +277,7 @@ export default function QuranInteractiveReader({
         </div>
       </div>
 
-      {/* ADVANCED SEARCH MODAL (Triggered by Top-Left Search Icon) */}
-      {isSearchOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
-          <div className="bg-white rounded-3xl shadow-2xl border border-slate-200 w-full max-w-md overflow-hidden flex flex-col max-h-[85vh] animate-in fade-in zoom-in duration-200">
-            {/* Search Header */}
-            <div className="p-4 bg-gradient-to-r from-[#116c9c] to-[#1081b7] text-white flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Search className="w-5 h-5" />
-                <h3 className="font-bold text-sm sm:text-base">Advanced Quran Search</h3>
-              </div>
-              <button
-                onClick={() => setIsSearchOpen(false)}
-                className="p-1 hover:bg-white/20 rounded-lg transition-colors text-white"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            <div className="p-4 space-y-4 overflow-y-auto">
-              {/* Jump to Specific Ayah */}
-              <div className="bg-slate-50 p-3.5 rounded-2xl border border-slate-200 space-y-2">
-                <label className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
-                  <ArrowRight className="w-3.5 h-3.5 text-[#1081b7]" /> Jump to Ayah Number in Current Surah:
-                </label>
-                <div className="flex gap-2">
-                  <input
-                    type="number"
-                    value={targetAyah}
-                    onChange={(e) => setTargetAyah(e.target.value)}
-                    placeholder={`Enter Ayah (1 - ${verses.length || 286})...`}
-                    className="flex-1 px-3 py-2 rounded-xl bg-white border border-slate-200 text-xs font-medium focus:border-[#1081b7] focus:outline-none"
-                    onKeyDown={(e) => e.key === 'Enter' && handleJumpToAyah()}
-                  />
-                  <button
-                    onClick={handleJumpToAyah}
-                    className="px-4 py-2 bg-[#1081b7] text-white text-xs font-bold rounded-xl hover:bg-[#116c9c] transition-colors"
-                  >
-                    Go
-                  </button>
-                </div>
-              </div>
-
-              {/* Filter Surahs by Name or Number */}
-              <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-700">Filter Surah by Name or Number:</label>
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Type Surah name (e.g. Yaseen, Rahman, 36)..."
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-medium focus:border-[#1081b7] focus:outline-none"
-                />
-              </div>
-
-              {/* Surahs List Results */}
-              <div className="space-y-1 max-h-60 overflow-y-auto divide-y divide-slate-100 pr-1">
-                {filteredSurahs.map((s) => (
-                  <button
-                    key={s.id}
-                    onClick={() => {
-                      if (onSelectSurahOrJuz) onSelectSurahOrJuz('surah', s.id);
-                      setIsSearchOpen(false);
-                    }}
-                    className="w-full flex items-center justify-between p-2.5 hover:bg-slate-50 rounded-xl transition-colors text-left"
-                  >
-                    <div className="flex items-center gap-2.5">
-                      <span className="w-6 h-6 rounded-md bg-[#1081b7]/10 text-[#1081b7] font-bold text-xs flex items-center justify-center">
-                        {s.id}
-                      </span>
-                      <span className="text-xs font-bold text-slate-800">{s.name}</span>
-                    </div>
-                    <span className="text-sm font-arabic font-bold text-[#116c9c]">{s.arabic}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* SETTINGS DRAWER / POPOVER (Triggered by Bottom Left Settings Button) */}
+      {/* SETTINGS DRAWER / POPOVER */}
       {isSettingsOpen && (
         <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-slate-900/60 backdrop-blur-sm p-2 sm:p-4">
           <div className="bg-white dark:bg-slate-900 rounded-t-3xl sm:rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 w-full max-w-lg overflow-hidden flex flex-col max-h-[90vh] animate-in slide-in-from-bottom duration-200">
@@ -550,106 +340,11 @@ export default function QuranInteractiveReader({
                 </div>
               </div>
 
-              {/* 2. Script Type / Font Style (Madani vs IndoPak) */}
-              <div className="space-y-2">
-                <label className="font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider text-[10px]">
-                  2. Script &amp; Font Style (Mushaf)
-                </label>
-                <div className="grid grid-cols-2 gap-2">
-                  <button
-                    onClick={() => setScriptType('madani')}
-                    className={`p-2.5 rounded-xl border flex items-center justify-center gap-2 font-bold transition-all ${
-                      scriptType === 'madani'
-                        ? 'border-[#1081b7] bg-blue-50 text-[#1081b7] shadow-sm'
-                        : 'border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800'
-                    }`}
-                  >
-                    <span>Madani Uthmani</span>
-                  </button>
-
-                  <button
-                    onClick={() => setScriptType('indopak')}
-                    className={`p-2.5 rounded-xl border flex items-center justify-center gap-2 font-bold transition-all ${
-                      scriptType === 'indopak'
-                        ? 'border-[#1081b7] bg-blue-50 text-[#1081b7] shadow-sm'
-                        : 'border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800'
-                    }`}
-                  >
-                    <span>IndoPak Script</span>
-                  </button>
-                </div>
-              </div>
-
-              {/* 3. Tajweed Color Rules Toggle */}
-              <div className="flex items-center justify-between bg-amber-50 dark:bg-amber-950/30 p-3.5 rounded-2xl border border-amber-200 dark:border-amber-900/50">
-                <div className="space-y-0.5">
-                  <span className="font-bold text-amber-900 dark:text-amber-200 flex items-center gap-1.5">
-                    <Sparkles className="w-4 h-4 text-amber-500" /> Tajweed Color Rules
-                  </span>
-                  <p className="text-[10px] text-amber-700 dark:text-amber-300">
-                    Color-code Ghunna, Ikhfa, Qalqalah, Idgham &amp; Madd.
-                  </p>
-                </div>
-                <button
-                  onClick={() => setIsTajweedEnabled(!isTajweedEnabled)}
-                  className={`w-12 h-6 rounded-full transition-colors relative p-0.5 ${
-                    isTajweedEnabled ? 'bg-[#1081b7]' : 'bg-slate-300'
-                  }`}
-                >
-                  <div
-                    className={`w-5 h-5 rounded-full bg-white transition-transform ${
-                      isTajweedEnabled ? 'translate-x-6' : 'translate-x-0'
-                    }`}
-                  />
-                </button>
-              </div>
-
-              {/* 4. Translation Language Selector (Off / English / Urdu) */}
-              <div className="space-y-2">
-                <label className="font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider text-[10px]">
-                  4. Translation Language
-                </label>
-                <div className="grid grid-cols-3 gap-2">
-                  <button
-                    onClick={() => setTranslationLang('none')}
-                    className={`p-2.5 rounded-xl border font-bold text-center transition-all ${
-                      translationLang === 'none'
-                        ? 'border-[#1081b7] bg-blue-50 text-[#1081b7] shadow-sm'
-                        : 'border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800'
-                    }`}
-                  >
-                    Off (Recitation)
-                  </button>
-
-                  <button
-                    onClick={() => setTranslationLang('en')}
-                    className={`p-2.5 rounded-xl border font-bold text-center transition-all ${
-                      translationLang === 'en'
-                        ? 'border-[#1081b7] bg-blue-50 text-[#1081b7] shadow-sm'
-                        : 'border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800'
-                    }`}
-                  >
-                    English
-                  </button>
-
-                  <button
-                    onClick={() => setTranslationLang('ur')}
-                    className={`p-2.5 rounded-xl border font-bold text-center transition-all ${
-                      translationLang === 'ur'
-                        ? 'border-[#1081b7] bg-blue-50 text-[#1081b7] shadow-sm'
-                        : 'border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800'
-                    }`}
-                  >
-                    Urdu (اردو)
-                  </button>
-                </div>
-              </div>
-
-              {/* 5. Font Size / Zoom Controls */}
+              {/* 2. Font Size / Zoom Controls */}
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <label className="font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider text-[10px]">
-                    5. Arabic Text Font Size (Zoom)
+                    2. Arabic Text Font Size (Zoom)
                   </label>
                   <span className="font-mono font-bold text-[#1081b7]">{fontSize}px</span>
                 </div>
@@ -682,11 +377,11 @@ export default function QuranInteractiveReader({
                 </div>
               </div>
 
-              {/* 6. Audio Reciter Selector */}
+              {/* 3. Audio Reciter Selector */}
               {contentType === 'surah' && (
                 <div className="space-y-2 pt-2 border-t border-slate-100 dark:border-slate-800">
                   <label className="font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider text-[10px]">
-                    6. Reciter Voice
+                    3. Reciter Voice
                   </label>
                   <select
                     value={selectedReciter}
@@ -706,46 +401,12 @@ export default function QuranInteractiveReader({
         </div>
       )}
 
-      {/* Tajweed Color Rules Custom Styling */}
+      {/* Universal Quranic Fonts */}
       <style jsx global>{`
-        .tajweed-text .tajweed-ghunna,
-        .tajweed-text .ghunna {
-          color: #ff7e1e !important;
-          font-weight: 600;
-        }
-        .tajweed-text .tajweed-ikhfa,
-        .tajweed-text .ikhfa {
-          color: #d9383a !important;
-          font-weight: 600;
-        }
-        .tajweed-text .tajweed-idgham,
-        .tajweed-text .idgham {
-          color: #10b981 !important;
-          font-weight: 600;
-        }
-        .tajweed-text .tajweed-qalqalah,
-        .tajweed-text .qalqalah {
-          color: #3b82f6 !important;
-          font-weight: 700;
-        }
-        .tajweed-text .tajweed-madd,
-        .tajweed-text .madd,
-        .tajweed-text .madd_2,
-        .tajweed-text .madd_4,
-        .tajweed-text .madd_6 {
-          color: #9333ea !important;
-          font-weight: 700;
-        }
-        .tajweed-text .tajweed-iqlab,
-        .tajweed-text .iqlab {
-          color: #db2777 !important;
-          font-weight: 600;
-        }
-        .tajweed-text .tajweed-ham_wasl {
-          color: #94a3b8 !important;
-        }
-        .tajweed-text .tajweed-slnt {
-          color: #a1a1aa !important;
+        @import url('https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Noto+Naskh+Arabic:wght@400;600;700&family=Scheherazade+New:wght@400;600;700&display=swap');
+
+        .font-quran-madani {
+          font-family: 'Amiri Quran', 'Scheherazade New', 'Noto Naskh Arabic', 'Traditional Arabic', serif;
         }
       `}</style>
     </div>

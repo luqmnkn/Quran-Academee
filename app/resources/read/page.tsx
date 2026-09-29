@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { BookOpen, Layers, ArrowLeft, Download, X, ChevronLeft, ChevronRight, Search } from 'lucide-react';
+import { BookOpen, Layers, ArrowLeft, Download, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { SURAHS, JUZ_LIST } from '@/lib/quranData';
 import ResourceFooter from '@/components/ResourceFooter';
 import QuranInteractiveReader from '@/components/QuranInteractiveReader';
@@ -13,7 +13,6 @@ export default function OnlineReaderPage() {
   const [currentId, setCurrentId] = useState<number>(1);
   const [isListDrawerOpen, setIsListDrawerOpen] = useState<boolean>(false);
   const [drawerType, setDrawerType] = useState<'surah' | 'juz'>('surah');
-  const [searchQuery, setSearchQuery] = useState<string>('');
 
   const currentSurah = SURAHS.find((s) => s.id === currentId) || SURAHS[0];
   const currentJuz = JUZ_LIST.find((j) => j.id === currentId) || JUZ_LIST[0];
@@ -23,30 +22,12 @@ export default function OnlineReaderPage() {
       ? `${currentSurah.name}`
       : `${currentJuz.name}`;
 
-
   const currentFilePath = contentType === 'surah' ? currentSurah.filePath : currentJuz.filePath;
-
 
   const openDrawer = (type: 'surah' | 'juz') => {
     setDrawerType(type);
     setIsListDrawerOpen(true);
-    setSearchQuery('');
   };
-
-  const filteredSurahs = SURAHS.filter(
-    (s) =>
-      s.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      s.transliteration.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      s.arabic.includes(searchQuery) ||
-      s.id.toString() === searchQuery.trim()
-  );
-
-  const filteredJuz = JUZ_LIST.filter(
-    (j) =>
-      j.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      j.arabic.includes(searchQuery) ||
-      j.id.toString() === searchQuery.trim()
-  );
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-[#f0f9ff] to-[#d7effa] text-slate-800 pt-20 sm:pt-24 pb-12 sm:pb-16 px-2 sm:px-4 overflow-x-hidden w-full max-w-full">
@@ -82,10 +63,9 @@ export default function OnlineReaderPage() {
             >
               {/* Drawer Header */}
               <div className="p-5 bg-gradient-to-r from-[#116c9c] to-[#1081b7] text-white flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                 
-                 
-                </div>
+                <h3 className="font-bold text-base">
+                  {drawerType === 'surah' ? 'Select Surah (1 - 114)' : 'Select Juz (1 - 30)'}
+                </h3>
                 <button
                   onClick={() => setIsListDrawerOpen(false)}
                   className="p-1.5 hover:bg-white/20 rounded-lg text-white transition-colors"
@@ -94,28 +74,10 @@ export default function OnlineReaderPage() {
                 </button>
               </div>
 
-              {/* Drawer Search Filter Input */}
-              <div className="p-4 border-b border-slate-100 bg-slate-50">
-                <div className="relative">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#1081b7]" />
-                  <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder={
-                      drawerType === 'surah'
-                        ? 'Filter Surah by name or number...'
-                        : 'Filter Juz by number...'
-                    }
-                    className="w-full pl-9 pr-4 py-2 rounded-xl bg-white border border-slate-200 text-xs font-medium focus:border-[#1081b7] focus:outline-none"
-                  />
-                </div>
-              </div>
-
               {/* Drawer List Content */}
               <div className="flex-1 overflow-y-auto p-3 space-y-1.5 divide-y divide-slate-100">
                 {drawerType === 'surah'
-                  ? filteredSurahs.map((s) => (
+                  ? SURAHS.map((s) => (
                       <button
                         key={s.id}
                         onClick={() => {
@@ -138,7 +100,7 @@ export default function OnlineReaderPage() {
                         <span className="text-base font-arabic font-bold text-[#116c9c]">{s.arabic}</span>
                       </button>
                     ))
-                  : filteredJuz.map((j) => (
+                  : JUZ_LIST.map((j) => (
                       <button
                         key={j.id}
                         onClick={() => {
