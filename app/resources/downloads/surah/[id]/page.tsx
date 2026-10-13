@@ -104,7 +104,7 @@ export default async function SurahDownloadDetailPage({ params }: Props) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-[#f0f9ff] to-[#d7effa] text-slate-800 pt-24 pb-16">
+    <div className="min-h-screen bg-gradient-to-b from-white via-[#f0f9ff] to-[#d7effa] text-slate-800 pt-24 pb-16 overflow-x-clip">
       {/* Inject JSON-LD for Search Engine Optimization */}
       <script
         type="application/ld+json"
@@ -130,11 +130,11 @@ export default async function SurahDownloadDetailPage({ params }: Props) {
         </div>
 
         {/* Main Surah Card Layout */}
-        <div className="bg-[#f0f9ff] rounded-3xl p-6 sm:p-10 shadow-xl border border-[#38aae3]/25 space-y-8">
+        <div className="bg-[#f0f9ff] rounded-none p-6 sm:p-10 shadow-xl border border-[#38aae3]/25 space-y-8">
           {/* Header Title Bar */}
           <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-[#38aae3]/20">
             <div className="flex items-center gap-4">
-              <span className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#116c9c] to-[#1081b7] text-white font-extrabold text-xl flex items-center justify-center shadow-md">
+              <span className="w-14 h-14 rounded-none bg-gradient-to-br from-[#116c9c] to-[#1081b7] text-white font-extrabold text-xl flex items-center justify-center shadow-md">
                 {surah.id}
               </span>
               <div>
@@ -162,7 +162,7 @@ export default async function SurahDownloadDetailPage({ params }: Props) {
                   <strong>Surah {surah.name}</strong> ({surah.arabic}) is the {surah.id}th chapter of the Glorious Quran, revealed in {surah.type} containing {surah.verses} verses. Main Theme: {surah.theme}.
                 </p>
 
-                <div className="bg-white rounded-2xl p-5 border border-[#38aae3]/20 space-y-3 shadow-sm">
+                <div className="bg-white rounded-none p-5 border border-[#38aae3]/20 space-y-3 shadow-sm">
                   <h4 className="text-xs font-bold text-slate-900 flex items-center gap-1.5">
                     <BookOpen className="w-4 h-4 text-[#1081b7]" /> Key Surah Attributes
                   </h4>
@@ -194,7 +194,7 @@ export default async function SurahDownloadDetailPage({ params }: Props) {
             </div>
 
             {/* Right Column: PDF Preview Frame & Download CTA */}
-            <div className="bg-white rounded-2xl p-5 border border-[#38aae3]/20 flex flex-col justify-between space-y-5 shadow-sm min-h-[420px]">
+            <div className="bg-white rounded-none p-5 border border-[#38aae3]/20 flex flex-col justify-between space-y-5 shadow-sm min-h-[420px]">
               <div className="space-y-3 flex-1 flex flex-col">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold text-[#1081b7] uppercase tracking-wider">
@@ -205,7 +205,7 @@ export default async function SurahDownloadDetailPage({ params }: Props) {
                   </span>
                 </div>
 
-                <div className="flex-1 w-full min-h-[300px] rounded-xl overflow-hidden border border-slate-200 bg-slate-50 relative">
+                <div className="flex-1 w-full min-h-[300px] rounded-none overflow-hidden border border-slate-200 bg-slate-50 relative">
                   <QuranPdfViewer
                     src={surah.filePath}
                     title={`Surah ${surah.name} PDF Preview`}
@@ -216,7 +216,7 @@ export default async function SurahDownloadDetailPage({ params }: Props) {
               <a
                 href={surah.filePath}
                 download
-                className="w-full inline-flex items-center justify-center gap-2.5 py-4 px-6 rounded-xl bg-gradient-to-r from-[#1081b7] to-[#116c9c] hover:from-[#116c9c] hover:to-[#1081b7] text-white font-extrabold text-sm shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5"
+                className="w-full inline-flex items-center justify-center gap-2.5 py-4 px-6 rounded-none bg-gradient-to-r from-[#1081b7] to-[#116c9c] hover:from-[#116c9c] hover:to-[#1081b7] text-white font-extrabold text-sm shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5"
               >
                 <Download className="w-5 h-5" />
                 <span>Download Surah {surah.name} PDF</span>
@@ -225,7 +225,7 @@ export default async function SurahDownloadDetailPage({ params }: Props) {
           </div>
 
           {/* SEO Content & Detailed Information Section for Search Engines */}
-          <div className="bg-white rounded-2xl p-6 sm:p-8 border border-[#38aae3]/20 space-y-6">
+          <div className="bg-white rounded-none p-6 sm:p-8 border border-[#38aae3]/20 space-y-6">
             <div className="space-y-3">
               <h2 className="text-xl sm:text-2xl font-extrabold text-[#116c9c]">
                 About Surah {surah.name} ({surah.transliteration}) — Reading &amp; Benefits
@@ -242,21 +242,21 @@ export default async function SurahDownloadDetailPage({ params }: Props) {
               </h3>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="bg-[#f0f9ff] p-4 rounded-xl border border-[#38aae3]/15 space-y-1">
+                <div className="bg-[#f0f9ff] p-4 rounded-none border border-[#38aae3]/15 space-y-1">
                   <h4 className="text-xs font-bold text-slate-900">How many verses in Surah {surah.name}?</h4>
                   <p className="text-xs text-slate-600 leading-relaxed">
                     Surah {surah.name} contains {surah.verses} verses (Ayat).
                   </p>
                 </div>
 
-                <div className="bg-[#f0f9ff] p-4 rounded-xl border border-[#38aae3]/15 space-y-1">
+                <div className="bg-[#f0f9ff] p-4 rounded-none border border-[#38aae3]/15 space-y-1">
                   <h4 className="text-xs font-bold text-slate-900">Where was it revealed?</h4>
                   <p className="text-xs text-slate-600 leading-relaxed">
                     Surah {surah.name} is a {surah.type} revelation.
                   </p>
                 </div>
 
-                <div className="bg-[#f0f9ff] p-4 rounded-xl border border-[#38aae3]/15 space-y-1">
+                <div className="bg-[#f0f9ff] p-4 rounded-none border border-[#38aae3]/15 space-y-1">
                   <h4 className="text-xs font-bold text-slate-900">Is this PDF free to download?</h4>
                   <p className="text-xs text-slate-600 leading-relaxed">
                     Yes, all Surah PDFs on Quran Academee are 100% free for learning and study.

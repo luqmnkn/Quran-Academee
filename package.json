@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node scripts/copy-worker.js && next dev",
-    "build": "node scripts/copy-worker.js && next build",
-    "postinstall": "node scripts/copy-worker.js",
+    "dev": "node scripts/sync-videos.js && node scripts/copy-worker.js && next dev",
+    "build": "node scripts/sync-videos.js && node scripts/copy-worker.js && next build",
+    "postinstall": "node scripts/sync-videos.js && node scripts/copy-worker.js",
     "start": "next start",
     "lint": "eslint"
   },

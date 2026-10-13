@@ -1,24 +1,16 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { Download } from 'lucide-react';
 import { DOWNLOADABLE_RESOURCES, DUAS } from '@/lib/quranData';
-import QuranReaderModal from '@/components/QuranReaderModal';
 import ResourceFooter from '@/components/ResourceFooter';
-import PremiumCarousel from '@/components/PremiumCarousel';
 
 export default function ResourcesHubPage() {
-  const [modalState, setModalState] = useState<{ isOpen: boolean; type: 'surah' | 'juz'; id: number }>({
-    isOpen: false,
-    type: 'surah',
-    id: 1,
-  });
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-[#f0f9ff] to-[#d7effa] text-slate-800 pt-24 pb-16 overflow-x-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-white via-[#f0f9ff] to-[#d7effa] text-slate-800 pt-24 pb-16 overflow-x-clip">
       {/* Hero Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="text-center max-w-3xl mx-auto space-y-4">
@@ -48,7 +40,7 @@ export default function ResourcesHubPage() {
           {/* Card 1: Read Quran (Full BG Image with White Shade Gradient Overlay & White Text) */}
           <motion.div
             whileHover={{ y: -4 }}
-            className="rounded-3xl shadow-xl border border-slate-700/30 flex flex-col justify-between relative overflow-hidden group min-h-[260px]"
+            className="rounded-none shadow-xl border border-slate-700/30 flex flex-col justify-between relative overflow-hidden group min-h-[260px]"
           >
             {/* Background Image */}
             <Image
@@ -70,7 +62,7 @@ export default function ResourcesHubPage() {
             <div className="p-8 pt-0 relative z-10">
               <Link
                 href="/resources/read"
-                className="w-full sm:w-auto px-7 py-3 rounded-xl bg-gradient-to-r from-[#1C8DC8] to-[#146299] hover:from-[#146299] hover:to-[#1C8DC8] text-white font-bold text-sm transition-all shadow-lg text-center inline-block"
+                className="w-full sm:w-auto px-7 py-3 rounded-none bg-gradient-to-r from-[#1C8DC8] to-[#146299] hover:from-[#146299] hover:to-[#1C8DC8] text-white font-bold text-sm transition-all shadow-lg text-center inline-block"
               >
                 Read Quran
               </Link>
@@ -80,7 +72,7 @@ export default function ResourcesHubPage() {
           {/* Card 2: Download Quran (Light Blue BG with 75% Text Width & PDF Icon on Right Side) */}
           <motion.div
             whileHover={{ y: -4 }}
-            className="bg-[#f0f9ff] rounded-3xl p-8 shadow-xl border border-[#38aae3]/25 flex flex-col justify-between relative overflow-hidden group min-h-[260px]"
+            className="bg-[#f0f9ff] rounded-none p-8 shadow-xl border border-[#38aae3]/25 flex flex-col justify-between relative overflow-hidden group min-h-[260px]"
           >
             {/* PDF Icon Graphic aligned to Right Side */}
             <div className="absolute right-4 bottom-4 w-36 h-36 sm:w-44 sm:h-44 opacity-80 group-hover:scale-105 group-hover:opacity-100 transition-all pointer-events-none">
@@ -104,7 +96,7 @@ export default function ResourcesHubPage() {
             <div className="pt-8 relative z-10">
               <Link
                 href="/resources/downloads"
-                className="w-full sm:w-auto px-7 py-3 rounded-xl bg-[#1081b7] hover:bg-[#116c9c] text-white font-bold text-sm transition-colors shadow-md text-center inline-block"
+                className="w-full sm:w-auto px-7 py-3 rounded-none bg-[#1081b7] hover:bg-[#116c9c] text-white font-bold text-sm transition-colors shadow-md text-center inline-block"
               >
                 Download Quran &amp; Duas
               </Link>
@@ -113,7 +105,7 @@ export default function ResourcesHubPage() {
         </div>
 
         {/* Essential Daily Masnoon Duas Guide Showcase (Left Description & Right Document Preview) */}
-        <div className="mt-16 bg-[#f0f9ff] rounded-3xl p-6 sm:p-10 border border-[#38aae3]/25 shadow-xl">
+        <div className="mt-16 bg-[#f0f9ff] rounded-none p-6 sm:p-10 border border-[#38aae3]/25 shadow-xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             {/* Left Side: Rich Detailed Description */}
             <div className="lg:col-span-7 space-y-5">
@@ -131,14 +123,14 @@ export default function ResourcesHubPage() {
               <div className="pt-4 flex flex-wrap items-center gap-4">
                 <Link
                   href={`/resources/downloads/dua/${DUAS[0]?.slug || 'dua-when-starting-any-good-task'}`}
-                  className="px-7 py-3.5 rounded-xl bg-gradient-to-r from-[#1081b7] to-[#116c9c] hover:from-[#116c9c] hover:to-[#1081b7] text-white font-extrabold text-sm shadow-lg transition-all inline-flex items-center gap-2"
+                  className="px-7 py-3.5 rounded-none bg-gradient-to-r from-[#1081b7] to-[#116c9c] hover:from-[#116c9c] hover:to-[#1081b7] text-white font-extrabold text-sm shadow-lg transition-all inline-flex items-center gap-2"
                 >
                   <span>Download Dua Cards</span>
                 </Link>
 
                 <Link
                   href="/resources/downloads"
-                  className="px-6 py-3.5 rounded-xl bg-white hover:bg-slate-50 text-[#1081b7] border border-[#38aae3]/30 font-bold text-sm shadow-sm transition-all inline-flex items-center gap-2"
+                  className="px-6 py-3.5 rounded-none bg-white hover:bg-slate-50 text-[#1081b7] border border-[#38aae3]/30 font-bold text-sm shadow-sm transition-all inline-flex items-center gap-2"
                 >
                   <span>Explore All 28 Duas</span>
                 </Link>
@@ -147,8 +139,8 @@ export default function ResourcesHubPage() {
 
             {/* Right Side: Single Document Preview Card */}
             <div className="lg:col-span-5 flex justify-center">
-              <div className="relative w-full max-w-sm rounded-2xl overflow-hidden group">
-                <div className="relative h-72 sm:h-80 w-full rounded-xl overflow-hidden bg-slate-100">
+              <div className="relative w-full max-w-sm rounded-none overflow-hidden group">
+                <div className="relative h-72 sm:h-80 w-full rounded-none overflow-hidden bg-slate-100">
                   <Image
                     src="/images/dua.jpg"
                     alt="Essential Daily Masnoon Duas Guide"
@@ -172,14 +164,6 @@ export default function ResourcesHubPage() {
 
       {/* Reusable Footer CTA */}
       <ResourceFooter />
-
-      {/* Reader Modal */}
-      <QuranReaderModal
-        isOpen={modalState.isOpen}
-        onClose={() => setModalState({ ...modalState, isOpen: false })}
-        initialType={modalState.type}
-        initialId={modalState.id}
-      />
     </div>
   );
 }

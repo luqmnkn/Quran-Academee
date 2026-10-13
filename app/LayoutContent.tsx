@@ -7,7 +7,7 @@ import Footer from '../components/Footer';
 import WhatsAppButton from '../components/WhatsAppButton';
 import FloatingControls from '../components/FloatingControls';
 import InquiryForm from '../components/InquiryForm';
-import { X, Calendar } from 'lucide-react';
+import { X } from 'lucide-react';
 
 export default function LayoutContent({
   children,

@@ -34,7 +34,7 @@ export default function FloatingControls({ onOpenTrialModal }: FloatingControlsP
             transition={{ type: 'spring', damping: 20, stiffness: 120 }}
             onClick={onOpenTrialModal}
             aria-label="Book Free Trial"
-            className="hidden md:flex fixed bottom-8 left-8 z-40 h-[52px] pl-5 pr-6 bg-gradient-to-r from-[#1C8DC8] to-[#3D8DC3] hover:from-[#146299] hover:to-[#1C8DC8] text-white font-display font-black text-xs uppercase tracking-widest rounded-full items-center space-x-2.5 shadow-[0_12px_36px_rgba(28,141,200,0.3)] hover:scale-[1.03] transition-all cursor-pointer border border-sky-200/30"
+            className="hidden md:flex fixed bottom-8 left-8 z-40 h-[52px] pl-5 pr-6 bg-gradient-to-r from-[#1C8DC8] to-[#3D8DC3] hover:from-[#146299] hover:to-[#1C8DC8] text-white font-display font-black text-xs uppercase tracking-widest rounded-none items-center space-x-2.5 shadow-[0_12px_36px_rgba(28,141,200,0.3)] hover:scale-[1.03] transition-all cursor-pointer border border-sky-200/30"
           >
             <Calendar size={15} className="animate-pulse" />
             <span>Book Free Trial</span>
@@ -52,7 +52,7 @@ export default function FloatingControls({ onOpenTrialModal }: FloatingControlsP
             <button
               onClick={onOpenTrialModal}
               aria-label="Book Free Trial Now"
-              className="w-full h-12 bg-gradient-to-r from-[#1C8DC8] to-[#3D8DC3] text-white font-display font-black text-xs uppercase tracking-widest rounded-full flex items-center justify-center space-x-2 shadow-[0_10px_30px_rgba(28,141,200,0.35)] border border-sky-200/30 active:scale-[0.98] transition-transform cursor-pointer"
+              className="w-full h-12 bg-gradient-to-r from-[#1C8DC8] to-[#3D8DC3] text-white font-display font-black text-xs uppercase tracking-widest rounded-none flex items-center justify-center space-x-2 shadow-[0_10px_30px_rgba(28,141,200,0.35)] border border-sky-200/30 active:scale-[0.98] transition-transform cursor-pointer"
             >
               <Calendar size={15} className="animate-pulse" />
               <span>Book Free Trial Now</span>

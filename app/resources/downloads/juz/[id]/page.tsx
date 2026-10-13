@@ -4,6 +4,7 @@ import { Metadata } from 'next';
 import { Download, ArrowLeft, Layers, CheckCircle2, ShieldCheck, HelpCircle, ArrowRight } from 'lucide-react';
 import { JUZ_LIST, getJuzSlug, getJuzParaName } from '@/lib/quranData';
 import ResourceFooter from '@/components/ResourceFooter';
+import QuranPdfViewer from '@/components/QuranPdfViewerWrapper';
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -103,7 +104,7 @@ export default async function JuzDownloadDetailPage({ params }: Props) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-[#f0f9ff] to-[#d7effa] text-slate-800 pt-24 pb-16">
+    <div className="min-h-screen bg-gradient-to-b from-white via-[#f0f9ff] to-[#d7effa] text-slate-800 pt-24 pb-16 overflow-x-clip">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaJsonLd) }}
@@ -128,11 +129,11 @@ export default async function JuzDownloadDetailPage({ params }: Props) {
         </div>
 
         {/* Main Card */}
-        <div className="bg-[#f0f9ff] rounded-3xl p-6 sm:p-10 shadow-xl border border-[#38aae3]/25 space-y-8">
+        <div className="bg-[#f0f9ff] rounded-none p-6 sm:p-10 shadow-xl border border-[#38aae3]/25 space-y-8">
           {/* Header Title Bar */}
           <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-[#38aae3]/20">
             <div className="flex items-center gap-4">
-              <span className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#1081b7] to-[#0e94d3] text-white font-extrabold text-xl flex items-center justify-center shadow-md">
+              <span className="w-14 h-14 rounded-none bg-gradient-to-br from-[#1081b7] to-[#0e94d3] text-white font-extrabold text-xl flex items-center justify-center shadow-md">
                 J{juz.id}
               </span>
               <div>
@@ -160,7 +161,7 @@ export default async function JuzDownloadDetailPage({ params }: Props) {
                   <strong>Para {juz.id} ({paraName})</strong> covers {juz.startSurah}. Main Focus: {juz.theme}.
                 </p>
 
-                <div className="bg-white rounded-2xl p-5 border border-[#38aae3]/20 space-y-3 shadow-sm">
+                <div className="bg-white rounded-none p-5 border border-[#38aae3]/20 space-y-3 shadow-sm">
                   <h4 className="text-xs font-bold text-slate-900 flex items-center gap-1.5">
                     <Layers className="w-4 h-4 text-[#1081b7]" /> Key Attributes
                   </h4>
@@ -188,7 +189,7 @@ export default async function JuzDownloadDetailPage({ params }: Props) {
             </div>
 
             {/* Right Column: PDF Preview Frame & Download CTA */}
-            <div className="bg-white rounded-2xl p-5 border border-[#38aae3]/20 flex flex-col justify-between space-y-5 shadow-sm min-h-[420px]">
+            <div className="bg-white rounded-none p-5 border border-[#38aae3]/20 flex flex-col justify-between space-y-5 shadow-sm min-h-[420px]">
               <div className="space-y-3 flex-1 flex flex-col">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold text-[#1081b7] uppercase tracking-wider">
@@ -199,11 +200,10 @@ export default async function JuzDownloadDetailPage({ params }: Props) {
                   </span>
                 </div>
 
-                <div className="flex-1 w-full min-h-[300px] rounded-xl overflow-hidden border border-slate-200 bg-slate-50">
-                  <iframe
-                    src={`${juz.filePath}#toolbar=0&navpanes=0`}
+                <div className="flex-1 w-full min-h-[300px] rounded-none overflow-hidden border border-slate-200 bg-slate-50 relative flex items-center justify-center">
+                  <QuranPdfViewer
+                    src={juz.filePath}
                     title={`Para ${juz.id} PDF Preview`}
-                    className="w-full h-full border-none bg-white"
                   />
                 </div>
               </div>
@@ -211,7 +211,7 @@ export default async function JuzDownloadDetailPage({ params }: Props) {
               <a
                 href={juz.filePath}
                 download
-                className="w-full inline-flex items-center justify-center gap-2.5 py-4 px-6 rounded-xl bg-gradient-to-r from-[#1081b7] to-[#116c9c] hover:from-[#116c9c] hover:to-[#1081b7] text-white font-extrabold text-sm shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5"
+                className="w-full inline-flex items-center justify-center gap-2.5 py-4 px-6 rounded-none bg-gradient-to-r from-[#1081b7] to-[#116c9c] hover:from-[#116c9c] hover:to-[#1081b7] text-white font-extrabold text-sm shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5"
               >
                 <Download className="w-5 h-5" />
                 <span>Download Para {juz.id} PDF</span>
@@ -220,7 +220,7 @@ export default async function JuzDownloadDetailPage({ params }: Props) {
           </div>
 
           {/* SEO Content Section */}
-          <div className="bg-white rounded-2xl p-6 sm:p-8 border border-[#38aae3]/20 space-y-6">
+          <div className="bg-white rounded-none p-6 sm:p-8 border border-[#38aae3]/20 space-y-6">
             <div className="space-y-3">
               <h2 className="text-xl sm:text-2xl font-extrabold text-[#116c9c]">
                 About Para {juz.id}: {paraName} ({juz.arabic}) — Recitation &amp; Hifz
@@ -237,21 +237,21 @@ export default async function JuzDownloadDetailPage({ params }: Props) {
               </h3>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="bg-[#f0f9ff] p-4 rounded-xl border border-[#38aae3]/15 space-y-1">
+                <div className="bg-[#f0f9ff] p-4 rounded-none border border-[#38aae3]/15 space-y-1">
                   <h4 className="text-xs font-bold text-slate-900">What Surahs are in Para {juz.id}?</h4>
                   <p className="text-xs text-slate-600 leading-relaxed">
                     Para {juz.id} covers {juz.startSurah}.
                   </p>
                 </div>
 
-                <div className="bg-[#f0f9ff] p-4 rounded-xl border border-[#38aae3]/15 space-y-1">
+                <div className="bg-[#f0f9ff] p-4 rounded-none border border-[#38aae3]/15 space-y-1">
                   <h4 className="text-xs font-bold text-slate-900">What is the Arabic name of Para {juz.id}?</h4>
                   <p className="text-xs text-slate-600 leading-relaxed">
                     It is titled {juz.arabic} ({paraName}).
                   </p>
                 </div>
 
-                <div className="bg-[#f0f9ff] p-4 rounded-xl border border-[#38aae3]/15 space-y-1">
+                <div className="bg-[#f0f9ff] p-4 rounded-none border border-[#38aae3]/15 space-y-1">
                   <h4 className="text-xs font-bold text-slate-900">Is this Para PDF free?</h4>
                   <p className="text-xs text-slate-600 leading-relaxed">
                     Yes, 100% free for all students, parents, and teachers.

@@ -29,6 +29,7 @@ interface QuranInteractiveReaderProps {
   currentFilePath: string;
   onSelectSurahOrJuz?: (type: 'surah' | 'juz', id: number) => void;
   onOpenDrawer?: (type: 'surah' | 'juz') => void;
+  isFullPage?: boolean;
   className?: string;
 }
 
@@ -39,6 +40,7 @@ export default function QuranInteractiveReader({
   currentFilePath,
   onSelectSurahOrJuz,
   onOpenDrawer,
+  isFullPage = false,
   className = ''
 }: QuranInteractiveReaderProps) {
   // Theme state: 'light' | 'dark' | 'sepia'
@@ -152,7 +154,7 @@ export default function QuranInteractiveReader({
   }[theme];
 
   return (
-    <div className={`w-full h-full flex flex-col relative overflow-hidden transition-colors duration-300 ${themeClasses} ${className}`}>
+    <div className={`w-full relative transition-colors duration-300 ${isFullPage ? '' : 'h-full flex flex-col overflow-hidden'} ${themeClasses} ${className}`}>
       {/* Hidden Audio Player */}
       {audioUrl && (
         <audio
@@ -163,9 +165,9 @@ export default function QuranInteractiveReader({
       )}
 
       {/* Reader Container Main Area */}
-      <div className="flex-1 flex flex-col relative overflow-hidden w-full max-w-full">
+      <div className={`w-full max-w-full flex flex-col relative ${isFullPage ? '' : 'flex-1 overflow-hidden'}`}>
         {/* Top Header */}
-        <div className="flex items-center justify-between px-3 py-2.5 sm:px-6 sm:py-3.5 bg-gradient-to-r from-[#116c9c] via-[#1081b7] to-[#0e94d3] text-white shadow-md select-none shrink-0 w-full max-w-full z-10">
+        <div className={`flex items-center justify-between px-3 py-2.5 sm:px-6 sm:py-3.5 bg-gradient-to-r from-[#116c9c] via-[#1081b7] to-[#0e94d3] text-white shadow-md select-none shrink-0 w-full max-w-full ${isFullPage ? 'sticky top-16 sm:top-20 z-20' : 'z-10'}`}>
           <div className="w-8" />
 
           {/* Centered Title */}
@@ -179,7 +181,7 @@ export default function QuranInteractiveReader({
           {contentType === 'surah' && audioUrl ? (
             <button
               onClick={togglePlay}
-              className="p-2 bg-white/10 hover:bg-white/20 active:scale-95 rounded-xl transition-all flex items-center gap-1.5 text-white"
+              className="p-2 bg-white/10 hover:bg-white/20 active:scale-95 rounded-none transition-all flex items-center gap-1.5 text-white"
               title={isPlaying ? 'Pause Audio' : 'Play Audio'}
             >
               {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
@@ -193,14 +195,14 @@ export default function QuranInteractiveReader({
         </div>
 
         {/* Main Content Area: Centered Ayah lines */}
-        <div className="flex-1 overflow-y-auto px-3 sm:px-6 py-4 sm:py-8 relative w-full scroll-smooth">
+        <div className={`px-3 sm:px-6 py-4 sm:py-8 relative w-full scroll-smooth ${isFullPage ? 'pb-36' : 'flex-1 overflow-y-auto'}`}>
           {isLoading ? (
-            <div className="w-full h-full flex flex-col items-center justify-center gap-3 text-[#1081b7] p-8">
+            <div className="w-full h-full flex flex-col items-center justify-center gap-3 text-[#1081b7] p-8 min-h-[300px]">
               <div className="w-8 h-8 border-3 border-[#1081b7] border-t-transparent rounded-full animate-spin" />
               <span className="text-xs sm:text-sm font-semibold">Loading Sacred Text...</span>
             </div>
           ) : error ? (
-            <div className="w-full h-full flex flex-col items-center justify-center gap-3 p-6 text-center max-w-md mx-auto">
+            <div className="w-full h-full flex flex-col items-center justify-center gap-3 p-6 text-center max-w-md mx-auto min-h-[300px]">
               <Info className="w-8 h-8 text-amber-500" />
               <p className="text-xs sm:text-sm font-semibold">{error}</p>
             </div>
@@ -208,7 +210,7 @@ export default function QuranInteractiveReader({
             <div className="max-w-4xl mx-auto space-y-6 sm:space-y-8">
               {/* Bismillah Header (Except Surah 9 Taubah) */}
               {contentType === 'surah' && currentId !== 9 && (
-                <div className={`text-center py-4 sm:py-6 rounded-2xl border shadow-sm ${bismillahThemeClasses}`}>
+                <div className={`text-center py-4 sm:py-6 rounded-none border shadow-sm ${bismillahThemeClasses}`}>
                   <h2 className="text-2xl sm:text-3xl font-quran-madani leading-relaxed font-bold">
                     بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
                   </h2>
@@ -216,7 +218,7 @@ export default function QuranInteractiveReader({
               )}
 
               {/* Quran Text Container: One Ayah per Line & Centered */}
-              <div className={`${cardThemeClasses} rounded-3xl p-5 sm:p-10 transition-colors duration-300`}>
+              <div className={`${cardThemeClasses} rounded-none p-5 sm:p-10 transition-colors duration-300`}>
                 {verses.map((verse, idx) => (
                   <div
                     key={verse.id || idx}
@@ -238,11 +240,11 @@ export default function QuranInteractiveReader({
         </div>
 
         {/* Floating Bottom Navigation Bar (Settings | Surah List | Juz List) */}
-        <div className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 bg-slate-900/90 backdrop-blur-md p-1.5 sm:p-2 rounded-full border border-white/20 shadow-2xl max-w-[calc(100vw-32px)]">
+        <div className={`${isFullPage ? 'fixed' : 'absolute'} bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2 bg-slate-900/90 backdrop-blur-md p-1.5 sm:p-2 rounded-none border border-white/20 shadow-2xl max-w-[calc(100vw-32px)]`}>
           {/* Button 1: Settings (Left Side) */}
           <button
             onClick={() => setIsSettingsOpen(true)}
-            className="px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 bg-white/10 hover:bg-white/20 text-white touch-manipulation"
+            className="px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-none text-xs font-bold transition-all flex items-center gap-1.5 bg-white/10 hover:bg-white/20 text-white touch-manipulation"
             title="Reader Settings"
           >
             <Settings className="w-4 h-4 text-amber-400" />
@@ -252,7 +254,7 @@ export default function QuranInteractiveReader({
           {/* Button 2: Surah List (1-114) */}
           <button
             onClick={() => onOpenDrawer && onOpenDrawer('surah')}
-            className={`px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-bold transition-all flex items-center gap-1.5 sm:gap-2 whitespace-nowrap touch-manipulation ${
+            className={`px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-none text-[11px] sm:text-xs font-bold transition-all flex items-center gap-1.5 sm:gap-2 whitespace-nowrap touch-manipulation ${
               contentType === 'surah'
                 ? 'bg-gradient-to-r from-[#1081b7] to-[#38aae3] text-white shadow'
                 : 'text-slate-300 hover:text-white hover:bg-white/10'
@@ -265,7 +267,7 @@ export default function QuranInteractiveReader({
           {/* Button 3: Juz List (1-30) */}
           <button
             onClick={() => onOpenDrawer && onOpenDrawer('juz')}
-            className={`px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-bold transition-all flex items-center gap-1.5 sm:gap-2 whitespace-nowrap touch-manipulation ${
+            className={`px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-none text-[11px] sm:text-xs font-bold transition-all flex items-center gap-1.5 sm:gap-2 whitespace-nowrap touch-manipulation ${
               contentType === 'juz'
                 ? 'bg-gradient-to-r from-[#1081b7] to-[#38aae3] text-white shadow'
                 : 'text-slate-300 hover:text-white hover:bg-white/10'
@@ -280,7 +282,7 @@ export default function QuranInteractiveReader({
       {/* SETTINGS DRAWER / POPOVER */}
       {isSettingsOpen && (
         <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-slate-900/60 backdrop-blur-sm p-2 sm:p-4">
-          <div className="bg-white dark:bg-slate-900 rounded-t-3xl sm:rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 w-full max-w-lg overflow-hidden flex flex-col max-h-[90vh] animate-in slide-in-from-bottom duration-200">
+          <div className="bg-white dark:bg-slate-900 rounded-none shadow-2xl border border-slate-200 dark:border-slate-800 w-full max-w-lg overflow-hidden flex flex-col max-h-[90vh] animate-in slide-in-from-bottom duration-200">
             {/* Settings Header */}
             <div className="p-4 bg-gradient-to-r from-[#116c9c] to-[#1081b7] text-white flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -289,13 +291,13 @@ export default function QuranInteractiveReader({
               </div>
               <button
                 onClick={() => setIsSettingsOpen(false)}
-                className="p-1 hover:bg-white/20 rounded-lg transition-colors text-white"
+                className="p-1 hover:bg-white/20 rounded-none transition-colors text-white"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <div className="p-5 space-y-6 overflow-y-auto text-xs text-slate-800 dark:text-slate-100">
+            <div className="p-5 space-y-6 overflow-y-auto text-xs text-slate-800 dark:text-slate-100 overscroll-contain">
               {/* 1. Theme Selection (Light / Dark / Sepia) */}
               <div className="space-y-2">
                 <label className="font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider text-[10px]">
@@ -304,7 +306,7 @@ export default function QuranInteractiveReader({
                 <div className="grid grid-cols-3 gap-2">
                   <button
                     onClick={() => setTheme('light')}
-                    className={`p-2.5 rounded-xl border flex items-center justify-center gap-2 font-bold transition-all ${
+                    className={`p-2.5 rounded-none border flex items-center justify-center gap-2 font-bold transition-all ${
                       theme === 'light'
                         ? 'border-[#1081b7] bg-blue-50 text-[#1081b7] shadow-sm'
                         : 'border-slate-200 bg-white text-slate-700'
@@ -316,7 +318,7 @@ export default function QuranInteractiveReader({
 
                   <button
                     onClick={() => setTheme('dark')}
-                    className={`p-2.5 rounded-xl border flex items-center justify-center gap-2 font-bold transition-all ${
+                    className={`p-2.5 rounded-none border flex items-center justify-center gap-2 font-bold transition-all ${
                       theme === 'dark'
                         ? 'border-[#1081b7] bg-slate-800 text-blue-400 shadow-sm'
                         : 'border-slate-700 bg-slate-900 text-slate-300'
@@ -328,7 +330,7 @@ export default function QuranInteractiveReader({
 
                   <button
                     onClick={() => setTheme('sepia')}
-                    className={`p-2.5 rounded-xl border flex items-center justify-center gap-2 font-bold transition-all ${
+                    className={`p-2.5 rounded-none border flex items-center justify-center gap-2 font-bold transition-all ${
                       theme === 'sepia'
                         ? 'border-amber-700 bg-[#f7e8c8] text-amber-900 shadow-sm'
                         : 'border-[#ebd6af] bg-[#fbf0d9] text-amber-800'
@@ -348,10 +350,10 @@ export default function QuranInteractiveReader({
                   </label>
                   <span className="font-mono font-bold text-[#1081b7]">{fontSize}px</span>
                 </div>
-                <div className="flex items-center gap-3 bg-slate-50 dark:bg-slate-800 p-3 rounded-2xl border border-slate-200 dark:border-slate-700">
+                <div className="flex items-center gap-3 bg-slate-50 dark:bg-slate-800 p-3 rounded-none border border-slate-200 dark:border-slate-700">
                   <button
                     onClick={() => setFontSize((f) => Math.max(f - 3, 20))}
-                    className="p-2 bg-white dark:bg-slate-700 hover:bg-slate-100 rounded-xl font-bold shadow-sm"
+                    className="p-2 bg-white dark:bg-slate-700 hover:bg-slate-100 rounded-none font-bold shadow-sm"
                     title="Zoom Out"
                   >
                     <ZoomOut className="w-4 h-4" />
@@ -369,7 +371,7 @@ export default function QuranInteractiveReader({
 
                   <button
                     onClick={() => setFontSize((f) => Math.min(f + 3, 52))}
-                    className="p-2 bg-white dark:bg-slate-700 hover:bg-slate-100 rounded-xl font-bold shadow-sm"
+                    className="p-2 bg-white dark:bg-slate-700 hover:bg-slate-100 rounded-none font-bold shadow-sm"
                     title="Zoom In"
                   >
                     <ZoomIn className="w-4 h-4" />
@@ -386,7 +388,7 @@ export default function QuranInteractiveReader({
                   <select
                     value={selectedReciter}
                     onChange={(e) => setSelectedReciter(Number(e.target.value))}
-                    className="w-full bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-100 font-semibold rounded-xl px-3 py-2.5 border border-slate-200 dark:border-slate-700 focus:outline-none focus:border-[#1081b7]"
+                    className="w-full bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-100 font-semibold rounded-none px-3 py-2.5 border border-slate-200 dark:border-slate-700 focus:outline-none focus:border-[#1081b7]"
                   >
                     {POPULAR_RECITERS.map((r) => (
                       <option key={r.id} value={r.id}>

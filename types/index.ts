@@ -29,3 +29,14 @@ export interface TrustStat {
   label: string;
   description: string;
 }
+
+export interface VideoTestimonial {
+  id: string;
+  studentName: string;
+  age: string;
+  courseName: string;
+  duration: string;
+  snippet: string;
+  thumbnailGradient: string;
+  videoUrl: string;
+}

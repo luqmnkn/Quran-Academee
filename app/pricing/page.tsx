@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, Star, Sparkles, Award, BookOpen, Compass, Globe, ChevronDown } from 'lucide-react';
+import { Check, Globe, ChevronDown } from 'lucide-react';
 
 interface PricingProps {
   onBookTrial?: (planName: string, planDetails: string) => void;
@@ -416,6 +416,75 @@ const PRICING_CATEGORIES: PricingCategory[] = [
         ]
       }
     ]
+  },
+  {
+    id: 'arabic-language',
+    title: 'Arabic Language Course',
+    subtitle: 'Quranic & Conversational Arabic',
+    icon: 'translate',
+    description: 'Master Arabic grammar, vocabulary, and sentence structure to understand the Holy Quran directly in its original language.',
+    plans: [
+      {
+        id: 'arabic-plan-1',
+        name: 'Plan 1',
+        price: 55,
+        originalPrice: 65,
+        weeklyClasses: 2,
+        classDuration: '30 Minutes',
+        classesPerMonth: 8,
+        features: [
+          'Free Trial Class included',
+          '2 Days per Week',
+          '30 Minutes / Class',
+          '08 Classes / Month',
+          'Arabic alphabet & root-word basics',
+          'Essential Quranic vocabulary',
+          'Certified Native Arabic tutor',
+          'Flexible scheduling / makeup classes'
+        ]
+      },
+      {
+        id: 'arabic-plan-2',
+        name: 'Plan 2',
+        price: 80,
+        originalPrice: 95,
+        weeklyClasses: 3,
+        classDuration: '30 Minutes',
+        classesPerMonth: 12,
+        isPopular: true,
+        features: [
+          'Free Trial Class included',
+          '3 Days per Week',
+          '30 Minutes / Class',
+          '12 Classes / Month',
+          'Grammar (Nahw & Sarf) foundations',
+          'Sentence construction & conversations',
+          'Direct Quranic verse translation exercises',
+          'Certified Native Arabic scholar',
+          'Priority makeup class rescheduling'
+        ]
+      },
+      {
+        id: 'arabic-plan-3',
+        name: 'Plan 3',
+        price: 110,
+        originalPrice: 130,
+        weeklyClasses: 5,
+        classDuration: '30 Minutes',
+        classesPerMonth: 20,
+        features: [
+          'Free Trial Class included',
+          '5 Days per Week',
+          '30 Minutes / Class',
+          '20 Classes / Month',
+          'Intensive Arabic immersion',
+          'Advanced grammar & classical texts',
+          'Fluent conversational practice',
+          'Senior Arabic linguist scholar',
+          'Dedicated progress audits'
+        ]
+      }
+    ]
   }
 ];
 
@@ -426,6 +495,7 @@ const COURSE_INFO = {
   'memorization': { label: 'Quran Memorization (Hifz)', multiplier: 1.4 },
   'islamic-essentials': { label: 'Islamic Essentials & Duas', multiplier: 1.2 },
   'hifz-revision': { label: 'Hifz Revision Partner', multiplier: 1.2 },
+  'arabic-language': { label: 'Arabic Language Course', multiplier: 1.2 },
 };
 
 const WEEKDAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
@@ -859,8 +929,8 @@ export default function Pricing({
           </div>
         </div>
 
-        {/* Six Course Selector Cards (Desktop Only) */}
-        <div className="hidden md:grid grid-cols-3 gap-4 max-w-4xl mx-auto mb-14 px-4">
+        {/* Course Selector Cards (Desktop Only) */}
+        <div className="hidden md:grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5 max-w-6xl mx-auto mb-14 px-4">
           {PRICING_CATEGORIES.map((category) => {
             const iconName = category.icon;
             const isActive = activeTab === category.id;
@@ -999,7 +1069,7 @@ export default function Pricing({
                   <div className="pt-8 mt-auto">
                     <button
                       onClick={() => handleBookTrial(plan.name, planDetailsString)}
-                      className={`w-full py-4 px-5 font-display font-black text-xs uppercase tracking-widest rounded-full transition-all duration-300 cursor-pointer flex items-center justify-center space-x-1.5 ${
+                      className={`w-full py-4 px-5 font-display font-black text-xs uppercase tracking-widest rounded-none transition-all duration-300 cursor-pointer flex items-center justify-center space-x-1.5 ${
                         isActiveCard
                           ? 'bg-gradient-to-r from-[#1C8DC8] via-[#3D8DC3] to-[#146299] hover:from-[#146299] hover:to-[#1C8DC8] text-white shadow-[0_12px_32px_rgba(28,141,200,0.28)] hover:shadow-[0_16px_40px_rgba(28,141,200,0.42)] hover:-translate-y-0.5 active:translate-y-0 border-0'
                           : 'bg-[#0B3951] hover:bg-[#1C8DC8] text-white shadow-[0_8px_24px_rgba(11,57,81,0.2)] hover:shadow-[0_12px_32px_rgba(28,141,200,0.32)] hover:-translate-y-0.5 active:translate-y-0'
@@ -1020,10 +1090,7 @@ export default function Pricing({
         
         {/* Heading Above the Card */}
         <div className="text-center mb-8 max-w-2xl mx-auto">
-          <span className="inline-flex items-center space-x-1.5 text-[9px] bg-[#1C8DC8]/10 text-[#1C8DC8] border border-[#1C8DC8]/20 px-3.5 py-1 rounded-full font-bold uppercase tracking-widest font-mono">
-            <Sparkles size={10} className="text-[#1C8DC8] animate-pulse" />
-            <span>Interactive Planner</span>
-          </span>
+
           <h2 className="font-display font-[900] text-2xl sm:text-4xl text-[#0B3951] tracking-tight mt-3">
             Design Your Custom Plan
           </h2>
@@ -1209,7 +1276,7 @@ export default function Pricing({
                   const details = `Custom: ${courseData.label} - ${customDays} Days/Week (${selectedDaysList.join(', ')}) - ${customDuration} (${customDays * 4} Classes/Month) - ${currentCountry.symbol}${customPriceConverted}/month`;
                   handleBookTrial('Custom Plan', details);
                 }}
-                className="w-full bg-gradient-to-r from-[#1C8DC8] via-[#3D8DC3] to-[#146299] hover:from-[#146299] hover:to-[#1C8DC8] text-white font-display font-black text-xs uppercase tracking-widest py-4 rounded-full transition-all duration-300 shadow-[0_12px_32px_rgba(28,141,200,0.28)] hover:shadow-[0_16px_40px_rgba(28,141,200,0.42)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer border-0 mt-2"
+                className="w-full bg-gradient-to-r from-[#1C8DC8] via-[#3D8DC3] to-[#146299] hover:from-[#146299] hover:to-[#1C8DC8] text-white font-display font-black text-xs uppercase tracking-widest py-4 rounded-none transition-all duration-300 shadow-[0_12px_32px_rgba(28,141,200,0.28)] hover:shadow-[0_16px_40px_rgba(28,141,200,0.42)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer border-0 mt-2"
               >
                 Book Custom Trial
               </button>

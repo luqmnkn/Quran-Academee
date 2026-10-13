@@ -1,4 +1,4 @@
-import { Course, Testimonial, TrustStat } from './types';
+import { Course, Testimonial, TrustStat, VideoTestimonial } from './types';
 
 export const COURSES: Course[] = [
   {
@@ -107,7 +107,7 @@ export const COURSES: Course[] = [
     arabicTitle: 'الواجبات الإسلامية',
     shortDescription: 'Learn essential Islamic knowledge, Salah steps, daily Duas, translation basics, and moral character development.',
     fullDescription: 'Connecting sacred recitation with real-world practice, this course covers daily Salah, essential Duas, core faith, and Islamic character (Akhlaq). Students learn to bridge divine guidance with daily actions, bringing the light of the Quran into their homes and communities.',
-    icon: 'Sparkles',
+    icon: 'BookOpen',
     ageGroup: 'Kids (5+) & New Muslims',
     duration: '3-4 Months',
     level: 'Beginner',
@@ -149,6 +149,31 @@ export const COURSES: Course[] = [
       'Interactive Revision: Tutors listen to your recitation and correct memory slips',
       'Mutashabihat Analysis: Training to differentiate look-alike verses across chapters',
       'Simulation Drills: Simulating lead-prayer scenarios and continuous testing'
+    ]
+  },
+  {
+    id: 'arabic-language',
+    title: 'Arabic Language Course',
+    arabicTitle: 'تعلم اللغة العربية',
+    shortDescription: 'Master Quranic and conversational Arabic—from essential grammar and vocabulary to fluent comprehension and expression.',
+    fullDescription: 'Understand the language of the Quran directly. This course takes you from foundational Arabic grammar (Nahw and Sarf) and essential vocabulary to speaking, reading, and deep comprehension of Quranic verses in their original language.',
+    icon: 'BookOpen',
+    ageGroup: 'Kids & Adults',
+    duration: '4-6 Months',
+    level: 'Beginner to Intermediate',
+    learningOutcomes: [
+      'Master essential Arabic grammar rules (Nahw & Sarf) and syntax.',
+      'Build a strong Quranic and conversational vocabulary base.',
+      'Understand Quranic verses directly without relying solely on translations.',
+      'Form correct Arabic sentences and engage in basic spoken conversation.',
+      'Read and comprehend classical Arabic texts with clarity and confidence.'
+    ],
+    curriculum: [
+      'Module 1: Arabic sentence structure, nouns, verbs, and particles',
+      'Module 2: Essential Quranic vocabulary and high-frequency roots',
+      'Module 3: Verb conjugations, tenses, and pronouns',
+      'Module 4: Reading and translating selected Quranic passages',
+      'Module 5: Conversational Arabic dialogues and comprehension drills'
     ]
   }
 ];
@@ -257,4 +282,37 @@ export const TRUST_STATS: TrustStat[] = [
   { value: '15,000+', label: 'Classes Completed', description: 'Successful live 1-on-1 sessions bridging sacred reading with real-life understanding.' },
   { value: '98%', label: 'Student Satisfaction', description: 'Loved and recommended by international parents, children, and adult learners.' },
   { value: '100%', label: 'Certified Educators', description: 'Instructors holding verified general degrees, Hifz certificates, and academic credentials.' }
+];
+
+export const VIDEO_TESTIMONIALS: VideoTestimonial[] = [
+  {
+    id: 'v1',
+    studentName: 'Anabia',
+    age: 'Young Learner',
+    courseName: 'Tajweed & Recitation',
+    duration: '6 Months with Quran Academee',
+    snippet: 'Anabia reciting Quran with beautiful articulation and proper Makharij rules.',
+    thumbnailGradient: 'from-[#1081b7]/30 via-[#38aae3]/20 to-[#116c9c]/40',
+    videoUrl: '/video-reviews/Anabia.mp4',
+  },
+  {
+    id: 'v2',
+    studentName: 'Khadija',
+    age: '1-on-1 Student',
+    courseName: 'Quran Recitation Session',
+    duration: '4 Months with Quran Academee',
+    snippet: 'Live recitation session demonstrating clear pronunciation, confidence, and fluency.',
+    thumbnailGradient: 'from-amber-500/20 via-[#1081b7]/25 to-[#0B3951]/20',
+    videoUrl: '/video-reviews/khadija.mp4',
+  },
+  {
+    id: 'v3',
+    studentName: 'Yusra & Zohaib',
+    age: 'Siblings',
+    courseName: 'Hifz & Tajweed Practice',
+    duration: '1 Year with Quran Academee',
+    snippet: 'Interactive recitation practice showing impressive memorization and Tajweed retention.',
+    thumbnailGradient: 'from-[#0e94d3]/20 via-[#1081b7]/25 to-[#116c9c]/30',
+    videoUrl: '/video-reviews/Yusra Zohaib.mp4',
+  },
 ];
