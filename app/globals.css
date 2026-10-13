@@ -3,9 +3,9 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --font-sans: var(--font-body);
-  --font-display: var(--font-headings);
-  --font-allura: var(--font-rotating);
+  --font-sans: SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif;
+  --font-display: SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif;
+  --font-allura: Courgette, Allura, cursive;
   --font-headings-weight: 600;
   
   --color-primary: #146299;
@@ -63,9 +63,9 @@
 
   --font-headings-weight: 600;
 
-  --font-sans: var(--font-body);
-  --font-display: var(--font-headings);
-  --font-allura: var(--font-rotating);
+  --font-sans: SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif;
+  --font-display: SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif;
+  --font-allura: Courgette, Allura, cursive;
   --font-serif: 'Playfair Display', serif;
   --font-mono: 'Fira Code', monospace;
 
@@ -223,15 +223,15 @@
     scroll-padding-top: 90px;
   }
 
-  body {
-    font-family: var(--font-sans);
+  html, body {
+    font-family: SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif !important;
     @apply bg-background text-foreground;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-display) !important;
+    font-family: SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif !important;
     font-weight: var(--font-headings-weight) !important;
     letter-spacing: -0.02em;
     line-height: 1.15;
@@ -240,12 +240,12 @@
 
 /* Tailwind v4 Utility for Allura & Cursive Elements */
 @utility font-allura {
-  font-family: 'Courgette', 'Allura', cursive !important;
+  font-family: Courgette, Allura, cursive !important;
   font-weight: 400 !important;
 }
 
 @utility custom-font {
-  font-family: 'Courgette', 'Allura', cursive !important;
+  font-family: Courgette, Allura, cursive !important;
   font-weight: 400 !important;
 }
 
@@ -258,8 +258,9 @@ h3 .font-allura,
 h4 .font-allura,
 h5 .font-allura,
 h6 .font-allura,
+p .font-allura,
 span.font-allura {
-  font-family: 'Courgette', 'Allura', cursive !important;
+  font-family: Courgette, Allura, cursive !important;
   font-weight: 400 !important;
   font-style: normal !important;
 }
@@ -323,9 +324,9 @@ span.font-allura {
 }
 
 @utility font-display {
-  font-family: var(--font-headings) !important;
+  font-family: SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif !important;
 }
 
 .font-display {
-  font-family: var(--font-headings) !important;
+  font-family: SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif !important;
 }

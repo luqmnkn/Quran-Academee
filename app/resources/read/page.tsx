@@ -30,11 +30,11 @@ export default function OnlineReaderPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-[#f0f9ff] to-[#d7effa] text-slate-800 pt-20 sm:pt-24 pb-12 sm:pb-16 px-2 sm:px-4 overflow-x-hidden w-full max-w-full">
-      <div className="max-w-7xl mx-auto space-y-3 sm:space-y-4 w-full overflow-x-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-white via-[#f0f9ff] to-[#d7effa] text-slate-800 pt-20 sm:pt-24 pb-12 sm:pb-16 px-2 sm:px-4 w-full max-w-full overflow-x-clip">
+      <div className="max-w-7xl mx-auto space-y-3 sm:space-y-4 w-full">
 
         {/* Reader Container */}
-        <div className="bg-white rounded-2xl sm:rounded-3xl shadow-2xl border border-[#38aae3]/25 overflow-hidden flex flex-col h-[calc(100vh-125px)] sm:h-[84vh] relative w-full max-w-full">
+        <div className="bg-white rounded-none shadow-2xl border border-[#38aae3]/25 relative w-full max-w-full">
           <QuranInteractiveReader
             contentType={contentType}
             currentId={currentId}
@@ -44,8 +44,12 @@ export default function OnlineReaderPage() {
             onSelectSurahOrJuz={(type, id) => {
               setContentType(type);
               setCurrentId(id);
+              if (typeof window !== 'undefined') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
             }}
-            className="w-full h-full border-none max-w-full"
+            isFullPage={true}
+            className="w-full border-none max-w-full"
           />
         </div>
       </div>
@@ -68,14 +72,14 @@ export default function OnlineReaderPage() {
                 </h3>
                 <button
                   onClick={() => setIsListDrawerOpen(false)}
-                  className="p-1.5 hover:bg-white/20 rounded-lg text-white transition-colors"
+                  className="p-1.5 hover:bg-white/20 rounded-none text-white transition-colors"
                 >
                   <X className="w-5 h-5" />
                 </button>
               </div>
 
               {/* Drawer List Content */}
-              <div className="flex-1 overflow-y-auto p-3 space-y-1.5 divide-y divide-slate-100">
+              <div className="flex-1 overflow-y-auto p-3 space-y-1.5 divide-y divide-slate-100 overscroll-contain">
                 {drawerType === 'surah'
                   ? SURAHS.map((s) => (
                       <button
@@ -85,14 +89,14 @@ export default function OnlineReaderPage() {
                           setCurrentId(s.id);
                           setIsListDrawerOpen(false);
                         }}
-                        className={`w-full flex items-center justify-between p-3 rounded-xl transition-all ${
+                        className={`w-full flex items-center justify-between p-3 rounded-none transition-all ${
                           contentType === 'surah' && currentId === s.id
                             ? 'bg-[#f0f9ff] text-[#1081b7] font-bold border border-[#38aae3]/30 shadow-sm'
                             : 'hover:bg-slate-50 text-slate-800'
                         }`}
                       >
                         <div className="flex items-center gap-3">
-                          <span className="w-7 h-7 rounded-lg bg-[#1081b7]/10 text-[#1081b7] font-bold text-xs flex items-center justify-center">
+                          <span className="w-7 h-7 rounded-none bg-[#1081b7]/10 text-[#1081b7] font-bold text-xs flex items-center justify-center">
                             {s.id}
                           </span>
                           <span className="text-xs font-semibold">{s.name}</span>
@@ -108,14 +112,14 @@ export default function OnlineReaderPage() {
                           setCurrentId(j.id);
                           setIsListDrawerOpen(false);
                         }}
-                        className={`w-full flex items-center justify-between p-3 rounded-xl transition-all ${
+                        className={`w-full flex items-center justify-between p-3 rounded-none transition-all ${
                           contentType === 'juz' && currentId === j.id
                             ? 'bg-[#f0f9ff] text-[#1081b7] font-bold border border-[#38aae3]/30 shadow-sm'
                             : 'hover:bg-slate-50 text-slate-800'
                         }`}
                       >
                         <div className="flex items-center gap-3">
-                          <span className="w-7 h-7 rounded-lg bg-[#1081b7]/10 text-[#1081b7] font-bold text-xs flex items-center justify-center">
+                          <span className="w-7 h-7 rounded-none bg-[#1081b7]/10 text-[#1081b7] font-bold text-xs flex items-center justify-center">
                             J{j.id}
                           </span>
                           <span className="text-xs font-semibold">{j.name}</span>

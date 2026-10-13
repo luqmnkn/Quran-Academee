@@ -46,58 +46,12 @@ async function fetchWithCache(url: string) {
 }
 
 /**
- * Fetch verses in Color-Coded Tajweed format (HTML with tajweed CSS classes)
- */
-export async function getSurahVersesTajweed(chapterNumber: number): Promise<VerseItem[]> {
-  const url = `${API_BASE}/quran/verses/uthmani_tajweed?chapter_number=${chapterNumber}`;
-  const data = await fetchWithCache(url);
-  return data.verses || [];
-}
-
-/**
  * Fetch verses in Uthmani Madani Mushaf format
  */
 export async function getSurahVersesMadani(chapterNumber: number): Promise<VerseItem[]> {
   const url = `${API_BASE}/quran/verses/uthmani?chapter_number=${chapterNumber}`;
   const data = await fetchWithCache(url);
   return data.verses || [];
-}
-
-/**
- * Fetch verses in IndoPak format
- */
-export async function getSurahVersesIndopak(chapterNumber: number): Promise<VerseItem[]> {
-  const url = `${API_BASE}/quran/verses/indopak?chapter_number=${chapterNumber}`;
-  const data = await fetchWithCache(url);
-  return data.verses || [];
-}
-
-/**
- * Fetch verses with Translation (English or Urdu)
- */
-export async function getSurahTranslation(chapterNumber: number, lang: 'en' | 'ur' = 'en'): Promise<VerseItem[]> {
-  const translationId = lang === 'ur' ? 158 : 131; // 158 = Fateh Muhammad Jalandhari (Urdu), 131 = Mustafa Khattab (English)
-  const [uthmaniData, transData] = await Promise.all([
-    fetchWithCache(`${API_BASE}/quran/verses/uthmani?chapter_number=${chapterNumber}`),
-    fetchWithCache(`${API_BASE}/verses/by_chapter/${chapterNumber}?language=${lang}&words=false&translations=${translationId}&fields=text_uthmani&per_page=300`)
-  ]);
-
-  const uthmaniVerses = uthmaniData.verses || [];
-  const transVerses = transData.verses || [];
-
-  return uthmaniVerses.map((v: any, idx: number) => {
-    const t = transVerses[idx];
-    const transText = t && t.translations && t.translations[0] ? t.translations[0].text : '';
-    // Clean HTML tags from translation text
-    const cleanTrans = transText.replace(/<sup[^>]*>.*?<\/sup>/gi, '').replace(/<[^>]+>/g, '');
-    return {
-      id: v.id,
-      verse_key: v.verse_key,
-      verse_number: idx + 1,
-      text_uthmani: v.text_uthmani,
-      translation: cleanTrans
-    };
-  });
 }
 
 /**

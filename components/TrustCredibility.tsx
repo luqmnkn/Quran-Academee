@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { TRUST_STATS } from '../data';
-import { CheckCircle2, Award } from 'lucide-react';
 
 interface AnimatedCounterProps {
   value: string;
@@ -74,12 +73,6 @@ export default function TrustCredibility() {
         
         {/* Section Header */}
         <div className="max-w-2xl mx-auto mb-16 sm:mb-20 space-y-4">
-          <div className="inline-flex items-center space-x-2 bg-[#F0F9FF] border border-[#1C8DC8]/20 px-4 py-2 shadow-sm">
-            <Award size={14} className="text-[#1C8DC8]" />
-            <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#1C8DC8]">
-              Credibility & Experience
-            </span>
-          </div>
           <h2 className="font-display font-[900] text-3xl sm:text-[40px] text-[#0B3951] tracking-[-0.03em] leading-[1.1]">
             An International Academy Built on <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] to-[#146299] font-allura px-1">Faith & Purpose</span>
           </h2>

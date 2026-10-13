@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import Hero from '../components/Hero';
 import Services from '../components/Services';
 import About from '../components/About';
@@ -12,7 +11,6 @@ import InquiryForm from '../components/InquiryForm';
 import FAQSection from '../components/FAQSection';
 
 export default function HomePage() {
-  const router = useRouter();
   const [selectedCourseSelection, setSelectedCourseSelection] = useState('');
 
   // Handle Course Selection by opening the Free Trial Modal

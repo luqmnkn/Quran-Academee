@@ -1,9 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion'; // or 'motion/react' depending on your export setup
 import { WHY_CHOOSE_US } from '../data';
-import IconRenderer from './IconRenderer';
 import PremiumCarousel from './PremiumCarousel';
-import { Compass, Sparkles, ShieldCheck } from 'lucide-react';
 
 // Type safety for array item
 type FeatureItem = (typeof WHY_CHOOSE_US)[number];
@@ -47,11 +45,6 @@ const WhyChooseUsCard = ({ feature }: { feature: FeatureItem }) => {
           </p>
         </div>
       </div>
-
-      {/* Detail Sparkle */}
-      <div className="self-center pt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 relative z-10">
-        <Sparkles size={14} className="text-[#1C8DC8]" />
-      </div>
     </div>
   );
 };
@@ -90,12 +83,6 @@ export default function WhyChooseUs() {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 space-y-4 sm:space-y-6">
-          <div className="inline-flex items-center space-x-2 bg-[#F0F9FF] border border-[#1C8DC8]/20 px-6 py-2 shadow-sm">
-            <Compass className="text-[#1C8DC8] w-4 h-4 animate-spin" style={{ animationDuration: '10s' }} />
-            <span className="text-xs font-bold text-[#146299] uppercase tracking-widest font-mono">
-              Academy Advancements
-            </span>
-          </div>
           
           <h2 className="font-display font-[900] text-3xl sm:text-5xl lg:text-6xl text-[#0B3951] tracking-[-0.03em] leading-[1.15]">
             Why Hundreds of Worldwide Families <br className="hidden sm:inline" />

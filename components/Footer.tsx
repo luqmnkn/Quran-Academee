@@ -21,7 +21,7 @@ export default function Footer() {
               href="/"
               className="flex items-center group"
             >
-              <Logo isDarkBg={true} className="transition-transform duration-300 group-hover:scale-[1.02]" />
+              <Logo isDarkBg={true} sizeClass="h-20 sm:h-24 md:h-28 lg:h-32" className="transition-transform duration-300 group-hover:scale-[1.02]" />
             </Link>
             
             <p className="text-xs text-slate-300 leading-relaxed max-w-sm">
@@ -188,12 +188,10 @@ export default function Footer() {
         </div>
 
         {/* Brand Bottom line */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
-          <p>© {currentYear} Quran Academee. All Rights Reserved. Bridging Divine Words with Living Action.</p>
-          <div className="flex items-center space-x-4">
-            <span>Designed with complete respect for Quranic learning</span>
-          </div>
-        </div>
+        <div className="flex items-center justify-center gap-4 text-xs text-slate-400">
+  <p>© {currentYear} Quran Academee. All Rights Reserved.</p>
+</div>
+
 
       </div>
     </footer>

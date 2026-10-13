@@ -2,53 +2,10 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { TESTIMONIALS } from '../data';
-import { Star, Quote, Play, Video, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { TESTIMONIALS, VIDEO_TESTIMONIALS } from '../data';
+import { VideoTestimonial } from '../types';
+import { Star, Quote, Play, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import PremiumCarousel from './PremiumCarousel';
-
-interface VideoTestimonial {
-  id: string;
-  studentName: string;
-  age: string;
-  courseName: string;
-  duration: string;
-  snippet: string;
-  thumbnailGradient: string;
-  videoUrl: string;
-}
-
-const VIDEO_TESTIMONIALS: VideoTestimonial[] = [
-  {
-    id: 'v1',
-    studentName: 'Anabia',
-    age: 'Young Learner',
-    courseName: 'Tajweed & Recitation',
-    duration: '6 Months with Quran Academee',
-    snippet: 'Anabia reciting Quran with beautiful articulation and proper Makharij rules.',
-    thumbnailGradient: 'from-[#1081b7]/30 via-[#38aae3]/20 to-[#116c9c]/40',
-    videoUrl: '/video-reviews/Anabia.mp4',
-  },
-  {
-    id: 'v2',
-    studentName: 'Khadija',
-    age: '1-on-1 Student',
-    courseName: 'Quran Recitation Session',
-    duration: '4 Months with Quran Academee',
-    snippet: 'Live recitation session demonstrating clear pronunciation, confidence, and fluency.',
-    thumbnailGradient: 'from-amber-500/20 via-[#1081b7]/25 to-[#0B3951]/20',
-    videoUrl: '/video-reviews/khadija.mp4',
-  },
-  {
-    id: 'v3',
-    studentName: 'Yusra & Zohaib',
-    age: 'Siblings',
-    courseName: 'Hifz & Tajweed Practice',
-    duration: '1 Year with Quran Academee',
-    snippet: 'Interactive recitation practice showing impressive memorization and Tajweed retention.',
-    thumbnailGradient: 'from-[#0e94d3]/20 via-[#1081b7]/25 to-[#116c9c]/30',
-    videoUrl: '/video-reviews/Yusra Zohaib.mp4',
-  },
-];
 
 // Component for individual video card on homepage
 function VideoCardItem({
@@ -65,7 +22,7 @@ function VideoCardItem({
       ref={containerRef}
       whileHover={{ y: -6, scale: 1.02 }}
       onClick={onClick}
-      className="shrink-0 snap-center w-[80vw] sm:w-auto aspect-[9/14] sm:aspect-[3/4] bg-slate-900 rounded-[28px] border-2 border-[#1081b7]/30 overflow-hidden relative group cursor-pointer shadow-xl p-4 flex flex-col justify-between select-none"
+      className="w-full aspect-[9/14] sm:aspect-[3/4] bg-slate-900 rounded-[28px] border-2 border-[#1081b7]/30 overflow-hidden relative group cursor-pointer shadow-xl p-4 flex flex-col justify-between select-none"
     >
       {/* Background HTML5 Video Preview */}
       <video
@@ -108,7 +65,27 @@ function VideoCardItem({
 
 export default function Testimonials() {
   const [activeTab, setActiveTab] = useState<'all' | 'Parent' | 'Adult Student'>('all');
+  const [videoList, setVideoList] = useState<VideoTestimonial[]>(VIDEO_TESTIMONIALS);
   const [selectedVideoIndex, setSelectedVideoIndex] = useState<number | null>(null);
+
+  // Automatically fetch video reviews from public/video-reviews directory
+  useEffect(() => {
+    fetch('/api/video-reviews')
+      .then((res) => {
+        if (!res.ok) throw new Error('API response error');
+        return res.json();
+      })
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setVideoList(data);
+        }
+      })
+      .catch((err) => {
+        console.log('Using default video reviews in testimonials:', err);
+      });
+  }, []);
+
+  const activeVideo = selectedVideoIndex !== null ? videoList[selectedVideoIndex] : null;
 
   const filtered =
     activeTab === 'all'
@@ -122,18 +99,26 @@ export default function Testimonials() {
       if (e.key === 'Escape') {
         setSelectedVideoIndex(null);
       } else if (e.key === 'ArrowLeft') {
-        setSelectedVideoIndex((prev) => (prev !== null && prev > 0 ? prev - 1 : VIDEO_TESTIMONIALS.length - 1));
+        setSelectedVideoIndex((prev) => (prev !== null && prev > 0 ? prev - 1 : videoList.length - 1));
       } else if (e.key === 'ArrowRight') {
-        setSelectedVideoIndex((prev) => (prev !== null && prev < VIDEO_TESTIMONIALS.length - 1 ? prev + 1 : 0));
+        setSelectedVideoIndex((prev) => (prev !== null && prev < videoList.length - 1 ? prev + 1 : 0));
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedVideoIndex]);
+  }, [selectedVideoIndex, videoList]);
+
+  const getReviewerName = (t: (typeof TESTIMONIALS)[0]) => {
+    const country = t.location.includes(',') ? t.location.split(',').pop()?.trim() : t.location;
+    if (t.role === 'Parent') {
+      return `${t.name}'s parents`;
+    }
+    return country ? `${t.name} from ${country}` : t.name;
+  };
 
   const renderCardContent = (testimonial: (typeof TESTIMONIALS)[0]) => (
-    <div className="bg-white rounded-2xl border border-[#E0F2FE] p-6 sm:p-7 md:p-8 flex flex-col justify-between h-full relative overflow-hidden group hover:border-[#1C8DC8]/40 hover:shadow-[0_15px_35px_rgba(28,141,200,0.06)] transition-all duration-300 text-left min-h-[260px]">
+    <div className="bg-white rounded-2xl border border-[#E0F2FE] p-6 sm:p-7 md:p-8 flex flex-col justify-between h-full relative overflow-hidden group hover:border-[#1C8DC8]/40 hover:shadow-[0_15px_35px_rgba(28,141,200,0.06)] transition-all duration-300 text-left min-h-[240px]">
       <Quote className="absolute -bottom-6 -right-6 w-24 h-24 text-[#1C8DC8]/5 select-none pointer-events-none" />
 
       <div className="space-y-3 relative z-10">
@@ -148,23 +133,13 @@ export default function Testimonials() {
         </p>
       </div>
 
-      <div className="flex items-center space-x-3 pt-4 border-t border-[#E0F2FE] relative z-10 mt-4">
-        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0B3951] to-[#1C8DC8] text-white flex items-center justify-center font-display font-black text-xs select-none shadow shrink-0">
-          {testimonial.avatarInitials}
-        </div>
-        <div>
-          <h4 className="font-display font-[800] text-[#0B3951] text-xs">
-            {testimonial.name}
-          </h4>
-          <p className="text-[9px] font-mono font-bold uppercase text-[#1C8DC8] tracking-wider mt-0.5">
-            {testimonial.role} &bull; {testimonial.location}
-          </p>
-        </div>
+      <div className="pt-4 border-t border-[#E0F2FE] relative z-10 mt-4">
+        <h4 className="font-display font-[800] text-[#0B3951] text-xs sm:text-sm">
+          {getReviewerName(testimonial)}
+        </h4>
       </div>
     </div>
   );
-
-  const activeVideo = selectedVideoIndex !== null ? VIDEO_TESTIMONIALS[selectedVideoIndex] : null;
 
   return (
     <section className="py-16 sm:py-20 md:py-24 bg-gradient-to-b from-white via-[#F0F9FF] to-white relative overflow-hidden">
@@ -173,13 +148,6 @@ export default function Testimonials() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
         {/* Header display segment */}
         <div className="text-center max-w-2xl mx-auto mb-16 space-y-6">
-          <div className="inline-flex items-center space-x-2 bg-[#F0F9FF] border border-[#E0F2FE] px-4 py-2 shadow-sm">
-            <Quote size={14} className="text-[#1C8DC8]" />
-            <span className="text-xs font-bold text-[#146299] uppercase tracking-widest font-mono">
-              Success Stories
-            </span>
-          </div>
-
           <h2 className="font-display font-[900] text-3xl sm:text-[45px] lg:text-[64px] text-[#0B3951] tracking-[-0.04em] leading-[1.05]">
             Hear From Our{' '}
             <span className="font-allura text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] via-[#146299] to-[#0B3951]">
@@ -197,7 +165,7 @@ export default function Testimonials() {
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-5 py-2.5 rounded-full text-xs font-black uppercase tracking-widest transition-all duration-300 border cursor-pointer ${
+                className={`px-5 py-2.5 rounded-none text-xs font-black uppercase tracking-widest transition-all duration-300 border cursor-pointer ${
                   activeTab === tab
                     ? 'bg-[#0B3951] text-white border-[#0B3951] shadow'
                     : 'bg-white text-slate-600 border-[#E0F2FE] hover:bg-[#F0F9FF]'
@@ -241,12 +209,6 @@ export default function Testimonials() {
         {/* Video Reviews Subsection */}
         <div className="mt-24 pt-16 border-t border-[#E0F2FE] relative z-10">
           <div className="text-center max-w-2xl mx-auto mb-14 space-y-4">
-            <div className="inline-flex items-center space-x-2 bg-[#F0F9FF] border border-[#E0F2FE] px-3.5 py-1.5 shadow-sm">
-              <Video size={13} className="text-[#1C8DC8]" />
-              <span className="text-[10px] font-bold text-[#146299] uppercase tracking-widest font-mono">
-                Student Recitation Videos
-              </span>
-            </div>
             <h3 className="font-display font-[900] text-2xl sm:text-[34px] text-[#0B3951] tracking-tight leading-none">
               Watch Our Students{' '}
               <span className="font-allura text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] to-[#146299]">
@@ -258,15 +220,29 @@ export default function Testimonials() {
             </p>
           </div>
 
-          {/* PORTRAIT VIDEO CARDS GRID */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto px-4 sm:px-0">
-            {VIDEO_TESTIMONIALS.map((video, idx) => (
+          {/* DESKTOP & TABLET: Video Cards Grid */}
+          <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto px-4 sm:px-0">
+            {videoList.map((video, idx) => (
               <VideoCardItem
-                key={video.id}
+                key={video.id || idx}
                 video={video}
                 onClick={() => setSelectedVideoIndex(idx)}
               />
             ))}
+          </div>
+
+          {/* MOBILE VIEW: Horizontal Snap Carousel (Left-Right like course cards) */}
+          <div className="block sm:hidden w-full px-2">
+            <PremiumCarousel>
+              {videoList.map((video, idx) => (
+                <div key={video.id || idx} className="h-full">
+                  <VideoCardItem
+                    video={video}
+                    onClick={() => setSelectedVideoIndex(idx)}
+                  />
+                </div>
+              ))}
+            </PremiumCarousel>
           </div>
         </div>
       </div>
@@ -327,26 +303,26 @@ export default function Testimonials() {
               <button
                 onClick={() =>
                   setSelectedVideoIndex((prev) =>
-                    prev !== null && prev > 0 ? prev - 1 : VIDEO_TESTIMONIALS.length - 1
+                    prev !== null && prev > 0 ? prev - 1 : videoList.length - 1
                   )
                 }
-                className="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-[#1081b7] text-white font-bold text-xs border border-white/20 transition-all flex items-center gap-1.5 shadow-sm"
+                className="px-4 py-2.5 rounded-none bg-white/10 hover:bg-[#1081b7] text-white font-bold text-xs border border-white/20 transition-all flex items-center gap-1.5 shadow-sm"
               >
                 <ChevronLeft className="w-4 h-4" />
                 <span>Previous</span>
               </button>
 
               <span className="text-xs font-bold text-slate-200 tracking-wider">
-                {selectedVideoIndex + 1} of {VIDEO_TESTIMONIALS.length}
+                {selectedVideoIndex + 1} of {videoList.length}
               </span>
 
               <button
                 onClick={() =>
                   setSelectedVideoIndex((prev) =>
-                    prev !== null && prev < VIDEO_TESTIMONIALS.length - 1 ? prev + 1 : 0
+                    prev !== null && prev < videoList.length - 1 ? prev + 1 : 0
                   )
                 }
-                className="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-[#1081b7] text-white font-bold text-xs border border-white/20 transition-all flex items-center gap-1.5 shadow-sm"
+                className="px-4 py-2.5 rounded-none bg-white/10 hover:bg-[#1081b7] text-white font-bold text-xs border border-white/20 transition-all flex items-center gap-1.5 shadow-sm"
               >
                 <span>Next</span>
                 <ChevronRight className="w-4 h-4" />

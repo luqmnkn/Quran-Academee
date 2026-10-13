@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { BookOpen, Layers, Sparkles, ArrowLeft, Download, ExternalLink, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { Download } from 'lucide-react';
 import { SURAHS, JUZ_LIST, DUAS, getJuzSlug, getJuzParaName, getSurahSlug } from '@/lib/quranData';
 import ResourceFooter from '@/components/ResourceFooter';
 import QuranPdfViewer from '@/components/QuranPdfViewerWrapper';
@@ -53,7 +53,7 @@ export default function DownloadableResourcesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-[#f0f9ff] to-[#d7effa] text-slate-800 pt-20 sm:pt-24 pb-16 overflow-x-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-white via-[#f0f9ff] to-[#d7effa] text-slate-800 pt-20 sm:pt-24 pb-16 overflow-x-clip">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-8">
 
         {/* Header */}
@@ -68,10 +68,10 @@ export default function DownloadableResourcesPage() {
 
         {/* Category Tabs */}
         <div className="flex justify-center">
-          <div className="flex flex-wrap items-center justify-center gap-2 bg-[#f0f9ff] p-1.5 rounded-2xl shadow-md border border-[#38aae3]/25">
+          <div className="flex flex-wrap items-center justify-center gap-2 bg-[#f0f9ff] p-1.5 rounded-none shadow-md border border-[#38aae3]/25">
             <button
               onClick={() => handleCategoryChange('surahs')}
-              className={`px-5 sm:px-7 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
+              className={`px-5 sm:px-7 py-2.5 rounded-none text-xs font-bold transition-all flex items-center gap-2 ${
                 resourceCategory === 'surahs'
                   ? 'bg-[#1081b7] text-white shadow-md'
                   : 'text-slate-600 hover:text-[#1081b7]'
@@ -81,7 +81,7 @@ export default function DownloadableResourcesPage() {
             </button>
             <button
               onClick={() => handleCategoryChange('juz')}
-              className={`px-5 sm:px-7 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
+              className={`px-5 sm:px-7 py-2.5 rounded-none text-xs font-bold transition-all flex items-center gap-2 ${
                 resourceCategory === 'juz'
                   ? 'bg-[#1081b7] text-white shadow-md'
                   : 'text-slate-600 hover:text-[#1081b7]'
@@ -91,7 +91,7 @@ export default function DownloadableResourcesPage() {
             </button>
             <button
               onClick={() => handleCategoryChange('duas')}
-              className={`px-5 sm:px-7 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
+              className={`px-5 sm:px-7 py-2.5 rounded-none text-xs font-bold transition-all flex items-center gap-2 ${
                 resourceCategory === 'duas'
                   ? 'bg-[#1081b7] text-white shadow-md'
                   : 'text-slate-600 hover:text-[#1081b7]'
@@ -102,19 +102,21 @@ export default function DownloadableResourcesPage() {
           </div>
         </div>
 
-        {/* Revamped 2-Column Interface: Dropdown on Left & Live PDF Preview on Right */}
+        {/* Clean 2-Column Interface: Selector & Info on Left, Live Preview on Right */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Left Column (5 Cols): Dropdown Selector & Details */}
-          <div className="lg:col-span-12">
-            <div className="space-y-2 w-5/6 sm:w-4/6 lg:w-3/6 max-w-md mx-auto">
-
+          {/* Left Column (5 Cols): Selector, Attributes & Direct Download */}
+          <div className="lg:col-span-5 bg-white p-6 sm:p-8 border border-[#38aae3]/25 shadow-md rounded-none space-y-6">
+            <div className="space-y-2">
+              <label className="block text-xs font-bold text-[#1081b7] uppercase tracking-wider">
+                Select {resourceCategory === 'surahs' ? 'Surah' : resourceCategory === 'juz' ? 'Para (Juz)' : 'Daily Dua'}
+              </label>
 
               {/* Styled Dropdown Menu */}
               <div className="relative">
                 <select
                   value={selectedId}
                   onChange={(e) => setSelectedId(Number(e.target.value))}
-                  className="w-full bg-white text-slate-900 font-bold text-sm sm:text-base rounded-2xl px-4 py-3.5 border-2 border-[#38aae3]/30 focus:border-[#1081b7] focus:outline-none shadow-md cursor-pointer appearance-none transition-all"
+                  className="w-full bg-white text-slate-900 font-bold text-sm sm:text-base rounded-none px-4 py-3.5 border-2 border-[#38aae3]/30 focus:border-[#1081b7] focus:outline-none shadow-sm cursor-pointer appearance-none transition-all pr-10"
                 >
                   {resourceCategory === 'surahs' &&
                     SURAHS.map((s) => (
@@ -142,12 +144,65 @@ export default function DownloadableResourcesPage() {
                 </div>
               </div>
             </div>
+
+            {/* Quick Details Card */}
+            <div className="p-4 bg-[#f0f9ff] border border-[#38aae3]/20 space-y-3 text-xs rounded-none">
+              <div className="flex items-center justify-between pb-2 border-b border-[#38aae3]/15">
+                <span className="font-bold text-slate-900 text-sm">{currentTitle}</span>
+                <span className="font-arabic font-bold text-lg text-[#116c9c]">{currentArabic}</span>
+              </div>
+
+              {resourceCategory === 'surahs' && (
+                <div className="space-y-1.5 text-slate-600">
+                  <p><strong>Total Verses:</strong> {selectedSurah.verses} Ayat</p>
+                  <p><strong>Revelation:</strong> {selectedSurah.type}</p>
+                  <p><strong>Theme:</strong> {selectedSurah.theme}</p>
+                </div>
+              )}
+
+              {resourceCategory === 'juz' && (
+                <div className="space-y-1.5 text-slate-600">
+                  <p><strong>Surah Range:</strong> {selectedJuz.startSurah}</p>
+                  <p><strong>Verses Span:</strong> {selectedJuz.versesSpan}</p>
+                  <p><strong>Core Focus:</strong> {selectedJuz.theme}</p>
+                </div>
+              )}
+
+              {resourceCategory === 'duas' && (
+                <div className="space-y-1.5 text-slate-600">
+                  <p><strong>Category:</strong> {selectedDua.category}</p>
+                  <p>{selectedDua.description}</p>
+                </div>
+              )}
+
+              <div className="pt-2">
+                <Link
+                  href={currentDetailUrl}
+                  className="text-[#1081b7] hover:underline font-bold inline-flex items-center gap-1 text-[11px]"
+                >
+                  View full dedicated page &amp; details &rarr;
+                </Link>
+              </div>
+            </div>
+
+            {/* Main Download CTA Button */}
+            <a
+              href={currentFilePath}
+              download
+              className="w-full py-4 px-6 rounded-none bg-gradient-to-r from-[#1081b7] to-[#116c9c] hover:from-[#116c9c] hover:to-[#1081b7] text-white font-extrabold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
+            >
+              <Download className="w-4 h-4" />
+              <span>Download {resourceCategory === 'duas' ? 'Dua Image' : 'PDF Document'}</span>
+            </a>
           </div>
 
-          {/* Right Column (7 Cols): Dynamic PDF First Page Preview Box */}
-          <div className="lg:col-span-12">
+          {/* Right Column (7 Cols): Live Preview */}
+          <div className="lg:col-span-7 bg-white p-6 sm:p-8 border border-[#38aae3]/25 shadow-md rounded-none space-y-4">
             <div className="flex items-center justify-between border-b border-[#38aae3]/20 pb-3">
               <div>
+                <span className="text-[11px] font-bold text-[#1081b7] uppercase tracking-wider block">
+                  {resourceCategory === 'duas' ? 'Card Preview' : 'First Page Preview'}
+                </span>
                 <h2 className="text-base sm:text-lg font-bold text-slate-900 leading-tight">
                   {currentTitle}
                 </h2>
@@ -156,33 +211,34 @@ export default function DownloadableResourcesPage() {
               <a
                 href={currentFilePath}
                 download
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#1081b7] hover:bg-[#116c9c] text-white text-xs font-bold shadow transition-all"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-none bg-[#1081b7] hover:bg-[#116c9c] text-white text-xs font-bold shadow transition-all shrink-0"
               >
                 <Download className="w-3.5 h-3.5" />
                 <span>Download</span>
               </a>
             </div>
 
-            {/* Dynamic PDF / Image Viewer Container */}
-            <div className={`w-full rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-inner relative flex items-center justify-center ${resourceCategory === 'duas' ? 'aspect-[4/1] bg-slate-100' : 'h-[520px]'}`}>
+            {/* Preview Box */}
+            <div className="w-full rounded-none overflow-hidden border border-slate-200 bg-slate-50 relative flex items-center justify-center min-h-[350px]">
               {resourceCategory === 'duas' ? (
-                <div className="relative w-full h-full p-2 flex items-center justify-center">
+                <div className="relative w-full h-[320px] sm:h-[400px] p-4 flex items-center justify-center bg-white">
                   <Image
                     src={currentFilePath}
                     alt={currentTitle}
                     fill
-                    className="object-contain p-1"
+                    className="object-contain p-2"
                   />
                 </div>
               ) : (
-                <QuranPdfViewer
-                  key={`${resourceCategory}-${selectedId}`}
-                  src={currentFilePath}
-                  title={`${currentTitle} PDF Preview`}
-                />
+                <div className="w-full flex items-center justify-center py-2">
+                  <QuranPdfViewer
+                    key={`${resourceCategory}-${selectedId}`}
+                    src={currentFilePath}
+                    title={`${currentTitle} PDF Preview`}
+                  />
+                </div>
               )}
             </div>
-
           </div>
         </div>
       </div>

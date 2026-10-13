@@ -1,28 +1,7 @@
 import React, { Suspense } from 'react';
 import Script from 'next/script';
-import { Inter, Rubik, Courgette } from 'next/font/google';
 import LayoutContent from './LayoutContent';
 import './globals.css';
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-body',
-  display: 'swap',
-});
-
-const rubik = Rubik({
-  subsets: ['latin'],
-  variable: '--font-headings',
-  display: 'swap',
-  weight: ['300', '400', '500', '600', '700', '800', '900'],
-});
-
-const courgette = Courgette({
-  subsets: ['latin'],
-  variable: '--font-rotating',
-  display: 'swap',
-  weight: ['400'],
-});
 
 export const metadata = {
   title: 'Quran Academy - Sacred Recitation to Living Wisdom',
@@ -54,7 +33,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`scroll-smooth ${inter.variable} ${rubik.variable} ${courgette.variable}`}>
+    <html lang="en" className="scroll-smooth">
       <head>
         {/* Google tag (gtag.js) */}
         <Script
@@ -74,7 +53,11 @@ export default function RootLayout({
         <link rel="icon" href="/images/favicon.png" type="image/png" sizes="any" />
         <link rel="shortcut icon" href="/images/favicon.png" type="image/png" />
         <link rel="apple-touch-icon" href="/images/favicon.png" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Courgette&family=Inter:wght@300;400;500;600;700&family=Rubik:wght@300;400;500;600;700;800;900&display=swap" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" />
+        <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossOrigin="anonymous" referrerPolicy="no-referrer" />
       </head>
       <body className="relative min-h-screen font-sans antialiased text-gray-950 bg-gray-50/50">

@@ -2,7 +2,7 @@
 
 import React, { useState, FormEvent, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, AlertCircle, Clock, Send, ShieldCheck, Calendar, Sparkles, ChevronDown } from 'lucide-react';
+import { Check, AlertCircle, Clock, ChevronDown } from 'lucide-react';
 import { ALL_COUNTRIES } from '@/utils/countries';
 import { trackLeadSubmission } from '@/utils/gtm';
 
@@ -53,13 +53,14 @@ export default function InquiryForm({
   // Sync prefilled course when it changes
   useEffect(() => {
     if (prefilledCourse) {
-      const courseValues = ['noorani-qaida', 'quran-reading', 'tajweed', 'memorization', 'islamic-essentials', 'hifz-revision'];
+      const courseValues = ['noorani-qaida', 'quran-reading', 'tajweed', 'memorization', 'islamic-essentials', 'hifz-revision', 'arabic-language'];
       const matched = courseValues.find(
         (val) =>
           val.toLowerCase() === prefilledCourse.toLowerCase() ||
           prefilledCourse.toLowerCase().includes(val.toLowerCase()) ||
           (val === 'noorani-qaida' && prefilledCourse.toLowerCase().includes('qaida')) ||
-          (val === 'noorani-qaida' && prefilledCourse.toLowerCase().includes('almadania'))
+          (val === 'noorani-qaida' && prefilledCourse.toLowerCase().includes('almadania')) ||
+          (val === 'arabic-language' && prefilledCourse.toLowerCase().includes('arabic'))
       );
       if (matched) {
         setCourseInterest(matched);
@@ -231,7 +232,7 @@ export default function InquiryForm({
           </p>
           <button
             onClick={() => setStatus('idle')}
-            className="bg-[#F0F9FF] hover:bg-white border border-[#E0F2FE] text-slate-700 font-extrabold text-[10px] uppercase tracking-widest py-2.5 px-5 rounded-xl cursor-pointer"
+            className="bg-[#F0F9FF] hover:bg-white border border-[#E0F2FE] text-slate-700 font-extrabold text-[10px] uppercase tracking-widest py-2.5 px-5 rounded-none cursor-pointer"
           >
             Request Another Slot
           </button>
@@ -489,6 +490,7 @@ export default function InquiryForm({
                 <option value="memorization">Quran Memorization (Hifz)</option>
                 <option value="islamic-essentials">Islamic Essentials & Duas</option>
                 <option value="hifz-revision">Hifz Revision Partner</option>
+                <option value="arabic-language">Arabic Language Course</option>
               </select>
             </div>
           </div>
@@ -527,7 +529,7 @@ export default function InquiryForm({
           <button
             type="submit"
             disabled={status === 'submitting'}
-            className="w-full h-11 sm:h-12 bg-gradient-to-r from-[#1C8DC8] via-[#3D8DC3] to-[#146299] hover:from-[#146299] hover:to-[#1C8DC8] text-white font-display font-extrabold rounded-2xl uppercase tracking-wider text-[10px] sm:text-xs px-4 transition-all duration-300 flex items-center justify-center space-x-2 cursor-pointer shadow-[0_12px_32px_rgba(28,141,200,0.22)] hover:shadow-[0_16px_40px_rgba(28,141,200,0.35)] hover:-translate-y-0.5 active:translate-y-0"
+            className="w-full h-11 sm:h-12 bg-gradient-to-r from-[#1C8DC8] via-[#3D8DC3] to-[#146299] hover:from-[#146299] hover:to-[#1C8DC8] text-white font-display font-extrabold rounded-none uppercase tracking-wider text-[10px] sm:text-xs px-4 transition-all duration-300 flex items-center justify-center space-x-2 cursor-pointer shadow-[0_12px_32px_rgba(28,141,200,0.22)] hover:shadow-[0_16px_40px_rgba(28,141,200,0.35)] hover:-translate-y-0.5 active:translate-y-0"
           >
             {status === 'submitting' ? (
               <>
@@ -557,72 +559,48 @@ export default function InquiryForm({
   return (
 <section id="contact" className="w-full lg:min-h-screen py-8 lg:py-12 bg-gradient-to-b from-white via-[#F0F9FF] to-white flex items-center justify-center overflow-hidden">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex items-center">
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 items-center w-full max-h-full">
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch w-full">
       
-      {/* Left Column: Context / Value Proposition */}
-      <div className="lg:col-span-5 flex flex-col justify-between space-y-4 bg-[#0B3951] text-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-xl relative overflow-hidden">
+      {/* Left Column: Context / Value Proposition Card matching form height */}
+      <div className="lg:col-span-5 h-full flex flex-col justify-center bg-[#0B3951] text-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 shadow-xl relative overflow-hidden">
         {/* Background Decorative Lines & Pattern */}
-        <div className="absolute inset-0 pointer-events-none opacity-15 overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none opacity-20 overflow-hidden">
           <svg className="w-full h-full" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M-50 80 C120 20, 220 180, 450 60" stroke="#1C8DC8" strokeWidth="2" strokeDasharray="6 6" />
-            <path d="M-50 180 C100 120, 260 260, 450 140" stroke="white" strokeWidth="1.5" />
-            <path d="M-50 280 C140 200, 210 340, 450 240" stroke="#1C8DC8" strokeWidth="2" strokeDasharray="4 4" />
-            <circle cx="340" cy="70" r="110" stroke="white" strokeWidth="1.5" />
-            <circle cx="60" cy="330" r="85" stroke="#1C8DC8" strokeWidth="1.5" />
+            <path d="M-50 80 C120 20, 220 180, 450 60" stroke="#1C8DC8" strokeWidth="2.5" strokeDasharray="6 6" strokeLinecap="round" />
+            <path d="M-50 180 C100 120, 260 260, 450 140" stroke="white" strokeWidth="2" strokeLinecap="round" />
+            <path d="M-50 280 C140 200, 210 340, 450 240" stroke="#1C8DC8" strokeWidth="2.5" strokeDasharray="4 4" strokeLinecap="round" />
+            <circle cx="340" cy="70" r="110" stroke="white" strokeWidth="2" />
+            <circle cx="60" cy="330" r="85" stroke="#1C8DC8" strokeWidth="2" />
           </svg>
         </div>
 
-        <div className="space-y-4 relative z-10">
-          <div className="inline-flex items-center space-x-2 bg-white/10 border border-white/20 px-3 py-1 rounded-full w-fit">
-            <Sparkles className="w-3.5 h-3.5 text-sky-300" />
-            <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-sky-200">
-              Free 3-Day Trial
-            </span>
+        <div className="relative z-10 my-auto">
+          <div className="relative inline-block">
+            {/* Rounded designed decorative line for mobile view */}
+            <svg 
+              className="block lg:hidden absolute -bottom-2 sm:-bottom-3 left-0 w-full h-4 sm:h-5 text-[#1C8DC8] pointer-events-none -z-0" 
+              viewBox="0 0 260 20" 
+              fill="none" 
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path 
+                d="M4 14C65 4 195 4 256 13" 
+                stroke="currentColor" 
+                strokeWidth="4" 
+                strokeLinecap="round" 
+              />
+            </svg>
+            <div className="block lg:hidden absolute -bottom-1 left-2 right-2 h-2 bg-gradient-to-r from-[#1C8DC8]/50 via-[#38AAE3]/70 to-[#1C8DC8]/50 rounded-full blur-[2px] -z-0" />
+
+            <h2 className="relative z-10 text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-display font-extrabold text-white leading-tight tracking-tight">
+              Book Your Free Trial<span className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-[#1C8DC8] font-black inline-block ml-0.5 leading-none">.</span>
+            </h2>
           </div>
-
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-extrabold text-white leading-tight">
-            Book Your Free Trial
-          </h2>
-
-          {/* HIDDEN ON MOBILE */}
-          <p className="hidden lg:block text-xs sm:text-sm text-slate-300 leading-relaxed">
-            Experience 1-on-1 live instruction combining sacred recitation, Tajweed, and Hifz with clear understanding and daily implementation.
-          </p>
-
-          {/* HIDDEN ON MOBILE */}
-          <div className="hidden lg:block space-y-3 pt-2">
-            <div className="flex items-start space-x-3">
-              <div className="p-1.5 bg-sky-500/20 rounded-lg text-sky-300 shrink-0 mt-0.5">
-                <Calendar size={16} />
-              </div>
-              <div>
-                <h4 className="text-xs font-bold text-white">Flexible Scheduling</h4>
-                <p className="text-[11px] text-slate-300">Choose times that perfectly fit your daily schedule.</p>
-              </div>
-            </div>
-
-            <div className="flex items-start space-x-3">
-              <div className="p-1.5 bg-sky-500/20 rounded-lg text-sky-300 shrink-0 mt-0.5">
-                <ShieldCheck size={16} />
-              </div>
-              <div>
-                <h4 className="text-xs font-bold text-white">Certified Tutors</h4>
-                <p className="text-[11px] text-slate-300">Learn from experienced, vetted Sanad-certified scholars.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* HIDDEN ON MOBILE */}
-        <div className="hidden lg:block border-t border-white/10 pt-4 mt-2 relative z-10">
-          <p className="text-[11px] text-slate-400">
-            Have urgent queries? Contact scheduling directly on WhatsApp for immediate support.
-          </p>
         </div>
       </div>
 
       {/* Right Column: Compact Form */}
-      <div className="lg:col-span-7 bg-white rounded-2xl sm:rounded-3xl border border-[#E0F2FE] p-4 sm:p-6 shadow-xl flex flex-col justify-center">
+      <div className="lg:col-span-7 h-full bg-white rounded-2xl sm:rounded-3xl border border-[#E0F2FE] p-4 sm:p-6 shadow-xl flex flex-col justify-center">
         {renderFormContent()}
       </div>
 
