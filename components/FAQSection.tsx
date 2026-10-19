@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { HelpCircle, ChevronDown, ChevronUp } from 'lucide-react';
 import { FAQS } from '../data';
 
@@ -12,11 +12,30 @@ export default function FAQSection() {
     setOpenIdx(openIdx === idx ? null : idx);
   };
 
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: FAQS.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  };
+
   return (
     <section 
       id="faqs" 
       className="py-16 sm:py-20 md:py-24 bg-gradient-to-b from-white via-[#F0F9FF]/40 to-white relative overflow-hidden"
     >
+      {/* FAQ Schema Structured Data for Search Engines & AI Crawlers */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+
       {/* Background radial highlight */}
       <div className="absolute top-1/4 right-0 w-80 h-80 bg-[#1C8DC8]/3 rounded-full blur-[120px] pointer-events-none" />
 
@@ -34,7 +53,7 @@ export default function FAQSection() {
           </p>
         </div>
 
-        {/* Collapsible Accordion Grid with Framer Motion Layout */}
+        {/* Collapsible Accordion Grid - Answers fully present in server HTML */}
         <div className="space-y-4 max-w-3xl mx-auto">
           {FAQS.map((faq, idx) => {
             const isOpen = openIdx === idx;
@@ -61,21 +80,20 @@ export default function FAQSection() {
                   </div>
                 </button>
 
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      id={contentId}
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: "easeInOut" }}
-                    >
-                      <div className="px-6 pb-6 text-sm sm:text-[15px] text-slate-600 leading-relaxed border-t border-[#E0F2FE] pt-4 text-left">
-                        <p>{faq.answer}</p>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                <motion.div
+                  id={contentId}
+                  initial={false}
+                  animate={{
+                    height: isOpen ? 'auto' : 0,
+                    opacity: isOpen ? 1 : 0,
+                  }}
+                  transition={{ duration: 0.3, ease: 'easeInOut' }}
+                  className="overflow-hidden"
+                >
+                  <div className="px-6 pb-6 text-sm sm:text-[15px] text-slate-600 leading-relaxed border-t border-[#E0F2FE] pt-4 text-left">
+                    <p>{faq.answer}</p>
+                  </div>
+                </motion.div>
               </div>
             );
           })}

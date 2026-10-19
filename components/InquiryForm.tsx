@@ -21,6 +21,9 @@ interface InquiryFormProps {
   onClearPrefill?: () => void;
   isModalMode?: boolean;
   onSubmitSuccess?: () => void;
+  title?: string;
+  asH1?: boolean;
+  sectionClassName?: string;
 }
 
 export default function InquiryForm({
@@ -29,7 +32,10 @@ export default function InquiryForm({
   prefilledDetails,
   onClearPrefill,
   isModalMode = false,
-  onSubmitSuccess
+  onSubmitSuccess,
+  title = 'Book Your Free Trial Class',
+  asH1 = false,
+  sectionClassName,
 }: InquiryFormProps) {
   // Form input states
   const [fullName, setFullName] = useState('');
@@ -53,14 +59,26 @@ export default function InquiryForm({
   // Sync prefilled course when it changes
   useEffect(() => {
     if (prefilledCourse) {
-      const courseValues = ['noorani-qaida', 'quran-reading', 'tajweed', 'memorization', 'islamic-essentials', 'hifz-revision', 'arabic-language'];
+      const courseValues = [
+        'noorani-qaida',
+        'quran-reading',
+        'tajweed',
+        'memorization',
+        'islamic-essentials',
+        'hifz-revision',
+        'quranic-arabic',
+        'conversational-arabic',
+        'arabic-language',
+      ];
       const matched = courseValues.find(
         (val) =>
           val.toLowerCase() === prefilledCourse.toLowerCase() ||
           prefilledCourse.toLowerCase().includes(val.toLowerCase()) ||
           (val === 'noorani-qaida' && prefilledCourse.toLowerCase().includes('qaida')) ||
           (val === 'noorani-qaida' && prefilledCourse.toLowerCase().includes('almadania')) ||
-          (val === 'arabic-language' && prefilledCourse.toLowerCase().includes('arabic'))
+          (val === 'conversational-arabic' && prefilledCourse.toLowerCase().includes('conversational')) ||
+          (val === 'quranic-arabic' && prefilledCourse.toLowerCase().includes('quranic arabic')) ||
+          (val === 'quranic-arabic' && prefilledCourse.toLowerCase().includes('arabic'))
       );
       if (matched) {
         setCourseInterest(matched);
@@ -225,7 +243,7 @@ export default function InquiryForm({
             <Check size={28} className="stroke-[3]" />
           </div>
           <h3 className="font-display font-[900] text-xl text-[#0B3951]">
-            Trial Lesson Booked!
+            Trial Class Booked!
           </h3>
           <p className="text-xs text-slate-600 max-w-md mx-auto leading-relaxed">
             Alhamdulillah. Your free slots have been registered in our scheduling coordinator board. Check your WhatsApp notifications shortly.
@@ -490,7 +508,8 @@ export default function InquiryForm({
                 <option value="memorization">Quran Memorization (Hifz)</option>
                 <option value="islamic-essentials">Islamic Essentials & Duas</option>
                 <option value="hifz-revision">Hifz Revision Partner</option>
-                <option value="arabic-language">Arabic Language Course</option>
+                <option value="quranic-arabic">Quranic Arabic Online</option>
+                <option value="conversational-arabic">Conversational Arabic Online</option>
               </select>
             </div>
           </div>
@@ -538,7 +557,7 @@ export default function InquiryForm({
               </>
             ) : (
               <>
-                <span>Securely Book 3-Day Free Trial</span>
+                <span>Securely Book Free Trial Class</span>
               </>
             )}
           </button>
@@ -556,8 +575,10 @@ export default function InquiryForm({
     return renderFormContent();
   }
 
+  const HeadingTag = asH1 ? 'h1' : 'h2';
+
   return (
-<section id="contact" className="w-full lg:min-h-screen py-8 lg:py-12 bg-gradient-to-b from-white via-[#F0F9FF] to-white flex items-center justify-center overflow-hidden">
+<section id="contact" className={sectionClassName || "w-full lg:min-h-screen py-8 lg:py-12 bg-gradient-to-b from-white via-[#F0F9FF] to-white flex items-center justify-center overflow-hidden"}>
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex items-center">
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch w-full">
       
@@ -592,9 +613,9 @@ export default function InquiryForm({
             </svg>
             <div className="block lg:hidden absolute -bottom-1 left-2 right-2 h-2 bg-gradient-to-r from-[#1C8DC8]/50 via-[#38AAE3]/70 to-[#1C8DC8]/50 rounded-full blur-[2px] -z-0" />
 
-            <h2 className="relative z-10 text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-display font-extrabold text-white leading-tight tracking-tight">
-              Book Your Free Trial<span className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-[#1C8DC8] font-black inline-block ml-0.5 leading-none">.</span>
-            </h2>
+            <HeadingTag className="relative z-10 text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-display font-extrabold text-white leading-tight tracking-tight">
+              {title}<span className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-[#1C8DC8] font-black inline-block ml-0.5 leading-none">.</span>
+            </HeadingTag>
           </div>
         </div>
       </div>

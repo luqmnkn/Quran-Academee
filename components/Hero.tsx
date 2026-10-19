@@ -42,7 +42,7 @@ function SheikhJawwadSection() {
           Under the supervision of
         </span>
         <h3 className="font-display font-bold text-xl sm:text-2xl md:text-3xl text-[#0B3951] leading-tight">
-          Sheikh Jawwad Musa
+          Sheikh Jawwad Moosa
         </h3>
         <p className="font-sans text-xs sm:text-base text-slate-600 leading-snug">
           Graduated from Madinah University
@@ -196,7 +196,7 @@ export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
                 transition={{ duration: 0.7, delay: 0.1 }}
                 className="font-display font-semibold text-[28px] xs:text-[32px] sm:text-4xl lg:text-5xl xl:text-6xl text-[#0B3951] tracking-tight leading-[1.2] md:leading-[1.15]"
               >
-                <span className="block">Start Your Quran Journey</span>
+                <span className="block">Start Your Quran Journey</span>{' '}
                 <span className="block font-allura text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] via-[#3D8DC3] to-[#146299]">With Quran Academee</span>
               </motion.h1>
 
@@ -221,7 +221,7 @@ export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
                 onClick={onOpenTrialModal}
                 className="bg-gradient-to-r from-[#1C8DC8] via-[#3D8DC3] to-[#146299] hover:from-[#146299] hover:to-[#1C8DC8] text-white font-extrabold text-xs sm:text-base px-6 sm:px-9 py-4 sm:py-4.5 rounded-none transition-all duration-300 shadow-[0_12px_32px_rgba(28,141,200,0.25)] hover:shadow-[0_16px_40px_rgba(28,141,200,0.38)] hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center space-x-2 cursor-pointer whitespace-nowrap group"
               >
-                <span>Start Free Trial</span>
+                <span>Start Free Trial Class</span>
                 <ChevronRight className="w-5 h-5 group-hover:translate-x-0.5 transition-transform" />
               </button>
 
@@ -274,16 +274,18 @@ export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
           <div className="flex flex-col space-y-3 text-center w-full">
             <div className="space-y-2">
               {/* Main Heading title block (Centered three lines for Mobile) */}
-              <motion.h1
+              <motion.p
+                role="heading"
+                aria-level={2}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.1 }}
                 className="font-display font-semibold text-[28px] xs:text-[32px] sm:text-4xl text-[#0B3951] tracking-tight leading-[1.2]"
               >
-                <span className="block">Start Your Journey</span>
-                <span className="block text-xs sm:text-sm uppercase tracking-widest text-[#146299] opacity-80 my-1">With</span>
+                <span className="block">Start Your Journey</span>{' '}
+                <span className="block text-xs sm:text-sm uppercase tracking-widest text-[#146299] opacity-80 my-1">With</span>{' '}
                 <span className="block font-allura text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] via-[#3D8DC3] to-[#146299] py-1">Quran Academee</span>
-              </motion.h1>
+              </motion.p>
             </div>
           </div>
 
@@ -324,7 +326,7 @@ export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
               onClick={onOpenTrialModal}
               className="w-1/2 bg-gradient-to-r from-[#1C8DC8] via-[#3D8DC3] to-[#146299] text-white font-extrabold text-xs py-3.5 rounded-none shadow-[0_12px_28px_rgba(28,141,200,0.25)] hover:shadow-[0_16px_36px_rgba(28,141,200,0.35)] flex items-center justify-center space-x-1 cursor-pointer whitespace-nowrap active:scale-98"
             >
-              <span>Free Trial</span>
+              <span>Free Trial Class</span>
               <ChevronRight className="w-4 h-4" />
             </button>
 

@@ -73,30 +73,27 @@ export default function Header({ onOpenTrialModal }: HeaderProps) {
 
   const navLinks = [
     { name: 'Home', href: '/' },
-    { name: 'Course', href: '/#courses' },
+    { name: 'Courses', href: '/courses' },
     { name: 'Pricing', href: '/pricing' },
     { name: 'Resources', href: '/resources' },
-    { name: 'About Us', href: '/#about' },
+    { name: 'About Us', href: '/about' },
   ];
 
   const isLinkActive = (linkHref: string) => {
-    if (pathname.startsWith('/resources') && linkHref === '/resources') {
+    if (linkHref === '/' && pathname === '/') {
       return true;
     }
-    if (pathname === '/pricing') {
-      return linkHref === '/pricing';
+    if (linkHref === '/courses' && pathname.startsWith('/courses')) {
+      return true;
     }
-    if (pathname === '/') {
-      if (linkHref === '/pricing' || linkHref === '/resources') return false;
-      if (linkHref === '/') {
-        return activeSection === 'home' || activeSection === '';
-      }
-      if (linkHref === '/#courses') {
-        return activeSection === 'courses';
-      }
-      if (linkHref === '/#about') {
-        return activeSection === 'about';
-      }
+    if (linkHref === '/resources' && pathname.startsWith('/resources')) {
+      return true;
+    }
+    if (linkHref === '/pricing' && pathname === '/pricing') {
+      return true;
+    }
+    if (linkHref === '/about' && pathname === '/about') {
+      return true;
     }
     return false;
   };

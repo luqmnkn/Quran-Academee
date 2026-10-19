@@ -82,11 +82,13 @@ export default function LayoutContent({
       const params = new URLSearchParams(window.location.search);
       const trial = params.get('trial');
       const plan = params.get('plan');
+      const course = params.get('course');
       const details = params.get('details');
 
       if (trial === 'true') {
         setIsTrialModalOpen(true);
         if (plan) setSelectedCourseSelection(plan);
+        else if (course) setSelectedCourseSelection(course);
         if (details) setSelectedDetailsSelection(details);
       } else {
         setIsTrialModalOpen(false);

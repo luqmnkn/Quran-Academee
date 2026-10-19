@@ -304,12 +304,13 @@ const PRICING_CATEGORIES: PricingCategory[] = [
     title: 'Islamic Essentials & Duas',
     subtitle: 'Fiqh, Aqeedah, Seerah, & Akhlaq',
     icon: 'explore',
-    description: 'Curriculum covering core creed, Salah, daily Duas, basic translation, and Islamic character development.',
+    description: 'Comprehensive program covering core creed, Salah, daily Duas, basic translation, and Islamic character development.',
     plans: [
       {
         id: 'islamic-plan-1',
         name: 'Plan 1',
         price: 55,
+        originalPrice: 65,
         weeklyClasses: 2,
         classDuration: '30 Minutes',
         classesPerMonth: 8,
@@ -329,6 +330,7 @@ const PRICING_CATEGORIES: PricingCategory[] = [
         id: 'islamic-plan-2',
         name: 'Plan 2',
         price: 80,
+        originalPrice: 95,
         weeklyClasses: 3,
         classDuration: '30 Minutes',
         classesPerMonth: 12,
@@ -340,7 +342,7 @@ const PRICING_CATEGORIES: PricingCategory[] = [
           '12 Classes / Month',
           'Fiqh, Seerah of Prophet Muhammad (PBUH)',
           'Moral etiquettes & stories of the Prophets',
-          'Age-appropriate curriculum & live worksheets',
+          'Age-appropriate coursework & live worksheets',
           'Weekly quizzes & academic evaluations',
           'Priority makeup class support'
         ]
@@ -418,14 +420,14 @@ const PRICING_CATEGORIES: PricingCategory[] = [
     ]
   },
   {
-    id: 'arabic-language',
-    title: 'Arabic Language Course',
-    subtitle: 'Quranic & Conversational Arabic',
+    id: 'quranic-arabic',
+    title: 'Quranic Arabic Online',
+    subtitle: 'Understand the Quran Directly',
     icon: 'translate',
-    description: 'Master Arabic grammar, vocabulary, and sentence structure to understand the Holy Quran directly in its original language.',
+    description: 'Master Arabic grammar (Nahw & Sarf), vocabulary, and sentence structure to understand the Holy Quran directly in its original language.',
     plans: [
       {
-        id: 'arabic-plan-1',
+        id: 'quranic-plan-1',
         name: 'Plan 1',
         price: 55,
         originalPrice: 65,
@@ -444,7 +446,7 @@ const PRICING_CATEGORIES: PricingCategory[] = [
         ]
       },
       {
-        id: 'arabic-plan-2',
+        id: 'quranic-plan-2',
         name: 'Plan 2',
         price: 80,
         originalPrice: 95,
@@ -458,14 +460,14 @@ const PRICING_CATEGORIES: PricingCategory[] = [
           '30 Minutes / Class',
           '12 Classes / Month',
           'Grammar (Nahw & Sarf) foundations',
-          'Sentence construction & conversations',
           'Direct Quranic verse translation exercises',
+          'Salah & daily Dua comprehension',
           'Certified Native Arabic scholar',
           'Priority makeup class rescheduling'
         ]
       },
       {
-        id: 'arabic-plan-3',
+        id: 'quranic-plan-3',
         name: 'Plan 3',
         price: 110,
         originalPrice: 130,
@@ -477,11 +479,80 @@ const PRICING_CATEGORIES: PricingCategory[] = [
           '5 Days per Week',
           '30 Minutes / Class',
           '20 Classes / Month',
-          'Intensive Arabic immersion',
-          'Advanced grammar & classical texts',
-          'Fluent conversational practice',
+          'Intensive Quranic Arabic immersion',
+          'Advanced classical syntax & rhetorical analysis',
+          'Full Surah translation projects',
           'Senior Arabic linguist scholar',
           'Dedicated progress audits'
+        ]
+      }
+    ]
+  },
+  {
+    id: 'conversational-arabic',
+    title: 'Conversational Arabic Online',
+    subtitle: 'Fluent Daily Speaking & Dialogue',
+    icon: 'chat',
+    description: 'Learn to speak Modern Standard Arabic (Fusha) with native Arabic speakers through immersive real-life conversation and everyday dialogues.',
+    plans: [
+      {
+        id: 'conv-plan-1',
+        name: 'Plan 1',
+        price: 55,
+        originalPrice: 68,
+        weeklyClasses: 2,
+        classDuration: '30 Minutes',
+        classesPerMonth: 8,
+        features: [
+          'Free Trial Class included',
+          '2 Days per Week',
+          '30 Minutes / Class',
+          '08 Classes / Month',
+          'Foundational daily greetings & vocabulary',
+          'Native Arabic speaker tutor',
+          'Everyday social dialogues',
+          'Flexible scheduling / makeup classes'
+        ]
+      },
+      {
+        id: 'conv-plan-2',
+        name: 'Plan 2',
+        price: 80,
+        originalPrice: 95,
+        weeklyClasses: 3,
+        classDuration: '30 Minutes',
+        classesPerMonth: 12,
+        isPopular: true,
+        features: [
+          'Free Trial Class included',
+          '3 Days per Week',
+          '30 Minutes / Class',
+          '12 Classes / Month',
+          'Real-life roleplay (travel, shopping, dining)',
+          'Modern Standard Arabic (Fusha)',
+          'Listening & spontaneous speaking drills',
+          'Personalized phonetic feedback',
+          'Priority makeup class rescheduling'
+        ]
+      },
+      {
+        id: 'conv-plan-3',
+        name: 'Plan 3',
+        price: 120,
+        originalPrice: 140,
+        weeklyClasses: 5,
+        classDuration: '30 Minutes',
+        classesPerMonth: 20,
+        features: [
+          'Free Trial Class included',
+          '5 Days per Week',
+          '30 Minutes / Class',
+          '20 Classes / Month',
+          'Intensive daily immersion conversations',
+          'Advanced cultural idioms & proverbs',
+          'Media & professional discourse practice',
+          'Senior native Arabic linguist',
+          'Official speaking proficiency certificate'
         ]
       }
     ]
@@ -495,6 +566,8 @@ const COURSE_INFO = {
   'memorization': { label: 'Quran Memorization (Hifz)', multiplier: 1.4 },
   'islamic-essentials': { label: 'Islamic Essentials & Duas', multiplier: 1.2 },
   'hifz-revision': { label: 'Hifz Revision Partner', multiplier: 1.2 },
+  'quranic-arabic': { label: 'Quranic Arabic', multiplier: 1.2 },
+  'conversational-arabic': { label: 'Conversational Arabic', multiplier: 1.2 },
   'arabic-language': { label: 'Arabic Language Course', multiplier: 1.2 },
 };
 
@@ -653,24 +726,18 @@ export default function Pricing({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full text-center">
         {/* Header Title */}
         <div className="max-w-3xl mx-auto mb-10 space-y-4">
-          <motion.div 
-            initial={{ opacity: 0, y: -10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center space-x-2 bg-sky-50 border border-sky-100 px-4 py-1.5 rounded-full"
-          >
-          </motion.div>
-
-          <motion.h2 
+          <motion.h1 
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
             className="font-display font-[900] text-3xl sm:text-[45px] lg:text-[52px] text-[#0B3951] tracking-tight leading-[1.1]"
           >
-            Flexible Monthly Plans
-          </motion.h2>
+            Online Quran Classes{' '}
+            <span className="font-allura inline-block py-1 text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] via-[#146299] to-[#0B3951]">
+              Pricing Plans
+            </span>
+          </motion.h1>
 
           <motion.p 
             initial={{ opacity: 0, y: 15 }}
@@ -882,7 +949,6 @@ export default function Pricing({
               className="w-full h-11 bg-white hover:bg-slate-50 text-[#0B3951] font-display font-extrabold text-[10px] uppercase tracking-wider px-3.5 rounded-2xl border border-sky-100 flex items-center justify-between shadow-sm cursor-pointer"
             >
               <span className="flex items-center space-x-1.5 min-w-0">
-                <span className="material-symbols-outlined text-[15px] text-[#1C8DC8] shrink-0">{activeCategory.icon}</span>
                 <span className="truncate">{activeCategory.title}</span>
               </span>
               <ChevronDown size={12} className={`text-slate-400 shrink-0 transition-transform duration-300 ${isCourseDropdownOpen ? 'rotate-180' : ''}`} />
@@ -915,9 +981,6 @@ export default function Pricing({
                               : 'text-slate-600 hover:bg-slate-50'
                           }`}
                         >
-                          <span className={`material-symbols-outlined text-[15px] leading-none select-none ${isActive ? 'text-[#1C8DC8]' : 'text-slate-400'}`}>
-                            {iconName}
-                          </span>
                           <span className="flex-1 truncate">{category.title}</span>
                         </button>
                       );
@@ -944,13 +1007,7 @@ export default function Pricing({
                     : 'bg-white/60 backdrop-blur-sm border-slate-200/60 text-slate-700 hover:bg-white hover:border-[#1C8DC8]/30 hover:shadow-[0_6px_15px_rgba(0,0,0,0.02)]'
                 }`}
               >
-                <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
-                  isActive ? 'bg-[#1C8DC8]/10 text-[#1C8DC8]' : 'bg-slate-100 text-slate-500'
-                }`}>
-                  <span className="material-symbols-outlined text-[18px] sm:text-[22px] leading-none select-none">
-                    {iconName}
-                  </span>
-                </div>
+                
                 <div className="min-w-0">
                   <h4 className={`font-display font-[900] text-[9.5px] sm:text-xs uppercase tracking-wider truncate transition-colors ${
                     isActive ? 'text-[#0B3951]' : 'text-slate-600'
@@ -989,7 +1046,12 @@ export default function Pricing({
           >
             {activeCategory.plans.map((plan) => {
               const formattedPrice = formatPrice(plan.price);
-              const formattedOriginal = plan.originalPrice ? formatPrice(plan.originalPrice) : null;
+              const rawOriginal =
+                plan.originalPrice && plan.originalPrice > plan.price
+                  ? formatPrice(plan.originalPrice)
+                  : null;
+              const formattedOriginal =
+                rawOriginal && rawOriginal > formattedPrice ? rawOriginal : null;
               const planDetailsString = `${plan.weeklyClasses} Days/Week - ${plan.classDuration} (${plan.classesPerMonth} Classes/Month) - ${currentCountry.symbol.trim()}${formattedPrice}/month`;
               const isActiveCard = !!plan.isPopular;
 
@@ -1075,7 +1137,7 @@ export default function Pricing({
                           : 'bg-[#0B3951] hover:bg-[#1C8DC8] text-white shadow-[0_8px_24px_rgba(11,57,81,0.2)] hover:shadow-[0_12px_32px_rgba(28,141,200,0.32)] hover:-translate-y-0.5 active:translate-y-0'
                       }`}
                     >
-                      <span>Book Free Trial</span>
+                      <span>Book Free Trial Class</span>
                     </button>
                   </div>
                 </motion.div>

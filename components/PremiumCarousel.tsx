@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
@@ -7,40 +9,15 @@ interface PremiumCarouselProps {
 }
 
 export default function PremiumCarousel({ children }: PremiumCarouselProps) {
-  // Convert children to a safe array format
+  // Convert children to a safe array format - render each item exactly once
   const rawChildren = useMemo(() => React.Children.toArray(children), [children]);
   const uniqueCount = rawChildren.length;
 
-  // Duplicate slides seamlessly for infinite looping without visual whitespace
-  const multipliedChildren = useMemo(() => {
-    if (uniqueCount === 0) return [];
-
-    // Ensure a minimum of 24 items for uninterrupted loop wrapping
-    const repeatCount = uniqueCount < 24 ? Math.ceil(24 / uniqueCount) : 2;
-    const items: React.ReactNode[] = [];
-
-    for (let cycle = 0; cycle < repeatCount; cycle++) {
-      rawChildren.forEach((child, childIdx) => {
-        if (React.isValidElement(child)) {
-          items.push(
-            React.cloneElement(child, {
-              key: `slide-${child.key || childIdx}-cycle-${cycle}`,
-            } as any)
-          );
-        } else {
-          items.push(child);
-        }
-      });
-    }
-
-    return items;
-  }, [rawChildren, uniqueCount]);
-
-  // Configure Embla with continuous autoplay
+  // Configure Embla with continuous autoplay and native looping
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
       align: 'center',
-      loop: true,
+      loop: uniqueCount > 2,
       skipSnaps: false,
     },
     [
@@ -74,19 +51,7 @@ export default function PremiumCarousel({ children }: PremiumCarouselProps) {
 
   const scrollTo = (index: number) => {
     if (!emblaApi || uniqueCount === 0) return;
-
-    const currentSnap = emblaApi.selectedScrollSnap();
-    const slidesLength = multipliedChildren.length;
-
-    // Calculate nearest slide occurrence to prevent long slide jumps across loops
-    const currentCycle = Math.floor(currentSnap / uniqueCount);
-    let targetIdx = currentCycle * uniqueCount + index;
-
-    if (targetIdx >= slidesLength) {
-      targetIdx = index;
-    }
-
-    emblaApi.scrollTo(targetIdx);
+    emblaApi.scrollTo(index);
   };
 
   if (uniqueCount === 0) return null;
@@ -101,8 +66,8 @@ export default function PremiumCarousel({ children }: PremiumCarouselProps) {
         ref={emblaRef}
       >
         <div className="flex touch-pan-y">
-          {multipliedChildren.map((child, idx) => {
-            const isSlideActive = idx % uniqueCount === activeDotIndex;
+          {rawChildren.map((child, idx) => {
+            const isSlideActive = idx === activeDotIndex;
 
             return (
               <div

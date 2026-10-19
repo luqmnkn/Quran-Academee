@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { MessageCircle, X } from 'lucide-react';
+import { trackWhatsAppClick } from '@/utils/gtm';
 
 export default function WhatsAppButton() {
   const [showTooltip, setShowTooltip] = useState(false);
 
   const whatsappMessage = encodeURIComponent(
-    "Assalamu Alaikum, I would like to learn Quran online. Please share details about your courses and free trial classes."
+    "Assalamu Alaikum, I would like to learn Quran online. Please share details about your courses and free trial class."
   );
 
   return (
@@ -16,6 +17,7 @@ export default function WhatsAppButton() {
         href={`https://wa.me/923702680670?text=${whatsappMessage}`}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={() => trackWhatsAppClick('floating_button')}
         className="w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#20ba5a] text-white flex items-center justify-center shadow-lg hover:shadow-green-500/25 hover:scale-110 active:scale-95 transition-all duration-300 relative"
         aria-label="Contact support on WhatsApp"
         id="whatsapp-floater"

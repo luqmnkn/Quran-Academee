@@ -63,7 +63,11 @@ function VideoCardItem({
   );
 }
 
-export default function Testimonials() {
+interface TestimonialsProps {
+  videoFirst?: boolean;
+}
+
+export default function Testimonials({ videoFirst = false }: TestimonialsProps = {}) {
   const [activeTab, setActiveTab] = useState<'all' | 'Parent' | 'Adult Student'>('all');
   const [videoList, setVideoList] = useState<VideoTestimonial[]>(VIDEO_TESTIMONIALS);
   const [selectedVideoIndex, setSelectedVideoIndex] = useState<number | null>(null);
@@ -141,110 +145,140 @@ export default function Testimonials() {
     </div>
   );
 
+  const renderWrittenSection = () => (
+    <div className="relative z-10">
+      {/* Header display segment */}
+      <div className="text-center max-w-2xl mx-auto mb-16 space-y-6">
+        <h2 className="font-display font-[900] text-3xl sm:text-[45px] lg:text-[56px] text-[#0B3951] tracking-[-0.04em] leading-[1.05]">
+          Hear From Our{' '}
+          <span className="font-allura text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] via-[#146299] to-[#0B3951]">
+            Quran Learners
+          </span>
+        </h2>
+
+        <p className="font-sans font-medium text-[18px] text-slate-600 max-w-lg mx-auto leading-relaxed">
+          Discover how kids and adults master Tajweed foundations while discovering deeper meaning and practical life guidance.
+        </p>
+
+        {/* Filtering tabs */}
+        <div className="flex flex-wrap items-center justify-center gap-2 pt-4">
+          {(['all', 'Parent', 'Adult Student'] as const).map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`px-5 py-2.5 rounded-none text-xs font-black uppercase tracking-widest transition-all duration-300 border cursor-pointer ${
+                activeTab === tab
+                  ? 'bg-[#0B3951] text-white border-[#0B3951] shadow'
+                  : 'bg-white text-slate-600 border-[#E0F2FE] hover:bg-[#F0F9FF]'
+              }`}
+            >
+              {tab === 'all' ? 'All Reviews' : `${tab}s`}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* 1. DESKTOP VIEW: Adaptive Grid Layout */}
+      <div className="hidden lg:grid grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <AnimatePresence mode="popLayout">
+          {filtered.map((testimonial) => (
+            <motion.div
+              layout
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.3 }}
+              key={testimonial.id}
+            >
+              {renderCardContent(testimonial)}
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </div>
+
+      {/* 2. MOBILE VIEW: Horizontal Snap Carousel */}
+      <div className="block lg:hidden">
+        <PremiumCarousel key={activeTab}>
+          {filtered.map((testimonial) => (
+            <div key={testimonial.id} className="h-full">
+              {renderCardContent(testimonial)}
+            </div>
+          ))}
+        </PremiumCarousel>
+      </div>
+    </div>
+  );
+
+  const renderVideoSection = (isSubSection: boolean) => (
+    <div className="relative z-10">
+      <div className="text-center max-w-2xl mx-auto mb-14 space-y-4">
+        {isSubSection ? (
+          <h3 className="font-display font-[900] text-2xl sm:text-[34px] text-[#0B3951] tracking-tight leading-none">
+            Watch Our Students{' '}
+            <span className="font-allura text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] to-[#146299]">
+              Recite In Real-Time
+            </span>
+          </h3>
+        ) : (
+          <h2 className="font-display font-[900] text-3xl sm:text-[45px] lg:text-[56px] text-[#0B3951] tracking-[-0.04em] leading-[1.05]">
+            Watch Our Students{' '}
+            <span className="font-allura text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] via-[#146299] to-[#0B3951]">
+              Recite In Real-Time
+            </span>
+          </h2>
+        )}
+        <p className="font-sans font-medium text-sm sm:text-base text-slate-600 max-w-lg mx-auto">
+          Real recordings from 1-on-1 virtual sessions showing progress in Tajweed recitation, Hifz retention, and active reflection.
+        </p>
+      </div>
+
+      {/* DESKTOP & TABLET: Video Cards Grid */}
+      <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto px-4 sm:px-0">
+        {videoList.map((video, idx) => (
+          <VideoCardItem
+            key={video.id || idx}
+            video={video}
+            onClick={() => setSelectedVideoIndex(idx)}
+          />
+        ))}
+      </div>
+
+      {/* MOBILE VIEW: Horizontal Snap Carousel (Left-Right like course cards) */}
+      <div className="block sm:hidden w-full px-2">
+        <PremiumCarousel>
+          {videoList.map((video, idx) => (
+            <div key={video.id || idx} className="h-full">
+              <VideoCardItem
+                video={video}
+                onClick={() => setSelectedVideoIndex(idx)}
+              />
+            </div>
+          ))}
+        </PremiumCarousel>
+      </div>
+    </div>
+  );
+
   return (
     <section className="py-16 sm:py-20 md:py-24 bg-gradient-to-b from-white via-[#F0F9FF] to-white relative overflow-hidden">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#1C8DC8]/3 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-        {/* Header display segment */}
-        <div className="text-center max-w-2xl mx-auto mb-16 space-y-6">
-          <h2 className="font-display font-[900] text-3xl sm:text-[45px] lg:text-[64px] text-[#0B3951] tracking-[-0.04em] leading-[1.05]">
-            Hear From Our{' '}
-            <span className="font-allura text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] via-[#146299] to-[#0B3951]">
-              Quran Learners
-            </span>
-          </h2>
-
-          <p className="font-sans font-medium text-[18px] text-slate-600 max-w-lg mx-auto leading-relaxed">
-            Discover how kids and adults master Tajweed foundations while discovering deeper meaning and practical life guidance.
-          </p>
-
-          {/* Filtering tabs */}
-          <div className="flex flex-wrap items-center justify-center gap-2 pt-4">
-            {(['all', 'Parent', 'Adult Student'] as const).map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`px-5 py-2.5 rounded-none text-xs font-black uppercase tracking-widest transition-all duration-300 border cursor-pointer ${
-                  activeTab === tab
-                    ? 'bg-[#0B3951] text-white border-[#0B3951] shadow'
-                    : 'bg-white text-slate-600 border-[#E0F2FE] hover:bg-[#F0F9FF]'
-                }`}
-              >
-                {tab === 'all' ? 'All Reviews' : `${tab}s`}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* 1. DESKTOP VIEW: Adaptive Grid Layout */}
-        <div className="hidden lg:grid grid-cols-2 gap-8 max-w-5xl mx-auto">
-          <AnimatePresence mode="popLayout">
-            {filtered.map((testimonial) => (
-              <motion.div
-                layout
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.3 }}
-                key={testimonial.id}
-              >
-                {renderCardContent(testimonial)}
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </div>
-
-        {/* 2. MOBILE VIEW: Horizontal Snap Carousel */}
-        <div className="block lg:hidden">
-          <PremiumCarousel key={activeTab}>
-            {filtered.map((testimonial) => (
-              <div key={testimonial.id} className="h-full">
-                {renderCardContent(testimonial)}
-              </div>
-            ))}
-          </PremiumCarousel>
-        </div>
-
-        {/* Video Reviews Subsection */}
-        <div className="mt-24 pt-16 border-t border-[#E0F2FE] relative z-10">
-          <div className="text-center max-w-2xl mx-auto mb-14 space-y-4">
-            <h3 className="font-display font-[900] text-2xl sm:text-[34px] text-[#0B3951] tracking-tight leading-none">
-              Watch Our Students{' '}
-              <span className="font-allura text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] to-[#146299]">
-                Recite In Real-Time
-              </span>
-            </h3>
-            <p className="font-sans font-medium text-sm sm:text-base text-slate-600 max-w-lg mx-auto">
-              Real recordings from 1-on-1 virtual sessions showing progress in Tajweed recitation, Hifz retention, and active reflection.
-            </p>
-          </div>
-
-          {/* DESKTOP & TABLET: Video Cards Grid */}
-          <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto px-4 sm:px-0">
-            {videoList.map((video, idx) => (
-              <VideoCardItem
-                key={video.id || idx}
-                video={video}
-                onClick={() => setSelectedVideoIndex(idx)}
-              />
-            ))}
-          </div>
-
-          {/* MOBILE VIEW: Horizontal Snap Carousel (Left-Right like course cards) */}
-          <div className="block sm:hidden w-full px-2">
-            <PremiumCarousel>
-              {videoList.map((video, idx) => (
-                <div key={video.id || idx} className="h-full">
-                  <VideoCardItem
-                    video={video}
-                    onClick={() => setSelectedVideoIndex(idx)}
-                  />
-                </div>
-              ))}
-            </PremiumCarousel>
-          </div>
-        </div>
+        {videoFirst ? (
+          <>
+            {renderVideoSection(false)}
+            <div className="mt-24 pt-16 border-t border-[#E0F2FE]">
+              {renderWrittenSection()}
+            </div>
+          </>
+        ) : (
+          <>
+            {renderWrittenSection()}
+            <div className="mt-24 pt-16 border-t border-[#E0F2FE]">
+              {renderVideoSection(true)}
+            </div>
+          </>
+        )}
       </div>
 
       {/* FULL-SIZE VIDEO MODAL WITH BLURRED BACKDROP & PREV/NEXT CONTROLS */}
