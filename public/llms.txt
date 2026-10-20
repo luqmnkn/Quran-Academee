@@ -1,0 +1,59 @@
+# Quran Academee
+
+> Quran Academee is a premier international online Quran academy dedicated to providing personalized live 1-on-1 Quran recitation, Tajweed, Hifz (memorization), Arabic language, and foundational Islamic studies for kids, teenagers, and adults worldwide under authentic scholarly supervision.
+
+## 1. Overview & Mission
+- **Official Domain:** https://www.quranacademee.com
+- **Academic Supervision:** Directed under the supervision of Sheikh Jawwad Musa, graduate of the Islamic University of Madinah.
+- **Global Coverage:** Providing 24/7 flexible scheduling tailored to students across the United States, United Kingdom, Canada, Australia, Europe, and the Middle East.
+- **Teaching Format:** Personalized 1-on-1 live interactive virtual sessions utilizing digital Mushaf tools, screen sharing, and continuous student feedback.
+- **Educators:** 100% verified certified male and female Quran scholars and Arabic educators. Female tutors are available upon request for female students and children.
+
+## 2. Core Courses & Curricula
+1. **Alqaida Almadania Basics / Noorani Qaida:** Foundational phonetics, Arabic alphabet recognition, Makharij (points of articulation), and basic reading rules for absolute beginners and young children.
+2. **Quran Recitation & Reading:** Word-by-word Mushaf reading fluency, pronunciation perfection, breath management, and Waqf (stopping rules).
+3. **Tajweed al Quran:** In-depth rules of classical Tarteel, Noon Sakinah & Tanween, Meem Sakinah, Mudood (prolongations), Qalqalah, and heavy/light letter rules.
+4. **Quran Memorization (Hifz):** Structured memorization of the Holy Quran with personalized daily Sabaq (new lesson), Sabaqi (recent lessons revision), and Manzil (cumulative retention).
+5. **Islamic Essentials & Duas:** Foundational Aqeedah (creed), practical Wudu and Salah step-by-step guidance, authentic daily Masnoon Duas, and Islamic manners (Akhlaq).
+6. **Hifz Revision Partner:** Dedicated mentor program for Huffaz to cement memorization, resolve Mutashabihat (similar verses), and sustain lifelong retention.
+7. **Quranic Arabic Online:** Classical Quranic Arabic grammar (Nahw & Sarf), root-word vocabulary, syntax, and verse-by-verse comprehension to understand the Holy Quran directly.
+8. **Conversational Arabic Online:** Modern Standard Arabic (Fusha) speaking fluency, daily practical dialogues, contemporary vocabulary, and accent perfection with native Arab tutors.
+
+## 3. Transparent Pricing & Monthly Plans
+Quran Academee offers transparent, monthly tuition with no hidden registration fees or long-term binding contracts. Tuition automatically adjusts based on local currency.
+
+- **Plan 1 (2 Days/Week):** 30 mins/class (08 classes per month) — $35 / month (Standard Original: $48)
+- **Plan 2 (3 Days/Week - Recommended):** 30 mins/class (12 classes per month) — $50 / month (Standard Original: $63)
+- **Plan 3 (5 Days/Week - Intensive):** 30 mins/class (20 classes per month) — $70 / month (Standard Original: $78)
+- **Hifz & Revision Programs:** 40–60 mins/class ranging from $100 to $150 / month.
+- **Make Your Own Plan (Custom Estimator):** Fully customizable schedule allowing students to pick 1 to 7 days per week, choose 30m / 45m / 1h session durations, and select specific weekdays.
+- **Free Trial Class:** Every prospective student is welcome to book a free trial class with no commitment or credit card required.
+
+## 4. Free Online Resources & Tools
+- **Interactive Quran Reader:** Access the full Holy Quran (114 Surahs and 30 Juz) in-browser with authentic translations, audio recitations, and customizable font sizing at https://www.quranacademee.com/resources/read
+- **Downloadable Quran & Dua PDFs:** Clean, printable black & white simple text PDF downloads for all Surahs, Paras, and authentic Masnoon Duas at https://www.quranacademee.com/resources/downloads
+- **Masnoon Duas Handbook:** Categorized daily supplications for morning, evening, protection, and daily life at https://www.quranacademee.com/resources
+
+## 5. Contact Information & Support
+- **General Inquiries:** contact@quranacademee.com
+- **Direct WhatsApp / Phone Support:** +92 370 2680670
+- **WhatsApp Chat Link:** https://wa.me/923702680670
+- **Operational Hours:** 24 hours / 7 days a week support desk
+
+## 6. Official Links & Sitemaps
+- **Homepage:** https://www.quranacademee.com
+- **Pricing:** https://www.quranacademee.com/pricing
+- **Resources Hub:** https://www.quranacademee.com/resources
+- **Privacy Policy:** https://www.quranacademee.com/privacy-policy
+- **Terms of Service:** https://www.quranacademee.com/terms
+- **Refund Policy:** https://www.quranacademee.com/refund-policy
+- **XML Sitemap:** https://www.quranacademee.com/sitemap.xml
+- **AI Briefing (llms.txt):** https://www.quranacademee.com/llms.txt
+
+## 7. Verified Social Media Profiles
+- **Facebook:** https://www.facebook.com/quranacademee1
+- **Instagram:** https://www.instagram.com/quranacademee/
+- **YouTube:** https://www.youtube.com/@quranacademee
+- **LinkedIn:** https://www.linkedin.com/company/quran-academee
+- **TikTok:** https://www.tiktok.com/@quranacademee
+- **Reddit:** https://www.reddit.com/user/quranacademee

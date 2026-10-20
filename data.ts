@@ -152,28 +152,53 @@ export const COURSES: Course[] = [
     ]
   },
   {
-    id: 'arabic-language',
-    title: 'Arabic Language Course',
-    arabicTitle: 'تعلم اللغة العربية',
-    shortDescription: 'Master Quranic and conversational Arabic—from essential grammar and vocabulary to fluent comprehension and expression.',
-    fullDescription: 'Understand the language of the Quran directly. This course takes you from foundational Arabic grammar (Nahw and Sarf) and essential vocabulary to speaking, reading, and deep comprehension of Quranic verses in their original language.',
+    id: 'quranic-arabic',
+    title: 'Quranic Arabic',
+    arabicTitle: 'العربية القرآنية',
+    shortDescription: 'Master classical Quranic Arabic, grammar (Nahw & Sarf), and root vocabulary to understand the Quran directly.',
+    fullDescription: 'Understand the language of the Quran directly without relying solely on translations. This course takes you from foundational Arabic grammar (Nahw and Sarf) and essential high-frequency root vocabulary to reading, translating, and deep comprehension of Quranic verses in their original language.',
     icon: 'BookOpen',
-    ageGroup: 'Kids & Adults',
-    duration: '4-6 Months',
+    ageGroup: 'Teens & Adults',
+    duration: 'Ongoing',
     level: 'Beginner to Intermediate',
     learningOutcomes: [
       'Master essential Arabic grammar rules (Nahw & Sarf) and syntax.',
-      'Build a strong Quranic and conversational vocabulary base.',
-      'Understand Quranic verses directly without relying solely on translations.',
-      'Form correct Arabic sentences and engage in basic spoken conversation.',
+      'Build a strong vocabulary of high-frequency Quranic roots.',
+      'Understand Quranic verses directly during recitation and daily prayers.',
+      'Recognize grammatical sentence structures across the Holy Quran.',
       'Read and comprehend classical Arabic texts with clarity and confidence.'
     ],
     curriculum: [
       'Module 1: Arabic sentence structure, nouns, verbs, and particles',
       'Module 2: Essential Quranic vocabulary and high-frequency roots',
-      'Module 3: Verb conjugations, tenses, and pronouns',
+      'Module 3: Verb conjugations, tenses, and derived forms',
       'Module 4: Reading and translating selected Quranic passages',
-      'Module 5: Conversational Arabic dialogues and comprehension drills'
+      'Module 5: Direct translation exercises on Juz 30 and daily Salah'
+    ]
+  },
+  {
+    id: 'conversational-arabic',
+    title: 'Conversational Arabic',
+    arabicTitle: 'المحادثة العربية',
+    shortDescription: 'Learn to speak Arabic fluently with native teachers. Master Modern Standard Arabic (Fusha) dialogues, expressions, and vocabulary.',
+    fullDescription: 'Speak Arabic with confidence in daily life. Guided by native Arabic speakers, this course immerses you in real-life conversational dialogues, Modern Standard Arabic (Fusha) vocabulary, and practical sentence construction for travel, study, business, and social communication.',
+    icon: 'MessageCircle',
+    ageGroup: 'Kids & Adults',
+    duration: 'Ongoing',
+    level: 'All Levels',
+    learningOutcomes: [
+      'Converse confidently in Arabic across diverse real-world daily situations.',
+      'Express ideas, opinions, and questions smoothly with natural pronunciation.',
+      'Build a rich working vocabulary of modern, high-frequency Arabic expressions.',
+      'Understand spoken Arabic from native speakers without translation delays.',
+      'Engage in authentic dialogues for travel, family, and professional environments.'
+    ],
+    curriculum: [
+      'Module 1: Greetings, introductions, numbers, and daily routines',
+      'Module 2: Practical life: travel, markets, ordering food, and asking directions',
+      'Module 3: Social conversations, hobbies, emotions, and storytelling',
+      'Module 4: Formal discourse (Fusha) in media and professional contexts',
+      'Module 5: Spontaneous speaking drills, debates, and accent reduction'
     ]
   }
 ];
@@ -273,7 +298,7 @@ export const FAQS = [
   },
   {
     question: 'How do I start the Free Trial class?',
-    answer: "It is simple! Just fill out the Inquiry / Free Trial form on our website. Our coordinator will contact you via WhatsApp or Email within 24 hours to schedule your student's first free trial lesson at a convenient time."
+    answer: "It is simple! Just fill out the Inquiry / Free Trial form on our website. Our coordinator will contact you via WhatsApp or Email within 24 hours to schedule your student's first free trial class at a convenient time."
   }
 ];
 

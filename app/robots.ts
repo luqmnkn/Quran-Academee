@@ -1,11 +1,9 @@
 import type { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = (
-    process.env.NEXT_PUBLIC_SITE_URL ||
-    process.env.SITE_URL ||
-    'https://quranacademee.com'
-  ).replace(/\/$/, '');
+  // Always enforce www canonical URL for robots and sitemap
+  const baseUrl = 'https://www.quranacademee.com';
+
 
   const isStagingOrPreview =
     (process.env.NODE_ENV as string) === 'staging' ||

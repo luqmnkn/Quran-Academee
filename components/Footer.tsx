@@ -1,6 +1,9 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import Logo from './Logo';
+import { trackWhatsAppClick } from '@/utils/gtm';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -98,19 +101,22 @@ export default function Footer() {
                   <Link href="/" className="hover:text-white hover:underline transition-colors">Home</Link>
                 </li>
                 <li>
-                  <Link href="/#about" className="hover:text-white hover:underline transition-colors">About Us</Link>
+                  <Link href="/about" className="hover:text-white hover:underline transition-colors">About Us</Link>
                 </li>
                 <li>
-                  <Link href="/#courses" className="hover:text-white hover:underline transition-colors">Programs</Link>
+                  <Link href="/teachers" className="hover:text-white hover:underline transition-colors">Our Teachers</Link>
+                </li>
+                <li>
+                  <Link href="/courses" className="hover:text-white hover:underline transition-colors">Programs</Link>
                 </li>
                 <li>
                   <Link href="/pricing" className="hover:text-white hover:underline transition-colors">Pricing Plans</Link>
                 </li>
                 <li>
-                  <Link href="/#why-us" className="hover:text-white hover:underline transition-colors">Why Learn Here</Link>
+                  <Link href="/reviews" className="hover:text-white hover:underline transition-colors">Student Reviews</Link>
                 </li>
                 <li>
-                  <Link href="/#faqs" className="hover:text-white hover:underline transition-colors">Questions</Link>
+                  <Link href="/free-trial" className="hover:text-white hover:underline transition-colors">Free Trial</Link>
                 </li>
               </ul>
             </div>
@@ -123,27 +129,35 @@ export default function Footer() {
               <ul className="space-y-2.5 text-xs text-slate-300 font-medium">
                 <li className="flex items-center space-x-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#1C8DC8] shrink-0"></span>
-                  <Link href="/#courses" className="hover:text-white hover:underline transition-colors">Alqaida Almadania Basics</Link>
+                  <Link href="/courses/madani-qaida-online" className="hover:text-white hover:underline transition-colors">Alqaida Almadania Basics</Link>
                 </li>
                 <li className="flex items-center space-x-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#1C8DC8] shrink-0"></span>
-                  <Link href="/#courses" className="hover:text-white hover:underline transition-colors">Quran Recitation & Reading</Link>
+                  <Link href="/courses/quran-reading-online" className="hover:text-white hover:underline transition-colors">Quran Recitation & Reading</Link>
                 </li>
                 <li className="flex items-center space-x-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#1C8DC8] shrink-0"></span>
-                  <Link href="/#courses" className="hover:text-white hover:underline transition-colors">Tajweed al Quran</Link>
+                  <Link href="/courses/online-tajweed-classes" className="hover:text-white hover:underline transition-colors">Tajweed al Quran</Link>
                 </li>
                 <li className="flex items-center space-x-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#1C8DC8] shrink-0"></span>
-                  <Link href="/#courses" className="hover:text-white hover:underline transition-colors">Quran Memorization (Hifz)</Link>
+                  <Link href="/courses/online-hifz-program" className="hover:text-white hover:underline transition-colors">Quran Memorization (Hifz)</Link>
                 </li>
                 <li className="flex items-center space-x-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#1C8DC8] shrink-0"></span>
-                  <Link href="/#courses" className="hover:text-white hover:underline transition-colors">Islamic Essentials & Duas</Link>
+                  <Link href="/courses/hifz-revision-partner" className="hover:text-white hover:underline transition-colors">Hifz Revision Partner</Link>
                 </li>
                 <li className="flex items-center space-x-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#1C8DC8] shrink-0"></span>
-                  <Link href="/#courses" className="hover:text-white hover:underline transition-colors">Hifz Revision Partner</Link>
+                  <Link href="/courses/islamic-studies-for-kids" className="hover:text-white hover:underline transition-colors">Islamic Essentials & Duas</Link>
+                </li>
+                <li className="flex items-center space-x-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#1C8DC8] shrink-0"></span>
+                  <Link href="/courses/quranic-arabic-online" className="hover:text-white hover:underline transition-colors">Quranic Arabic Online</Link>
+                </li>
+                <li className="flex items-center space-x-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#1C8DC8] shrink-0"></span>
+                  <Link href="/courses/conversational-arabic-online" className="hover:text-white hover:underline transition-colors">Conversational Arabic Online</Link>
                 </li>
               </ul>
             </div>
@@ -159,7 +173,13 @@ export default function Footer() {
                 <span className="material-symbols-outlined text-[16px] leading-none select-none text-[#1C8DC8] shrink-0 mt-0.5">phone</span>
                 <div>
                   <span className="text-[10px] block uppercase text-slate-400">WhatsApp Number</span>
-                  <a href="https://wa.me/923702680670" target="_blank" rel="noreferrer" className="text-white hover:text-[#1C8DC8] font-semibold block mt-0.5">
+                  <a
+                    href="https://wa.me/923702680670"
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={() => trackWhatsAppClick('footer_link')}
+                    className="text-white hover:text-[#1C8DC8] font-semibold block mt-0.5"
+                  >
                     +92 370 2680670
                   </a>
                 </div>
@@ -187,10 +207,42 @@ export default function Footer() {
 
         </div>
 
+        {/* Audience & Global Locations Bar */}
+        <div className="border-t border-white/10 pt-6 pb-6 mb-6 text-xs text-slate-300">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
+            <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+              <span className="text-[#1C8DC8] font-bold uppercase tracking-wider text-[11px]">Specialized:</span>
+              <Link href="/online-quran-classes-for-kids" className="hover:text-white hover:underline transition-colors">Classes for Kids</Link>
+              <span className="opacity-30">·</span>
+              <Link href="/learn-quran-online-for-adults" className="hover:text-white hover:underline transition-colors">Classes for Adults</Link>
+              <span className="opacity-30">·</span>
+              <Link href="/female-quran-teacher-online" className="hover:text-white hover:underline transition-colors">Female Quran Teachers</Link>
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+              <span className="text-[#1C8DC8] font-bold uppercase tracking-wider text-[11px]">Worldwide:</span>
+              <Link href="/online-quran-classes-uk" className="hover:text-white hover:underline transition-colors">United Kingdom</Link>
+              <span className="opacity-30">·</span>
+              <Link href="/online-quran-classes-usa" className="hover:text-white hover:underline transition-colors">United States</Link>
+              <span className="opacity-30">·</span>
+              <Link href="/online-quran-classes-canada" className="hover:text-white hover:underline transition-colors">Canada</Link>
+              <span className="opacity-30">·</span>
+              <Link href="/online-quran-classes-australia" className="hover:text-white hover:underline transition-colors">Australia</Link>
+            </div>
+          </div>
+        </div>
+
         {/* Brand Bottom line */}
-        <div className="flex items-center justify-center gap-4 text-xs text-slate-400">
-  <p>© {currentYear} Quran Academee. All Rights Reserved.</p>
-</div>
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400">
+          <p>© {currentYear} Quran Academee. All Rights Reserved.</p>
+          <nav className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1" aria-label="Legal navigation">
+            <Link href="/privacy-policy" className="hover:text-white hover:underline transition-colors">Privacy Policy</Link>
+            <span className="hidden sm:inline opacity-30">·</span>
+            <Link href="/terms" className="hover:text-white hover:underline transition-colors">Terms of Service</Link>
+            <span className="hidden sm:inline opacity-30">·</span>
+            <Link href="/refund-policy" className="hover:text-white hover:underline transition-colors">Refund Policy</Link>
+          </nav>
+        </div>
+
 
 
       </div>

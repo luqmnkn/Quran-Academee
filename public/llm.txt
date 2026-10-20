@@ -1,35 +1,58 @@
-# Quran Academee - Full Developer & AI Context Guide
-> Quran Academee is a premier online educational platform dedicated to providing personalized, high-quality Quranic studies, Tajweed mastery, Arabic language instruction, and foundational Islamic learning for students worldwide.
+# Quran Academee
 
-## 1. Platform Overview & Mission
-- **Domain:** [https://quranacademee.com](https://quranacademee.com)
-- **Primary Mission:** To make authentic Quranic education accessible, engaging, and flexible for children, teenagers, and adults regardless of geographical location.
-- **Teaching Format:** 1-on-1 live interactive online classes utilizing digital learning tools, screen sharing, and qualified male/female tutors.
+> Quran Academee is a premier international online Quran academy dedicated to providing personalized live 1-on-1 Quran recitation, Tajweed, Hifz (memorization), Arabic language, and foundational Islamic studies for kids, teenagers, and adults worldwide under authentic scholarly supervision.
 
-## 2. Target Audience & Student Demographics
-- **Children & Beginners:** Tailored interactive foundational courses (Qaida, basic reading, and short Surah memorization) with gentle, encouraging pacing.
-- **Adult Learners:** Flexible schedules designed for working professionals or busy parents looking to learn reading from scratch, improve recitation, or understand Tajweed.
-- **Advanced Students:** Focused programs for Hifz (memorization) and basic Tafseer (comprehension).
+## 1. Overview & Mission
+- **Official Domain:** https://www.quranacademee.com
+- **Academic Supervision:** Directed under the supervision of Sheikh Jawwad Musa, graduate of the Islamic University of Madinah.
+- **Global Coverage:** Providing 24/7 flexible scheduling tailored to students across the United States, United Kingdom, Canada, Australia, Europe, and the Middle East.
+- **Teaching Format:** Personalized 1-on-1 live interactive virtual sessions utilizing digital Mushaf tools, screen sharing, and continuous student feedback.
+- **Educators:** 100% verified certified male and female Quran scholars and Arabic educators. Female tutors are available upon request for female students and children.
 
-## 3. Core Courses & Curriculum Breakdown
-- **Quran Reading with Tajweed:** Learning Arabic letters, proper pronunciation (Makharij), articulation points, and the precise rules of recitation.
-- **Hifz-ul-Quran (Memorization):** Structured, step-by-step memorization of the Holy Quran with regular revision schedules and retention checks.
-- **Arabic Language Foundation:** Basic vocabulary, grammar, and sentence structure designed to help students better understand the text of the Quran.
-- **Islamic Studies:** Essential daily duas, Islamic etiquettes, and foundational knowledge suitable for growing minds.
+## 2. Core Courses & Curricula
+1. **Alqaida Almadania Basics / Noorani Qaida:** Foundational phonetics, Arabic alphabet recognition, Makharij (points of articulation), and basic reading rules for absolute beginners and young children.
+2. **Quran Recitation & Reading:** Word-by-word Mushaf reading fluency, pronunciation perfection, breath management, and Waqf (stopping rules).
+3. **Tajweed al Quran:** In-depth rules of classical Tarteel, Noon Sakinah & Tanween, Meem Sakinah, Mudood (prolongations), Qalqalah, and heavy/light letter rules.
+4. **Quran Memorization (Hifz):** Structured memorization of the Holy Quran with personalized daily Sabaq (new lesson), Sabaqi (recent lessons revision), and Manzil (cumulative retention).
+5. **Islamic Essentials & Duas:** Foundational Aqeedah (creed), practical Wudu and Salah step-by-step guidance, authentic daily Masnoon Duas, and Islamic manners (Akhlaq).
+6. **Hifz Revision Partner:** Dedicated mentor program for Huffaz to cement memorization, resolve Mutashabihat (similar verses), and sustain lifelong retention.
+7. **Arabic Language Course:** Classical Quranic and conversational Arabic, grammar (Nahw & Sarf), root-word vocabulary, and sentence construction to understand divine revelation directly.
 
-## 4. Key Platform Features & Benefits
-- **Flexible Timing:** Available 24/7 across various international time zones to fit family routines.
-- **Customized Learning Plans:** Lesson pacing tailored to each student's current proficiency level and goals.
-- **Trial Classes:** Offers trial sessions to help new students experience the teaching environment before committing.
-- **Qualified Tutors:** Rigorously vetted instructors proficient in English, Urdu, and Arabic instruction.
+## 3. Transparent Pricing & Monthly Plans
+Quran Academee offers transparent, monthly tuition with no hidden registration fees or long-term binding contracts. Tuition automatically adjusts based on local currency.
 
-## 5. Key Navigation Links & Resources
-- [Home Page](https://quranacademee.com/): Portal overview, testimonials, and booking CTAs.
-- [Courses](https://quranacademee.com/#courses): Detailed breakdown of curriculum tracks.
-- [Pricing & Subscriptions](https://quranacademee.com/pricing): Monthly fee tiers and plan structures.
-- [About Us](https://quranacademee.com/#about): Background on our organization, teaching methodology, and values.
-- [Contact Support](https://quranacademee.com/#contact): Inquiries, support channels, and trial scheduling forms.
+- **Plan 1 (2 Days/Week):** 30 mins/class (08 classes per month) — $35 / month (Standard Original: $48)
+- **Plan 2 (3 Days/Week - Recommended):** 30 mins/class (12 classes per month) — $50 / month (Standard Original: $63)
+- **Plan 3 (5 Days/Week - Intensive):** 30 mins/class (20 classes per month) — $70 / month (Standard Original: $78)
+- **Hifz & Revision Programs:** 40–60 mins/class ranging from $100 to $150 / month.
+- **Make Your Own Plan (Custom Estimator):** Fully customizable schedule allowing students to pick 1 to 7 days per week, choose 30m / 45m / 1h session durations, and select specific weekdays.
+- **Free Trial Class:** Every prospective student is welcome to book a free trial class with no commitment or credit card required.
 
-## 6. Technical & Machine-Readable References
-- **Standard AI Context:** [https://quranacademee.com/llms.txt](https://quranacademee.com/llms.txt)
-- **Traditional Search Sitemap:** [https://quranacademee.com/sitemap.xml](https://quranacademee.com/sitemap.xml)
+## 4. Free Online Resources & Tools
+- **Interactive Quran Reader:** Access the full Holy Quran (114 Surahs and 30 Juz) in-browser with authentic translations, audio recitations, and customizable font sizing at https://www.quranacademee.com/resources/read
+- **Downloadable Quran & Dua PDFs:** Clean, printable black & white simple text PDF downloads for all Surahs, Paras, and authentic Masnoon Duas at https://www.quranacademee.com/resources/downloads
+- **Masnoon Duas Handbook:** Categorized daily supplications for morning, evening, protection, and daily life at https://www.quranacademee.com/resources
+
+## 5. Contact Information & Support
+- **General Inquiries:** contact@quranacademee.com
+- **Direct WhatsApp / Phone Support:** +92 370 2680670
+- **WhatsApp Chat Link:** https://wa.me/923702680670
+- **Operational Hours:** 24 hours / 7 days a week support desk
+
+## 6. Official Links & Sitemaps
+- **Homepage:** https://www.quranacademee.com
+- **Pricing:** https://www.quranacademee.com/pricing
+- **Resources Hub:** https://www.quranacademee.com/resources
+- **Privacy Policy:** https://www.quranacademee.com/privacy-policy
+- **Terms of Service:** https://www.quranacademee.com/terms
+- **Refund Policy:** https://www.quranacademee.com/refund-policy
+- **XML Sitemap:** https://www.quranacademee.com/sitemap.xml
+- **AI Briefing (llms.txt):** https://www.quranacademee.com/llms.txt
+
+## 7. Verified Social Media Profiles
+- **Facebook:** https://www.facebook.com/quranacademee1
+- **Instagram:** https://www.instagram.com/quranacademee/
+- **YouTube:** https://www.youtube.com/@quranacademee
+- **LinkedIn:** https://www.linkedin.com/company/quran-academee
+- **TikTok:** https://www.tiktok.com/@quranacademee
+- **Reddit:** https://www.reddit.com/user/quranacademee

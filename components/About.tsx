@@ -12,7 +12,7 @@ export default function About({ onOpenTrialModal }: AboutProps) {
   const steps = [
     {
       num: '1',
-      title: 'Book a Free Trial',
+      title: 'Book a Free Trial Class',
       desc: 'Fill out our simple inquiry form. Our scheduling coordinator will reach out directly on WhatsApp to coordinate a convenient time.',
       mobileDesc: 'Book your free trial class in seconds.'
     },
@@ -191,7 +191,7 @@ export default function About({ onOpenTrialModal }: AboutProps) {
             onClick={onOpenTrialModal}
             className="w-full sm:w-auto px-8 sm:px-12 py-4 sm:py-5 font-display text-xs sm:text-sm font-extrabold uppercase tracking-widest text-[#0B3951] bg-white hover:bg-slate-100 transition-all duration-300 rounded-none shadow-[0_12px_32px_rgba(0,0,0,0.18)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer inline-flex items-center justify-center space-x-2.5"
           >
-            <span>Schedule 3-Day Free Trial Now</span>
+            <span>Schedule Free Trial Class Now</span>
           </button>
         </motion.div>
       </div>

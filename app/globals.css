@@ -323,6 +323,16 @@ span.font-allura {
   animation: float 6s ease-in-out infinite;
 }
 
+/* Continuous Left Marquee Animation */
+@keyframes teamMarquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-team-marquee {
+  animation: teamMarquee 30s linear infinite;
+}
+
 @utility font-display {
   font-family: SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif !important;
 }
