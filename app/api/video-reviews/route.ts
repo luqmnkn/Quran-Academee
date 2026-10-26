@@ -53,35 +53,57 @@ export async function GET() {
       return NextResponse.json(DEFAULT_TESTIMONIALS);
     }
 
-    // Build the dynamic list of video reviews
-    const reviews: VideoTestimonial[] = videoFiles.map((file, idx) => {
-      const studentName = formatStudentName(file);
-      const videoUrl = `/video-reviews/${file}`;
+    // Build the dynamic list of video reviews respecting DEFAULT_TESTIMONIALS sequence
+    const reviews: VideoTestimonial[] = [];
 
-      // Check if existing item in default list has custom snippet / courseName
-      const existing = DEFAULT_TESTIMONIALS.find(
-        (t) => path.basename(t.videoUrl).toLowerCase() === file.toLowerCase()
+    // 1. First add testimonials in the exact order of DEFAULT_TESTIMONIALS
+    DEFAULT_TESTIMONIALS.forEach((item, idx) => {
+      const targetBase = path.basename(item.videoUrl).toLowerCase();
+      const matchedFile = videoFiles.find(
+        (f) => f.toLowerCase() === targetBase
       );
 
-      if (existing) {
-        return {
-          ...existing,
-          id: existing.id || `v-${idx + 1}`,
-          studentName: existing.studentName || studentName,
-          videoUrl,
-        };
+      if (matchedFile) {
+        reviews.push({
+          ...item,
+          id: item.id || `v-${idx + 1}`,
+          videoUrl: `/video-reviews/${matchedFile}`,
+        });
+      } else {
+        // Fallback matching by student name
+        const nameMatch = videoFiles.find(
+          (f) => f.toLowerCase().replace(/[-_]+/g, ' ').includes(item.studentName.toLowerCase())
+        );
+        if (nameMatch) {
+          reviews.push({
+            ...item,
+            id: item.id || `v-${idx + 1}`,
+            videoUrl: `/video-reviews/${nameMatch}`,
+          });
+        } else {
+          reviews.push(item);
+        }
       }
+    });
 
-      return {
-        id: `v-${idx + 1}-${encodeURIComponent(file)}`,
-        studentName,
-        age: 'Student',
-        courseName: 'Tajweed & Recitation',
-        duration: 'Student at Quran Academee',
-        snippet: `${studentName} reciting Holy Quran with proper Tajweed and fluency.`,
-        thumbnailGradient: 'from-[#1081b7]/30 via-[#38aae3]/20 to-[#116c9c]/40',
-        videoUrl,
-      };
+    // 2. Append any additional video files found in the directory not in DEFAULT_TESTIMONIALS
+    videoFiles.forEach((file, idx) => {
+      const alreadyIncluded = reviews.some(
+        (r) => path.basename(r.videoUrl).toLowerCase() === file.toLowerCase()
+      );
+      if (!alreadyIncluded) {
+        const studentName = formatStudentName(file);
+        reviews.push({
+          id: `v-extra-${idx + 1}-${encodeURIComponent(file)}`,
+          studentName,
+          age: 'Student',
+          courseName: 'Tajweed & Recitation',
+          duration: 'Student at Quran Academee',
+          snippet: `${studentName} reciting Holy Quran with proper Tajweed and fluency.`,
+          thumbnailGradient: 'from-[#1081b7]/30 via-[#38aae3]/20 to-[#116c9c]/40',
+          videoUrl: `/video-reviews/${file}`,
+        });
+      }
     });
 
     return NextResponse.json(reviews, {

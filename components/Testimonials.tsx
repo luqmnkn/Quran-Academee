@@ -233,7 +233,7 @@ export default function Testimonials({ videoFirst = false }: TestimonialsProps =
       </div>
 
       {/* DESKTOP & TABLET: Video Cards Grid */}
-      <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto px-4 sm:px-0">
+      <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-7xl mx-auto px-4 sm:px-0">
         {videoList.map((video, idx) => (
           <VideoCardItem
             key={video.id || idx}
