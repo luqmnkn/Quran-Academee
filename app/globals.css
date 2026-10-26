@@ -330,7 +330,7 @@ span.font-allura {
 }
 
 .animate-team-marquee {
-  animation: teamMarquee 30s linear infinite;
+  animation: teamMarquee 55s linear infinite;
 }
 
 @utility font-display {
