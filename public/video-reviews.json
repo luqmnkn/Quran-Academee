@@ -20,14 +20,14 @@
     "videoUrl": "/video-reviews/Azaan Akhtar.mp4"
   },
   {
-    "id": "v-3-Khadija.mp4",
+    "id": "v-3-khadija.mp4",
     "studentName": "Khadija",
     "age": "Student",
     "courseName": "Tajweed & Recitation",
     "duration": "Student at Quran Academee",
     "snippet": "Khadija reciting Holy Quran with proper Tajweed and fluency.",
     "thumbnailGradient": "from-[#1081b7]/30 via-[#38aae3]/20 to-[#116c9c]/40",
-    "videoUrl": "/video-reviews/Khadija.mp4"
+    "videoUrl": "/video-reviews/khadija.mp4"
   },
   {
     "id": "v-4-Yusra.mp4",
