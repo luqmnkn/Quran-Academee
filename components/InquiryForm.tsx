@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Check, AlertCircle, Clock, ChevronDown } from 'lucide-react';
 import { ALL_COUNTRIES } from '@/utils/countries';
 import { trackLeadSubmission } from '@/utils/gtm';
+import IosTimePicker from './IosTimePicker';
 
 interface FormErrors {
   fullName?: string;
@@ -44,6 +45,7 @@ export default function InquiryForm({
   const [countryCode, setCountryCode] = useState('+1');
   const [country, setCountry] = useState('United States');
   const [courseInterest, setCourseInterest] = useState('noorani-qaida');
+  const [preferredTime, setPreferredTime] = useState('4:00 PM');
   const [message, setMessage] = useState('');
   const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false);
   const [countrySearchQuery, setCountrySearchQuery] = useState('');
@@ -155,7 +157,7 @@ export default function InquiryForm({
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleFormSubmit = async (e: FormEvent) => {
+const handleFormSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     if (website || botField) {
@@ -249,7 +251,7 @@ export default function InquiryForm({
             Alhamdulillah. Your free slots have been registered in our scheduling coordinator board. Check your WhatsApp notifications shortly.
           </p>
           <button
-            onClick={() => setStatus('idle')}
+            onClick={() => { setStatus('idle'); setPreferredTime('4:00 PM'); }}
             className="bg-[#F0F9FF] hover:bg-white border border-[#E0F2FE] text-slate-700 font-extrabold text-[10px] uppercase tracking-widest py-2.5 px-5 rounded-none cursor-pointer"
           >
             Request Another Slot
@@ -513,6 +515,13 @@ export default function InquiryForm({
               </select>
             </div>
           </div>
+
+          {/* Preferred Class Time (iOS Style Time Picker) */}
+          <IosTimePicker
+            value={preferredTime}
+            onChange={(newTime) => setPreferredTime(newTime)}
+            label="Preferred Class Time"
+          />
 
           {/* Requirements / Notes Area */}
           <div>

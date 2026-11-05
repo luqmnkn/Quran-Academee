@@ -10,6 +10,12 @@ interface Props {
   params: Promise<{ id: string }>;
 }
 
+export function generateStaticParams() {
+  return JUZ_LIST.map((juz) => ({
+    id: getJuzSlug(juz),
+  }));
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
   const juz = JUZ_LIST.find((j) => getJuzSlug(j) === id || String(j.id) === String(id)) || JUZ_LIST[0];
@@ -17,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const pageTitle = `Download Para ${juz.id} ${paraName} (${juz.name}) PDF - Quran Juz ${juz.id} | Quran Academee`;
   const pageDescription = `Download free simple text PDF for Para ${juz.id} (${paraName} / ${juz.name}). Spans ${juz.startSurah}. High quality script for daily Quran reading, Tajweed practice, and Hifz revision.`;
-  const canonicalUrl = `https://quranacademee.com/resources/downloads/juz/${getJuzSlug(juz)}`;
+  const canonicalUrl = `https://www.quranacademee.com/resources/downloads/juz/${getJuzSlug(juz)}`;
 
   return {
     title: pageTitle,
@@ -62,14 +68,45 @@ export default async function JuzDownloadDetailPage({ params }: Props) {
     '@type': 'DigitalDocument',
     'name': `Para ${juz.id} ${paraName} (${juz.name}) PDF`,
     'description': `High-quality simple text PDF document for Para ${juz.id} (${paraName}), covering ${juz.startSurah} of the Holy Quran.`,
-    'url': `https://quranacademee.com/resources/downloads/juz/${getJuzSlug(juz)}`,
+    'url': `https://www.quranacademee.com/resources/downloads/juz/${getJuzSlug(juz)}`,
     'encodingFormat': 'application/pdf',
     'inLanguage': 'ar',
     'publisher': {
-      '@type': 'Organization',
+      '@type': 'EducationalOrganization',
       'name': 'Quran Academee',
-      'url': 'https://quranacademee.com'
+      'url': 'https://www.quranacademee.com'
     }
+  };
+
+  const breadcrumbSchemaJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    'itemListElement': [
+      {
+        '@type': 'ListItem',
+        'position': 1,
+        'name': 'Home',
+        'item': 'https://www.quranacademee.com'
+      },
+      {
+        '@type': 'ListItem',
+        'position': 2,
+        'name': 'Resources',
+        'item': 'https://www.quranacademee.com/resources'
+      },
+      {
+        '@type': 'ListItem',
+        'position': 3,
+        'name': 'Downloads',
+        'item': 'https://www.quranacademee.com/resources/downloads'
+      },
+      {
+        '@type': 'ListItem',
+        'position': 4,
+        'name': `Para ${juz.id} (${paraName})`,
+        'item': `https://www.quranacademee.com/resources/downloads/juz/${getJuzSlug(juz)}`
+      }
+    ]
   };
 
   const faqSchemaJsonLd = {
@@ -108,6 +145,10 @@ export default async function JuzDownloadDetailPage({ params }: Props) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchemaJsonLd) }}
       />
       <script
         type="application/ld+json"

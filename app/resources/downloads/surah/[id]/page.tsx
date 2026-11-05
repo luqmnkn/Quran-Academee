@@ -10,13 +10,19 @@ interface Props {
   params: Promise<{ id: string }>;
 }
 
+export function generateStaticParams() {
+  return SURAHS.map((surah) => ({
+    id: getSurahSlug(surah),
+  }));
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
   const surah = SURAHS.find((s) => getSurahSlug(s) === id || String(s.id) === String(id)) || SURAHS[0];
 
   const pageTitle = `Download Surah ${surah.name} (${surah.arabic}) PDF - Chapter ${surah.id} | Quran Academee`;
   const pageDescription = `Download free simple text PDF for Surah ${surah.name} (${surah.transliteration}). Revealed in ${surah.type}, containing ${surah.verses} verses. Theme: ${surah.theme}. Perfect for reading, memorization, and Tajweed revision.`;
-  const canonicalUrl = `https://quranacademee.com/resources/downloads/surah/${getSurahSlug(surah)}`;
+  const canonicalUrl = `https://www.quranacademee.com/resources/downloads/surah/${getSurahSlug(surah)}`;
 
   return {
     title: pageTitle,
@@ -62,14 +68,45 @@ export default async function SurahDownloadDetailPage({ params }: Props) {
     '@type': 'DigitalDocument',
     'name': `Surah ${surah.name} (${surah.arabic}) PDF`,
     'description': `High-quality simple text PDF document for Surah ${surah.name} (${surah.transliteration}), chapter ${surah.id} of the Holy Quran.`,
-    'url': `https://quranacademee.com/resources/downloads/surah/${getSurahSlug(surah)}`,
+    'url': `https://www.quranacademee.com/resources/downloads/surah/${getSurahSlug(surah)}`,
     'encodingFormat': 'application/pdf',
     'inLanguage': 'ar',
     'publisher': {
-      '@type': 'Organization',
+      '@type': 'EducationalOrganization',
       'name': 'Quran Academee',
-      'url': 'https://quranacademee.com'
+      'url': 'https://www.quranacademee.com'
     }
+  };
+
+  const breadcrumbSchemaJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    'itemListElement': [
+      {
+        '@type': 'ListItem',
+        'position': 1,
+        'name': 'Home',
+        'item': 'https://www.quranacademee.com'
+      },
+      {
+        '@type': 'ListItem',
+        'position': 2,
+        'name': 'Resources',
+        'item': 'https://www.quranacademee.com/resources'
+      },
+      {
+        '@type': 'ListItem',
+        'position': 3,
+        'name': 'Downloads',
+        'item': 'https://www.quranacademee.com/resources/downloads'
+      },
+      {
+        '@type': 'ListItem',
+        'position': 4,
+        'name': `Surah ${surah.name}`,
+        'item': `https://www.quranacademee.com/resources/downloads/surah/${getSurahSlug(surah)}`
+      }
+    ]
   };
 
   const faqSchemaJsonLd = {
@@ -109,6 +146,10 @@ export default async function SurahDownloadDetailPage({ params }: Props) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchemaJsonLd) }}
       />
       <script
         type="application/ld+json"

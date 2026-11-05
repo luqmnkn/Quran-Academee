@@ -210,34 +210,34 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* SECTION 3: SCHOLARLY SUPERVISION */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 sm:mb-28 text-center">
-        <div className=" rounded-2xl sm:rounded-3xl  p-8 sm:p-12 ">
-          {/* Big Picture on Top (remains on top on both desktop & mobile) */}
-          <div className="relative w-44 h-44 sm:w-52 sm:h-52 md:w-60 md:h-60 mx-auto rounded-full overflow-hidden shadow-md border-4 border-sky-100 bg-slate-50 mb-6">
+      {/* SECTION 3: SCHOLARLY SUPERVISION BANNER (MATCHES BLUE CARD MOCKUP) */}
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-6 mb-20 sm:mb-28">
+        <div className="relative bg-gradient-to-r from-[#2092EC] via-[#2D73DB] to-[#3F4EB5] rounded-[28px] sm:rounded-[36px] shadow-2xl p-6 sm:p-8 md:p-0 text-white flex flex-col md:flex-row items-center md:items-end justify-between overflow-visible">
+          
+          {/* Sheikh Jawwad Cutout Photo (Desktop: Left with head overlapping above. Mobile: Top) */}
+          <div className="relative w-64 sm:w-72 md:w-80 lg:w-[360px] shrink-0 -mt-20 sm:-mt-24 md:-mt-16 md:self-end flex justify-center z-10">
             <Image
               src="/images/shiekhJawwad.png"
               alt="Sheikh Jawwad Moosa"
-              fill
-              className="object-cover object-top"
+              width={380}
+              height={440}
               priority
+              className="w-full h-auto object-contain drop-shadow-2xl select-none pointer-events-none"
             />
           </div>
 
-          {/* Sheikh Name & Credentials */}
-          <div className="space-y-2 mb-5">
-            <h2 className="font-display font-[900] text-2xl sm:text-3xl md:text-4xl text-[#0B3951] tracking-tight">
-              Supervised by Sheikh Jawwad Moosa
+          {/* Supervised Information (Desktop: Right centered text. Mobile: Below photo) */}
+          <div className="flex-1 text-center py-6 sm:py-8 md:py-12 md:pr-10 lg:pr-14 md:pl-4 space-y-3 z-10">
+            <h2 className="font-display font-[900] text-2xl sm:text-3xl lg:text-[34px] xl:text-[38px] text-white tracking-tight leading-tight">
+              Supervised by Sheikh Jawwad<br className="hidden sm:inline" /> Moosa
             </h2>
-            <p className="text-xs sm:text-sm text-sky-700 font-bold">
+            <p className="text-sm sm:text-base text-white/95 font-bold tracking-wide">
               Graduate, Islamic University of Madinah
             </p>
+            <p className="text-xs sm:text-[13px] lg:text-sm text-white/90 leading-relaxed font-sans max-w-xl mx-auto font-normal pt-1">
+              All curriculum standards, pedagogical methodology, and faculty accreditations at Quran Academee are supervised under the direct guidance of Sheikh Jawwad Musa, ensuring authentic classical tradition is faithfully preserved in every 1-on-1 virtual classroom.
+            </p>
           </div>
-
-          {/* Short Para About Sheikh & Supervision */}
-          <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl mx-auto mb-8 font-medium">
-            All curriculum standards, pedagogical methodology, and faculty accreditations at Quran Academee are supervised under the direct guidance of Sheikh Jawwad Musa, ensuring authentic classical tradition is faithfully preserved in every 1-on-1 virtual classroom.
-          </p>
 
         </div>
       </section>

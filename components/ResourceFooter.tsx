@@ -51,7 +51,7 @@ export default function ResourceFooter({ onOpenTrialModal }: ResourceFooterProps
                   </button>
                 ) : (
                   <Link
-                    href="/#courses"
+                    href="/free-trial"
                     className="inline-flex items-center gap-2 px-7 py-3.5 rounded-none bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-bold text-sm shadow-lg hover:shadow-amber-500/25 transition-all transform hover:-translate-y-0.5"
                   >
                     <span>Book a Free Trial Class</span>

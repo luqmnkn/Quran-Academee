@@ -32,6 +32,25 @@ export const metadata = {
     locale: 'en_US',
     type: 'website',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Online Quran Classes for Kids & Adults | Quran Academee',
+    description:
+      'Master Tajweed, reading & Hifz with certified 1-on-1 online Quran teachers. Interactive online Quran classes for kids and adults worldwide. Book a free trial class today.',
+    images: ['/images/link.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  category: 'education',
   verification: {
     google:
       process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ||
@@ -85,11 +104,6 @@ const organizationAndWebsiteSchema = {
       publisher: {
         '@id': 'https://www.quranacademee.com/#organization',
       },
-      potentialAction: {
-        '@type': 'SearchAction',
-        target: 'https://www.quranacademee.com/resources?q={search_term_string}',
-        'query-input': 'required name=search_term_string',
-      },
     },
   ],
 };
@@ -131,6 +145,8 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/images/favicon.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://fonts.cdnfonts.com" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Courgette&family=Inter:wght@300;400;500;600;700&family=Rubik:wght@300;400;500;600;700;800;900&display=swap" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" />
         <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display" />

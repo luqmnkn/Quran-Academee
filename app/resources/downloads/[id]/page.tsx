@@ -1,47 +1,143 @@
-'use client';
-
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useParams, notFound } from 'next/navigation';
-import { motion } from 'framer-motion';
+import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
 import { Download, ArrowLeft, FileText, CheckCircle2, BookOpen, ShieldCheck } from 'lucide-react';
 import { DOWNLOADABLE_RESOURCES } from '@/lib/quranData';
 import ResourceFooter from '@/components/ResourceFooter';
 
-export default function BookletDetailPage() {
-  const params = useParams();
-  const id = Array.isArray(params?.id) ? params.id[0] : params?.id;
+interface Props {
+  params: Promise<{ id: string }>;
+}
 
+export function generateStaticParams() {
+  return DOWNLOADABLE_RESOURCES.map((r) => ({
+    id: r.id,
+  }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { id } = await params;
   const resource = DOWNLOADABLE_RESOURCES.find((r) => r.id === id);
 
   if (!resource) {
-    return (
-      <div className="min-h-screen bg-[#f0f9ff] flex items-center justify-center pt-24 pb-16 px-4 text-center">
-        <div className="bg-white rounded-none p-8 max-w-md shadow-xl space-y-4">
-          <h2 className="text-2xl font-bold text-[#116c9c]">Document Not Found</h2>
-          <p className="text-slate-600 text-sm">The requested booklet resource could not be found.</p>
-          <Link
-            href="/resources"
-            className="inline-block px-5 py-2.5 rounded-none bg-[#1081b7] text-white font-bold text-xs"
-          >
-            Back to Resource Hub
-          </Link>
-        </div>
-      </div>
-    );
+    return {
+      title: 'Resource Not Found | Quran Academee',
+      description: 'The requested educational resource could not be found.',
+    };
   }
+
+  const pageTitle = `${resource.title} (${resource.category}) Free PDF Download | Quran Academee`;
+  const pageDescription = `${resource.description} Download the verified, printable ${resource.format} guide (${resource.fileSize}, ${resource.pages} pages) under scholarly supervision.`;
+  const canonicalUrl = `https://www.quranacademee.com/resources/downloads/${resource.id}`;
+
+  return {
+    title: pageTitle,
+    description: pageDescription,
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title: pageTitle,
+      description: pageDescription,
+      url: canonicalUrl,
+      type: 'article',
+      siteName: 'Quran Academee',
+      images: [
+        {
+          url: resource.thumbnail,
+          width: 600,
+          height: 800,
+          alt: resource.title,
+        },
+      ],
+      locale: 'en_US',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: pageTitle,
+      description: pageDescription,
+      images: [resource.thumbnail],
+    },
+  };
+}
+
+export default async function BookletDetailPage({ params }: Props) {
+  const { id } = await params;
+  const resource = DOWNLOADABLE_RESOURCES.find((r) => r.id === id);
+
+  if (!resource) {
+    notFound();
+  }
+
+  const schemaJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'DigitalDocument',
+    name: resource.title,
+    description: resource.description,
+    url: `https://www.quranacademee.com/resources/downloads/${resource.id}`,
+    image: `https://www.quranacademee.com${resource.thumbnail}`,
+    encodingFormat: 'application/pdf',
+    numberOfPages: resource.pages,
+    inLanguage: ['en', 'ar'],
+    publisher: {
+      '@type': 'EducationalOrganization',
+      name: 'Quran Academee',
+      url: 'https://www.quranacademee.com',
+    },
+  };
+
+  const breadcrumbSchemaJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://www.quranacademee.com',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Resources',
+        item: 'https://www.quranacademee.com/resources',
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: 'Downloads',
+        item: 'https://www.quranacademee.com/resources/downloads',
+      },
+      {
+        '@type': 'ListItem',
+        position: 4,
+        name: resource.title,
+        item: `https://www.quranacademee.com/resources/downloads/${resource.id}`,
+      },
+    ],
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-[#f0f9ff] to-[#d7effa] text-slate-800 pt-24 pb-16 overflow-x-clip">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchemaJsonLd) }}
+      />
+
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         {/* Navigation Breadcrumb */}
         <div className="flex items-center justify-between">
           <Link
-            href="/resources"
+            href="/resources/downloads"
             className="inline-flex items-center gap-2 text-xs font-bold text-[#1081b7] hover:text-[#116c9c] transition-colors"
           >
-            <ArrowLeft className="w-4 h-4" /> Back to Resource Hub
+            <ArrowLeft className="w-4 h-4" /> Back to Download Index
           </Link>
           <span className="text-xs text-slate-500 font-medium">
             Resource Library &bull; {resource.category}
@@ -49,11 +145,7 @@ export default function BookletDetailPage() {
         </div>
 
         {/* Main Document Showcase Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="bg-[#f0f9ff] rounded-none p-6 sm:p-10 shadow-xl border border-[#38aae3]/25 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
-        >
+        <div className="bg-[#f0f9ff] rounded-none p-6 sm:p-10 shadow-xl border border-[#38aae3]/25 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           {/* Left: Large Cover Page Thumbnail */}
           <div className="lg:col-span-5 flex justify-center">
             <div className="relative w-full max-w-sm h-80 sm:h-96 bg-white rounded-none p-4 shadow-lg border border-[#38aae3]/20 flex items-center justify-center overflow-hidden">
@@ -131,7 +223,7 @@ export default function BookletDetailPage() {
               </a>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
 
       {/* CTA Footer */}

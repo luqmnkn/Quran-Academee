@@ -1,22 +1,42 @@
 [
   {
-    "id": "v-1-Anabia.mp4",
-    "studentName": "Anabia",
+    "id": "v-1-Anabya.mp4",
+    "studentName": "Anabya",
     "age": "Student",
     "courseName": "Tajweed & Recitation",
     "duration": "Student at Quran Academee",
-    "snippet": "Anabia reciting Holy Quran with proper Tajweed and fluency.",
+    "snippet": "Anabya reciting Holy Quran with proper Tajweed and fluency.",
     "thumbnailGradient": "from-[#1081b7]/30 via-[#38aae3]/20 to-[#116c9c]/40",
-    "videoUrl": "/video-reviews/Anabia.mp4"
+    "videoUrl": "/video-reviews/Anabya.mp4"
   },
   {
-    "id": "v-2-Yusra%20Zohaib.mp4",
-    "studentName": "Yusra & Zohaib",
+    "id": "v-2-Azaan%20Akhtar.mp4",
+    "studentName": "Azaan Akhtar",
     "age": "Student",
     "courseName": "Tajweed & Recitation",
     "duration": "Student at Quran Academee",
-    "snippet": "Yusra & Zohaib reciting Holy Quran with proper Tajweed and fluency.",
+    "snippet": "Azaan Akhtar reciting Holy Quran with proper Tajweed and fluency.",
     "thumbnailGradient": "from-[#1081b7]/30 via-[#38aae3]/20 to-[#116c9c]/40",
-    "videoUrl": "/video-reviews/Yusra Zohaib.mp4"
+    "videoUrl": "/video-reviews/Azaan Akhtar.mp4"
+  },
+  {
+    "id": "v-3-Khadija.mp4",
+    "studentName": "Khadija",
+    "age": "Student",
+    "courseName": "Tajweed & Recitation",
+    "duration": "Student at Quran Academee",
+    "snippet": "Khadija reciting Holy Quran with proper Tajweed and fluency.",
+    "thumbnailGradient": "from-[#1081b7]/30 via-[#38aae3]/20 to-[#116c9c]/40",
+    "videoUrl": "/video-reviews/Khadija.mp4"
+  },
+  {
+    "id": "v-4-Yusra.mp4",
+    "studentName": "Yusra",
+    "age": "Student",
+    "courseName": "Tajweed & Recitation",
+    "duration": "Student at Quran Academee",
+    "snippet": "Yusra reciting Holy Quran with proper Tajweed and fluency.",
+    "thumbnailGradient": "from-[#1081b7]/30 via-[#38aae3]/20 to-[#116c9c]/40",
+    "videoUrl": "/video-reviews/Yusra.mp4"
   }
 ]

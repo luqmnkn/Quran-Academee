@@ -1,5 +1,13 @@
 import type { MetadataRoute } from 'next';
 import { COURSES_DATA } from '@/lib/coursesData';
+import {
+  SURAHS,
+  JUZ_LIST,
+  DUAS,
+  DOWNLOADABLE_RESOURCES,
+  getSurahSlug,
+  getJuzSlug,
+} from '@/lib/quranData';
 
 export const revalidate = 86400; // Cache and revalidate sitemap every 24 hours
 
@@ -9,11 +17,44 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const currentDate = new Date();
 
+  // All 8 core courses
   const courseUrls: MetadataRoute.Sitemap = COURSES_DATA.map((course) => ({
     url: `${baseUrl}/courses/${course.slug}`,
     lastModified: currentDate,
     changeFrequency: 'weekly',
     priority: 0.85,
+  }));
+
+  // All 114 Surah PDF download pages
+  const surahUrls: MetadataRoute.Sitemap = SURAHS.map((surah) => ({
+    url: `${baseUrl}/resources/downloads/surah/${getSurahSlug(surah)}`,
+    lastModified: currentDate,
+    changeFrequency: 'monthly',
+    priority: 0.75,
+  }));
+
+  // All 30 Para / Juz PDF download pages
+  const juzUrls: MetadataRoute.Sitemap = JUZ_LIST.map((juz) => ({
+    url: `${baseUrl}/resources/downloads/juz/${getJuzSlug(juz)}`,
+    lastModified: currentDate,
+    changeFrequency: 'monthly',
+    priority: 0.75,
+  }));
+
+  // All 28 Daily Masnoon Duas pages
+  const duaUrls: MetadataRoute.Sitemap = DUAS.map((dua) => ({
+    url: `${baseUrl}/resources/downloads/dua/${dua.slug}`,
+    lastModified: currentDate,
+    changeFrequency: 'monthly',
+    priority: 0.75,
+  }));
+
+  // Downloadable booklet resources (e.g., daily-duas handbook)
+  const bookletUrls: MetadataRoute.Sitemap = DOWNLOADABLE_RESOURCES.map((r) => ({
+    url: `${baseUrl}/resources/downloads/${r.id}`,
+    lastModified: currentDate,
+    changeFrequency: 'monthly',
+    priority: 0.7,
   }));
 
   return [
@@ -40,7 +81,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}/resources`,
       lastModified: currentDate,
       changeFrequency: 'weekly',
-      priority: 0.8,
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/resources/read`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/resources/downloads`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.85,
     },
     // Dedicated course pages
     ...courseUrls,
@@ -114,6 +167,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.8,
     },
+    // Downloadable Surahs, Juz, Duas and Booklets
+    ...surahUrls,
+    ...juzUrls,
+    ...duaUrls,
+    ...bookletUrls,
     // Legal pages
     {
       url: `${baseUrl}/privacy-policy`,

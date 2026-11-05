@@ -177,6 +177,7 @@ export interface UserConfirmationEmailParams {
   phone: string;
   country: string;
   courseInterest: string;
+  preferredTime?: string;
   message?: string;
 }
 
@@ -190,6 +191,7 @@ export function generateUserConfirmationEmailHtml({
   phone,
   country,
   courseInterest,
+  preferredTime,
   message,
 }: UserConfirmationEmailParams): string {
   const formattedCourse = courseInterest.replace(/-/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase());

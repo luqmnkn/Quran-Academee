@@ -41,6 +41,13 @@ export const contactSchema = z.object({
     .min(1, { message: 'Please select a course of interest' })
     .max(100, { message: 'Course interest must not exceed 100 characters' }),
 
+  preferredTime: z
+    .string()
+    .trim()
+    .max(100)
+    .optional()
+    .default('Flexible / Any Time'),
+
   message: z
     .string()
     .trim()
