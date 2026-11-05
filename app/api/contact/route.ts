@@ -73,6 +73,7 @@ export async function POST(req: NextRequest) {
       phone: data.phone,
       country: data.country,
       courseInterest: data.courseInterest,
+      preferredTime: data.preferredTime || 'Flexible / Any Time',
       message: data.message,
     });
 
@@ -187,6 +188,10 @@ export async function POST(req: NextRequest) {
                 <td>${data.country}</td>
               </tr>
               <tr>
+                <th>Preferred Time</th>
+                <td style="color: #0B3951; font-weight: 700;">${data.preferredTime || 'Flexible / Any Time'}</td>
+              </tr>
+              <tr>
                 <th>Selected Course</th>
                 <td style="color: #1C8DC8; text-transform: capitalize;">${data.courseInterest.replace(/-/g, ' ')}</td>
               </tr>
@@ -225,6 +230,7 @@ export async function POST(req: NextRequest) {
         phone: data.phone,
         country: data.country,
         courseInterest: data.courseInterest,
+        preferredTime: data.preferredTime || 'Flexible / Any Time',
         message: data.message,
       });
 

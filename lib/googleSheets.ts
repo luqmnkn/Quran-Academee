@@ -6,6 +6,7 @@ export interface LeadData {
   phone: string;
   country: string;
   courseInterest: string;
+  preferredTime?: string;
   message?: string;
 }
 
@@ -82,11 +83,11 @@ export async function appendLeadToSheet(data: LeadData): Promise<sheets_v4.Schem
       // Write column headers (A1:G1)
       await sheets.spreadsheets.values.append({
         spreadsheetId,
-        range: `'${sheetTitle}'!A1:G1`,
+        range: `'${sheetTitle}'!A1:H1`,
         valueInputOption: 'USER_ENTERED',
         requestBody: {
           values: [
-            ['Timestamp', 'Full Name', 'Email', 'Phone', 'Country', 'Course Interest', 'Message'],
+            ['Timestamp', 'Full Name', 'Email', 'Phone', 'Country', 'Course Interest', 'Preferred Time', 'Message'],
           ],
         },
       });
@@ -95,7 +96,7 @@ export async function appendLeadToSheet(data: LeadData): Promise<sheets_v4.Schem
     // 3. Append the lead row to the bottom of the dataset
     const appendResponse = await sheets.spreadsheets.values.append({
       spreadsheetId,
-      range: `'${sheetTitle}'!A:G`,
+      range: `'${sheetTitle}'!A:H`,
       valueInputOption: 'USER_ENTERED',
       insertDataOption: 'INSERT_ROWS',
       requestBody: {

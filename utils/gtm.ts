@@ -6,6 +6,7 @@ export interface LeadData {
   phone: string;
   country: string;
   courseInterest: string;
+  preferredTime?: string;
   message: string;
   plan: string;
 }

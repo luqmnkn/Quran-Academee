@@ -60,8 +60,8 @@ function HeroVideoReviews({
   onSelectVideo: (index: number) => void;
 }) {
   return (
-    <div className="w-full flex justify-center items-center py-2 sm:py-3 overflow-hidden">
-      <div className="flex items-start justify-center gap-3.5 sm:gap-5 overflow-x-auto max-w-full py-1 px-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+    <div className="w-full py-2 sm:py-3">
+      <div className="flex items-start justify-start sm:justify-center gap-3.5 sm:gap-5 overflow-x-auto max-w-full py-1 px-4 sm:px-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
         {videos.map((video, idx) => (
           <motion.div
             key={video.id || idx}
@@ -71,7 +71,7 @@ function HeroVideoReviews({
             className="flex flex-col items-center cursor-pointer group select-none shrink-0"
           >
             {/* Pure Video Card: Increased size, simple, completely borderless, and without shades */}
-            <div className="w-[120px] xs:w-[135px] sm:w-[155px] md:w-[170px] aspect-[9/14] rounded-2xl sm:rounded-3xl overflow-hidden relative bg-slate-100 transition-transform duration-300">
+            <div className="w-[125px] xs:w-[135px] sm:w-[155px] md:w-[170px] aspect-[9/14] rounded-2xl sm:rounded-3xl overflow-hidden relative bg-slate-100 transition-transform duration-300">
               <video
                 src={video.videoUrl}
                 playsInline
@@ -91,11 +91,13 @@ function HeroVideoReviews({
             </div>
 
             {/* Student Name */}
-            <span className="text-xs sm:text-sm md:text-base font-bold text-[#0B3951] mt-2 text-center leading-tight truncate max-w-[120px] xs:max-w-[135px] sm:max-w-[155px] md:max-w-[170px]">
+            <span className="text-xs sm:text-sm md:text-base font-bold text-[#0B3951] mt-2 text-center leading-tight truncate max-w-[125px] xs:max-w-[135px] sm:max-w-[155px] md:max-w-[170px]">
               {video.studentName}
             </span>
           </motion.div>
         ))}
+        {/* End padding spacer for mobile horizontal scroll */}
+        <div className="w-2 shrink-0 sm:hidden" aria-hidden="true" />
       </div>
     </div>
   );

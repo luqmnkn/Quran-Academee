@@ -113,6 +113,9 @@ export default function Footer() {
                   <Link href="/pricing" className="hover:text-white hover:underline transition-colors">Pricing Plans</Link>
                 </li>
                 <li>
+                  <Link href="/resources" className="hover:text-white hover:underline transition-colors">Free Resources</Link>
+                </li>
+                <li>
                   <Link href="/reviews" className="hover:text-white hover:underline transition-colors">Student Reviews</Link>
                 </li>
                 <li>
@@ -242,8 +245,6 @@ export default function Footer() {
             <Link href="/refund-policy" className="hover:text-white hover:underline transition-colors">Refund Policy</Link>
           </nav>
         </div>
-
-
 
       </div>
     </footer>
