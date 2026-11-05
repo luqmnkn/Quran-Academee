@@ -145,12 +145,10 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/images/favicon.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://fonts.cdnfonts.com" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Courgette&family=Inter:wght@300;400;500;600;700&family=Rubik:wght@300;400;500;600;700;800;900&display=swap" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" />
         <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossOrigin="anonymous" referrerPolicy="no-referrer" />
       </head>
       <body className="relative min-h-screen font-sans antialiased text-gray-950 bg-gray-50/50">
         <Suspense fallback={<main>{children}</main>}>

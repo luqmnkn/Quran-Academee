@@ -276,9 +276,7 @@ export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
           <div className="flex flex-col space-y-3 text-center w-full">
             <div className="space-y-2">
               {/* Main Heading title block (Centered three lines for Mobile) */}
-              <motion.p
-                role="heading"
-                aria-level={2}
+              <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.1 }}
@@ -287,7 +285,7 @@ export default function Hero({ onSubmitInquiry, onOpenTrialModal }: HeroProps) {
                 <span className="block">Start Your Journey</span>{' '}
                 <span className="block text-xs sm:text-sm uppercase tracking-widest text-[#146299] opacity-80 my-1">With</span>{' '}
                 <span className="block font-allura text-transparent bg-clip-text bg-gradient-to-r from-[#1C8DC8] via-[#3D8DC3] to-[#146299] py-1">Quran Academee</span>
-              </motion.p>
+              </motion.h1>
             </div>
           </div>
 

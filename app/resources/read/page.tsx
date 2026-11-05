@@ -32,6 +32,8 @@ export default function OnlineReaderPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-[#f0f9ff] to-[#d7effa] text-slate-800 pt-20 sm:pt-24 pb-12 sm:pb-16 px-2 sm:px-4 w-full max-w-full overflow-x-clip">
       <div className="max-w-7xl mx-auto space-y-3 sm:space-y-4 w-full">
+        {/* Semantic H1 for SEO & Accessibility */}
+        <h1 className="sr-only">Read Holy Quran Online (114 Surahs &amp; 30 Juz) - Quran Academee</h1>
 
         {/* Reader Container */}
         <div className="bg-white rounded-none shadow-2xl border border-[#38aae3]/25 relative w-full max-w-full">

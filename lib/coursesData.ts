@@ -59,7 +59,7 @@ export const COURSES_DATA: CourseDetail[] = [
     arabicTitle: 'القاعدة المدنية',
     h1: 'Online Madani Qaida Classes for Kids & Beginners',
     metaTitle: 'Online Madani Qaida Classes for Kids & Adults | Quran Academee',
-    metaDescription: 'Learn Madani Qaida online with live 1-on-1 certified Quran tutors. Master Arabic letters, Makharij pronunciation, and reading rules. Book a free trial class today.',
+    metaDescription: 'Learn Madani Qaida online with certified Quran tutors. Master Arabic letters, Makharij pronunciation, and reading rules. Book a free trial class today.',
     answerFirstSummary:
       'Online Madani Qaida classes at Quran Academee provide live, 1-on-1 foundational Quran reading instruction for kids and adult beginners. Students learn correct Arabic alphabet pronunciation (Makharij), letter joining, Harakat, and basic phonetic rules through certified scholars, transitioning smoothly from Noorani to Madani script for lifelong Quranic recitation fluency.',
     category: 'Foundations & Reading',
@@ -1083,7 +1083,7 @@ export const COURSES_DATA: CourseDetail[] = [
     arabicTitle: 'العربية القرآنية',
     h1: 'Online Quranic Arabic Classes to Understand the Quran Directly',
     metaTitle: 'Online Quranic Arabic Classes | Understand Quran | Quran Academee',
-    metaDescription: 'Learn Quranic Arabic online with certified native scholars. Master grammar (Nahw & Sarf), vocabulary, and direct verse comprehension. Book a free trial class today.',
+    metaDescription: 'Learn Quranic Arabic online with certified scholars. Master grammar (Nahw & Sarf), vocabulary, and direct verse comprehension. Book a free trial class today.',
     answerFirstSummary:
       'Online Quranic Arabic classes at Quran Academee enable students to understand the Holy Quran directly in its original revelation without relying solely on translations. Taught by native Arabic scholars, learners master essential grammar (Nahw and Sarf), high-frequency Quranic root vocabulary, and practical sentence construction to connect deeply with divine revelation during recitation and daily prayer.',
     category: 'Arabic Language',
@@ -1257,7 +1257,7 @@ export const COURSES_DATA: CourseDetail[] = [
     arabicTitle: 'المحادثة العربية',
     h1: 'Online Conversational Arabic Classes for Fluent Daily Speaking',
     metaTitle: 'Online Conversational Arabic Classes | Speak Arabic | Quran Academee',
-    metaDescription: 'Learn Conversational Arabic online with certified native Arabic speakers. Master daily dialogues, speaking fluency, and Modern Standard Arabic. Book a free trial today.',
+    metaDescription: 'Learn Conversational Arabic online with native tutors. Master daily dialogues, speaking fluency, and Modern Standard Arabic. Book a free trial today.',
     answerFirstSummary:
       'Online Conversational Arabic classes at Quran Academee teach students to speak Modern Standard Arabic (Fusha) confidently in everyday life. Guided by native Arabic speakers, learners master practical conversational dialogues, contemporary vocabulary, and natural sentence formation for travel, study, business, and social communication.',
     category: 'Arabic Language',

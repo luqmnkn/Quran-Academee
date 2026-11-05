@@ -4,7 +4,6 @@ export default function robots(): MetadataRoute.Robots {
   // Always enforce www canonical URL for robots and sitemap
   const baseUrl = 'https://www.quranacademee.com';
 
-
   const isStagingOrPreview =
     (process.env.NODE_ENV as string) === 'staging' ||
     process.env.VERCEL_ENV === 'preview' ||
@@ -21,11 +20,18 @@ export default function robots(): MetadataRoute.Robots {
   }
 
   return {
-    rules: {
-      userAgent: '*',
-      allow: '/',
-      disallow: ['/admin/', '/api/'],
-    },
+    rules: [
+      {
+        userAgent: '*',
+        allow: '/',
+        disallow: ['/admin/', '/api/'],
+      },
+      {
+        userAgent: ['GPTBot', 'ClaudeBot', 'Google-Extended', 'PerplexityBot', 'Applebot-Extended'],
+        allow: '/',
+        disallow: ['/admin/', '/api/'],
+      },
+    ],
     sitemap: `${baseUrl}/sitemap.xml`,
     host: baseUrl,
   };

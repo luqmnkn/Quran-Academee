@@ -34,10 +34,62 @@ export const metadata: Metadata = {
   },
 };
 
+const readPageSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': 'https://www.quranacademee.com/resources/read#webpage',
+      url: 'https://www.quranacademee.com/resources/read',
+      name: 'Read Holy Quran Online (114 Surahs & 30 Juz)',
+      description:
+        'Interactive digital Quran reader featuring complete Arabic script, English translations, and verse-by-verse audio recitations.',
+      inLanguage: ['ar', 'en'],
+      publisher: {
+        '@type': 'EducationalOrganization',
+        name: 'Quran Academee',
+        url: 'https://www.quranacademee.com',
+      },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': 'https://www.quranacademee.com/resources/read#breadcrumb',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://www.quranacademee.com',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Resources',
+          item: 'https://www.quranacademee.com/resources',
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: 'Read Quran Online',
+          item: 'https://www.quranacademee.com/resources/read',
+        },
+      ],
+    },
+  ],
+};
+
 export default function ReadLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(readPageSchema) }}
+      />
+      {children}
+    </>
+  );
 }
