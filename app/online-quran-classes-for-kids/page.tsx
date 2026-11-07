@@ -41,6 +41,13 @@ export const metadata: Metadata = {
     locale: 'en_US',
     type: 'website',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Online Quran Classes for Kids | Fun & Certified 1-on-1 Lessons',
+    description:
+      'Interactive online Quran classes for kids aged 4-15. Learn Madani Qaida, Tajweed, and Hifz with patient, background-checked male & female tutors.',
+    images: ['/images/link.png'],
+  },
 };
 
 export default function QuranClassesForKidsPage() {

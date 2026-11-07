@@ -39,6 +39,13 @@ export const metadata: Metadata = {
     locale: 'en_CA',
     type: 'website',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Online Quran Classes Canada | 1-on-1 Lessons across Canadian Timezones',
+    description:
+      'Certified online Quran classes for Muslim families in Toronto, Calgary, Montreal, Vancouver & across Canada. 1-on-1 lessons from CA$45/month.',
+    images: ['/images/link.png'],
+  },
 };
 
 export default function OnlineQuranClassesCanadaPage() {

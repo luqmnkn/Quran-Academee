@@ -41,6 +41,13 @@ export const metadata: Metadata = {
     locale: 'en_US',
     type: 'website',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Female Quran Teacher Online | 1-on-1 Classes for Sisters & Kids',
+    description:
+      'Learn Quran with certified female Quran teachers online. Private 1-on-1 classes in Tajweed, Hifz, and Qaida for sisters and young children.',
+    images: ['/images/link.png'],
+  },
 };
 
 export default function FemaleQuranTeacherPage() {

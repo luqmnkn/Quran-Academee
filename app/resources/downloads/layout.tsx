@@ -34,10 +34,62 @@ export const metadata: Metadata = {
   },
 };
 
+const downloadsPageSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'CollectionPage',
+      '@id': 'https://www.quranacademee.com/resources/downloads#collection',
+      url: 'https://www.quranacademee.com/resources/downloads',
+      name: 'Download Holy Quran & Daily Masnoon Duas PDFs',
+      description:
+        'Download clean, printable simple-text PDFs for all 114 Surahs, 30 Juz (Paras), and 28 authentic Masnoon Duas for offline reading, memorization, and revision.',
+      inLanguage: ['ar', 'en'],
+      publisher: {
+        '@type': 'EducationalOrganization',
+        name: 'Quran Academee',
+        url: 'https://www.quranacademee.com',
+      },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': 'https://www.quranacademee.com/resources/downloads#breadcrumb',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://www.quranacademee.com',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Resources',
+          item: 'https://www.quranacademee.com/resources',
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: 'Downloads',
+          item: 'https://www.quranacademee.com/resources/downloads',
+        },
+      ],
+    },
+  ],
+};
+
 export default function DownloadsLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(downloadsPageSchema) }}
+      />
+      {children}
+    </>
+  );
 }

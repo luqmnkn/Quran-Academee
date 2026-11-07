@@ -26,6 +26,13 @@ export const metadata: Metadata = {
     locale: 'en_US',
     type: 'website',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Book a 3-Day Free Trial Online Quran Class | Quran Academee',
+    description:
+      'Experience 1-on-1 live Quran classes free with certified scholars. No credit card required, flexible scheduling for kids and adults worldwide.',
+    images: ['/images/link.png'],
+  },
 };
 
 export default function FreeTrialPage() {

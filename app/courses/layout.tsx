@@ -25,6 +25,13 @@ export const metadata: Metadata = {
     locale: 'en_US',
     type: 'website',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Online Quran Courses & Programs | Quran Academee',
+    description:
+      'Explore 1-on-1 online Quran courses with certified male & female scholars. Madani Qaida, Tajweed, Quran Reading, Hifz, Islamic Studies & Arabic.',
+    images: ['/images/link.png'],
+  },
 };
 
 export default function CoursesLayout({

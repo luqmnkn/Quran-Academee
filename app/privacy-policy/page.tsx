@@ -17,6 +17,13 @@ export const metadata: Metadata = {
     locale: 'en_US',
     type: 'website',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Privacy Policy - Quran Academee',
+    description:
+      'Read the Quran Academee Privacy Policy to understand how we collect, use, and protect your personal information.',
+    images: ['/images/link.png'],
+  },
 };
 
 const LAST_UPDATED = 'October 2024';
@@ -24,9 +31,50 @@ const CONTACT_EMAIL = 'contact@quranacademee.com';
 const SITE_NAME = 'Quran Academee';
 const SITE_URL = 'https://www.quranacademee.com';
 
+const privacySchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': 'https://www.quranacademee.com/privacy-policy#webpage',
+      url: 'https://www.quranacademee.com/privacy-policy',
+      name: 'Privacy Policy - Quran Academee',
+      description:
+        'Read the Quran Academee Privacy Policy to understand how we collect, use, and protect your personal information.',
+      publisher: {
+        '@type': 'EducationalOrganization',
+        name: 'Quran Academee',
+        url: 'https://www.quranacademee.com',
+      },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': 'https://www.quranacademee.com/privacy-policy#breadcrumb',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://www.quranacademee.com',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Privacy Policy',
+          item: 'https://www.quranacademee.com/privacy-policy',
+        },
+      ],
+    },
+  ],
+};
+
 export default function PrivacyPolicyPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-[#f0f9ff] to-white text-slate-800">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(privacySchema) }}
+      />
       {/* Hero Banner */}
       <div className="bg-[#0B3951] text-white py-16 px-4 text-center">
         <p className="text-xs uppercase tracking-widest text-[#1C8DC8] mb-3 font-semibold">Legal</p>
@@ -58,7 +106,7 @@ export default function PrivacyPolicyPage() {
               <ul className="list-disc pl-5 space-y-2 text-sm text-slate-700 leading-relaxed">
                 <li><strong>Contact Information:</strong> When you fill out our inquiry or free trial form, we collect your name, email address, WhatsApp or phone number, and any message you provide.</li>
                 <li><strong>Usage Data:</strong> We may collect anonymised analytics data (e.g., pages visited, session duration) via tools such as Google Analytics to help us improve our website.</li>
-                <li><strong>Cookies:</strong> Our website uses cookies to enhance your browsing experience. You can disable cookies in your browser settings, though some features may be affected.</li>
+                <li><strong>Payment Information:</strong> We do not store payment card details on our servers. Payments are handled securely through third-party processors.</li>
               </ul>
             ),
           },
@@ -66,77 +114,69 @@ export default function PrivacyPolicyPage() {
             title: '2. How We Use Your Information',
             content: (
               <ul className="list-disc pl-5 space-y-2 text-sm text-slate-700 leading-relaxed">
-                <li>To respond to your inquiry and schedule a free trial session.</li>
-                <li>To send relevant communications about our services, schedule, or updates (you may opt out at any time).</li>
-                <li>To improve and personalise your experience on our website.</li>
-                <li>To comply with legal obligations.</li>
+                <li>To schedule and coordinate your free trial and ongoing classes.</li>
+                <li>To communicate with you regarding schedules, teacher assignments, and course updates.</li>
+                <li>To respond to your inquiries and support requests via email or WhatsApp.</li>
+                <li>To improve our curriculum, teaching materials, and platform experience.</li>
               </ul>
             ),
           },
           {
-            title: '3. Sharing Your Information',
+            title: '3. Data Sharing & Third Parties',
             content: (
               <p className="text-sm text-slate-700 leading-relaxed">
-                We do <strong>not</strong> sell, trade, or rent your personal information to third parties. We may share information with trusted service providers (e.g., Google Analytics, email tools) solely to operate our services, and only under strict confidentiality agreements. We may disclose information if required by law.
+                We do not sell, trade, or rent your personal information to third parties. We may share information only with trusted service providers (e.g., email delivery, video conferencing tools) strictly to operate our educational services, subject to confidentiality agreements.
               </p>
             ),
           },
           {
-            title: '4. Data Retention',
+            title: '4. Children’s Privacy',
             content: (
               <p className="text-sm text-slate-700 leading-relaxed">
-                We retain personal data only as long as necessary to fulfil the purposes described in this policy, or as required by law. Inquiry submissions are kept for up to 12 months unless you request earlier deletion.
+                Many of our students are children. We only collect information about children with the consent of a parent or legal guardian. Parents have the right to review, update, or request the deletion of their child’s personal data at any time by contacting us.
               </p>
             ),
           },
           {
-            title: '5. Your Rights',
-            content: (
-              <ul className="list-disc pl-5 space-y-2 text-sm text-slate-700 leading-relaxed">
-                <li>Access and receive a copy of your personal data.</li>
-                <li>Request correction of inaccurate data.</li>
-                <li>Request deletion of your data.</li>
-                <li>Opt out of marketing communications at any time.</li>
-              </ul>
-            ),
-          },
-          {
-            title: '6. Third-Party Links',
+            title: '5. Security',
             content: (
               <p className="text-sm text-slate-700 leading-relaxed">
-                Our website may contain links to third-party websites. We are not responsible for the privacy practices of those sites and encourage you to review their own privacy policies.
+                We implement industry-standard security measures to protect your personal information against unauthorised access, alteration, disclosure, or destruction. However, no internet transmission is 100% secure, and we encourage you to protect your own credentials.
               </p>
             ),
           },
           {
-            title: '7. Children&apos;s Privacy',
+            title: '6. Cookies & Tracking',
             content: (
               <p className="text-sm text-slate-700 leading-relaxed">
-                Our services are used by students of all ages, including children. We do not knowingly collect personal information from children under 13 without verifiable parental consent. If you believe we have collected such data, please contact us immediately.
+                Our website uses basic functional cookies and analytics tools (such as Google Tag Manager and Google Analytics) to monitor traffic and improve user experience. You may configure your browser to decline cookies, though some features may function less effectively.
               </p>
             ),
           },
           {
-            title: '8. Security',
+            title: '7. Your Rights',
             content: (
               <p className="text-sm text-slate-700 leading-relaxed">
-                We implement industry-standard technical and organisational measures to protect your personal data. However, no method of internet transmission is 100% secure and we cannot guarantee absolute security.
+                Depending on your location (e.g., GDPR in the UK/EU), you may have the right to access, correct, or delete personal data we hold about you, or to withdraw consent for specific communications. To exercise any of these rights, contact us at{' '}
+                <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#1C8DC8] hover:underline font-semibold">
+                  {CONTACT_EMAIL}
+                </a>.
               </p>
             ),
           },
           {
-            title: '9. Changes to This Policy',
+            title: '8. Changes to This Policy',
             content: (
               <p className="text-sm text-slate-700 leading-relaxed">
-                We may update this Privacy Policy from time to time. The &ldquo;Last updated&rdquo; date at the top will reflect the most recent revision. Continued use of our website after changes constitutes your acceptance of the updated policy.
+                We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated &ldquo;Last updated&rdquo; date. Continued use of our services after updates constitutes acceptance of the revised policy.
               </p>
             ),
           },
           {
-            title: '10. Contact Us',
+            title: '9. Contact Us',
             content: (
               <p className="text-sm text-slate-700 leading-relaxed">
-                For questions or concerns about this Privacy Policy or your personal data, please contact us at{' '}
+                If you have questions or concerns about this Privacy Policy, please contact us at{' '}
                 <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#1C8DC8] hover:underline font-semibold">
                   {CONTACT_EMAIL}
                 </a>{' '}

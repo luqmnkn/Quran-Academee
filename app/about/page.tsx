@@ -29,6 +29,13 @@ export const metadata: Metadata = {
     locale: 'en_US',
     type: 'website',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'About Quran Academee | Story, Faculty & Scholarly Supervision',
+    description:
+      'Learn about Quran Academee, our Madinah University scholarly supervision under Sheikh Jawwad Musa, authentic 1-on-1 methodology, and certified faculty teaching worldwide.',
+    images: ['/images/link.png'],
+  },
 };
 
 export default function AboutPage() {
@@ -63,12 +70,35 @@ export default function AboutPage() {
     },
   };
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://www.quranacademee.com',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'About',
+        item: 'https://www.quranacademee.com/about',
+      },
+    ],
+  };
+
   return (
     <main className="min-h-screen bg-slate-50/50 text-[#0B3951] pt-24 sm:pt-28 pb-20 relative overflow-hidden">
       {/* Schema.org JSON-LD */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
       {/* Background Glow Accents */}

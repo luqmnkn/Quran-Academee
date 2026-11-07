@@ -33,6 +33,13 @@ export const metadata: Metadata = {
     locale: 'en_AU',
     type: 'website',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Online Quran Classes Australia | 1-on-1 Classes in AEST/AWST Time',
+    description:
+      'Premier online Quran classes for kids and adults in Sydney, Melbourne, Brisbane & Perth. Certified male and female scholars from A$50/month.',
+    images: ['/images/link.png'],
+  },
 };
 
 export default function OnlineQuranClassesAustraliaPage() {

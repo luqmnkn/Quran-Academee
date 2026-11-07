@@ -38,6 +38,13 @@ export const metadata: Metadata = {
     locale: 'en_US',
     type: 'website',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Our Certified Quran Teachers & Scholars | Quran Academee',
+    description:
+      'Meet verified online Quran teachers at Quran Academee. Certified scholars, Huffaz, and Tajweed educators fluent in English with child-centered pedagogy.',
+    images: ['/images/link.png'],
+  },
 };
 
 export default function TeachersPage() {

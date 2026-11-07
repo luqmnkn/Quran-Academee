@@ -66,6 +66,12 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
       locale: 'en_US',
       type: 'article',
     },
+    twitter: {
+      card: 'summary_large_image',
+      title: course.metaTitle,
+      description: course.metaDescription,
+      images: ['/images/link.png'],
+    },
   };
 }
 

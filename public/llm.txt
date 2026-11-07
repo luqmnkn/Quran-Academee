@@ -65,6 +65,7 @@ Quran Academee offers transparent, monthly tuition with no hidden registration f
 - **Refund Policy:** https://www.quranacademee.com/refund-policy
 - **XML Sitemap:** https://www.quranacademee.com/sitemap.xml
 - **AI Briefing (llms.txt):** https://www.quranacademee.com/llms.txt
+- **Complete AI Reference (llms-full.txt):** https://www.quranacademee.com/llms-full.txt
 
 ## 9. Verified Social Media Profiles
 - **Facebook:** https://www.facebook.com/quranacademee1

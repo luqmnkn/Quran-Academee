@@ -40,6 +40,13 @@ export const metadata: Metadata = {
     locale: 'en_US',
     type: 'website',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Learn Quran Online for Adults | Beginners to Advanced Tajweed',
+    description:
+      'Personalized 1-on-1 online Quran classes for busy adults. Flexible 24/7 scheduling, certified male & female teachers, and private learning.',
+    images: ['/images/link.png'],
+  },
 };
 
 export default function LearnQuranForAdultsPage() {

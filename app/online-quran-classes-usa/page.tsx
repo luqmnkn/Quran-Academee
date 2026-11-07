@@ -39,6 +39,13 @@ export const metadata: Metadata = {
     locale: 'en_US',
     type: 'website',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Online Quran Classes USA | 1-on-1 Classes in US Timezones | Quran Academee',
+    description:
+      'Top-rated online Quran classes for kids and adults across the USA (EST, CST, MST, PST). Certified male & female tutors from $35/month.',
+    images: ['/images/link.png'],
+  },
 };
 
 export default function OnlineQuranClassesUSAPage() {

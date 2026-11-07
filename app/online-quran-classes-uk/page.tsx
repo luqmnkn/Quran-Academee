@@ -39,6 +39,13 @@ export const metadata: Metadata = {
     locale: 'en_GB',
     type: 'website',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Online Quran Classes UK | 1-on-1 Lessons in British Time | Quran Academee',
+    description:
+      'Certified 1-on-1 online Quran classes for UK kids and adults. Convenient GMT/BST timings (4pm-8pm), certified male & female scholars, from £28/month.',
+    images: ['/images/link.png'],
+  },
 };
 
 export default function OnlineQuranClassesUKPage() {

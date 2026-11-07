@@ -17,15 +17,63 @@ export const metadata: Metadata = {
     locale: 'en_US',
     type: 'website',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Refund Policy - Quran Academee',
+    description:
+      'Understand the Quran Academee fair refund and cancellation process for online Quran classes.',
+    images: ['/images/link.png'],
+  },
 };
 
 const LAST_UPDATED = 'October 2024';
 const CONTACT_EMAIL = 'contact@quranacademee.com';
 const SITE_NAME = 'Quran Academee';
 
+const refundSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': 'https://www.quranacademee.com/refund-policy#webpage',
+      url: 'https://www.quranacademee.com/refund-policy',
+      name: 'Refund Policy - Quran Academee',
+      description:
+        'Understand the Quran Academee fair refund and cancellation process for online Quran classes.',
+      publisher: {
+        '@type': 'EducationalOrganization',
+        name: 'Quran Academee',
+        url: 'https://www.quranacademee.com',
+      },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': 'https://www.quranacademee.com/refund-policy#breadcrumb',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://www.quranacademee.com',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Refund Policy',
+          item: 'https://www.quranacademee.com/refund-policy',
+        },
+      ],
+    },
+  ],
+};
+
 export default function RefundPolicyPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-[#f0f9ff] to-white text-slate-800">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(refundSchema) }}
+      />
       {/* Hero Banner */}
       <div className="bg-[#0B3951] text-white py-16 px-4 text-center">
         <p className="text-xs uppercase tracking-widest text-[#1C8DC8] mb-3 font-semibold">Legal</p>
@@ -43,78 +91,69 @@ export default function RefundPolicyPage() {
         {/* Intro */}
         <div className="bg-[#E0F2FE]/40 border border-[#BAE6FD] rounded-2xl p-6 text-sm text-slate-700 leading-relaxed">
           <p>
-            At <strong>{SITE_NAME}</strong>, we are committed to ensuring you are satisfied with our Quran education services. This Refund Policy outlines the conditions under which refunds may be granted.
+            At <strong>{SITE_NAME}</strong>, we are dedicated to providing high-quality, authentic Quran and Islamic education. We want you to be completely satisfied with your learning experience. This Refund Policy outlines the terms and conditions under which refunds and fee adjustments are provided.
           </p>
           <p className="mt-3">
-            By enrolling in our services, you acknowledge and agree to the terms set out below.
+            By enrolling in a monthly tuition plan, you acknowledge and agree to the terms below.
           </p>
         </div>
 
         {[
           {
-            title: '1. Free Trial Guarantee',
+            title: '1. Free 3-Day Trial Period',
             content: (
               <p className="text-sm text-slate-700 leading-relaxed">
-                All new students are entitled to a <strong>free trial class</strong> with no payment required. This allows you to evaluate the teaching quality and approach before committing to a paid plan. No refund is applicable to the free trial as no charge is made.
+                We strongly encourage all prospective students to take advantage of our free 3-day trial class before paying tuition. No payment details are collected for the trial, and there is zero obligation to continue. This allows you to evaluate your assigned teacher, curriculum fit, and learning schedule risk-free.
               </p>
             ),
           },
           {
-            title: '2. Monthly Subscription Refunds',
+            title: '2. Monthly Tuition Payments',
             content: (
               <ul className="list-disc pl-5 space-y-2 text-sm text-slate-700 leading-relaxed">
-                <li>
-                  <strong>Within 7 days of payment:</strong> If you have not attended any paid classes and request a cancellation within 7 days of payment, you are entitled to a full refund.
-                </li>
-                <li>
-                  <strong>After classes have commenced:</strong> A pro-rated refund will be issued for any unused, prepaid classes remaining at the time of cancellation.
-                </li>
-                <li>
-                  <strong>After the billing period ends:</strong> No refund will be issued for past months already delivered.
-                </li>
+                <li>Tuition is billed on a monthly cycle in advance of classes being delivered.</li>
+                <li>Because teacher time slots are reserved exclusively for each student, monthly tuition payments are generally <strong>non-refundable</strong> once the billing cycle has begun.</li>
               </ul>
             ),
           },
           {
-            title: '3. Missed Classes (Student-Initiated)',
-            content: (
-              <ul className="list-disc pl-5 space-y-2 text-sm text-slate-700 leading-relaxed">
-                <li>Classes missed by the student without at least 12 hours&apos; advance notice are considered completed and are <strong>not eligible for a refund or make-up session</strong>.</li>
-                <li>Classes rescheduled with adequate notice will be accommodated based on teacher and student availability.</li>
-              </ul>
-            ),
-          },
-          {
-            title: '4. Missed Classes (Teacher-Initiated)',
+            title: '3. Prorated Refunds for Unused Classes',
             content: (
               <p className="text-sm text-slate-700 leading-relaxed">
-                If a class is missed due to teacher unavailability, {SITE_NAME} will either reschedule the class at no additional cost or credit the class to your next billing cycle.
+                If you choose to discontinue classes mid-month due to unavoidable personal circumstances, you may request a prorated refund for all classes that have <strong>not yet occurred</strong>, subject to a minimum of <strong>48 hours notice</strong> prior to the next scheduled lesson. Classes that have already taken place are non-refundable.
               </p>
             ),
           },
           {
-            title: '5. Dissatisfaction with Service Quality',
+            title: '4. Academy-Initiated Cancellations',
             content: (
               <p className="text-sm text-slate-700 leading-relaxed">
-                If you are unsatisfied with the quality of instruction, please contact us within 3 days of the relevant class. We will review the situation and, at our discretion, offer a replacement session with a different teacher, a make-up class, or a partial refund.
+                In the rare event that Quran Academee is unable to deliver your scheduled classes (for example, due to tutor illness or academy scheduling disruptions) and a suitable make-up session or qualified substitute cannot be arranged within 30 days, you are entitled to a full refund for the affected session(s).
               </p>
             ),
           },
           {
-            title: '6. Non-Refundable Items',
+            title: '5. Student Absences & No-Shows',
             content: (
               <ul className="list-disc pl-5 space-y-2 text-sm text-slate-700 leading-relaxed">
-                <li>Classes already delivered and attended.</li>
-                <li>Discounted or promotional pricing once the promotion period has passed.</li>
-                <li>Any administrative or registration fees (if applicable).</li>
+                <li>Classes missed by a student with at least <strong>4 hours advance notice</strong> are eligible for a make-up class within the same billing month, subject to teacher availability.</li>
+                <li>Missed classes where no advance notice was given (unannounced no-shows) are non-refundable and will not be rescheduled.</li>
               </ul>
+            ),
+          },
+          {
+            title: '6. Switching Teachers',
+            content: (
+              <p className="text-sm text-slate-700 leading-relaxed">
+                If you are not satisfied with your current teacher for any reason, please let us know immediately. We will assign you a new teacher at no extra charge. A teacher mismatch is treated as a priority reassignment rather than a cause for cancellation.
+              </p>
             ),
           },
           {
             title: '7. How to Request a Refund',
             content: (
               <p className="text-sm text-slate-700 leading-relaxed">
-                To request a refund, please contact us at{' '}
+                To request a refund, please contact our support team at{' '}
                 <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#1C8DC8] hover:underline font-semibold">
                   {CONTACT_EMAIL}
                 </a>{' '}

@@ -29,6 +29,13 @@ export const metadata: Metadata = {
     locale: 'en_US',
     type: 'website',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Student & Parent Reviews | Video Testimonials | Quran Academee',
+    description:
+      'Watch real student video recitations and read verified parent reviews for Quran Academee. Rated 4.9/5 for 1-on-1 Tajweed, Hifz, and Qaida classes worldwide.',
+    images: ['/images/link.png'],
+  },
 };
 
 export default function ReviewsPage() {
@@ -40,8 +47,8 @@ export default function ReviewsPage() {
     description: video.snippet,
     thumbnailUrl: 'https://www.quranacademee.com/images/link.png',
     uploadDate: '2026-01-15T08:00:00+00:00',
-    contentUrl: `https://www.quranacademee.com${video.videoUrl}`,
-    embedUrl: `https://www.quranacademee.com${video.videoUrl}`,
+    contentUrl: `https://www.quranacademee.com${encodeURI(video.videoUrl)}`,
+    embedUrl: `https://www.quranacademee.com${encodeURI(video.videoUrl)}`,
     publisher: {
       '@type': 'EducationalOrganization',
       name: 'Quran Academee',

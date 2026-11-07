@@ -17,6 +17,13 @@ export const metadata: Metadata = {
     locale: 'en_US',
     type: 'website',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Terms of Service - Quran Academee',
+    description:
+      'Read the Quran Academee Terms of Service including enrolment, payment, and usage conditions.',
+    images: ['/images/link.png'],
+  },
 };
 
 const LAST_UPDATED = 'October 2024';
@@ -24,9 +31,50 @@ const CONTACT_EMAIL = 'contact@quranacademee.com';
 const SITE_NAME = 'Quran Academee';
 const SITE_URL = 'https://www.quranacademee.com';
 
+const termsSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': 'https://www.quranacademee.com/terms#webpage',
+      url: 'https://www.quranacademee.com/terms',
+      name: 'Terms of Service - Quran Academee',
+      description:
+        'Read the Quran Academee Terms of Service including enrolment, payment, and usage conditions.',
+      publisher: {
+        '@type': 'EducationalOrganization',
+        name: 'Quran Academee',
+        url: 'https://www.quranacademee.com',
+      },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': 'https://www.quranacademee.com/terms#breadcrumb',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://www.quranacademee.com',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Terms of Service',
+          item: 'https://www.quranacademee.com/terms',
+        },
+      ],
+    },
+  ],
+};
+
 export default function TermsPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-[#f0f9ff] to-white text-slate-800">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(termsSchema) }}
+      />
       {/* Hero Banner */}
       <div className="bg-[#0B3951] text-white py-16 px-4 text-center">
         <p className="text-xs uppercase tracking-widest text-[#1C8DC8] mb-3 font-semibold">Legal</p>
@@ -44,20 +92,19 @@ export default function TermsPage() {
         {/* Intro */}
         <div className="bg-[#E0F2FE]/40 border border-[#BAE6FD] rounded-2xl p-6 text-sm text-slate-700 leading-relaxed">
           <p>
-            These Terms of Service (&ldquo;Terms&rdquo;) govern your access to and use of{' '}
-            <strong>{SITE_NAME}</strong> (<a href={SITE_URL} className="text-[#1C8DC8] hover:underline">{SITE_URL}</a>) and the online Quran education services we provide. By enrolling or using our services, you agree to be bound by these Terms.
+            Welcome to <strong>{SITE_NAME}</strong> (<a href={SITE_URL} className="text-[#1C8DC8] hover:underline">{SITE_URL}</a>). By enrolling in our courses, using our website, or communicating with our staff and teachers, you agree to comply with and be bound by the following Terms of Service. Please read them carefully.
           </p>
           <p className="mt-3">
-            If you are enrolling on behalf of a minor, you (the parent or guardian) accept these Terms on their behalf and take responsibility for their participation.
+            If you do not agree to these Terms, please do not use our services.
           </p>
         </div>
 
         {[
           {
-            title: '1. Services',
+            title: '1. Services Offered',
             content: (
               <p className="text-sm text-slate-700 leading-relaxed">
-                {SITE_NAME} provides live one-on-one online Quran classes covering Tajweed, Quran Recitation &amp; Reading, Quran Memorisation (Hifz), Alqaida Almadania Basics, Islamic Essentials &amp; Duas, and Hifz Revision. Class schedules, duration, and frequency are agreed upon at the time of enrolment.
+                Quran Academee provides online one-on-one and group Quran, Tajweed, Hifz, Islamic Studies, and Arabic language instruction for children and adults. Classes are delivered via video conferencing tools such as Zoom or Google Meet.
               </p>
             ),
           },
@@ -65,78 +112,77 @@ export default function TermsPage() {
             title: '2. Enrolment & Free Trial',
             content: (
               <ul className="list-disc pl-5 space-y-2 text-sm text-slate-700 leading-relaxed">
-                <li>A free trial class is available to all new students. No payment is required for the trial.</li>
-                <li>Enrolment is confirmed upon receipt of the first payment.</li>
-                <li>We reserve the right to decline or terminate enrolment if conduct is deemed inappropriate.</li>
+                <li>New students may request a free 3-day trial class with no financial commitment.</li>
+                <li>Trial classes are subject to tutor availability and scheduling confirmation.</li>
+                <li>Following the trial, continuation requires enrolment in a monthly tuition plan.</li>
               </ul>
             ),
           },
           {
-            title: '3. Payments',
+            title: '3. Tuition & Payments',
             content: (
               <ul className="list-disc pl-5 space-y-2 text-sm text-slate-700 leading-relaxed">
-                <li>Fees are charged on a monthly basis and are due at the beginning of each month.</li>
-                <li>All fees are stated in USD and may be converted to your local currency at current rates.</li>
-                <li>Late payment may result in suspension of classes until payment is received.</li>
-                <li>Pricing may be revised with reasonable notice (minimum 30 days). Current students will be informed before any change takes effect.</li>
+                <li>Tuition fees are billed monthly in advance based on the selected package and schedule.</li>
+                <li>Payments must be settled before the start of each monthly billing cycle.</li>
+                <li>We reserve the right to pause classes if payment is not received within 7 days of the invoice date.</li>
+                <li>There are no registration fees or hidden charges.</li>
               </ul>
             ),
           },
           {
-            title: '4. Scheduling & Cancellations',
+            title: '4. Attendance, Rescheduling & Make-Up Classes',
             content: (
               <ul className="list-disc pl-5 space-y-2 text-sm text-slate-700 leading-relaxed">
-                <li>Students must give at least 12 hours&apos; advance notice to cancel or reschedule a class.</li>
-                <li>Classes cancelled without adequate notice are considered completed and will not be made up.</li>
-                <li>We will make reasonable efforts to reschedule classes missed due to teacher unavailability.</li>
+                <li>Students are expected to attend scheduled classes punctually.</li>
+                <li>If a student needs to reschedule, at least <strong>4 hours advance notice</strong> must be provided to the coordinator or teacher.</li>
+                <li>With timely notice, we will do our best to arrange a make-up class within the same billing month, subject to tutor availability.</li>
+                <li>Unannounced absences (no-shows) are non-refundable and not eligible for make-up sessions.</li>
+                <li>If a teacher is unable to attend, a make-up class or substitute qualified teacher will always be provided.</li>
               </ul>
             ),
           },
           {
-            title: '5. Student Conduct',
-            content: (
-              <ul className="list-disc pl-5 space-y-2 text-sm text-slate-700 leading-relaxed">
-                <li>Students and their guardians are expected to behave respectfully toward teachers and staff at all times.</li>
-                <li>Recording of live sessions is prohibited without explicit written consent from {SITE_NAME}.</li>
-                <li>Sharing login credentials or reselling our resources is strictly prohibited.</li>
-              </ul>
-            ),
-          },
-          {
-            title: '6. Intellectual Property',
+            title: '5. Student Conduct & Code of Ethics',
             content: (
               <p className="text-sm text-slate-700 leading-relaxed">
-                All content on this website — including text, images, downloadable resources, and course materials — is the intellectual property of {SITE_NAME} or its licensors. You may not reproduce, distribute, or create derivative works without prior written permission.
+                Students and parents are expected to treat teachers with respect, Islamic courtesy, and dignity at all times. Inappropriate, offensive, or disruptive behavior will not be tolerated and may result in immediate termination of classes without refund.
               </p>
             ),
           },
           {
-            title: '7. Limitation of Liability',
+            title: '6. Direct Contact with Teachers',
             content: (
               <p className="text-sm text-slate-700 leading-relaxed">
-                To the fullest extent permitted by law, {SITE_NAME} shall not be liable for any indirect, incidental, or consequential damages arising from your use of our services. Our total liability for any claim shall not exceed the fees paid by you in the preceding 30 days.
+                All scheduling, payment, and administrative communications must go through the official Quran Academee administration. Direct financial arrangements or private tutoring solicitations with our teachers outside our platform are strictly prohibited.
               </p>
             ),
           },
           {
-            title: '8. Termination',
+            title: '7. Cancellation & Pausing Enrolment',
             content: (
               <p className="text-sm text-slate-700 leading-relaxed">
-                Either party may terminate the service relationship with 7 days&apos; written notice. Upon termination, any unused prepaid classes will be refunded on a pro-rated basis, subject to our{' '}
-                <Link href="/refund-policy" className="text-[#1C8DC8] hover:underline">Refund Policy</Link>.
+                You may pause or cancel your subscription at any time by giving written notice to our administration before the next billing cycle. No long-term contracts bind you.
               </p>
             ),
           },
           {
-            title: '9. Governing Law',
+            title: '8. Intellectual Property',
             content: (
               <p className="text-sm text-slate-700 leading-relaxed">
-                These Terms are governed by applicable international law as relevant to the services provided online. Any disputes will be resolved through good-faith negotiation or, if necessary, binding arbitration.
+                All original curriculum content, guides, worksheets, PDFs, and website materials produced by Quran Academee remain the intellectual property of Quran Academee. They may not be reproduced or distributed for commercial purposes without written consent.
               </p>
             ),
           },
           {
-            title: '10. Changes to These Terms',
+            title: '9. Limitation of Liability',
+            content: (
+              <p className="text-sm text-slate-700 leading-relaxed">
+                Quran Academee is not liable for technical issues arising from your internet connection, hardware malfunctions, or third-party software (such as Zoom or Google Meet). We will, however, work with you in good faith to resolve scheduling disruptions caused by technical failures.
+              </p>
+            ),
+          },
+          {
+            title: '10. Amendments',
             content: (
               <p className="text-sm text-slate-700 leading-relaxed">
                 We may update these Terms periodically. Continued use of our services after notification of changes constitutes acceptance of the updated Terms.
