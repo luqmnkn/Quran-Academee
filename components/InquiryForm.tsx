@@ -25,6 +25,7 @@ interface InquiryFormProps {
   title?: string;
   asH1?: boolean;
   sectionClassName?: string;
+  sectionId?: string;
 }
 
 export default function InquiryForm({
@@ -37,6 +38,7 @@ export default function InquiryForm({
   title = 'Book Your Free Trial Class',
   asH1 = false,
   sectionClassName,
+  sectionId = 'contact',
 }: InquiryFormProps) {
   // Form input states
   const [fullName, setFullName] = useState('');
@@ -587,7 +589,7 @@ const handleFormSubmit = async (e: FormEvent) => {
   const HeadingTag = asH1 ? 'h1' : 'h2';
 
   return (
-<section id="contact" className={sectionClassName || "w-full lg:min-h-screen py-8 lg:py-12 bg-gradient-to-b from-white via-[#F0F9FF] to-white flex items-center justify-center overflow-hidden"}>
+<section id={sectionId} className={sectionClassName || "w-full lg:min-h-screen py-8 lg:py-12 bg-gradient-to-b from-white via-[#F0F9FF] to-white flex items-center justify-center overflow-hidden"}>
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex items-center">
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch w-full">
       

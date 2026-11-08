@@ -58,6 +58,7 @@ export default function HomePage() {
       <Testimonials />
 
       <InquiryForm
+        sectionId="booktrialclass"
         prefilledCourse={
           selectedCourseSelection && selectedCourseSelection.toLowerCase().includes('plan')
             ? ''
