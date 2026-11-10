@@ -46,11 +46,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: canonicalUrl,
       type: 'article',
       siteName: 'Quran Academee',
+      images: [
+        {
+          url: '/images/link.png',
+          width: 1200,
+          height: 630,
+          alt: pageTitle,
+        },
+      ],
+      locale: 'en_US',
     },
     twitter: {
       card: 'summary_large_image',
       title: pageTitle,
       description: pageDescription,
+      images: ['/images/link.png'],
     },
   };
 }

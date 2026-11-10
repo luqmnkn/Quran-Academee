@@ -14,6 +14,14 @@ export const metadata: Metadata = {
       'Understand the Quran Academee fair refund and cancellation process for online Quran classes.',
     url: 'https://www.quranacademee.com/refund-policy',
     siteName: 'Quran Academee',
+    images: [
+      {
+        url: '/images/link.png',
+        width: 1200,
+        height: 630,
+        alt: 'Quran Academee Refund Policy',
+      },
+    ],
     locale: 'en_US',
     type: 'website',
   },

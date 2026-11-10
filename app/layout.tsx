@@ -101,6 +101,7 @@ const organizationAndWebsiteSchema = {
       '@id': 'https://www.quranacademee.com/#website',
       url: 'https://www.quranacademee.com',
       name: 'Quran Academee',
+      inLanguage: 'en-US',
       publisher: {
         '@id': 'https://www.quranacademee.com/#organization',
       },
@@ -146,6 +147,8 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://fonts.cdnfonts.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Courgette&family=Inter:wght@300;400;500;600;700&family=Rubik:wght@300;400;500;600;700;800;900&display=swap" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" />
         <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display" />

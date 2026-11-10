@@ -3,6 +3,7 @@
 > Quran Academee is a premier international online Quran academy dedicated to providing personalized live 1-on-1 Quran recitation, Tajweed, Hifz (memorization), Arabic language, and foundational Islamic studies for kids, teenagers, and adults worldwide under authentic scholarly supervision.
 
 ## 1. Overview & Mission
+- **AI Discovery & Search Engines:** Full crawler access enabled for SearchGPT (OAI-SearchBot), ChatGPT (GPTBot & ChatGPT-User), Claude (ClaudeBot & Claude-Web), Perplexity, Apple Intelligence, and Google.
 - **Official Domain:** https://www.quranacademee.com
 - **Academic Supervision:** Directed under the supervision of Sheikh Jawwad Musa, graduate of the Islamic University of Madinah.
 - **Global Coverage:** Providing 24/7 flexible scheduling tailored to students across the United States, United Kingdom, Canada, Australia, Europe, and the Middle East.

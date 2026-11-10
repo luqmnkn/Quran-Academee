@@ -14,6 +14,14 @@ export const metadata: Metadata = {
       'Read the Quran Academee Privacy Policy to understand how we collect, use, and protect your personal information.',
     url: 'https://www.quranacademee.com/privacy-policy',
     siteName: 'Quran Academee',
+    images: [
+      {
+        url: '/images/link.png',
+        width: 1200,
+        height: 630,
+        alt: 'Quran Academee Privacy Policy',
+      },
+    ],
     locale: 'en_US',
     type: 'website',
   },

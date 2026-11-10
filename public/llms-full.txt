@@ -5,6 +5,7 @@
 ---
 
 ## 1. Executive Summary & Scholarly Governance
+- **AI Discovery & Search Engines:** Explicit indexation and retrieval access configured for SearchGPT (OAI-SearchBot), ChatGPT (GPTBot, ChatGPT-User), Anthropic Claude (ClaudeBot, Claude-Web), PerplexityBot, Applebot-Extended, and Google.
 - **Official Domain:** https://www.quranacademee.com
 - **Academy Mission:** An international Islamic academy bridging the divide between mechanical phonetics and living Islamic character. The pedagogy begins with classical Tajweed, Makharij accuracy, and Hifz retention, moving directly into word-by-word comprehension, translation, and practical daily Islamic ethics.
 - **Academic & Scholarly Supervision:** Directed under the supervision of Sheikh Jawwad Musa, graduate of the Islamic University of Madinah. All curriculum standards, teacher certifications, and teaching methodologies are reviewed under authentic Madinah scholarly guidelines.

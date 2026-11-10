@@ -14,6 +14,14 @@ export const metadata: Metadata = {
       'Read the Quran Academee Terms of Service including enrolment, payment, and usage conditions.',
     url: 'https://www.quranacademee.com/terms',
     siteName: 'Quran Academee',
+    images: [
+      {
+        url: '/images/link.png',
+        width: 1200,
+        height: 630,
+        alt: 'Quran Academee Terms of Service',
+      },
+    ],
     locale: 'en_US',
     type: 'website',
   },
